@@ -6,7 +6,6 @@
 }
 
 body {
-  background-color: $color1;
   background: url(../img/sample3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,7 +19,6 @@ body {
     box-shadow: 0 1rem 2rem $color4; //shadow effect
     border-radius: 3vw;
     .titleHeader {
-      color: $color2;
       @include fadeInforInnerHTML;
     }
     .description {
@@ -30,10 +28,6 @@ body {
     .search {
       .form-label {
         color: $color4;
-      }
-      .form-select {
-        background-color: $color3;
-        color: $color1;
       }
     }
     .btn {

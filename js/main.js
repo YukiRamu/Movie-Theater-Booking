@@ -4,18 +4,53 @@ const droptexts = document.querySelectorAll(".drops span");
 console.log(droptexts);
 const bigger = document.querySelector(".bigger");
 console.log(bigger);
+
 //search box
 const search = document.querySelector(".search");
 const searchBtn = document.querySelector(".searchBtn");
 
+//API
+const baseURL = "https://api.themoviedb.org";
+//const parameter = "/3/movie/"; //specify movie
+const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
+
+/* Fetch Data -- TMDB */
+//to fetch a list of movies based on a keyword
+//https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=jurassic
+
+const getMovieList = (keyword) => {
+  fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw error(response.statusText);
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch data`);
+      return error;
+    });
+}
+
+
+/* Function Call */
+//When the search button is clicked, get a list of movies based on a keyword
+searchBtn.addEventListener("click", () => {
+  //validation check
+  
+  getMovieList(search.value);
+})
+
 /* ============== Animation function  ============== */
-//dropping text animation
+//#1 dropping text animation
 let dropTextsArray = [];
 Array.from(droptexts).forEach(elem => {
   dropTextsArray.push(elem.innerHTML);
 });
-
-// let array = Array.from(droptexts);
 
 let index = 0;
 const windowOpen = () => {
@@ -25,8 +60,8 @@ const windowOpen = () => {
     complete(timer);
   }
 }
-
-let index2= 0;
+//#2 ScaleUp animation
+let index2 = 0;
 const scaleUp = () => {
   droptexts[index2].classList.add("scaleUp"); //add class to all span tags one by one
   index2++;
@@ -34,8 +69,8 @@ const scaleUp = () => {
     complete(timer2);
   }
 }
-
-let index3= 0;
+//#3 ZoomIn animation
+let index3 = 0;
 const showText = () => {
   bigger.classList.add("show"); //add class to all span tags one by one
   index3++;
@@ -49,63 +84,3 @@ const complete = (timerName) => {
 let timer = setInterval(windowOpen, 100);
 let timer2 = setInterval(scaleUp, 200);
 let timer3 = setInterval(showText, 800);
-
-// //#1 drop
-// let index = 0;
-// let index2 = 0;
-// const windowOpen = () => {
-//   console.log(array.length);
-//   for (let i = 0; i < array.length; i++) {
-//     console.log("show");
-//     array[i].classList.add("show");
-//     i++
-//     console.log("I is  ",i)
-//     if (i ===array.length) {
-//       alert("stop");
-//     }
-//   }
-// alert("stop")
-//   if (i === array.length) {
-//     console.log("scaleUp");
-//     for (let j = 0; j < array.length; j++) {
-//       array[j].classList.add("scaleUp");
-//       return j
-//     }
-//     if (j === array.length) {
-//       console.log("grow scaleUp");
-//       bigger.classList.add("show"); //add class to .grow
-//       clearInterval(timer);
-//       timer = null;
-//       console.log(timer)
-//       return;
-//     }
-
-//   }
-
-// }
-// let timer = setInterval(windowOpen, 300);
-
-// //#2 scale Up
-// let index2 = 0;
-// const scaleUp = () => {
-//   droptexts[index2].classList.add("scaleUp"); //add class to all span tags one by one
-//   alert("before");
-//   index2++
-//   alert("after");
-//   if (index2=== dropTextsArray.length) {
-//     alert("inside if")
-//     fadeIn(); // -> #3
-//     clearInterval(timer2);
-//     timer2 = null;
-//     console.log(timer2)
-//     return;
-//   }
-// }
-// let timer2 = setInterval(scaleUp, 100);
-
-// //#3 FadeIn
-// const fadeIn = () => {
-//   alert("inside fadeIn")
-//   bigger.classList.add("show"); //add class to .grow
-// }
-

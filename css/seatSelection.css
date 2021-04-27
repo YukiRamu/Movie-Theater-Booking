@@ -156,13 +156,16 @@
 /* Global settings*/
 body {
   font-family: "Raleway", sans-serif;
+  color: #f5f5f6;
+  background-color: #282c37;
+  overflow-x: hidden;
 }
 
 .btn-outline-light {
   background-color: #ec1a47;
   border: none;
-  -webkit-box-shadow: 0 0.3rem 0.5rem #ec1a47;
-          box-shadow: 0 0.3rem 0.5rem #ec1a47;
+  -webkit-box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.758);
   color: #f5f5f6;
 }
 
@@ -174,13 +177,35 @@ body {
   color: #ec1a47;
 }
 
+.form-control {
+  background-color: #dedfe3;
+}
+
+.form-control:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+}
+
+.form-select {
+  background-color: #dedfe3;
+  color: #282c37;
+}
+
+.form-select:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+}
+
 /* Global setting*/
 .flaticon-couch {
   font-size: 1.2rem;
 }
 
 body {
-  background-color: #282c37;
   background: url(../img/sample3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -200,7 +225,6 @@ body .container {
 }
 
 body .container .titleHeader {
-  color: #f5f5f6;
   opacity: 0;
   -webkit-transition: opacity 0.5s linear;
   transition: opacity 0.5s linear;
@@ -213,11 +237,6 @@ body .container .description {
 
 body .container .search .form-label {
   color: #a2a3a9;
-}
-
-body .container .search .form-select {
-  background-color: #dedfe3;
-  color: #282c37;
 }
 
 body .container .btn {

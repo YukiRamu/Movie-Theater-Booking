@@ -156,13 +156,16 @@
 /* Global settings*/
 body {
   font-family: "Raleway", sans-serif;
+  color: #f5f5f6;
+  background-color: #282c37;
+  overflow-x: hidden;
 }
 
 .btn-outline-light {
   background-color: #ec1a47;
   border: none;
-  -webkit-box-shadow: 0 0.3rem 0.5rem #ec1a47;
-          box-shadow: 0 0.3rem 0.5rem #ec1a47;
+  -webkit-box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.758);
   color: #f5f5f6;
 }
 
@@ -174,9 +177,27 @@ body {
   color: #ec1a47;
 }
 
-body {
-  background-color: #282c37;
-  overflow-x: hidden;
+.form-control {
+  background-color: #dedfe3;
+}
+
+.form-control:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+}
+
+.form-select {
+  background-color: #dedfe3;
+  color: #282c37;
+}
+
+.form-select:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.758);
 }
 
 body .container {
@@ -191,7 +212,6 @@ body .container {
 body .container .opening {
   width: 100vw;
   height: 100vh;
-  background-color: #282c37;
 }
 
 body .container .opening .row {
@@ -204,9 +224,6 @@ body .container .opening .row.top {
 
 body .container .opening h1 {
   text-align: center;
-  color: #f5f5f6;
-  -webkit-animation: blinkingText 1.5s infinite;
-          animation: blinkingText 1.5s infinite;
 }
 
 body .container .opening h1 .drops {
@@ -244,9 +261,10 @@ body .container .opening h1 .drops span.show.scaleUp {
 }
 
 body .container .opening h1 .bigger {
-  font-size: 5rem;
   opacity: 0;
-  font-family: "Arvo", serif;
+  font-size: 7rem;
+  font-family: "Noto Serif", serif;
+  font-weight: bold;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -272,7 +290,6 @@ body .container .opening i {
 
 body .container .opening .msg {
   font-size: 3rem;
-  color: #f5f5f6;
   text-align: center;
   text-decoration: none;
   -webkit-animation: blinkingText 1.5s infinite;
@@ -300,7 +317,7 @@ body .container nav .container-fluid .websiteTitle {
 
 body .container nav .container-fluid .websiteTitle span {
   font-weight: bold;
-  color: #ec1a47;
+  color: rgba(236, 26, 71, 0.758);
   font-size: 3rem;
   -webkit-animation: flicker 2s linear infinite;
           animation: flicker 2s linear infinite;
@@ -326,6 +343,7 @@ body .container nav .container-fluid .navbar-collapse.show .nav-item {
 }
 
 body .container nav .container-fluid .navbar-collapse.show .nav-link {
+  color: #f5f5f6;
   padding: 0.5rem 0.5rem;
 }
 
@@ -353,10 +371,9 @@ body .container nav .container-fluid .navbar-collapse .nav-link {
 }
 
 body .container nav .container-fluid .navbar-collapse .nav-link:hover {
-  color: #f5f5f6;
   font-weight: bold;
-  border-bottom: 0.2rem solid #ec1a47;
-  text-shadow: 0 1rem 1rem #ec1a47;
+  border-bottom: 0.2rem solid rgba(236, 26, 71, 0.758);
+  text-shadow: 0 1rem 1rem rgba(236, 26, 71, 0.758);
 }
 
 body .container nav .container-fluid form .search {
@@ -394,7 +411,6 @@ body .container .carousel .carousel-inner .carousel-item .movieInfo {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  color: #f5f5f6;
   border-radius: 3vw;
   padding: 1rem;
 }
