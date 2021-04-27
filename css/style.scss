@@ -1,10 +1,84 @@
 @import "./component";
 
 body {
-  //background-color: $color1;
+  background-color: $color1;
+  overflow-x: hidden;
   .container {
     margin: 0; //full screen
     padding: 0; //full screen
+    /* opening*/
+    .opening {
+      width: 100vw; //full screen
+      height: 100vh; //full screen
+      background-color: $color1;
+      .row {
+        margin-right: 0;
+        &.top {
+          padding-top: 10%;
+        }
+      }
+      h1 {
+        text-align: center;
+        //position: relative;
+        // top: 25%;
+        color: $color2;
+        //animation: blinkingText 2s infinite;
+        .drops {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 2rem;
+          span {
+            opacity: 0;
+            display: block;
+            font-size: 5rem;
+            transform: translateY(-15rem);
+            overflow-y: hidden;
+            &.show {
+              opacity: 1;
+              font-size: 5rem;
+              transition: 0.3s linear;
+              transform: translateY(0rem);
+              padding: 1rem;
+              &.scaleUp {
+                transform: scale(1.5);
+              }
+            }
+          }
+        }
+        .bigger {
+          font-size: 5rem;
+          opacity: 0;
+          font-family: "Arvo", serif;
+          width: fit-content;
+          margin: auto;
+          &.show {
+            opacity: 1;
+            transition: 01s;
+            transform: scale(1.5);
+          }
+        }
+      }
+      a {
+        //display: block;
+        font-size: 4rem;
+        color: $color2;
+        text-align: center;
+        //position: absolute;
+        // bottom: 15%;
+        // left: 50%;
+        text-decoration: none;
+      }
+      .msg {
+        // display: block;
+        font-size: 3rem;
+        color: $color2;
+        text-align: center;
+        //  position: absolute;
+        // bottom: 5%;
+        //  left: 50%;
+        text-decoration: none;
+      }
+    }
     /* nav bar */
     nav {
       font-size: 1.5rem;
@@ -23,6 +97,7 @@ body {
             font-weight: bold;
             color: $accent1;
             font-size: 3rem;
+            animation: flicker 2s linear infinite;
           }
           &:hover {
             color: $color2;
@@ -73,7 +148,6 @@ body {
         }
       }
     }
-
     /* carousel */
     .carousel {
       height: 100vh; //full screen
@@ -122,6 +196,11 @@ body {
           }
         }
       }
+    }
+    /* Search Result */
+    .searchResult {
+      width: 100vw; //full screen
+      min-height: 100vh; //full screen
     }
   }
 }

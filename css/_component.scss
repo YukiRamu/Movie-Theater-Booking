@@ -14,6 +14,62 @@ $color7: #363942;
 $accent1: rgb(236, 26, 71);
 
 /* animation */
+@keyframes flicker {
+  0% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  2% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  4% {
+    opacity: 1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  19% {
+    opacity: 1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  21% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  23% {
+    opacity: 1;
+    text-shadow: 0 0 1em $accent1;
+  }
+
+  80% {
+    opacity: 1;
+    text-shadow: 0 0 1em $accent1;
+  }
+  83% {
+    opacity: 0.4;
+    text-shadow: 0 0 1em $accent1;
+  }
+  87% {
+    opacity: 1;
+    text-shadow: 0 0 1em $accent1;
+  }
+}
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: #000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -37,6 +93,9 @@ $accent1: rgb(236, 26, 71);
 }
 
 /* Global settings*/
+body {
+  font-family: "Raleway", sans-serif;
+}
 .btn-outline-light {
   background-color: $accent1;
   border: none;
