@@ -1,7 +1,6 @@
 /* =========== Variables =========== */
 //button
 const movieChoice = document.getElementById("movieChoice"); //dropdown
-//const viewSeatsBtn = document.getElementById("viewSeats"); //view seat btn
 
 //Title
 const titleHeader = document.querySelector(".titleHeader");
@@ -10,7 +9,6 @@ const titleHeader = document.querySelector(".titleHeader");
 const seat = document.querySelectorAll(".seat"); //all seats div 
 const regularSeats = document.querySelectorAll(".regSeat"); // all regular seats 
 const vipSeats = document.querySelectorAll(".vipSeat"); // all vip seats 
-//const seatRow = document.querySelectorAll(".seatRow"); // seat rows (4)
 
 //Seat Panel display control
 const seatLabel = document.querySelector(".seatLabel");
@@ -35,19 +33,13 @@ const seatPrice = {
 }
 
 /* =========== Class =========== */
-class Movie {
-  constructor() {
-
-  }
-}
-
-class SeatMap {
-  constructor(seatType, selected, locationIndex) {
-    this._seatType = seatType;
-    this._selected = selected;
-    this._locationIndex = locationIndex;
-  }
-}
+// class SeatMap {
+//   constructor(seatType, selected, locationIndex) {
+//     this._seatType = seatType;
+//     this._selected = selected;
+//     this._locationIndex = locationIndex;
+//   }
+// }
 
 class UI {
   constructor(seatType, isSelected) {
@@ -73,12 +65,10 @@ class UI {
     //count the number of tickets
     if (this._seatType === "regular") {
       UI.regularSeatCount++;
-      console.log(UI.regularSeatCount);
       regularTicketNum.innerHTML = UI.regularSeatCount; //display reg ticket num
       UI.calcTotalPrice(UI.regularSeatCount, this._seatType);
     } else if (this._seatType === "vip") {
       UI.vipSeatCount++;
-      console.log(UI.vipSeatCount);
       vipTicketNum.innerHTML = UI.vipSeatCount; //display vip ticket num
       UI.calcTotalPrice(UI.vipSeatCount, this._seatType);
     }
