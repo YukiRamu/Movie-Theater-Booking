@@ -23,12 +23,248 @@
   <!--CSS and icon link-->
   <link rel="stylesheet" href="./css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="./css/style.css" />
-  <link rel="icon" type="image/x-icon" href="./img/seatSelectionIcon.JPG">
+  <link rel="icon" type="image/x-icon" href="./img/logo.jpg">
 
 </head>
 
 <body>
-  <h1>Movie Theatre Booking</h1>
+  <div class="container">
+    <!-- Top navigation bar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand websiteTitle" href="./index.html"><img src="./img/logo.jpg" alt="logo" width="30"
+            height="24" class="d-inline-block align-text-top"> <span>Y</span>Cinema</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link3</a>
+            </li>
+          </ul>
+
+          <form class="d-flex">
+            <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light searchBtn" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Featured Movie Section
+    <div class="movieInfo">
+      <div class="row">
+        <h1 class="col movieTitle">New Release Movie Title</h1>
+      </div>
+
+      <div class="row">
+        <div class="col category">
+          <p>category1</p>
+          <p>|</p>
+          <p>category2</p>
+          <p>|</p>
+          <p>category3</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="col description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum dolores asperiores
+          deleniti
+          consequuntur aut, est voluptas ea sed, id laboriosam optio, facere cupiditate amet quisquam iusto libero
+          tenetur? Natus, tempore? Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+
+      <div class="row">
+        <div class="col showInfo">
+          <p><i class="far fa-clock"></i> 120 min</p>
+          <p><i class="far fa-closed-captioning"></i> Subtitles</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col btns">
+          <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+          <button type="button" class="btn btn-outline-light"><i class="fas fa-ticket-alt"></i> Buy ticket</button>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./img/sample1.jpg" class="d-block w-100" alt="sample1">
+          <!-- Featured Movie Section start need to apply info with JavaScript-->
+          <div class="movieInfo">
+            <div class="row">
+              <h1 class="col movieTitle">New Release Movie Title</h1>
+            </div>
+
+            <div class="row">
+              <div class="col category">
+                <p>category1</p>
+                <p>|</p>
+                <p>category2</p>
+                <p>|</p>
+                <p>category3</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum dolores
+                asperiores deleniti
+                consequuntur aut, est voluptas ea sed, id laboriosam optio, facere cupiditate amet quisquam iusto libero
+                tenetur? Natus, tempore? Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+
+            <div class="row">
+              <div class="col showInfo">
+                <p><i class="far fa-clock"></i> 120 min</p>
+                <p><i class="far fa-closed-captioning"></i> Subtitles</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col btns">
+                <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+                <button type="button" class="btn btn-outline-light"><i class="fas fa-ticket-alt"></i> Buy
+                  ticket</button>
+              </div>
+            </div>
+          </div>
+          <!-- Featured movie section end-->
+        </div>
+
+        <div class="carousel-item">
+          <img src="./img/sample2.jpg" class="d-block w-100" alt="sample2">
+          <!-- Featured Movie Section start need to apply info with JavaScript-->
+          <div class="movieInfo">
+            <div class="row">
+              <h1 class="col movieTitle">New Release Movie Title</h1>
+            </div>
+
+            <div class="row">
+              <div class="col category">
+                <p>category1</p>
+                <p>|</p>
+                <p>category2</p>
+                <p>|</p>
+                <p>category3</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum dolores
+                asperiores deleniti
+                consequuntur aut, est voluptas ea sed, id laboriosam optio, facere cupiditate amet quisquam iusto libero
+                tenetur? Natus, tempore? Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+
+            <div class="row">
+              <div class="col showInfo">
+                <p><i class="far fa-clock"></i> 120 min</p>
+                <p><i class="far fa-closed-captioning"></i> Subtitles</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col btns">
+                <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+                <button type="button" class="btn btn-outline-light"><i class="fas fa-ticket-alt"></i> Buy
+                  ticket</button>
+              </div>
+            </div>
+          </div>
+          <!-- Featured movie section end-->
+        </div>
+
+        <div class="carousel-item">
+          <img src="./img/sample3.jpg" class="d-block w-100" alt="sample3">
+          <!-- Featured Movie Section start need to apply info with JavaScript-->
+          <div class="movieInfo">
+            <div class="row">
+              <h1 class="col movieTitle">New Release Movie Title</h1>
+            </div>
+
+            <div class="row">
+              <div class="col category">
+                <p>category1</p>
+                <p>|</p>
+                <p>category2</p>
+                <p>|</p>
+                <p>category3</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum dolores
+                asperiores deleniti
+                consequuntur aut, est voluptas ea sed, id laboriosam optio, facere cupiditate amet quisquam iusto libero
+                tenetur? Natus, tempore? Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+
+            <div class="row">
+              <div class="col showInfo">
+                <p><i class="far fa-clock"></i> 120 min</p>
+                <p><i class="far fa-closed-captioning"></i> Subtitles</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col btns">
+                <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+                <button type="button" class="btn btn-outline-light"><i class="fas fa-ticket-alt"></i> Buy
+                  ticket</button>
+              </div>
+            </div>
+          </div>
+          <!-- Featured movie section end-->
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+  </div>
+
+
+  <!--  Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+  <!--JavaScript-->
+  <script type="text/javascript" src="./js/seatSelection.js"></script>
+
 </body>
 
 </html>

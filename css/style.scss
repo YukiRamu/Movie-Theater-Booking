@@ -1,3 +1,126 @@
+@import "./component";
+
 body {
-  background-color: antiquewhite;
+  //background-color: $color1;
+  .container {
+    margin: 0; //full screen
+    padding: 0; //full screen
+    /* nav bar */
+    nav {
+      font-size: 1.5rem;
+      .container-fluid {
+        .navbar-toggler {
+          border-color: $color2;
+          color: $accent1;
+          .navbar-toggler-icon {
+            background-color: $color2;
+          }
+        }
+
+        .websiteTitle {
+          color: $color2;
+          font-size: 2rem;
+          span {
+            font-weight: bold;
+            color: $accent1;
+            font-size: 3rem;
+          }
+          &:hover {
+            color: $color2;
+            font-weight: bold;
+            text-shadow: 0 1rem 1rem $accent1;
+          }
+        }
+        .navbar-collapse {
+          &.show {
+            padding: 1.5rem;
+            text-align: right;
+            .nav-item {
+              width: fit-content;
+              margin-left: auto;
+              background-color: $color1Tr;
+            }
+            .nav-link {
+              padding: 0.5rem 0.5rem;
+              &:hover {
+                color: $accent1;
+                border-bottom: none;
+              }
+            }
+            form {
+              margin-top: 1rem;
+              margin-left: auto;
+              width: fit-content;
+              .search {
+                width: 30vw;
+              }
+            }
+          }
+          .nav-link {
+            color: $color2;
+            transform: translateY(0.5rem);
+            &:hover {
+              color: $color2;
+              font-weight: bold;
+              border-bottom: 0.2rem solid $accent1;
+              text-shadow: 0 1rem 1rem $accent1;
+            }
+          }
+        }
+        form {
+          .search {
+            width: 50vw;
+          }
+        }
+      }
+    }
+
+    /* carousel */
+    .carousel {
+      height: 100vh; //full screen
+      width: 100vw; //full screen
+      background-color: $color7;
+      .carousel-inner {
+        height: 100vh; //full screen
+        margin: auto;
+        .carousel-item {
+          height: 100%;
+          img {
+            //images for carousel
+            height: 100vh; //full screen
+          }
+          .movieInfo {
+            background-color: $color1Tr;
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            z-index: 1;
+            width: 40vw;
+            height: fit-content;
+            color: $color2;
+            .row {
+              margin: 1rem;
+            }
+            .category {
+              display: flex;
+              justify-content: space-evenly;
+            }
+            .description {
+              text-align: justify;
+            }
+            .showInfo {
+              display: flex;
+              justify-content: space-evenly;
+            }
+            .btns {
+              .btn {
+                margin: 0.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
