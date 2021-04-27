@@ -79,10 +79,10 @@
 
 @-webkit-keyframes blinkingText {
   0% {
-    color: #000;
+    color: #f5f5f6;
   }
   49% {
-    color: #000;
+    color: #f5f5f6;
   }
   60% {
     color: transparent;
@@ -91,16 +91,16 @@
     color: transparent;
   }
   100% {
-    color: #000;
+    color: #f5f5f6;
   }
 }
 
 @keyframes blinkingText {
   0% {
-    color: #000;
+    color: #f5f5f6;
   }
   49% {
-    color: #000;
+    color: #f5f5f6;
   }
   60% {
     color: transparent;
@@ -109,7 +109,7 @@
     color: transparent;
   }
   100% {
-    color: #000;
+    color: #f5f5f6;
   }
 }
 

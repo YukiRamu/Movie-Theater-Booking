@@ -79,10 +79,10 @@
 
 @-webkit-keyframes blinkingText {
   0% {
-    color: #000;
+    color: #f5f5f6;
   }
   49% {
-    color: #000;
+    color: #f5f5f6;
   }
   60% {
     color: transparent;
@@ -91,16 +91,16 @@
     color: transparent;
   }
   100% {
-    color: #000;
+    color: #f5f5f6;
   }
 }
 
 @keyframes blinkingText {
   0% {
-    color: #000;
+    color: #f5f5f6;
   }
   49% {
-    color: #000;
+    color: #f5f5f6;
   }
   60% {
     color: transparent;
@@ -109,7 +109,7 @@
     color: transparent;
   }
   100% {
-    color: #000;
+    color: #f5f5f6;
   }
 }
 
@@ -205,8 +205,8 @@ body .container .opening .row.top {
 body .container .opening h1 {
   text-align: center;
   color: #f5f5f6;
-  -webkit-animation: blinkingText 1s infinite;
-          animation: blinkingText 1s infinite;
+  -webkit-animation: blinkingText 1.5s infinite;
+          animation: blinkingText 1.5s infinite;
 }
 
 body .container .opening h1 .drops {
@@ -261,11 +261,13 @@ body .container .opening h1 .bigger.show {
           transform: scale(1.5);
 }
 
-body .container .opening a {
+body .container .opening i {
   font-size: 4rem;
-  color: #f5f5f6;
+  color: #ec1a47;
   text-align: center;
   text-decoration: none;
+  margin: 1.5rem auto;
+  padding: 0;
 }
 
 body .container .opening .msg {
@@ -273,6 +275,8 @@ body .container .opening .msg {
   color: #f5f5f6;
   text-align: center;
   text-decoration: none;
+  -webkit-animation: blinkingText 1.5s infinite;
+          animation: blinkingText 1.5s infinite;
 }
 
 body .container nav {
@@ -291,6 +295,7 @@ body .container nav .container-fluid .navbar-toggler .navbar-toggler-icon {
 body .container nav .container-fluid .websiteTitle {
   color: #f5f5f6;
   font-size: 2rem;
+  text-shadow: 0 13.36px 8.896px #282c37, 0 -2px 1px #f5f5f6;
 }
 
 body .container nav .container-fluid .websiteTitle span {

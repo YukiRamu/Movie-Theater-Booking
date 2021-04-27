@@ -55,10 +55,10 @@ $accent1: rgb(236, 26, 71);
 }
 @keyframes blinkingText {
   0% {
-    color: #000;
+    color: $color2;
   }
   49% {
-    color: #000;
+    color: $color2;
   }
   60% {
     color: transparent;
@@ -67,7 +67,7 @@ $accent1: rgb(236, 26, 71);
     color: transparent;
   }
   100% {
-    color: #000;
+    color: $color2;
   }
 }
 @keyframes fadeIn {
