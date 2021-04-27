@@ -205,6 +205,8 @@ body .container .opening .row.top {
 body .container .opening h1 {
   text-align: center;
   color: #f5f5f6;
+  -webkit-animation: blinkingText 1s infinite;
+          animation: blinkingText 1s infinite;
 }
 
 body .container .opening h1 .drops {
