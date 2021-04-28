@@ -234,25 +234,39 @@ body .container .titlePanel {
   margin-left: -1rem;
 }
 
-body .container .titlePanel .director span {
+body .container .titlePanel .categoryRow {
+  margin-left: 0.1rem;
+}
+
+body .container .titlePanel .categoryRow .col {
+  border: 1px solid white;
+  border-radius: 5vw;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+body .container .titlePanel .directorRow span {
   margin-right: 0.5rem;
 }
 
-body .container .titlePanel .book {
+body .container .titlePanel .bookRow {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin-left: 0.2rem;
 }
 
-body .container .titlePanel .book .rate {
+body .container .titlePanel .bookRow .rate {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 2rem;
 }
 
-body .container .titlePanel .book .rate span {
+body .container .titlePanel .bookRow .rate span {
   font-size: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;

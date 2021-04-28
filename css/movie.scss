@@ -17,16 +17,24 @@ body {
       min-height: 60vh;
       padding: 2rem 0 2rem 3rem;
       margin-left: -1rem;
-      .overview {
+      .categoryRow {
+        margin-left: 0.1rem;
+        .col {
+          border: 1px solid white;
+          border-radius: 5vw;
+          max-width: fit-content;
+          text-align: center;
+          margin-right: 1rem;
+        }
       }
-      .director {
+      .overviewRow {
+      }
+      .directorRow {
         span {
           margin-right: 0.5rem;
         }
       }
-      .category {
-      }
-      .book {
+      .bookRow {
         width: fit-content;
         margin-left: 0.2rem;
         .bookNowBtn {
