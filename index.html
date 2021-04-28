@@ -13,7 +13,9 @@
 
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Noto+Serif:wght@700&family=Raleway&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Noto+Serif:wght@700&family=Raleway&display=swap"
+    rel="stylesheet">
 
   <!--jquery / Velocity.js-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -59,14 +61,16 @@
 
       <div class="row">
         <a class="col msg" href="#carouselExampleIndicators">Check out New Release</a>
-      </div>     
+      </div>
     </div>
 
     <!-- Top navigation bar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light">
       <div class="container-fluid">
-        <a class="navbar-brand websiteTitle" href="./index.html"><img src="./img/logo.jpg" alt="logo" width="30"
-            height="24" class="d-inline-block align-text-top"> <span>Y</span>Cinema</a>
+        <a class="navbar-brand websiteTitle" href="./index.html"><span> Y</span>Cinema</a>
+        <!-- 
+        <img src="./img/logo.jpg" alt="logo" width="30"
+            height="24" class="d-inline-block align-text-top"> -->
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
           aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +91,8 @@
           </ul>
 
           <form class="d-flex">
-            <input class="form-control me-2 search" type="search" placeholder="Search movies, actors, editors, etc" aria-label="Search">
+            <input class="form-control me-2 search" type="search" placeholder="Search movies, actors, editors, etc"
+              aria-label="Search">
             <button class="btn btn-outline-light searchBtn" type="submit">Search</button>
           </form>
         </div>
@@ -253,8 +258,150 @@
       </button>
     </div>
 
+    <!-- 
+    <div class="popover__wrapper">
+      <a href="#">
+        <h2 class="popover__title">Hover:me</h2>
+      </a>
+      <div class="popover__content">
+        <p class="popover__message">Joseph Francis "Joey" Tribbiani, Jr.</p>
+        <img alt="Joseph Francis Joey Tribbiani, Jr." src="https://media.giphy.com/media/11SIBu3s72Co8w/giphy.gif">
+      </div>
+    </div> -->
+
+
+
     <!-- Search Result -->
-    <div class="searchResult" id="searchResult"></div>
+    <div class="searchResult" id="searchResult">
+      <h2 class="movieListCounts"><span>350</span> MOVIES</h2>
+      <!-- result cards 5 panels in one row / 10 moview at one page-->
+      <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow">
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col line">
+          <div class="card h-100 bg-dark text-white movieCard">
+            <img src="./img/sample4.jpg" class="card-img-top" alt="sample4">
+            <div class="popOverContent">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam sunt
+                veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+                fuga natus!</p>
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+            </div>
+
+            <div class="card-img-overlay">
+              <h5 class="card-title">Movie Title</h5>
+              <p class="card-text">category</p>
+              <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- result cards till here-->
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
 
   </div>
 

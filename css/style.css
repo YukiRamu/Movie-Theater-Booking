@@ -201,8 +201,9 @@ body {
 }
 
 body .container {
-  margin: 0;
+  margin: auto;
   padding: 0;
+  min-width: 100%;
   /* opening*/
   /* nav bar */
   /* carousel */
@@ -210,7 +211,9 @@ body .container {
 }
 
 body .container .opening {
-  width: 100vw;
+  background: url(../img/bg2.jpg);
+  background-position: center;
+  background-size: cover;
   height: 100vh;
 }
 
@@ -396,7 +399,6 @@ body .container nav .container-fluid form .search {
 
 body .container .carousel {
   height: 100vh;
-  width: 100vw;
   background-color: #363942;
 }
 
@@ -407,6 +409,7 @@ body .container .carousel .carousel-inner {
 
 body .container .carousel .carousel-inner .carousel-item {
   height: 100%;
+  width: 100%;
 }
 
 body .container .carousel .carousel-inner .carousel-item img {
@@ -460,7 +463,47 @@ body .container .carousel .carousel-inner .carousel-item .movieInfo .btns .btn {
 }
 
 body .container .searchResult {
-  width: 100vw;
   min-height: 100vh;
+  width: 90%;
+  margin: auto;
+  padding-top: 6rem;
+}
+
+body .container .searchResult .movieListCounts {
+  margin-bottom: 2rem;
+}
+
+body .container .searchResult .movieListCounts span {
+  color: #1aec1d;
+}
+
+body .container .searchResult .movieListRow .line .movieCard {
+  z-index: 1;
+}
+
+body .container .searchResult .movieListRow .line .movieCard:hover {
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
+}
+
+body .container .searchResult .movieListRow .line .movieCard .popOverContent {
+  opacity: 0;
+  position: absolute;
+  background-color: #363942;
+  border: #282c37cf 0.1rem solid;
+  top: 0;
+  left: 101%;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  padding: 1rem;
+  -webkit-box-shadow: 0.5rem 0.5rem 1rem black;
+          box-shadow: 0.5rem 0.5rem 1rem black;
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
+}
+
+body .container .searchResult .movieListRow .line .movieCard .popOverContent:show {
+  opacity: 1;
 }
 /*# sourceMappingURL=style.css.map */
