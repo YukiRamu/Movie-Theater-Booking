@@ -109,3 +109,11 @@ const complete = (timerName) => {
 let timer = setInterval(windowOpen, 100);
 let timer2 = setInterval(scaleUp, 200);
 let timer3 = setInterval(showText, 800);
+
+//#4 Nav bar color change on scroll
+$(() => {
+  $(document).scroll(() => {
+    let $nav = $(".fixed-top");
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+  });
+});
