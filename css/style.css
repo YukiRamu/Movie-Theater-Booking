@@ -163,11 +163,18 @@ body {
 }
 
 .btn-outline-light {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   background-color: #ec1a47;
   border: none;
   -webkit-box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.579);
           box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.579);
   color: #f5f5f6;
+  text-transform: uppercase;
 }
 
 .btn-outline-light:hover {

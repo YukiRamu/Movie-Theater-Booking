@@ -115,10 +115,13 @@ body {
 
 //button
 .btn-outline-light {
+  height: fit-content;
+  width: fit-content;
   background-color: $accent1;
   border: none;
   box-shadow: 0 0.3rem 0.5rem $accent1Tr;
   color: $color2;
+  text-transform: uppercase;
   &:hover {
     background-color: $color2;
     border: $accent1 0.1rem solid;
