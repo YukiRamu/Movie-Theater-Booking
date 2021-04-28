@@ -1,21 +1,22 @@
 /* Variables */
 //opening animation
 const droptexts = document.querySelectorAll(".drops span");
-console.log(droptexts);
 const bigger = document.querySelector(".bigger");
-console.log(bigger);
 
 //search box
 const search = document.querySelector(".search");
 const searchBtn = document.querySelector(".searchBtn");
+const alertMsg = document.querySelector(".alert");
 
 //API
 const baseURL = "https://api.themoviedb.org";
 //const parameter = "/3/movie/"; //specify movie
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
+let dataArray = [];
+
 
 /* Fetch Data -- TMDB */
-//to fetch a list of movies based on a keyword
+//#1 fetch a list of movies based on a keyword
 //https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=jurassic
 
 const getMovieList = (keyword) => {
@@ -28,7 +29,12 @@ const getMovieList = (keyword) => {
       }
     })
     .then((data) => {
-      console.log(data);
+      console.log(data)
+      dataArray = data.results;
+      console.log(dataArray);
+      smoothScroll("searchResult");
+      //showMovieList(); // -> display the list
+      return dataArray;
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch data`);
@@ -36,13 +42,32 @@ const getMovieList = (keyword) => {
     });
 }
 
+//#2 display the list in the result section
+
+// smooth scroll to the section (id)
+const smoothScroll = (id) => {
+  let scrollTo = document.getElementById(`${id}`);
+  scrollTo.scrollIntoView(({
+    behavior: "smooth"
+  }), true); // to top
+}
 
 /* Function Call */
 //When the search button is clicked, get a list of movies based on a keyword
-searchBtn.addEventListener("click", () => {
+searchBtn.addEventListener("click", (e) => {
   //validation check
-  
+  if (search.value === "") {
+    //Show alert for 1.5s
+    e.preventDefault();
+    alertMsg.style.transform = "translateY(0rem)";
+    setTimeout(() => {
+
+      alertMsg.style.transform = "translateY(-10rem)";
+    }, 1500)
+    return false
+  }
   getMovieList(search.value);
+
 })
 
 /* ============== Animation function  ============== */
