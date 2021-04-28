@@ -299,17 +299,18 @@ body .container .opening .msg {
           animation: blinkingText 1.5s infinite;
 }
 
-body .container .fixed-top {
+body .container .navbar {
   font-size: 1.5rem;
+  padding: 0;
 }
 
-body .container .fixed-top.scrolled {
-  background-color: #fff !important;
-  -webkit-transition: background-color 200ms linear;
-  transition: background-color 200ms linear;
+body .container .navbar.headerScrolled {
+  background-color: #282c37 !important;
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
 }
 
-body .container .fixed-top .alert {
+body .container .navbar .alert {
   position: absolute;
   top: -0%;
   width: 100vw;
@@ -323,22 +324,22 @@ body .container .fixed-top .alert {
   transition: 0.5s linear;
 }
 
-body .container .fixed-top .container-fluid .navbar-toggler {
+body .container .navbar .container-fluid .navbar-toggler {
   border-color: #f5f5f6;
   color: #ec1a47;
 }
 
-body .container .fixed-top .container-fluid .navbar-toggler .navbar-toggler-icon {
+body .container .navbar .container-fluid .navbar-toggler .navbar-toggler-icon {
   background-color: #f5f5f6;
 }
 
-body .container .fixed-top .container-fluid .websiteTitle {
+body .container .navbar .container-fluid .websiteTitle {
   color: #f5f5f6;
   font-size: 2rem;
   text-shadow: 0 13.36px 8.896px #282c37, 0 -2px 1px #f5f5f6;
 }
 
-body .container .fixed-top .container-fluid .websiteTitle span {
+body .container .navbar .container-fluid .websiteTitle span {
   font-weight: bold;
   color: rgba(236, 26, 71, 0.579);
   font-size: 3rem;
@@ -346,18 +347,18 @@ body .container .fixed-top .container-fluid .websiteTitle span {
           animation: flicker 2s linear infinite;
 }
 
-body .container .fixed-top .container-fluid .websiteTitle:hover {
+body .container .navbar .container-fluid .websiteTitle:hover {
   color: #f5f5f6;
   font-weight: bold;
   text-shadow: 0 1rem 1rem #ec1a47;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show {
+body .container .navbar .container-fluid .navbar-collapse.show {
   padding: 1.5rem;
   text-align: right;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show .nav-item {
+body .container .navbar .container-fluid .navbar-collapse.show .nav-item {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -365,17 +366,17 @@ body .container .fixed-top .container-fluid .navbar-collapse.show .nav-item {
   background-color: #282c37cf;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show .nav-link {
+body .container .navbar .container-fluid .navbar-collapse.show .nav-link {
   color: #f5f5f6;
   padding: 0.5rem 0.5rem;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show .nav-link:hover {
+body .container .navbar .container-fluid .navbar-collapse.show .nav-link:hover {
   color: #ec1a47;
   border-bottom: none;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show form {
+body .container .navbar .container-fluid .navbar-collapse.show form {
   margin-top: 1rem;
   margin-left: auto;
   width: -webkit-fit-content;
@@ -383,23 +384,23 @@ body .container .fixed-top .container-fluid .navbar-collapse.show form {
   width: fit-content;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse.show form .search {
+body .container .navbar .container-fluid .navbar-collapse.show form .search {
   width: 30vw;
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse .nav-link {
+body .container .navbar .container-fluid .navbar-collapse .nav-link {
   color: #f5f5f6;
   -webkit-transform: translateY(0.5rem);
           transform: translateY(0.5rem);
 }
 
-body .container .fixed-top .container-fluid .navbar-collapse .nav-link:hover {
+body .container .navbar .container-fluid .navbar-collapse .nav-link:hover {
   font-weight: bold;
   border-bottom: 0.2rem solid rgba(236, 26, 71, 0.579);
   text-shadow: 0 1rem 1rem rgba(236, 26, 71, 0.579);
 }
 
-body .container .fixed-top .container-fluid form .search {
+body .container .navbar .container-fluid form .search {
   width: 50vw;
 }
 
@@ -483,33 +484,14 @@ body .container .searchResult .movieListCounts span {
   color: #1aec1d;
 }
 
-body .container .searchResult .movieListRow .line .movieCard {
-  z-index: 1;
+body .container .searchResult .movieListRow .card {
+  border: none;
+  padding: 2rem;
+  background-color: unset !important;
+  margin-top: 0;
 }
 
-body .container .searchResult .movieListRow .line .movieCard:hover {
-  -webkit-transform: translateY(-1rem);
-          transform: translateY(-1rem);
-}
-
-body .container .searchResult .movieListRow .line .movieCard .popOverContent {
-  opacity: 0;
-  position: absolute;
-  background-color: #363942;
-  border: #282c37cf 0.1rem solid;
-  top: 0;
-  left: 101%;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  padding: 1rem;
-  -webkit-box-shadow: 0.5rem 0.5rem 1rem black;
-          box-shadow: 0.5rem 0.5rem 1rem black;
-  -webkit-transform: translateY(-1rem);
-          transform: translateY(-1rem);
-}
-
-body .container .searchResult .movieListRow .line .movieCard .popOverContent:show {
-  opacity: 1;
+body .container .searchResult .movieListRow .card .card-img-overlay {
+  padding: 3rem;
 }
 /*# sourceMappingURL=style.css.map */

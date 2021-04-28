@@ -74,11 +74,12 @@ body {
       }
     }
     /* nav bar */
-    .fixed-top {
+    .navbar {
       font-size: 1.5rem;
-      &.scrolled {
-        background-color: #fff !important;
-        transition: background-color 200ms linear;
+      padding: 0;
+      &.headerScrolled {
+        background-color: $color1 !important;
+        transition: background-color 0.2s linear;
       }
       .alert {
         position: absolute;
@@ -99,7 +100,6 @@ body {
             background-color: $color2;
           }
         }
-
         .websiteTitle {
           color: $color2;
           font-size: 2rem;
@@ -222,31 +222,13 @@ body {
         }
       }
       .movieListRow {
-        .line {
-          .movieCard {
-            z-index: 1; // for hover effect
-            &:hover {
-              transform: translateY(-1rem);
-            }
-            .popOverContent {
-              opacity: 0;
-              position: absolute;
-              background-color: $color7;
-              border: $color1Tr 0.1rem solid;
-              top: 0;
-              left: 101%;
-              width: 100%;
-              height: 100%;
-              z-index: 1;
-              padding: 1rem;
-              box-shadow: 0.5rem 0.5rem 1rem $black; //shadow effect
-              transform: translateY(-1rem);
-              &:show {
-                opacity: 1;
-              }
-              p {
-              }
-            }
+        .card {
+          border: none;
+          padding: 2rem;
+          background-color: unset !important;
+          margin-top: 0;
+          .card-img-overlay {
+            padding: 3rem;
           }
         }
       }

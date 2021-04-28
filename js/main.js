@@ -14,6 +14,10 @@ const baseURL = "https://api.themoviedb.org";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 let dataArray = [];
 
+//animation
+const popOverContent = document.querySelectorAll(".popOverContent");
+const card = document.querySelectorAll(".card-img-overlay");
+const movieListRow = document.querySelectorAll(".movieListRow");
 
 /* Fetch Data -- TMDB */
 //#1 fetch a list of movies based on a keyword
@@ -55,6 +59,7 @@ const smoothScroll = (id) => {
 /* Function Call */
 //When the search button is clicked, get a list of movies based on a keyword
 searchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   //validation check
   if (search.value === "") {
     //Show alert for 1.5s
@@ -114,6 +119,42 @@ let timer3 = setInterval(showText, 800);
 $(() => {
   $(document).scroll(() => {
     let $nav = $(".fixed-top");
-    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+    $nav.toggleClass('headerScrolled', $(this).scrollTop() > $nav.height());
   });
 });
+
+//#5 Pop over 
+console.log(popOverContent)
+console.log(card)
+console.log(movieListRow)
+
+for (let i = 0; i < movieListRow.length; i++) {
+  movieListRow[i].addEventListener("click", (event) => {
+    if (event.target.classList.contains("clicked")) {
+      console.log("overlay image clicked");
+      console.log(i)
+      popOverContent[i].classList.add("show");
+    } else if (event.target.classList.contains("shown")) {
+      ;
+    }
+    else {
+      console.log("somewhere else clicked");
+      popOverContent[i].classList.remove("show");
+    }
+  })
+}
+
+
+
+// for (let i = 0; i < movieImg.length; i++) {
+//   movieImg[i], addEventListener("click", () => {
+//     console.log(movieImg[i])
+//     popOverContent[i].classList.add("show");
+//   });
+// }
+
+// $(document).ready(function(){
+//   $('#imgOne').popover();
+//   $('#popOverContent').popover({ trigger: "hover" });
+// })
+
