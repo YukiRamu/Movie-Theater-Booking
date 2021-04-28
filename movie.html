@@ -33,66 +33,112 @@
 
 <body>
   <div class="container">
-    <!--Title panel-->
-    <div class="titlePanel">
-      <div class="row categoryRow">
-        <p class="col">category1</p>
-        <p class="col">category2</p>
-        <p class="col">category3</p>
-      </div>
-      <div class="row titleRow">
-        <h1 class="col">Twilight</h1>
-      </div>
-      <div class="row overviewRow">
-        <p class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate corrupti cumque rerum qui
-          accusantium
-          molestias quibusdam a. Ipsum, reprehenderit ratione incidunt eius laudantium totam consectetur deleniti eos
-          quo, nemo repellendus!</p>
-      </div>
-      <div class="row directorRow">
-        <p class="col"><span><i class="far fa-clock"></i> 120 min</span><span><i class="far fa-closed-captioning"></i>
-            Subtitles</span><span><i class="fas fa-bullhorn"></i> Christomer Nolan</span></p>
-      </div>
-
-      <div class="row bookRow">
-        <a class="col-md-8 btn btn-outline-light bookNowBtn" href="./seatSelection.html" target="_blank" role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
-        <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
-      </div>
-    </div>
-
     <!-- first row -->
     <div class="row trailerRow">
+      <!-- trailer -->
       <div class="col trailer">
-        trailer here
+        <iframe width=100% height=100% src="https://www.youtube.com/embed/d6X1r7ralfE" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </div>
+
+      <!--Title panel-->
+      <div class=" col titlePanel">
+        <div class="row categoryRow">
+          <p class="col">category1</p>
+          <p class="col">category2</p>
+          <p class="col">category3</p>
+        </div>
+        <div class="row titleRow">
+          <h1 class="col">Twilight Saga Breaking Dawn Part 2</h1>
+        </div>
+        <div class="row overviewRow">
+          <p class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate corrupti cumque rerum qui
+            accusantium
+            molestias quibusdam a. Ipsum, reprehenderit ratione incidunt eius laudantium totam consectetur deleniti eos
+            quo, nemo repellendus!</p>
+        </div>
+        <div class="row directorRow">
+          <p class="col"><span><i class="far fa-clock"></i> 120 min</span><span><i class="far fa-closed-captioning"></i>
+              Subtitles</span><span><i class="fas fa-bullhorn"></i> Christomer Nolan</span></p>
+        </div>
+
+        <div class="row bookRow">
+          <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+          <a class="col-md-8 btn btn-outline-light bookNowBtn" href="./seatSelection.html" target="_blank"
+            role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
+          <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
+        </div>
+      </div>
+
     </div>
 
     <!-- second row -->
     <div class="row detailRow">
       <!-- second row left-->
       <div class="col left">
+        <!-- left top -->
         <div class="row castRow">
           <div class="col casts">
-            level2 cast carousel here
+            <h2>Main Cast</h2>
+            <!-- ================================ -->
+            <!-- result cards 5 panels in one row-->
+            <div class="row row-cols-1 row-cols-md-4 g-4 castImgRow">
+              <div class="col card bg-transparent">
+                <img src="./img/sample5.jpg" class="card-img-top" alt="sample4">
+                <div class="card-body">
+                  <p class="card-text">Actor/Actress Name</p>
+                </div>
+              </div>
+              <div class="col card bg-transparent">
+                <img src="./img/sample5.jpg" class="card-img-top" alt="sample4">
+                <div class="card-body">
+                  <p class="card-text">Actor/Actress Name</p>
+                </div>
+              </div>
+              <div class="col card bg-transparent">
+                <img src="./img/sample5.jpg" class="card-img-top" alt="sample4">
+                <div class="card-body">
+                  <p class="card-text">Actor/Actress Name</p>
+                </div>
+              </div>
+              <div class="col card bg-transparent">
+                <img src="./img/sample5.jpg" class="card-img-top" alt="sample4">
+                <div class="card-body">
+                  <p class="card-text">Actor/Actress Name</p>
+                </div>
+              </div>
+            </div>
+            <!-- ================================ -->
           </div>
         </div>
+        <!-- left bottom -->
         <div class="row reviewRow">
           <div class="col reviews">
-            level2 review here
+            <h2>Reviews</h2>
+            <div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, iusto! Illum facere quibusdam facilis
+                aperiam delectus sapiente, repudiandae dolorem libero eligendi a, perferendis nostrum temporibus nisi
+                incidunt atque suscipit ducimus!</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi illo necessitatibus tenetur quia
+                natus distinctio ullam ratione beatae numquam, quas doloremque, repellendus architecto? Laborum magnam
+                deleniti saepe quasi amet odio!</p>
+            </div>
           </div>
         </div>
       </div>
       <!-- second row right-->
       <div class="col right">
         <div class="row">
-          gallery here
+          <h2>Gallery</h2>
         </div>
       </div>
 
     </div>
 
     <!--footer-->
-    <footer class="col footer mb-3">
+    <footer class="footer">
       <div>
         ©Yuki Matsubara 2021. All Rights Reserved.
         <a href="https://www.linkedin.com/in/yukimatsubara/" target="_blank"><i class="fab fa-linkedin"></i></a>

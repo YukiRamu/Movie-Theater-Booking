@@ -218,28 +218,31 @@ body .container {
   margin: auto;
   padding: 0;
   min-width: 100%;
-  /* title panel */
   /* trailer row (top) */
   /* detail row (bottom) */
 }
 
-body .container .titlePanel {
+body .container .trailerRow {
+  min-height: 100vh;
+  /* title panel */
+}
+
+body .container .trailerRow .titlePanel {
   position: absolute;
   background-color: black;
   background: -webkit-gradient(linear, left top, right top, color-stop(10%, black), to(transparent));
   background: linear-gradient(to right, black 10%, transparent);
-  width: 40%;
-  min-height: 60vh;
-  padding: 2rem 0 2rem 3rem;
+  min-height: 100vh;
+  padding: 3rem 0 0 5rem;
   margin-left: -1rem;
 }
 
-body .container .titlePanel .categoryRow {
+body .container .trailerRow .titlePanel .categoryRow {
   margin-left: 0.1rem;
 }
 
-body .container .titlePanel .categoryRow .col {
-  border: 1px solid white;
+body .container .trailerRow .titlePanel .categoryRow .col {
+  border: 0.2rem solid #ec1a47;
   border-radius: 5vw;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
@@ -248,25 +251,35 @@ body .container .titlePanel .categoryRow .col {
   margin-right: 1rem;
 }
 
-body .container .titlePanel .directorRow span {
+body .container .trailerRow .titlePanel .titleRow h1 {
+  font-family: "Noto Serif", serif;
+  font-size: 6rem;
+}
+
+body .container .trailerRow .titlePanel .overviewRow {
+  max-width: 40%;
+}
+
+body .container .trailerRow .titlePanel .directorRow span {
   margin-right: 0.5rem;
 }
 
-body .container .titlePanel .bookRow {
+body .container .trailerRow .titlePanel .bookRow {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin-left: 0.2rem;
+  grid-gap: 1.5rem;
 }
 
-body .container .titlePanel .bookRow .rate {
+body .container .trailerRow .titlePanel .bookRow .rate {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 2rem;
 }
 
-body .container .titlePanel .bookRow .rate span {
+body .container .trailerRow .titlePanel .bookRow .rate span {
   font-size: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -274,17 +287,11 @@ body .container .titlePanel .bookRow .rate span {
   margin-left: 0.5rem;
 }
 
-body .container .titlePanel .rating .rate {
+body .container .trailerRow .titlePanel .rating .rate {
   font-size: 2rem;
 }
 
-body .container .trailerRow {
-  background-color: pink;
-  min-height: 60vh;
-}
-
 body .container .detailRow {
-  background-color: cyan;
   min-height: 50vh;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
@@ -292,21 +299,15 @@ body .container .detailRow {
   margin-left: auto;
 }
 
-body .container .detailRow .left {
-  background-color: darkkhaki;
-}
-
 body .container .detailRow .left .castRow {
-  background-color: red;
-  height: 50%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
-body .container .detailRow .left .reviewRow {
-  background-color: darkseagreen;
-  height: 50%;
-}
-
-body .container .detailRow .right {
-  background-color: darksalmon;
+body .container .detailRow .left .castRow .casts .castImgRow .card .card-img-top {
+  border-radius: 5%;
+  -webkit-box-shadow: 0 1rem 2rem black;
+          box-shadow: 0 1rem 2rem black;
 }
 /*# sourceMappingURL=movie.css.map */

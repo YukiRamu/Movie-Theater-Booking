@@ -217,6 +217,7 @@ body {
       padding-top: 6rem;
       .movieListCounts {
         margin-bottom: 2rem;
+        padding-bottom: 1rem;
         span {
           color: $accent2;
         }
@@ -227,11 +228,20 @@ body {
           padding: 2rem;
           background-color: unset !important;
           margin-top: 0;
+          cursor:pointer;
+          &:hover {
+            transform: translateY(-1rem);
+          }
           .card-img-overlay {
             padding: 3rem;
           }
         }
       }
+      .popOverContent {
+        box-shadow: 0 1rem 2rem $black; //shadow effect 
+        border-radius: 3vw;
+      }
+      
     }
   }
 }

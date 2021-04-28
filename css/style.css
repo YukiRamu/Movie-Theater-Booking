@@ -494,6 +494,7 @@ body .container .searchResult {
 
 body .container .searchResult .movieListCounts {
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 body .container .searchResult .movieListCounts span {
@@ -505,9 +506,21 @@ body .container .searchResult .movieListRow .card {
   padding: 2rem;
   background-color: unset !important;
   margin-top: 0;
+  cursor: pointer;
+}
+
+body .container .searchResult .movieListRow .card:hover {
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
 }
 
 body .container .searchResult .movieListRow .card .card-img-overlay {
   padding: 3rem;
+}
+
+body .container .searchResult .popOverContent {
+  -webkit-box-shadow: 0 1rem 2rem black;
+          box-shadow: 0 1rem 2rem black;
+  border-radius: 3vw;
 }
 /*# sourceMappingURL=style.css.map */
