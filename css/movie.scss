@@ -1,0 +1,36 @@
+@import "./component";
+
+body {
+  // background: url(../img/sample1.jpg);
+  // @include backgroundFullScreen;
+  .container {
+    min-height: 50vh;
+    /* trailer row (top) */
+    .trailerRow {
+      background-color: pink;
+      height: 50vh;
+      .trailer {
+        //full width, height
+      }
+    }
+    /* detail row (bottom) */
+    .detailRow {
+      background-color: cyan;
+      min-height: 50vh;
+      .left {
+        background-color: darkkhaki;
+        .castRow {
+          background-color: red;
+          height: 50%;
+        }
+        .reviewRow {
+          background-color: darkseagreen;
+          height: 50%;
+        }
+      }
+      .right {
+        background-color:darksalmon;
+      }
+    }
+  }
+}

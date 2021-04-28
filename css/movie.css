@@ -1,0 +1,242 @@
+/* Color Palette*/
+/* animation */
+@-webkit-keyframes flicker {
+  0% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  2% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  4% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  19% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  21% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  23% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  80% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  83% {
+    opacity: 0.4;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  87% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+}
+@keyframes flicker {
+  0% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  2% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  4% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  19% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  21% {
+    opacity: 0.1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  23% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  80% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  83% {
+    opacity: 0.4;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+  87% {
+    opacity: 1;
+    text-shadow: 0 0 1em #ec1a47;
+  }
+}
+
+@-webkit-keyframes blinkingText {
+  0% {
+    color: #f5f5f6;
+  }
+  49% {
+    color: #f5f5f6;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #f5f5f6;
+  }
+}
+
+@keyframes blinkingText {
+  0% {
+    color: #f5f5f6;
+  }
+  49% {
+    color: #f5f5f6;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #f5f5f6;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes scaleUp {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+}
+
+/* mixin */
+/* Global settings*/
+body {
+  font-family: "Raleway", sans-serif;
+  color: #f5f5f6;
+  background-color: #282c37;
+  overflow-x: hidden;
+}
+
+.btn-outline-light {
+  background-color: #ec1a47;
+  border: none;
+  -webkit-box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.579);
+          box-shadow: 0 0.3rem 0.5rem rgba(236, 26, 71, 0.579);
+  color: #f5f5f6;
+}
+
+.btn-outline-light:hover {
+  background-color: #f5f5f6;
+  border: #ec1a47 0.1rem solid;
+  -webkit-box-shadow: 0 0.3rem 0.5rem #f5f5f6;
+          box-shadow: 0 0.3rem 0.5rem #f5f5f6;
+  color: #ec1a47;
+}
+
+.form-control {
+  background-color: #dedfe3;
+}
+
+.form-control:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
+}
+
+.form-select {
+  background-color: #dedfe3;
+  color: #282c37;
+}
+
+.form-select:focus {
+  background-color: #f5f5f6;
+  border: none;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
+          box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
+}
+
+.footer {
+  text-align: center;
+  color: #a2a3a9;
+}
+
+body .container {
+  min-height: 50vh;
+  /* trailer row (top) */
+  /* detail row (bottom) */
+}
+
+body .container .trailerRow {
+  background-color: pink;
+  height: 50vh;
+}
+
+body .container .detailRow {
+  background-color: cyan;
+  min-height: 50vh;
+}
+
+body .container .detailRow .left {
+  background-color: darkkhaki;
+}
+
+body .container .detailRow .left .castRow {
+  background-color: red;
+  height: 50%;
+}
+
+body .container .detailRow .left .reviewRow {
+  background-color: darkseagreen;
+  height: 50%;
+}
+
+body .container .detailRow .right {
+  background-color: darksalmon;
+}
+/*# sourceMappingURL=movie.css.map */

@@ -7,8 +7,7 @@
 
 body {
   background: url(../img/sample3.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  @include backgroundFullScreen;
   .container {
     /* seat selection part (col-8) */
     min-height: 100vh;
@@ -16,7 +15,7 @@ body {
     margin: 2rem auto;
     padding: 2rem;
     background-color: $color1Tr;
-    box-shadow: 0 1rem 2rem $color4; //shadow effect
+    box-shadow: 0 1rem 2rem $black; //shadow effect
     border-radius: 3vw;
     .titleHeader {
       @include fadeInforInnerHTML;
@@ -51,7 +50,6 @@ body {
       .seatLabel {
         display: none;
         color: $color3;
-        //display: flex;
         justify-content: space-around;
         flex-direction: row;
         align-items: flex-end;
@@ -213,11 +211,6 @@ body {
           animation: fadeIn 0.3s linear;
         }
       }
-    }
-
-    .footer {
-      text-align: center;
-      color: $color4;
     }
   }
 }

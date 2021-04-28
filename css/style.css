@@ -153,6 +153,7 @@
   }
 }
 
+/* mixin */
 /* Global settings*/
 body {
   font-family: "Raleway", sans-serif;
@@ -200,6 +201,11 @@ body {
           box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
 }
 
+.footer {
+  text-align: center;
+  color: #a2a3a9;
+}
+
 body .container {
   margin: auto;
   padding: 0;
@@ -212,8 +218,9 @@ body .container {
 
 body .container .opening {
   background: url(../img/bg2.jpg);
-  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100vh;
 }
 
@@ -241,6 +248,8 @@ body .container .opening h1 .drops {
 
 body .container .opening h1 .drops span {
   opacity: 0;
+  -webkit-transition: 0.3s linear;
+  transition: 0.3s linear;
   display: block;
   font-size: 5rem;
   -webkit-transform: translateY(-15rem);
@@ -251,8 +260,6 @@ body .container .opening h1 .drops span {
 body .container .opening h1 .drops span.show {
   opacity: 1;
   font-size: 5rem;
-  -webkit-transition: 0.3s linear;
-  transition: 0.3s linear;
   -webkit-transform: translateY(0rem);
           transform: translateY(0rem);
   padding: 1rem;
@@ -265,6 +272,8 @@ body .container .opening h1 .drops span.show.scaleUp {
 
 body .container .opening h1 .bigger {
   opacity: 0;
+  -webkit-transition: 1s linear;
+  transition: 1s linear;
   font-size: 7rem;
   font-family: "Noto Serif", serif;
   font-weight: bold;
@@ -276,8 +285,6 @@ body .container .opening h1 .bigger {
 
 body .container .opening h1 .bigger.show {
   opacity: 1;
-  -webkit-transition: 01s;
-  transition: 01s;
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
@@ -425,6 +432,8 @@ body .container .carousel .carousel-inner .carousel-item img {
 
 body .container .carousel .carousel-inner .carousel-item .movieInfo {
   background-color: #282c37cf;
+  -webkit-box-shadow: 0 1rem 2rem black;
+          box-shadow: 0 1rem 2rem black;
   position: absolute;
   top: 50%;
   left: 10%;

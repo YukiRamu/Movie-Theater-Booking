@@ -153,6 +153,7 @@
   }
 }
 
+/* mixin */
 /* Global settings*/
 body {
   font-family: "Raleway", sans-serif;
@@ -200,6 +201,11 @@ body {
           box-shadow: 0 0 0 0.1rem rgba(236, 26, 71, 0.579);
 }
 
+.footer {
+  text-align: center;
+  color: #a2a3a9;
+}
+
 /* Global setting*/
 .flaticon-couch {
   font-size: 1.2rem;
@@ -209,6 +215,7 @@ body {
   background: url(../img/sample3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 body .container {
@@ -218,8 +225,8 @@ body .container {
   margin: 2rem auto;
   padding: 2rem;
   background-color: #282c37cf;
-  -webkit-box-shadow: 0 1rem 2rem #a2a3a9;
-          box-shadow: 0 1rem 2rem #a2a3a9;
+  -webkit-box-shadow: 0 1rem 2rem black;
+          box-shadow: 0 1rem 2rem black;
   border-radius: 3vw;
   /* Your seat part (col-4) */
 }
@@ -485,10 +492,5 @@ body .container .yourSeat .alert.show {
   display: block;
   -webkit-animation: fadeIn 0.3s linear;
           animation: fadeIn 0.3s linear;
-}
-
-body .container .footer {
-  text-align: center;
-  color: #a2a3a9;
 }
 /*# sourceMappingURL=seatSelection.css.map */

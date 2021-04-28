@@ -9,8 +9,7 @@ body {
     /* opening*/
     .opening {
       background: url(../img/bg2.jpg);
-      background-position: center;
-      background-size: cover;
+      @include backgroundFullScreen;
       // width: 100vw; //full screen
       height: 100vh; //full screen
       .row {
@@ -28,6 +27,7 @@ body {
           margin-bottom: 2rem;
           span {
             opacity: 0;
+            transition: 0.3s linear;
             display: block;
             font-size: 5rem;
             transform: translateY(-15rem);
@@ -35,7 +35,6 @@ body {
             &.show {
               opacity: 1;
               font-size: 5rem;
-              transition: 0.3s linear;
               transform: translateY(0rem);
               padding: 1rem;
               &.scaleUp {
@@ -46,6 +45,7 @@ body {
         }
         .bigger {
           opacity: 0;
+          transition: 1s linear;
           font-size: 7rem;
           font-family: "Noto Serif", serif;
           font-weight: bold;
@@ -53,7 +53,6 @@ body {
           margin: auto;
           &.show {
             opacity: 1;
-            transition: 01s;
             transform: scale(1.5);
           }
         }
@@ -176,6 +175,7 @@ body {
           }
           .movieInfo {
             background-color: $color1Tr;
+            box-shadow: 0 1rem 2rem $black; //shadow effect
             position: absolute;
             top: 50%;
             left: 10%;
