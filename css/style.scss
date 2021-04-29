@@ -228,7 +228,7 @@ body {
           padding: 2rem;
           background-color: unset !important;
           margin-top: 0;
-          cursor:pointer;
+          cursor: pointer;
           &:hover {
             transform: translateY(-1rem);
           }
@@ -238,10 +238,34 @@ body {
         }
       }
       .popOverContent {
-        box-shadow: 0 1rem 2rem $black; //shadow effect 
-        border-radius: 3vw;
+        opacity: 0;
+        box-shadow: 0 0rem 2rem $black; //shadow effect
+        transition: 0.3s linear;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(45deg, $color5 40%, transparent);
+        padding: 1rem 2rem 2rem 2rem;
+        width: 50%;
+        z-index: 0;
+        border-top-right-radius: 5vw;
+        text-shadow: 0 0 1em $color7;
+        font-weight: bold;
+        &.show {
+          opacity: 1;
+          z-index: 1;
+        }
+        .clsBtn {
+          color: $accent1;
+          background-color: unset;
+          border: none;
+          font-size: 2.5rem;
+          padding: 0;
+          &:hover {
+            color: $accent2;
+          }
+        }
       }
-      
     }
   }
 }

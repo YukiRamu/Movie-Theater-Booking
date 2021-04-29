@@ -15,9 +15,10 @@ const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 let dataArray = [];
 
 //animation
-const popOverContent = document.querySelectorAll(".popOverContent");
+const popOverContent = document.querySelector(".popOverContent");
 const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelectorAll(".movieListRow");
+const closeBtn = document.querySelector(".clsBtn");
 
 /* Fetch Data -- TMDB */
 //#1 fetch a list of movies based on a keyword
@@ -123,27 +124,31 @@ $(() => {
   });
 });
 
-//#5 Pop over 
-console.log(popOverContent)
-console.log(card)
-console.log(movieListRow)
+//#5 Pop over  ---Under construction
+console.log(popOverContent);
+console.log(card);
+console.log(movieListRow);
 
 for (let i = 0; i < movieListRow.length; i++) {
   movieListRow[i].addEventListener("click", (event) => {
     if (event.target.classList.contains("clicked")) {
       console.log("overlay image clicked");
       console.log(i)
-      popOverContent[i].classList.add("show");
+      popOverContent.classList.add("show");
     } else if (event.target.classList.contains("shown")) {
       ;
     }
     else {
       console.log("somewhere else clicked");
-      popOverContent[i].classList.remove("show");
+      popOverContent.classList.remove("show");
     }
-  })
-}
+  });
+};
 
+//#6 Pop over close
+closeBtn.addEventListener("click", () => {
+  popOverContent.classList.remove("show");
+});
 
 
 // for (let i = 0; i < movieImg.length; i++) {

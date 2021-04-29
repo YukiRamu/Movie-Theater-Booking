@@ -519,8 +519,37 @@ body .container .searchResult .movieListRow .card .card-img-overlay {
 }
 
 body .container .searchResult .popOverContent {
-  -webkit-box-shadow: 0 1rem 2rem black;
-          box-shadow: 0 1rem 2rem black;
-  border-radius: 3vw;
+  opacity: 0;
+  -webkit-box-shadow: 0 0rem 2rem black;
+          box-shadow: 0 0rem 2rem black;
+  -webkit-transition: 0.3s linear;
+  transition: 0.3s linear;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(45deg, #84838d 40%, transparent);
+  padding: 1rem 2rem 2rem 2rem;
+  width: 50%;
+  z-index: 0;
+  border-top-right-radius: 5vw;
+  text-shadow: 0 0 1em #363942;
+  font-weight: bold;
+}
+
+body .container .searchResult .popOverContent.show {
+  opacity: 1;
+  z-index: 1;
+}
+
+body .container .searchResult .popOverContent .clsBtn {
+  color: #ec1a47;
+  background-color: unset;
+  border: none;
+  font-size: 2.5rem;
+  padding: 0;
+}
+
+body .container .searchResult .popOverContent .clsBtn:hover {
+  color: #1aec1d;
 }
 /*# sourceMappingURL=style.css.map */

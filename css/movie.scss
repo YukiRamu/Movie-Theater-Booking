@@ -19,8 +19,7 @@ body {
       /* title panel */
       .titlePanel {
         position: absolute;
-        background-color: black;
-        background: linear-gradient(to right, black 10%, transparent);
+        background: linear-gradient(to right, $black 10%, transparent);
         min-height: 100vh;
         padding: 3rem 0 0 5rem;
         margin-left: -1rem;
