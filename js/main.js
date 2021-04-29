@@ -12,19 +12,18 @@ const alertMsg = document.querySelector(".alert");
 const baseURL = "https://api.themoviedb.org";
 //const parameter = "/3/movie/"; //specify movie
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
-let dataArray = [];
 
 //animation
 const popOverContent = document.querySelector(".popOverContent");
 const card = document.querySelectorAll(".card-img-overlay");
-const movieListRow = document.querySelectorAll(".movieListRow");
+const movieListRow = document.querySelector(".movieListRow");
 const closeBtn = document.querySelector(".clsBtn");
 
 /* Fetch Data -- TMDB */
-//#1 fetch a list of movies based on a keyword
+//#1 fetch a list of movie IDs based on a keyword
 //https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=jurassic
 
-const getMovieList = (keyword) => {
+const fetchAPIByKeyword = (keyword) => {
   fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}`)
     .then((response) => {
       if (!response.ok) {
@@ -34,20 +33,111 @@ const getMovieList = (keyword) => {
       }
     })
     .then((data) => {
-      console.log(data)
-      dataArray = data.results;
-      console.log(dataArray);
+      console.log("fetch API data is ", data)
+      let idArray = [];
+      idArray.push(data.results.map((elem) => { return elem.id }));
       smoothScroll("searchResult");
-      //showMovieList(); // -> display the list
-      return dataArray;
+      getMovieDetail(idArray); // -> fetch detail by id
     })
     .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch data`);
+      console.error(`Error = ${error}. Unable to fetch data by keyword`);
       return error;
     });
+  return;
 }
 
-//#2 display the list in the result section
+//#2 fetch movie detail by id
+//https://api.themoviedb.org/3/movie/%7Bmovie_id%7D?api_key=%7Bapikey%7D
+
+const getMovieDetail = (idArray) => {
+  console.log("idArray is ", idArray[0]);
+  let movieTitle;
+  let categoryArray = [];
+  let runtime;
+  let overview;
+
+  //fetch detail of movie and store it one by one
+  let resultArray = [];
+  for (let i = 0; i < idArray[0].length; i++) {
+    console.log("current id is", idArray[0][i]);
+
+    fetch(`${baseURL}/3/movie/${idArray[0][i]}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
+      .then((response) => {
+        console.log(`${baseURL}/3/movie/${idArray[0][i]}?api_key=${APIKey}&append_to_response=videos%2Bimages}`);
+
+        if (!response.ok) {
+          throw error(response.statusText);
+        } else {
+          return response.json();
+        }
+      }).then((data) => {
+        console.log("detail data by id is ", data); //object
+        
+        //movieTitle = data["original_title"];
+        //categoryArray.push(data["genres"].map((elem) => { return elem.name }));
+        // categoryArray = data["genres"];
+        // runtime = data["runtime"];
+        // overview = data["overview"];
+
+        resultArray.push({
+          movieTitle: data["original_title"],
+          category: categoryArray,
+          runtime: data["runtime"],
+          overview: data["overview"]
+        });
+        console.log(resultArray);
+
+      })
+      .catch((error) => {
+        console.error(`Error = ${error}. Unable to fetch data by ID`);
+        return error;
+      });
+  }
+  return;
+}
+
+//displayMovielist(movieTitle, categoryArray, runtime, overview); // -> show the result on the result section
+
+//#3 show the result on the result section
+const displayMovielist = (movieTitle, categoryArray, runtime, overview) => {
+
+  //for categories
+  let html = categoryArray.map((elem) => {
+    return `<p class="card-text clicked">${elem.name}</p>`;
+  }).join("");
+  console.log(html);
+
+  let appendHTML = `
+    <div class="col card bg-dark text-white">
+      <img src="./img/sample6.jpg" class="card-img" alt="sample4">
+      <div class="card-img-overlay clicked">
+        <h5 class="card-title clicked">${movieTitle}</h5>
+        <p class="card-text clicked">${html}</p>
+        <p class="card-text clicked"><i class="far fa-clock"></i> ${runtime}</p>
+      </div>
+    </div>
+  `
+  console.log(appendHTML);
+
+  movieListRow.innerHTML = appendHTML;
+
+  return;
+};
+
+//Movie class : 
+class Movie {
+  constructor() {
+    this._movieTitle = movieTitle;
+    this._category = category;
+    this._runtime = runtime;
+  }
+  //method
+  //create html
+  displayMovielist() {
+
+  }
+
+}
 
 // smooth scroll to the section (id)
 const smoothScroll = (id) => {
@@ -57,7 +147,7 @@ const smoothScroll = (id) => {
   }), true); // to top
 }
 
-/* Function Call */
+/* =================== Function Call =================== */
 //When the search button is clicked, get a list of movies based on a keyword
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -72,7 +162,7 @@ searchBtn.addEventListener("click", (e) => {
     }, 1500)
     return false
   }
-  getMovieList(search.value);
+  fetchAPIByKeyword(search.value);
 
 })
 
@@ -125,25 +215,24 @@ $(() => {
 });
 
 //#5 Pop over  ---Under construction
-console.log(popOverContent);
-console.log(card);
-console.log(movieListRow);
+// console.log(popOverContent);
+// console.log(card);
+// console.log(movieListRow);
 
-for (let i = 0; i < movieListRow.length; i++) {
-  movieListRow[i].addEventListener("click", (event) => {
-    if (event.target.classList.contains("clicked")) {
-      console.log("overlay image clicked");
-      console.log(i)
-      popOverContent.classList.add("show");
-    } else if (event.target.classList.contains("shown")) {
-      ;
-    }
-    else {
-      console.log("somewhere else clicked");
-      popOverContent.classList.remove("show");
-    }
-  });
-};
+
+movieListRow.addEventListener("click", (event) => {
+  if (event.target.classList.contains("clicked")) {
+    console.log("overlay image clicked");
+    popOverContent.classList.add("show");
+  } else if (event.target.classList.contains("shown")) {
+    ;
+  }
+  else {
+    console.log("somewhere else clicked");
+    popOverContent.classList.remove("show");
+  }
+});
+
 
 //#6 Pop over close
 closeBtn.addEventListener("click", () => {

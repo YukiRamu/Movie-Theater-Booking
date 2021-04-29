@@ -223,9 +223,10 @@ body {
         }
       }
       .movieListRow {
+        margin-bottom: 3rem;
         .card {
           border: none;
-          padding: 2rem;
+          padding: 1rem;
           background-color: unset !important;
           margin-top: 0;
           cursor: pointer;

@@ -501,9 +501,13 @@ body .container .searchResult .movieListCounts span {
   color: #1aec1d;
 }
 
+body .container .searchResult .movieListRow {
+  margin-bottom: 3rem;
+}
+
 body .container .searchResult .movieListRow .card {
   border: none;
-  padding: 2rem;
+  padding: 1rem;
   background-color: unset !important;
   margin-top: 0;
   cursor: pointer;
