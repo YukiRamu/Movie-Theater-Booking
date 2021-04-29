@@ -19,10 +19,20 @@ const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelector(".movieListRow");
 const closeBtn = document.querySelector(".clsBtn");
 
+//Movie class : 
+class Movie {
+  constructor() {
+    this._movieTitle = movieTitle;
+    this._category = category;
+    this._runtime = runtime;
+  }
+  //method
+  //create html
+  //displayMovielist() {}
+}
+
 /* Fetch Data -- TMDB */
 //#1 fetch a list of movie IDs based on a keyword
-//https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=jurassic
-
 const fetchAPIByKeyword = (keyword) => {
   fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}`)
     .then((response) => {
@@ -37,107 +47,77 @@ const fetchAPIByKeyword = (keyword) => {
       let idArray = [];
       idArray.push(data.results.map((elem) => { return elem.id }));
       smoothScroll("searchResult");
-      getMovieDetail(idArray); // -> fetch detail by id
+
+      //get movie detail and display it one by one
+      idArray[0].forEach(elem => {
+        getMovieDetail(elem); //#2 get detail by id
+      });
+
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch data by keyword`);
       return error;
     });
   return;
-}
+};
 
 //#2 fetch movie detail by id
-//https://api.themoviedb.org/3/movie/%7Bmovie_id%7D?api_key=%7Bapikey%7D
-
-const getMovieDetail = (idArray) => {
-  console.log("idArray is ", idArray[0]);
-  let movieTitle;
-  let categoryArray = [];
-  let runtime;
-  let overview;
+const getMovieDetail = (id) => {
+  console.log("idy check!!!", id);
 
   //fetch detail of movie and store it one by one
   let resultArray = [];
-  for (let i = 0; i < idArray[0].length; i++) {
-    console.log("current id is", idArray[0][i]);
 
-    fetch(`${baseURL}/3/movie/${idArray[0][i]}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
-      .then((response) => {
-        console.log(`${baseURL}/3/movie/${idArray[0][i]}?api_key=${APIKey}&append_to_response=videos%2Bimages}`);
+  fetch(`${baseURL}/3/movie/${id}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw error(response.statusText);
+      } else {
+        return response.json();
+      }
+    }).then((data) => {
+      let categoryArray = [];
+      categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
-        if (!response.ok) {
-          throw error(response.statusText);
-        } else {
-          return response.json();
-        }
-      }).then((data) => {
-        console.log("detail data by id is ", data); //object
-        
-        //movieTitle = data["original_title"];
-        //categoryArray.push(data["genres"].map((elem) => { return elem.name }));
-        // categoryArray = data["genres"];
-        // runtime = data["runtime"];
-        // overview = data["overview"];
-
-        resultArray.push({
-          movieTitle: data["original_title"],
-          category: categoryArray,
-          runtime: data["runtime"],
-          overview: data["overview"]
-        });
-        console.log(resultArray);
-
-      })
-      .catch((error) => {
-        console.error(`Error = ${error}. Unable to fetch data by ID`);
-        return error;
+      resultArray.push({
+        movieTitle: data["original_title"],
+        category: categoryArray,
+        runtime: data["runtime"],
+        overview: data["overview"]
       });
-  }
-  return;
+      displayMovielist(resultArray); //#3 show the result
+      return;
+    })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch data by ID`);
+      return error;
+    });
+  return resultArray;
 }
 
-//displayMovielist(movieTitle, categoryArray, runtime, overview); // -> show the result on the result section
-
 //#3 show the result on the result section
-const displayMovielist = (movieTitle, categoryArray, runtime, overview) => {
+const displayMovielist = (data) => {
 
   //for categories
-  let html = categoryArray.map((elem) => {
-    return `<p class="card-text clicked">${elem.name}</p>`;
+  let html = data[0].category[0].map((elem) => {
+    return `<p class="card-text clicked">${elem}</p>`;
   }).join("");
-  console.log(html);
 
-  let appendHTML = `
+  let appendHTML =
+    `
     <div class="col card bg-dark text-white">
       <img src="./img/sample6.jpg" class="card-img" alt="sample4">
       <div class="card-img-overlay clicked">
-        <h5 class="card-title clicked">${movieTitle}</h5>
+        <h5 class="card-title clicked">${data[0].movieTitle}</h5>
         <p class="card-text clicked">${html}</p>
-        <p class="card-text clicked"><i class="far fa-clock"></i> ${runtime}</p>
+        <p class="card-text clicked"><i class="far fa-clock"></i> ${data[0].runtime}</p>
       </div>
     </div>
-  `
-  console.log(appendHTML);
+    `;
 
-  movieListRow.innerHTML = appendHTML;
-
+  movieListRow.insertAdjacentHTML("beforeend", appendHTML);
   return;
 };
-
-//Movie class : 
-class Movie {
-  constructor() {
-    this._movieTitle = movieTitle;
-    this._category = category;
-    this._runtime = runtime;
-  }
-  //method
-  //create html
-  displayMovielist() {
-
-  }
-
-}
 
 // smooth scroll to the section (id)
 const smoothScroll = (id) => {
@@ -218,7 +198,6 @@ $(() => {
 // console.log(popOverContent);
 // console.log(card);
 // console.log(movieListRow);
-
 
 movieListRow.addEventListener("click", (event) => {
   if (event.target.classList.contains("clicked")) {
