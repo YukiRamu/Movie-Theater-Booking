@@ -119,41 +119,34 @@ body {
           &.show {
             padding: 1.5rem;
             text-align: right;
+          }
+          .navbar-nav {
+            margin-left: auto !important;
+            margin-right: 1rem !important;
             .nav-item {
               width: fit-content;
               margin-left: auto;
-              background-color: $color1Tr;
-            }
-            .nav-link {
               color: $color2;
-              padding: 0.5rem 0.5rem;
+              transform: translateY(0.5rem);
+              opacity: 0;
               &:hover {
-                color: $accent1;
-                border-bottom: none;
+                font-weight: bold;
+                border-bottom: 0.2rem solid $accent1Tr;
+                text-shadow: 0 1rem 1rem $accent1Tr;
               }
-            }
-            form {
-              margin-top: 1rem;
-              margin-left: auto;
-              width: fit-content;
-              .search {
-                width: 30vw;
+              span {
+                color: $accent2;
+              }
+              &.fadeIn {
+                opacity: 1;
+                animation: fadeIn 1s linear;
               }
             }
           }
-          .nav-link {
-            color: $color2;
-            transform: translateY(0.5rem);
-            &:hover {
-              font-weight: bold;
-              border-bottom: 0.2rem solid $accent1Tr;
-              text-shadow: 0 1rem 1rem $accent1Tr;
+          form {
+            .search {
+              width: 50vw;
             }
-          }
-        }
-        form {
-          .search {
-            width: 50vw;
           }
         }
       }
@@ -210,23 +203,16 @@ body {
     }
     /* Search Result */
     .searchResult {
-      // width: 100vw; //full screen
       min-height: 100vh; //full screen
       width: 90%;
       margin: auto;
-      padding-top: 6rem;
-      .movieListCounts {
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        span {
-          color: $accent2;
-        }
-      }
+      margin: 1rem auto;
+      padding-top: 10rem;
       .movieListRow {
         margin-bottom: 3rem;
         .card {
           border: none;
-          // padding: 1rem;
+          padding: 1rem;
           background-color: unset !important;
           margin-top: 1rem;
           margin-bottom: 1rem;
@@ -234,7 +220,7 @@ body {
           z-index: 1;
           &:hover {
             transform: translateY(-1rem);
-            box-shadow: 0 0rem 2rem $white; //shadow effect
+            box-shadow: 0 0rem 1.5rem $white; //shadow effect
             padding: 0;
           }
           img {

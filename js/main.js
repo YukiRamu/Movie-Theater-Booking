@@ -10,9 +10,9 @@ const alertMsg = document.querySelector(".alert");
 
 //API
 const baseURL = "https://api.themoviedb.org";
-const imgBaseURL = "https://image.tmdb.org/t/p/w92";
-//const parameter = "/3/movie/"; //specify movie
+const imgBaseURL = "https://image.tmdb.org/t/p/w154";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
+const numOfResult = document.querySelector(".numOfResult");
 
 //animation
 const popOverContent = document.querySelector(".popOverContent");
@@ -58,7 +58,13 @@ const getMovieByKeyword = (keyword) => {
       }
     })
     .then((data) => {
-      console.log("fetch API data is ", data)
+      console.log("fetch API data is ", data);
+      console.log("number of result is ", data.total_results);
+
+      //display the total number of result on nav bar with fadeIn effect
+      numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
+      numOfResult.classList.add("fadeIn");
+
       //get ids
       let idArray = [];
       idArray.push(data.results.map((elem) => { return elem.id }));
@@ -157,6 +163,11 @@ const smoothScroll = (id) => {
 }
 
 /* =================== Function Call =================== */
+//when the search box is focused
+search.addEventListener("focus", () => {
+  numOfResult.classList.remove("fadeIn");
+})
+
 //When the search button is clicked, get a list of movies based on a keyword
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -170,6 +181,8 @@ searchBtn.addEventListener("click", (e) => {
     }, 1500)
     return false
   }
+  //clear the previous search result
+  movieListRow.innerHTML = "";
   getMovieByKeyword(search.value);
 })
 
