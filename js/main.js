@@ -10,6 +10,7 @@ const alertMsg = document.querySelector(".alert");
 
 //API
 const baseURL = "https://api.themoviedb.org";
+const imgBaseURL = "https://image.tmdb.org/t/p/w92";
 //const parameter = "/3/movie/"; //specify movie
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 
@@ -31,9 +32,23 @@ class Movie {
   //displayMovielist() {}
 }
 
+/* *******************************************
+/* Fetch API Note - how to access data
+/* 1. Search by keyword : getMovieByKeyword()
+/* https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=
+//
+/* 2. Search detail by id (must have "id") : getMovieDetailById()
+/* https://api.themoviedb.org/3/movie/${id}?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&append_to_response=videos%2Bimages
+//
+/* 3. get image
+/* use poster_path as a parameter
+/* https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
+// backdrop_path for the backgroud photo
+/* *******************************************
+
 /* Fetch Data -- TMDB */
 //#1 fetch a list of movie IDs based on a keyword
-const fetchAPIByKeyword = (keyword) => {
+const getMovieByKeyword = (keyword) => {
   fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}`)
     .then((response) => {
       if (!response.ok) {
@@ -44,13 +59,14 @@ const fetchAPIByKeyword = (keyword) => {
     })
     .then((data) => {
       console.log("fetch API data is ", data)
+      //get ids
       let idArray = [];
       idArray.push(data.results.map((elem) => { return elem.id }));
-      smoothScroll("searchResult");
+      smoothScroll("searchResult");//#0 scroll to the result section
 
       //get movie detail and display it one by one
       idArray[0].forEach(elem => {
-        getMovieDetail(elem); //#2 get detail by id
+        getMovieDetailById(elem); //#2 get detail by id
       });
 
     })
@@ -62,8 +78,8 @@ const fetchAPIByKeyword = (keyword) => {
 };
 
 //#2 fetch movie detail by id
-const getMovieDetail = (id) => {
-  console.log("idy check!!!", id);
+const getMovieDetailById = (id) => {
+  console.log("id check!!!", id);
 
   //fetch detail of movie and store it one by one
   let resultArray = [];
@@ -76,14 +92,22 @@ const getMovieDetail = (id) => {
         return response.json();
       }
     }).then((data) => {
+
+      //get image
+      console.log(data)
+
+      //prepare category component
       let categoryArray = [];
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
+      //create a movie component
       resultArray.push({
         movieTitle: data["original_title"],
         category: categoryArray,
         runtime: data["runtime"],
-        overview: data["overview"]
+        overview: data["overview"],
+        backdropPath: data["backdrop_path"], //background photo
+        posterPath: data["poster_path"]
       });
       displayMovielist(resultArray); //#3 show the result
       return;
@@ -97,16 +121,20 @@ const getMovieDetail = (id) => {
 
 //#3 show the result on the result section
 const displayMovielist = (data) => {
+  //show only the data that has a poster image
+  if (data[0].posterPath) {
+    //for category component
+    let html = data[0].category[0].map((elem) => {
+      return `<p class="card-text clicked">${elem}</p>`;
+    }).join("");
 
-  //for categories
-  let html = data[0].category[0].map((elem) => {
-    return `<p class="card-text clicked">${elem}</p>`;
-  }).join("");
+    //============== Check for testing purpose: delete later
+    console.log(data)
 
-  let appendHTML =
-    `
+    let appendHTML =
+      `
     <div class="col card bg-dark text-white">
-      <img src="./img/sample6.jpg" class="card-img" alt="sample4">
+      <img src="${imgBaseURL + data[0].posterPath}" class="card-img" alt="sample4">
       <div class="card-img-overlay clicked">
         <h5 class="card-title clicked">${data[0].movieTitle}</h5>
         <p class="card-text clicked">${html}</p>
@@ -115,11 +143,12 @@ const displayMovielist = (data) => {
     </div>
     `;
 
-  movieListRow.insertAdjacentHTML("beforeend", appendHTML);
-  return;
+    movieListRow.insertAdjacentHTML("beforeend", appendHTML);
+    return;
+  }
 };
 
-// smooth scroll to the section (id)
+// smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
   let scrollTo = document.getElementById(`${id}`);
   scrollTo.scrollIntoView(({
@@ -137,13 +166,11 @@ searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
     alertMsg.style.transform = "translateY(0rem)";
     setTimeout(() => {
-
       alertMsg.style.transform = "translateY(-10rem)";
     }, 1500)
     return false
   }
-  fetchAPIByKeyword(search.value);
-
+  getMovieByKeyword(search.value);
 })
 
 /* ============== Animation function  ============== */
