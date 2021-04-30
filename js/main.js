@@ -11,8 +11,10 @@ const alertMsg = document.querySelector(".alert");
 //API
 const baseURL = "https://api.themoviedb.org";
 const imgBaseURL = "https://image.tmdb.org/t/p/w185";
+const videoBaseURL = "https://api.themoviedb.org/3/movie/"
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 const numOfResult = document.querySelector(".numOfResult");
+const searchResultSection = document.querySelector(".searchResult");
 
 //animation
 const popOverContent = document.querySelector(".popOverContent");
@@ -31,6 +33,10 @@ const movieListRow = document.querySelector(".movieListRow");
 /* use poster_path as a parameter
 /* https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 // backdrop_path for the backgroud photo
+//
+// 4. get video getVideoByMovieId ()
+/* https://api.themoviedb.org/3/movie/384018/videos?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&language=en-US
+/* 
 /* *******************************************
 
 /* Fetch Data -- TMDB */
@@ -46,6 +52,9 @@ const getMovieByKeyword = (keyword) => {
     })
     .then((data) => {
       console.log("fetch API data is ", data);
+      //display the total number of result on nav bar with fadeIn effect
+      numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
+      numOfResult.classList.add("fadeIn");
 
       // if there is no data, do nothing.
       if (data.total_results === 0) {
@@ -53,10 +62,6 @@ const getMovieByKeyword = (keyword) => {
       } else {
         smoothScroll("searchResult");//#0 scroll to the result section
       }
-
-      //display the total number of result on nav bar with fadeIn effect
-      numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
-      numOfResult.classList.add("fadeIn");
 
       //get ids
       let idArray = [];
@@ -74,12 +79,13 @@ const getMovieByKeyword = (keyword) => {
     });
 };
 
-//#2 fetch movie detail by id
-const getMovieDetailById = (id) => {
+//#2 fetch movie detail by movie id
+const getMovieDetailById = (movieId) => {
   //fetch detail of movie and store it one by one
   let resultArray = [];
+  let categoryArray = [];
 
-  fetch(`${baseURL}/3/movie/${id}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
+  fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
     .then((response) => {
       if (!response.ok) {
         throw error(response.statusText);
@@ -87,13 +93,13 @@ const getMovieDetailById = (id) => {
         return response.json();
       }
     }).then((data) => {
+      console.log(data);
       //prepare category component
-      let categoryArray = [];
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
       //create a movie component
       resultArray.push({
-        movieId: id,
+        movieId: movieId,
         movieTitle: data["original_title"],
         category: categoryArray,
         runtime: data["runtime"],
@@ -118,7 +124,7 @@ const displayMovielist = (movieComponent) => {
     let appendHTML =
       `
     <div class="col card bg-dark text-white">
-      <img src="${imgBaseURL + movieComponent[0].posterPath}" class="card-img clicked" alt="${movieComponent[0].movieId}">
+      <img src="${imgBaseURL + movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
     </div>
     `;
 
@@ -130,7 +136,7 @@ const displayMovielist = (movieComponent) => {
     // </div>
 
     movieListRow.insertAdjacentHTML("beforeend", appendHTML);
-    storeMovieComponentHTML(movieComponent); //-> store html into local storage
+    storeMovieComponentHTML(movieComponent); //-> #4 store html into local storage
 
     return movieComponent;
   }
@@ -148,14 +154,14 @@ const storeMovieComponentHTML = (movieComponent) => {
   //for the entire html
   let htmlAll = `
   <button type="button" class="clsBtn" onclick="closePopup()">x</button>
+  <h5>${movieComponent[0].movieTitle}</h5>
   <p">${movieComponent[0].overview}</p>
-  <button type="button" class="btn btn-outline-light">▶ Watch trailer</button>
+  <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${movieComponent[0].movieId}</span></button>
   <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
       class="fas fa-film"></i></i> View Detail</a >
     <div class="info">
       ${htmlCategory}
       <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime}</p>
-      <span class="movieId">${movieComponent[0].movieId}</span>
     </div>
   `;
 
@@ -170,21 +176,57 @@ const storeMovieComponentHTML = (movieComponent) => {
   localStorage.setItem("descriptionHTML", JSON.stringify(detailAppendHTMLList));
 }
 
+//#4 fetch video key by movid Id
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("trailerBtn")) {
+    //get movieId from the button tag > span
+    let movieId = event.target.children.innerHTML; //string
+    getVideoByMovieId(movieId);
+  }
+});
+const getVideoByMovieId = (movieId) => {
+  //fetch video key and store it to the local Storage
+  fetch(`${videoBaseURL}${movieId}/videos?api_key=${APIKey}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw error(response.statusText);
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      //prepare video key array and return
+      let videoKeyArray = [];
+      videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
+      console.log(videoKeyArray);
+
+      //iframe > show video
+
+    })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch video data by movieId`);
+      return error;
+    });
+}
+
 // smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
+  searchResultSection.style.display = "block";
   let scrollTo = document.getElementById(`${id}`);
   scrollTo.scrollIntoView(({
     behavior: "smooth"
   }), true); // to top
 }
 
-/* =================== Function Call =================== */
+/* =========================== Function Call =========================== */
 //when the search box is focused
 search.addEventListener("focus", () => {
   //numnber of result hide
   numOfResult.classList.remove("fadeIn");
   //movie detail popUp hide
   popOverContent.classList.remove("show");
+  //clear input
+  search.value = "";
 })
 
 //When the search button is clicked, get a list of movies based on a keyword
@@ -205,7 +247,7 @@ searchBtn.addEventListener("click", (e) => {
   getMovieByKeyword(search.value);
 })
 
-/* ============== Animation function  ============== */
+/* =========================== Animation function  =========================== */
 //#1 dropping text animation
 let dropTextsArray = [];
 Array.from(droptexts).forEach(elem => {
@@ -257,12 +299,15 @@ $(() => {
 movieListRow.addEventListener("click", (event) => {
   console.log(event.target);
 
-  if (event.target.classList.contains("clicked")) {
+  //when the image is clicked
+  if (event.target.classList.contains("posterImg")) {
     console.log("overlay image clicked");
+    //show pop up
     popOverContent.classList.add("show");
 
     //append detail movie information into the pop up
     let component = JSON.parse(localStorage.getItem("descriptionHTML"));
+    console.log(component);
 
     //find the appendHTML by movieId ("==" because of data type difference)
     let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
@@ -274,13 +319,7 @@ movieListRow.addEventListener("click", (event) => {
   }
 });
 
-//#6 Pop over close
-// closeBtn.addEventListener("click", () => {
-//   console.log("close button is clicked");
-//   popOverContent.classList.remove("show");
-// });
-
+//#6 Pop over close - onclick attribute in html
 const closePopup = () => {
-  console.log("close button is clicked");
   popOverContent.classList.remove("show");
 }

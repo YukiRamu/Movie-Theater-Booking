@@ -58,7 +58,7 @@
       </div>
 
       <div class="row">
-        <a class="col msg" href="#carouselExampleIndicators">Check out New Release</a>
+        <a class="col msg" href="#carouselExampleIndicators">Check out New On Theater</a>
       </div>
     </div>
 
@@ -93,8 +93,8 @@
           </ul>
 
           <form class="d-flex">
-            <input class="form-control me-2 search" type="search" placeholder="Search movies, actors, editors, etc"
-              aria-label="Search">
+            <input class="form-control me-2 search" type="text" placeholder="Search movies, actors, editors, etc"
+              aria-label="default input">
             <button class="btn btn-outline-light searchBtn" type="submit">Search</button>
           </form>
         </div>
@@ -118,7 +118,7 @@
           <!-- Featured Movie Section start need to apply info with JavaScript-->
           <div class="movieInfo">
             <div class="row">
-              <h1 class="col movieTitle">New Release Movie Title</h1>
+              <h1 class="col movieTitle">Now on Theater</h1>
             </div>
 
             <div class="row">
@@ -267,15 +267,16 @@
       <!-- result cards 5 panels in one row / 10 moview at one page-->
       <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow">
         <div class="col card bg-dark text-white">
-          <img src="./img/sample4.jpg" class="card-img clicked" alt="671">
+          <img src="./img/sample4.jpg" class="card-img clicked posterImg" alt="671">
         </div>
       </div>
 
-      <!--display small description of selected movie : appear on click at the bottom-->
       <div class="popOverContent">
+        <!--display small description of selected movie : appear on click at the bottom-->
         <button type="button" class="clsBtn" onclick="closePopup()">x</button>
+        <h5>Movie Title here</h5>
         <p>description here</p>
-        <button type="button" class="btn btn-outline-light">▶ Watch trailer</button>
+        <button type="button" class="btn btn-outline-light trailerBtn" name="1254">▶ Watch trailer<span class="movieId">748836</span></button>
         <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
             class="fas fa-film"></i></i> View Detail</a>
         <div class="info">
@@ -283,18 +284,18 @@
           <p class="card-text"> category |</p>
           <p class="card-text"> category |</p>
           <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
-          <span class="movieId">748836</span>
         </div>
+        <!--display small description of selected movie : appear on click at the bottom-->
       </div>
 
-      <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation example" class="pageNav">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="#">1</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="#">2</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="#">3</a></li>
           <li class="page-item">
             <a class="page-link" href="#">Next</a>
           </li>

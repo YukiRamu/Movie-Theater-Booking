@@ -153,5 +153,12 @@ body {
 .footer {
   text-align: center;
   color: $color4;
+  margin-top: 1rem;
   margin-bottom: 1rem;
+  i {
+    color: $color4;
+    &:hover {
+      color: $blue;
+    }
+  }
 }

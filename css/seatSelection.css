@@ -211,7 +211,16 @@ body {
 .footer {
   text-align: center;
   color: #a2a3a9;
+  margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.footer i {
+  color: #a2a3a9;
+}
+
+.footer i:hover {
+  color: #5392d4;
 }
 
 /* Global setting*/
