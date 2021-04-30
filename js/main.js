@@ -21,6 +21,11 @@ const popOverContent = document.querySelector(".popOverContent");
 const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelector(".movieListRow");
 
+//modal
+const htmlBody = document.getElementsByTagName("body");
+const trailerModal = document.querySelector(".trailerModal");
+const trailerBackground = document.querySelector(".trailerBackground");
+
 /* *******************************************
 /* Fetch API Note - how to access data
 /* 1. Search by keyword : getMovieByKeyword()
@@ -58,6 +63,8 @@ const getMovieByKeyword = (keyword) => {
 
       // if there is no data, do nothing.
       if (data.total_results === 0) {
+        //hide search result section if it is already open
+        searchResultSection.style.display = "none";
         return false;
       } else {
         smoothScroll("searchResult");//#0 scroll to the result section
@@ -179,8 +186,10 @@ const storeMovieComponentHTML = (movieComponent) => {
 //#4 fetch video key by movid Id
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBtn")) {
+    console.log("trailerBtn is clicked movie id is ")
+    console.log(event.target.children[0].innerHTML)
     //get movieId from the button tag > span
-    let movieId = event.target.children.innerHTML; //string
+    let movieId = event.target.children[0].innerHTML; //string
     getVideoByMovieId(movieId);
   }
 });
@@ -195,12 +204,15 @@ const getVideoByMovieId = (movieId) => {
       }
     })
     .then((data) => {
-      //prepare video key array and return
+      //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
       console.log(videoKeyArray);
 
-      //iframe > show video
+      //iframe > show video on modal popuo
+      //#2 show modal
+      trailerModal.classList.add("show");
+      htmlBody.classList.add("trailerModal-active");
 
     })
     .catch((error) => {
@@ -234,6 +246,7 @@ searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   //validation check
   if (search.value === "") {
+    console.log("alert")
     //Show alert for 1.5s
     e.preventDefault();
     alertMsg.style.transform = "translateY(0rem)";
@@ -323,3 +336,9 @@ movieListRow.addEventListener("click", (event) => {
 const closePopup = () => {
   popOverContent.classList.remove("show");
 }
+
+//#7 close modal
+trailerBackground.addEventListener("click", () => {
+  trailerModal.classList.remove("show");
+  htmlBody.classList.remove("trailerModal-active");
+})

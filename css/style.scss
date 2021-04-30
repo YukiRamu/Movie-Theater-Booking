@@ -1,6 +1,10 @@
 @import "./component";
 
+html,
 body {
+  &.trailerModal-active {
+    overflow: hidden;
+  }
   .container {
     //margin: 0; //full screen
     margin: auto;
@@ -203,12 +207,13 @@ body {
     }
     /* Search Result */
     .searchResult {
-     // display: none;
+      display: none;
       min-height: 100vh; //full screen
       width: 90%;
       margin: auto;
       margin: 1rem auto;
       padding-top: 10rem;
+      position: relative;
       .movieListRow {
         margin-bottom: 3rem;
         .card {
@@ -303,5 +308,103 @@ body {
         }
       }
     }
+  }
+  .trailerModal {
+    color: red;
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 0;
+    .trailerBackground {
+      background-color: rgba(207, 200, 200, 0.827);
+      width: 100vw;
+      height: 100vh;
+      .trailer {
+        background-color: pink;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    &.show {
+      z-index: 3000;
+      opacity: 1;
+    }
+    //========~=======================~
+    // &.trailer {
+    //   z-index: 0;
+    //   transform: scale(1);
+    //   .trailerbackground {
+    //     background: rgba(0, 0, 0, 0.7);
+    //     .trailer {
+    //       animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    //     }
+    //   }
+    //   + .content {
+    //     z-index: 1;
+    //     animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    //   }
+    //   &.out {
+    //     .trailerbackground {
+    //       .modal {
+    //         animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    //       }
+    //     }
+    //     + .content {
+    //       animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    //     }
+    //   }
+    // }
+    //========~=======================~
+  }
+}
+
+@keyframes blowUpContent {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes blowUpContentTwo {
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blowUpModal {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes blowUpModalTwo {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
