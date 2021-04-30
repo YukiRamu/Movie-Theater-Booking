@@ -22,9 +22,10 @@ const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelector(".movieListRow");
 
 //modal
-const htmlBody = document.getElementsByTagName("body");
+const htmlBody = document.getElementsByTagName("body")[0];
 const trailerModal = document.querySelector(".trailerModal");
 const trailerBackground = document.querySelector(".trailerBackground");
+const trailerContents = document.querySelector(".trailerContents");
 
 /* *******************************************
 /* Fetch API Note - how to access data
@@ -135,13 +136,6 @@ const displayMovielist = (movieComponent) => {
     </div>
     `;
 
-    //=========== use below in the description section
-    //   <div class="card-img-overlay clicked">
-    //   <h5 class="card-title clicked">${data[0].movieTitle}</h5>
-    //   <p class="card-text clicked">${html}</p>
-    //   <p class="card-text clicked"><i class="far fa-clock"></i> ${data[0].runtime}</p>
-    // </div>
-
     movieListRow.insertAdjacentHTML("beforeend", appendHTML);
     storeMovieComponentHTML(movieComponent); //-> #4 store html into local storage
 
@@ -193,6 +187,8 @@ document.addEventListener("click", (event) => {
     getVideoByMovieId(movieId);
   }
 });
+
+//#5 get video key array by movid id
 const getVideoByMovieId = (movieId) => {
   //fetch video key and store it to the local Storage
   fetch(`${videoBaseURL}${movieId}/videos?api_key=${APIKey}`)
@@ -207,18 +203,75 @@ const getVideoByMovieId = (movieId) => {
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
-      console.log(videoKeyArray);
+      console.log(videoKeyArray[0]);
 
-      //iframe > show video on modal popuo
       //#2 show modal
       trailerModal.classList.add("show");
       htmlBody.classList.add("trailerModal-active");
+
+      //#3 create iframe
+      //prepare carousel-indicators (= length of array) = buttons
+      let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
+
+      //******** if there are more than 2 trailers
+      let indicatorHTML = "";
+      for (let i = 1; i < videoKeyArray[0].length; i++) {
+        indicatorHTML += `<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="${i}"></button>;`
+      };
+      console.log(indicatorHTML);
+
+      //prepare carousel-items
+      let itemHTMLBase = `
+        <div class="carousel-item active">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        </div>`
+
+      //******** if there are more than 2 trailers
+      let itemHTML = "";
+      for (let i = 1; i < videoKeyArray[0].length; i++) {
+        itemHTML += `
+        <div class="carousel-item">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        </div>`
+      }
+      console.log(itemHTML);
+
+      let iframeHTML = `
+        <div class="carousel-indicators">
+          ${indicatorHTMLBase}${indicatorHTML}
+        </div>
+        <div class="carousel-inner">
+          ${itemHTMLBase}${itemHTML}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#movieTrailer" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#movieTrailer" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        `;
+      console.log(iframeHTML);
+
+      trailerContents.innerHTML = iframeHTML;
 
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch video data by movieId`);
       return error;
     });
+}
+
+//#6 create iframe for trailer
+const showTrailer = () => {
+
 }
 
 // smooth scroll to the section (param: sectionId)
@@ -338,7 +391,9 @@ const closePopup = () => {
 }
 
 //#7 close modal
-trailerBackground.addEventListener("click", () => {
-  trailerModal.classList.remove("show");
-  htmlBody.classList.remove("trailerModal-active");
+trailerBackground.addEventListener("click", (event) => {
+  if (event.target.classList.contains("trailerBackground")) {
+    trailerModal.classList.remove("show");
+    htmlBody.classList.remove("trailerModal-active");
+  }
 })
