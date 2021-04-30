@@ -10,7 +10,7 @@ const alertMsg = document.querySelector(".alert");
 
 //API
 const baseURL = "https://api.themoviedb.org";
-const imgBaseURL = "https://image.tmdb.org/t/p/w154";
+const imgBaseURL = "https://image.tmdb.org/t/p/w185";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 const numOfResult = document.querySelector(".numOfResult");
 
@@ -73,20 +73,17 @@ const getMovieByKeyword = (keyword) => {
       //get movie detail and display it one by one
       idArray[0].forEach(elem => {
         getMovieDetailById(elem); //#2 get detail by id
+        return;
       });
-
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch data by keyword`);
       return error;
     });
-  return;
 };
 
 //#2 fetch movie detail by id
 const getMovieDetailById = (id) => {
-  console.log("id check!!!", id);
-
   //fetch detail of movie and store it one by one
   let resultArray = [];
 
@@ -98,16 +95,13 @@ const getMovieDetailById = (id) => {
         return response.json();
       }
     }).then((data) => {
-
-      //get image
-      console.log(data)
-
       //prepare category component
       let categoryArray = [];
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
       //create a movie component
       resultArray.push({
+        movieId: id,
         movieTitle: data["original_title"],
         category: categoryArray,
         runtime: data["runtime"],
@@ -122,37 +116,67 @@ const getMovieDetailById = (id) => {
       console.error(`Error = ${error}. Unable to fetch data by ID`);
       return error;
     });
-  return resultArray;
+  return;
 }
 
 //#3 show the result on the result section
-const displayMovielist = (data) => {
+const displayMovielist = (movieComponent) => {
   //show only the data that has a poster image
-  if (data[0].posterPath) {
-    //for category component
-    let html = data[0].category[0].map((elem) => {
-      return `<p class="card-text clicked">${elem}</p>`;
-    }).join("");
-
-    //============== Check for testing purpose: delete later
-    console.log(data)
-
+  if (movieComponent[0].posterPath) {
     let appendHTML =
       `
     <div class="col card bg-dark text-white">
-      <img src="${imgBaseURL + data[0].posterPath}" class="card-img" alt="sample4">
-      <div class="card-img-overlay clicked">
-        <h5 class="card-title clicked">${data[0].movieTitle}</h5>
-        <p class="card-text clicked">${html}</p>
-        <p class="card-text clicked"><i class="far fa-clock"></i> ${data[0].runtime}</p>
-      </div>
+      <img src="${imgBaseURL + movieComponent[0].posterPath}" class="card-img clicked" alt="${movieComponent[0].movieId}">
     </div>
     `;
 
+    //=========== use below in the description section
+    //   <div class="card-img-overlay clicked">
+    //   <h5 class="card-title clicked">${data[0].movieTitle}</h5>
+    //   <p class="card-text clicked">${html}</p>
+    //   <p class="card-text clicked"><i class="far fa-clock"></i> ${data[0].runtime}</p>
+    // </div>
+
     movieListRow.insertAdjacentHTML("beforeend", appendHTML);
-    return;
+    storeMovieComponentHTML(movieComponent); //-> store html into local storage
+
+    return movieComponent;
   }
 };
+
+//#4 store html list with detail movie info into LocalStorage
+let detailAppendHTMLList = [];
+const storeMovieComponentHTML = (movieComponent) => {
+  //create html
+  //for category component
+  let htmlCategory = movieComponent[0].category[0].map((elem) => {
+    return `<p class="card-text">${elem}</p>`;
+  }).join("");
+
+  //for the entire html
+  let htmlAll = `
+  <button type="button" class="clsBtn" aria-label="Close">x</button>
+  <p">${movieComponent[0].overview}</p>
+  <button type="button" class="btn btn-outline-light">▶ Watch trailer</button>
+  <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
+      class="fas fa-film"></i></i> View Detail</a >
+    <div class="info">
+      ${htmlCategory}
+      <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime}</p>
+      <span class="movieId">${movieComponent[0].movieId}</span>
+    </div>
+  `;
+
+  //create an object
+  let dataObj = {
+    movieId: movieComponent[0].movieId,
+    appendHTML: htmlAll
+  }
+  detailAppendHTMLList.push(dataObj);
+
+  //when all item is shown, the local storage will be ready (all item stored)
+  localStorage.setItem("descriptionHTML", JSON.stringify(detailAppendHTMLList));
+}
 
 // smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
@@ -165,7 +189,10 @@ const smoothScroll = (id) => {
 /* =================== Function Call =================== */
 //when the search box is focused
 search.addEventListener("focus", () => {
+  //numnber of result hide
   numOfResult.classList.remove("fadeIn");
+  //movie detail popUp hide
+  popOverContent.classList.remove("show");
 })
 
 //When the search button is clicked, get a list of movies based on a keyword
@@ -240,24 +267,40 @@ $(() => {
 // console.log(movieListRow);
 
 movieListRow.addEventListener("click", (event) => {
+  console.log(event.target);
+
   if (event.target.classList.contains("clicked")) {
     console.log("overlay image clicked");
     popOverContent.classList.add("show");
-  } else if (event.target.classList.contains("shown")) {
-    ;
+
+    //append detail movie information into the pop up
+    let component = JSON.parse(localStorage.getItem("descriptionHTML"));
+
+    //find the appendHTML by movieId
+    let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
+    popOverContent.innerHTML = result.appendHTML;
+
   }
+  //else if (event.target.classList.contains("shown")) {
+  //   console.log("shown clicked")
+  //   ;
+  // }
   else {
     console.log("somewhere else clicked");
     popOverContent.classList.remove("show");
   }
 });
 
-
 //#6 Pop over close
-closeBtn.addEventListener("click", () => {
-  popOverContent.classList.remove("show");
-});
+// closeBtn.addEventListener("click", () => {
+//   console.log("close button is clicked")
+//   popOverContent.classList.remove("show");
+// });
 
+const close = () => {
+  console.log("close button is clicked")
+  popOverContent.classList.remove("show");
+}
 
 // for (let i = 0; i < movieImg.length; i++) {
 //   movieImg[i], addEventListener("click", () => {

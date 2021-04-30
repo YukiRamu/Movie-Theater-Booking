@@ -267,29 +267,26 @@
       <!-- result cards 5 panels in one row / 10 moview at one page-->
       <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow">
         <div class="col card bg-dark text-white">
-          <img src="./img/sample4.jpg" class="card-img" alt="sample4">
-          <div class="card-img-overlay clicked">
-            <h5 class="card-title clicked">Movie Title</h5>
-            <p class="card-text clicked">category</p>
-            <p class="card-text clicked">category</p>
-            <p class="card-text clicked">category</p>
-            <p class="card-text clicked"><i class="far fa-clock"></i> 120 min</p>
-          </div>
+          <img src="./img/sample4.jpg" class="card-img clicked" alt="671">
         </div>
       </div>
 
       <!--display small description of selected movie : appear on click at the bottom-->
       <div class="popOverContent">
-        <button type="button" class="clsBtn" aria-label="Close">x</button>
-        <p class="shown">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam
-          sunt
-          veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
+        <button type="button" class="clsBtn" aria-label="Close" onclick="close()">x</button>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur et, sit illum quisquam  sunt veritatis enim officiis consequuntur minus assumenda provident harum in, suscipit eum ea fugit eligendi
           fuga natus!</p>
-        <button type="button" class="btn btn-outline-light shown ">▶ Watch trailer</button>
-        <a class="btn btn-outline-light shown" href="./movie.html" target="_blank" role="button"><i
+        <button type="button" class="btn btn-outline-light">▶ Watch trailer</button>
+        <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
             class="fas fa-film"></i></i> View Detail</a>
+        <div class="info">
+          <p class="card-text">category |</p>
+          <p class="card-text"> category |</p>
+          <p class="card-text"> category |</p>
+          <p class="card-text"><i class="far fa-clock"></i> 120 min</p>
+          <span class="movieId">748836</span>
+        </div>
       </div>
-      <!-- result cards till here append with JavaScript-->
 
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">

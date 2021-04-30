@@ -225,9 +225,15 @@ body {
           }
           img {
             height: 100%;
+            border-radius: 5%;
           }
           .card-img-overlay {
+            color: $accent1;
             padding: 3rem;
+            text-shadow: 0 0 1em $white;
+            .card-title {
+              font-size: 1.5rem;
+            }
           }
         }
       }
@@ -239,15 +245,15 @@ body {
         bottom: 0;
         left: 0;
         background: linear-gradient(45deg, $color5 40%, transparent);
-        padding: 1rem 2rem 2rem 2rem;
+        padding: 1rem 2rem 1rem 2rem;
         width: 50%;
-        z-index: 0;
+        //z-index: 0;
         border-top-right-radius: 5vw;
         text-shadow: 0 0 1em $color7;
         font-weight: bold;
         &.show {
           opacity: 1;
-          z-index: 2;
+          z-index: 1000;
         }
         .clsBtn {
           color: $accent1;
@@ -255,8 +261,22 @@ body {
           border: none;
           font-size: 2.5rem;
           padding: 0;
+          z-index: 2000;
           &:hover {
             color: $accent2;
+          }
+        }
+        .info {
+          display: flex;
+          justify-content: flex-start;
+          margin: 1rem;
+          margin-left: 0;
+          p {
+            padding-right: 1rem;
+            color: $accent1;
+          }
+          span {
+            opacity: 0;
           }
         }
       }
