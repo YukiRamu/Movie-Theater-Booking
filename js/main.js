@@ -18,19 +18,6 @@ const numOfResult = document.querySelector(".numOfResult");
 const popOverContent = document.querySelector(".popOverContent");
 const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelector(".movieListRow");
-const closeBtn = document.querySelector(".clsBtn");
-
-//Movie class : 
-class Movie {
-  constructor() {
-    this._movieTitle = movieTitle;
-    this._category = category;
-    this._runtime = runtime;
-  }
-  //method
-  //create html
-  //displayMovielist() {}
-}
 
 /* *******************************************
 /* Fetch API Note - how to access data
@@ -155,7 +142,7 @@ const storeMovieComponentHTML = (movieComponent) => {
 
   //for the entire html
   let htmlAll = `
-  <button type="button" class="clsBtn" aria-label="Close">x</button>
+  <button type="button" class="clsBtn" onclick="closePopup()">x</button>
   <p">${movieComponent[0].overview}</p>
   <button type="button" class="btn btn-outline-light">▶ Watch trailer</button>
   <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
@@ -261,11 +248,7 @@ $(() => {
   });
 });
 
-//#5 Pop over  ---Under construction
-// console.log(popOverContent);
-// console.log(card);
-// console.log(movieListRow);
-
+//#5 Pop over screen
 movieListRow.addEventListener("click", (event) => {
   console.log(event.target);
 
@@ -280,12 +263,7 @@ movieListRow.addEventListener("click", (event) => {
     let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
     popOverContent.innerHTML = result.appendHTML;
 
-  }
-  //else if (event.target.classList.contains("shown")) {
-  //   console.log("shown clicked")
-  //   ;
-  // }
-  else {
+  } else {
     console.log("somewhere else clicked");
     popOverContent.classList.remove("show");
   }
@@ -293,24 +271,11 @@ movieListRow.addEventListener("click", (event) => {
 
 //#6 Pop over close
 // closeBtn.addEventListener("click", () => {
-//   console.log("close button is clicked")
+//   console.log("close button is clicked");
 //   popOverContent.classList.remove("show");
 // });
 
-const close = () => {
-  console.log("close button is clicked")
+const closePopup = () => {
+  console.log("close button is clicked");
   popOverContent.classList.remove("show");
 }
-
-// for (let i = 0; i < movieImg.length; i++) {
-//   movieImg[i], addEventListener("click", () => {
-//     console.log(movieImg[i])
-//     popOverContent[i].classList.add("show");
-//   });
-// }
-
-// $(document).ready(function(){
-//   $('#imgOne').popover();
-//   $('#popOverContent').popover({ trigger: "hover" });
-// })
-
