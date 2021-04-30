@@ -212,5 +212,12 @@ body {
         }
       }
     }
+    .footer {
+      display: none;
+      &.show {
+        display: block;
+        animation: fadeIn 1s linear;
+      }
+    }
   }
 }

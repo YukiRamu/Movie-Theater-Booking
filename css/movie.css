@@ -211,6 +211,7 @@ body {
 .footer {
   text-align: center;
   color: #a2a3a9;
+  margin-bottom: 1rem;
 }
 
 body .container {

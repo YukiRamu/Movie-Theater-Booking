@@ -46,7 +46,13 @@ const getMovieByKeyword = (keyword) => {
     })
     .then((data) => {
       console.log("fetch API data is ", data);
-      console.log("number of result is ", data.total_results);
+
+      // if there is no data, do nothing.
+      if (data.total_results === 0) {
+        return false;
+      } else {
+        smoothScroll("searchResult");//#0 scroll to the result section
+      }
 
       //display the total number of result on nav bar with fadeIn effect
       numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
@@ -55,7 +61,6 @@ const getMovieByKeyword = (keyword) => {
       //get ids
       let idArray = [];
       idArray.push(data.results.map((elem) => { return elem.id }));
-      smoothScroll("searchResult");//#0 scroll to the result section
 
       //get movie detail and display it one by one
       idArray[0].forEach(elem => {
@@ -259,7 +264,7 @@ movieListRow.addEventListener("click", (event) => {
     //append detail movie information into the pop up
     let component = JSON.parse(localStorage.getItem("descriptionHTML"));
 
-    //find the appendHTML by movieId
+    //find the appendHTML by movieId ("==" because of data type difference)
     let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
     popOverContent.innerHTML = result.appendHTML;
 

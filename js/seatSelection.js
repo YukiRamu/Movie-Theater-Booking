@@ -16,6 +16,7 @@ const screenLine = document.querySelector(".screenLine");
 const seatContainer = document.querySelector(".seat-container");
 const note = document.querySelector(".note");
 const yourSeat = document.querySelector(".yourSeat");
+const footer = document.querySelector(".footer");
 
 //Price Calc
 const regularTicketNum = document.querySelector(".regNum");
@@ -129,6 +130,7 @@ class UI {
     seatContainer.classList.add("show");
     note.classList.add("show");
     yourSeat.classList.add("show");
+    footer.classList.add("show");
   }
 
   static hideMap() {
@@ -138,6 +140,7 @@ class UI {
     seatContainer.classList.remove("show");
     note.classList.remove("show");
     yourSeat.classList.remove("show");
+    footer.classList.remove("show");
   }
 }
 
@@ -296,7 +299,8 @@ const checkOut = (title) => {
 //store emply array
 //The JSON.stringify() method converts JavaScript objects into strings.
 //array -> convert to object
-if ((localStorage.length === 0)) {
+console.log(localStorage.getItem("seatMap"))
+if ((localStorage.length === 0)||(localStorage.getItem("seatMap")=== null)) {
   localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
 }
 

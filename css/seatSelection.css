@@ -211,6 +211,7 @@ body {
 .footer {
   text-align: center;
   color: #a2a3a9;
+  margin-bottom: 1rem;
 }
 
 /* Global setting*/
@@ -499,5 +500,15 @@ body .container .yourSeat .alert.show {
   display: block;
   -webkit-animation: fadeIn 0.3s linear;
           animation: fadeIn 0.3s linear;
+}
+
+body .container .footer {
+  display: none;
+}
+
+body .container .footer.show {
+  display: block;
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
 }
 /*# sourceMappingURL=seatSelection.css.map */
