@@ -300,9 +300,12 @@ body {
             .page-link {
               background-color: transparent;
               color: $accent1;
+              cursor: pointer;
             }
             .pageNum {
               color: $color2;
+              cursor: pointer;
+              z-index: 2;
             }
           }
         }
@@ -319,7 +322,8 @@ body {
     opacity: 0;
     z-index: 0;
     .trailerBackground {
-      background: linear-gradient(45deg, $color1 10%, $color1Tr 50%, color5Tr 80%, transparent);
+      background: linear-gradient(45deg, $color1Tr, $color5Tr), url(../img/sample3.jpg);
+      @include backgroundFullScreen;
       width: 100vw;
       height: 100vh;
       .trailer {
@@ -335,9 +339,10 @@ body {
             margin: auto;
           }
           .carousel-inner {
-
+            box-shadow: 0rem 0rem 3rem $color2Tr; //shadow
           }
-          .carousel-control-prev, .carousel-control-next {
+          .carousel-control-prev,
+          .carousel-control-next {
             height: fit-content;
             margin: auto;
           }

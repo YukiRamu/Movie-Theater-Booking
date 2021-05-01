@@ -209,8 +209,14 @@ const getVideoByMovieId = (movieId) => {
       trailerModal.classList.add("show");
       htmlBody.classList.add("trailerModal-active");
 
-      //#3 show trailer in the modal
-      showTrailer(videoKeyArray);
+      if (videoKeyArray[0].length === 0) {
+        //when no trailer found
+        trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
+      } else {
+        //#3 show trailer in the modal if the video key is found
+        showTrailer(videoKeyArray);
+      }
+
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch video data by movieId`);
@@ -234,7 +240,7 @@ const showTrailer = (videoKeyArray) => {
   //prepare carousel-items
   let itemHTMLBase = `
         <div class="carousel-item active">
-          <iframe width="560" height="315" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
+          <iframe width="650" height="400" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
@@ -245,7 +251,7 @@ const showTrailer = (videoKeyArray) => {
   for (let i = 1; i < videoKeyArray[0].length; i++) {
     itemHTML += `
         <div class="carousel-item">
-          <iframe width="560" height="315" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
+          <iframe width="650" height="400" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>

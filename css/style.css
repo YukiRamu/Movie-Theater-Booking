@@ -656,11 +656,14 @@ html .container .searchResult .pageNav .pagination .page-item .page-link,
 body .container .searchResult .pageNav .pagination .page-item .page-link {
   background-color: transparent;
   color: #ec1a47;
+  cursor: pointer;
 }
 
 html .container .searchResult .pageNav .pagination .page-item .pageNum,
 body .container .searchResult .pageNav .pagination .page-item .pageNum {
   color: #f5f5f6;
+  cursor: pointer;
+  z-index: 2;
 }
 
 html .trailerModal,
@@ -677,7 +680,10 @@ body .trailerModal {
 
 html .trailerModal .trailerBackground,
 body .trailerModal .trailerBackground {
-  background: linear-gradient(45deg, #282c37 10%, #282c37cf 50%, color5Tr 80%, transparent);
+  background: linear-gradient(45deg, #282c37cf, #84838dd5), url(../img/sample3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 100vw;
   height: 100vh;
 }
@@ -705,7 +711,14 @@ body .trailerModal .trailerBackground .trailer .trailerContents .carousel-indica
   margin: auto;
 }
 
-html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev, html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-next,
+html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner,
+body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner {
+  -webkit-box-shadow: 0rem 0rem 3rem #f5f5f6e4;
+          box-shadow: 0rem 0rem 3rem #f5f5f6e4;
+}
+
+html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev,
+html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-next,
 body .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev,
 body .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-next {
   height: -webkit-fit-content;
