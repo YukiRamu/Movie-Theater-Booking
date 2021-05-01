@@ -222,6 +222,7 @@ const getVideoByMovieId = (movieId) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id);
+
       }
 
     })
@@ -296,13 +297,13 @@ const showTrailerBackgroundImg = (movidId) => {
   console.log(dataObj);
   console.log("backdrop url is ", backdropBaseURL + dataObj.backdropPath)
   let url = backdropBaseURL + dataObj.backdropPath;
+
   // trailerModal ---add background
-  
-  //trailerBackground.style.background = `yellow url('${url}') no-repeat center cover`;
-
-
- trailerBackground.style.backgroundImage = `url('${url}')`;
-
+  trailerBackground.style.backgroundImage = `url('${url}')`;
+  trailerBackground.style.backgroundPosition = "center";
+  trailerBackground.style.backgroundSize = "cover";
+  trailerBackground.style.backgroundRepeat = "no-repeat";
+  //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
 }
 
 // smooth scroll to the section (param: sectionId)
