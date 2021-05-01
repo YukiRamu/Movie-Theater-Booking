@@ -245,6 +245,10 @@ body .container .opening {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a6d900), to(#ff4454));
+  background: linear-gradient(to bottom, #a6d900 0%, #ff4454 100%);
+  -webkit-animation: huerotator 3s infinite alternate;
+          animation: huerotator 3s infinite alternate;
   height: 100vh;
 }
 
@@ -680,7 +684,6 @@ body .trailerModal {
 
 html .trailerModal .trailerBackground,
 body .trailerModal .trailerBackground {
-  background: linear-gradient(45deg, #282c37cf, #84838dd5), url(../img/sample3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -731,6 +734,30 @@ html .trailerModal.show,
 body .trailerModal.show {
   z-index: 3000;
   opacity: 1;
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
+}
+
+@-webkit-keyframes huerotator {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes huerotator {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
 }
 
 @-webkit-keyframes blowUpContent {

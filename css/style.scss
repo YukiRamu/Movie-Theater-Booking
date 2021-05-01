@@ -14,7 +14,10 @@ body {
     .opening {
       background: url(../img/bg2.jpg);
       @include backgroundFullScreen;
-      // width: 100vw; //full screen
+      //***************************** style change ********************
+      background: linear-gradient(to bottom, #a6d900 0%, #ff4454 100%);
+      animation: huerotator 3s infinite alternate;
+      //***************************** style change ********************
       height: 100vh; //full screen
       .row {
         margin-right: 0;
@@ -322,8 +325,9 @@ body {
     opacity: 0;
     z-index: 0;
     .trailerBackground {
-      background: linear-gradient(45deg, $color1Tr, $color5Tr), url(../img/sample3.jpg);
+      //background: linear-gradient(45deg, $color1Tr, $color5Tr), url("https://image.tmdb.org/t/p/original/8f9dnOtpArDrOMEylpSN9Sc6fuz.jpg");
       @include backgroundFullScreen;
+
       width: 100vw;
       height: 100vh;
       .trailer {
@@ -352,6 +356,7 @@ body {
     &.show {
       z-index: 3000;
       opacity: 1;
+      animation: fadeIn 1s linear;
     }
     //========~=======================~
     // &.trailer {
@@ -379,6 +384,15 @@ body {
     //   }
     // }
     //========~=======================~
+  }
+}
+
+@keyframes huerotator {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
 

@@ -12,6 +12,7 @@ const alertMsg = document.querySelector(".alert");
 const baseURL = "https://api.themoviedb.org";
 const imgBaseURL = "https://image.tmdb.org/t/p/w185";
 const videoBaseURL = "https://api.themoviedb.org/3/movie/"
+const backdropBaseURL = "https://image.tmdb.org/t/p/original";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 const numOfResult = document.querySelector(".numOfResult");
 const searchResultSection = document.querySelector(".searchResult");
@@ -101,7 +102,7 @@ const getMovieDetailById = (movieId) => {
         return response.json();
       }
     }).then((data) => {
-      console.log(data);
+      console.log("movie detail is ", data);
       //prepare category component
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
@@ -144,7 +145,7 @@ const displayMovielist = (movieComponent) => {
 };
 
 //#4 store html list with detail movie info into LocalStorage
-let detailAppendHTMLList = [];
+let detailMovieInfo = [];
 const storeMovieComponentHTML = (movieComponent) => {
   //create html
   //for category component
@@ -166,22 +167,24 @@ const storeMovieComponentHTML = (movieComponent) => {
     </div>
   `;
 
-  //create an object
+  console.log(movieComponent);
+
+  //create an object to store in the local storage
   let dataObj = {
     movieId: movieComponent[0].movieId,
-    appendHTML: htmlAll
+    appendHTML: htmlAll, //discription popUp
+    backdropPath: movieComponent[0].backdropPath //trailer background img
   }
-  detailAppendHTMLList.push(dataObj);
+  detailMovieInfo.push(dataObj);
 
   //when all item is shown, the local storage will be ready (all item stored)
-  localStorage.setItem("descriptionHTML", JSON.stringify(detailAppendHTMLList));
+  localStorage.setItem("movieComponent", JSON.stringify(detailMovieInfo));
 }
 
+/******************** Below are the functions to fetch trailer data ******************* */
 //#4 fetch video key by movid Id
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBtn")) {
-    console.log("trailerBtn is clicked movie id is ")
-    console.log(event.target.children[0].innerHTML)
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
     getVideoByMovieId(movieId);
@@ -200,10 +203,10 @@ const getVideoByMovieId = (movieId) => {
       }
     })
     .then((data) => {
+      console.log(data)
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
-      console.log(videoKeyArray[0]);
 
       //#2 show modal
       trailerModal.classList.add("show");
@@ -212,9 +215,13 @@ const getVideoByMovieId = (movieId) => {
       if (videoKeyArray[0].length === 0) {
         //when no trailer found
         trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
+        trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`;
+        trailerBackground.style.backgroundPosition = "center";
+        trailerBackground.style.backgroundSize = "cover";
+        trailerBackground.style.backgroundRepeat = "no-repeat";
       } else {
         //#3 show trailer in the modal if the video key is found
-        showTrailer(videoKeyArray);
+        showTrailer(videoKeyArray, data.id);
       }
 
     })
@@ -225,7 +232,7 @@ const getVideoByMovieId = (movieId) => {
 }
 
 //#6 create iframe for trailer
-const showTrailer = (videoKeyArray) => {
+const showTrailer = (videoKeyArray, movidId) => {
   //#3 create iframe
   //prepare carousel-indicators (= length of array) = buttons
   let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
@@ -235,7 +242,6 @@ const showTrailer = (videoKeyArray) => {
   for (let i = 1; i < videoKeyArray[0].length; i++) {
     indicatorHTML += `<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="${i}"></button>;`
   };
-  console.log(indicatorHTML);
 
   //prepare carousel-items
   let itemHTMLBase = `
@@ -257,7 +263,6 @@ const showTrailer = (videoKeyArray) => {
           allowfullscreen></iframe>
         </div>`
   }
-  console.log(itemHTML);
 
   let iframeHTML = `
         <div class="carousel-indicators">
@@ -275,9 +280,29 @@ const showTrailer = (videoKeyArray) => {
           <span class="visually-hidden">Next</span>
         </button>
         `;
-  console.log(iframeHTML);
 
-  trailerContents.innerHTML = iframeHTML;
+  trailerContents.innerHTML = iframeHTML;  //display trailer(s)
+  showTrailerBackgroundImg(movidId);
+};
+
+//#7 add background image to the trailer
+const showTrailerBackgroundImg = (movidId) => {
+  //get backdropPath from localstorage
+  let component = JSON.parse(localStorage.getItem("movieComponent"));
+  console.log("going to find backdropPath", component);
+
+  //find the backdropPath by movieId
+  let dataObj = component.find(obj => { return obj.movieId == movidId });
+  console.log(dataObj);
+  console.log("backdrop url is ", backdropBaseURL + dataObj.backdropPath)
+  let url = backdropBaseURL + dataObj.backdropPath;
+  // trailerModal ---add background
+  
+  //trailerBackground.style.background = `yellow url('${url}') no-repeat center cover`;
+
+
+ trailerBackground.style.backgroundImage = `url('${url}')`;
+
 }
 
 // smooth scroll to the section (param: sectionId)
@@ -290,7 +315,7 @@ const smoothScroll = (id) => {
 }
 
 /* =========================== Function Call =========================== */
-//when the search box is focused
+//#1 when the search box is focused
 search.addEventListener("focus", () => {
   //numnber of result hide
   numOfResult.classList.remove("fadeIn");
@@ -300,12 +325,11 @@ search.addEventListener("focus", () => {
   search.value = "";
 })
 
-//When the search button is clicked, get a list of movies based on a keyword
+//#2 When the search button is clicked, get a list of movies based on a keyword
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   //validation check
   if (search.value === "") {
-    console.log("alert")
     //Show alert for 1.5s
     e.preventDefault();
     alertMsg.style.transform = "translateY(0rem)";
@@ -314,9 +338,46 @@ searchBtn.addEventListener("click", (e) => {
     }, 1500)
     return false
   }
-  //clear the previous search result
+  //#3 clear the previous search result
   movieListRow.innerHTML = "";
   getMovieByKeyword(search.value);
+})
+
+//#4 Pop up screen for movie detail
+movieListRow.addEventListener("click", (event) => {
+
+  //when the image is clicked
+  if (event.target.classList.contains("posterImg")) {
+    //show pop up
+    popOverContent.classList.add("show");
+
+    //append detail movie information into the pop up
+    let component = JSON.parse(localStorage.getItem("movieComponent"));
+
+    //find the appendHTML by movieId ("==" because of data type difference)
+    let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
+    popOverContent.innerHTML = result.appendHTML;
+  } else {
+    popOverContent.classList.remove("show");
+  }
+});
+
+//#5 Pop over close - onclick attribute in html
+const closePopup = () => {
+  popOverContent.classList.remove("show");
+}
+
+//#6 close modal
+trailerBackground.addEventListener("click", (event) => {
+  if (event.target.classList.contains("trailerBackground")) {
+    //stop the trailer when the modal is closed
+    const video = document.querySelectorAll(".video");
+    video.forEach(elem => {
+      elem.setAttribute("src", "");
+    });
+    trailerModal.classList.remove("show");
+    htmlBody.classList.remove("trailerModal-active");
+  }
 })
 
 /* =========================== Animation function  =========================== */
@@ -366,42 +427,3 @@ $(() => {
     $nav.toggleClass('headerScrolled', $(this).scrollTop() > $nav.height());
   });
 });
-
-//#5 Pop over screen
-movieListRow.addEventListener("click", (event) => {
-  console.log(event.target);
-
-  //when the image is clicked
-  if (event.target.classList.contains("posterImg")) {
-    //show pop up
-    popOverContent.classList.add("show");
-
-    //append detail movie information into the pop up
-    let component = JSON.parse(localStorage.getItem("descriptionHTML"));
-    console.log(component);
-
-    //find the appendHTML by movieId ("==" because of data type difference)
-    let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
-    popOverContent.innerHTML = result.appendHTML;
-  } else {
-    popOverContent.classList.remove("show");
-  }
-});
-
-//#6 Pop over close - onclick attribute in html
-const closePopup = () => {
-  popOverContent.classList.remove("show");
-}
-
-//#7 close modal
-trailerBackground.addEventListener("click", (event) => {
-  if (event.target.classList.contains("trailerBackground")) {
-    //stop the trailer when the modal is closed
-    const video = document.querySelectorAll(".video");
-    video.forEach(elem => {
-      elem.setAttribute("src", "");
-    });
-    trailerModal.classList.remove("show");
-    htmlBody.classList.remove("trailerModal-active");
-  }
-})
