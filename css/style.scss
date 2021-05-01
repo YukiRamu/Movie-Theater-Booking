@@ -310,7 +310,6 @@ body {
     }
   }
   .trailerModal {
-    color: red;
     position: fixed;
     display: table;
     height: 100%;
@@ -320,15 +319,29 @@ body {
     opacity: 0;
     z-index: 0;
     .trailerBackground {
-      background-color: rgba(207, 200, 200, 0.827);
+      background: linear-gradient(45deg, $color1 10%, $color1Tr 50%, color5Tr 80%, transparent);
       width: 100vw;
       height: 100vh;
       .trailer {
-        background-color: pink;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        .trailerContents {
+          text-align: center;
+          z-index: 1;
+          .carousel-indicators {
+            width: fit-content;
+            margin: auto;
+          }
+          .carousel-inner {
+
+          }
+          .carousel-control-prev, .carousel-control-next {
+            height: fit-content;
+            margin: auto;
+          }
+        }
       }
     }
     &.show {

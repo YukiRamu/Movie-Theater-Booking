@@ -209,40 +209,51 @@ const getVideoByMovieId = (movieId) => {
       trailerModal.classList.add("show");
       htmlBody.classList.add("trailerModal-active");
 
-      //#3 create iframe
-      //prepare carousel-indicators (= length of array) = buttons
-      let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
+      //#3 show trailer in the modal
+      showTrailer(videoKeyArray);
+    })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch video data by movieId`);
+      return error;
+    });
+}
 
-      //******** if there are more than 2 trailers
-      let indicatorHTML = "";
-      for (let i = 1; i < videoKeyArray[0].length; i++) {
-        indicatorHTML += `<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="${i}"></button>;`
-      };
-      console.log(indicatorHTML);
+//#6 create iframe for trailer
+const showTrailer = (videoKeyArray) => {
+  //#3 create iframe
+  //prepare carousel-indicators (= length of array) = buttons
+  let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
 
-      //prepare carousel-items
-      let itemHTMLBase = `
+  //******** if there are more than 2 trailers
+  let indicatorHTML = "";
+  for (let i = 1; i < videoKeyArray[0].length; i++) {
+    indicatorHTML += `<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="${i}"></button>;`
+  };
+  console.log(indicatorHTML);
+
+  //prepare carousel-items
+  let itemHTMLBase = `
         <div class="carousel-item active">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}"
+          <iframe width="560" height="315" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
           title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
         </div>`
 
-      //******** if there are more than 2 trailers
-      let itemHTML = "";
-      for (let i = 1; i < videoKeyArray[0].length; i++) {
-        itemHTML += `
+  //******** if there are more than 2 trailers
+  let itemHTML = "";
+  for (let i = 1; i < videoKeyArray[0].length; i++) {
+    itemHTML += `
         <div class="carousel-item">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}"
+          <iframe width="560" height="315" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
           title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
         </div>`
-      }
-      console.log(itemHTML);
+  }
+  console.log(itemHTML);
 
-      let iframeHTML = `
+  let iframeHTML = `
         <div class="carousel-indicators">
           ${indicatorHTMLBase}${indicatorHTML}
         </div>
@@ -258,20 +269,9 @@ const getVideoByMovieId = (movieId) => {
           <span class="visually-hidden">Next</span>
         </button>
         `;
-      console.log(iframeHTML);
+  console.log(iframeHTML);
 
-      trailerContents.innerHTML = iframeHTML;
-
-    })
-    .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch video data by movieId`);
-      return error;
-    });
-}
-
-//#6 create iframe for trailer
-const showTrailer = () => {
-
+  trailerContents.innerHTML = iframeHTML;
 }
 
 // smooth scroll to the section (param: sectionId)
@@ -367,7 +367,6 @@ movieListRow.addEventListener("click", (event) => {
 
   //when the image is clicked
   if (event.target.classList.contains("posterImg")) {
-    console.log("overlay image clicked");
     //show pop up
     popOverContent.classList.add("show");
 
@@ -378,9 +377,7 @@ movieListRow.addEventListener("click", (event) => {
     //find the appendHTML by movieId ("==" because of data type difference)
     let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
     popOverContent.innerHTML = result.appendHTML;
-
   } else {
-    console.log("somewhere else clicked");
     popOverContent.classList.remove("show");
   }
 });
@@ -393,6 +390,11 @@ const closePopup = () => {
 //#7 close modal
 trailerBackground.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBackground")) {
+    //stop the trailer when the modal is closed
+    const video = document.querySelectorAll(".video");
+    video.forEach(elem => {
+      elem.setAttribute("src", "");
+    });
     trailerModal.classList.remove("show");
     htmlBody.classList.remove("trailerModal-active");
   }

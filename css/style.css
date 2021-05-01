@@ -665,7 +665,6 @@ body .container .searchResult .pageNav .pagination .page-item .pageNum {
 
 html .trailerModal,
 body .trailerModal {
-  color: red;
   position: fixed;
   display: table;
   height: 100%;
@@ -678,19 +677,41 @@ body .trailerModal {
 
 html .trailerModal .trailerBackground,
 body .trailerModal .trailerBackground {
-  background-color: rgba(207, 200, 200, 0.827);
+  background: linear-gradient(45deg, #282c37 10%, #282c37cf 50%, color5Tr 80%, transparent);
   width: 100vw;
   height: 100vh;
 }
 
 html .trailerModal .trailerBackground .trailer,
 body .trailerModal .trailerBackground .trailer {
-  background-color: pink;
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+html .trailerModal .trailerBackground .trailer .trailerContents,
+body .trailerModal .trailerBackground .trailer .trailerContents {
+  text-align: center;
+  z-index: 1;
+}
+
+html .trailerModal .trailerBackground .trailer .trailerContents .carousel-indicators,
+body .trailerModal .trailerBackground .trailer .trailerContents .carousel-indicators {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev, html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-next,
+body .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev,
+body .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-next {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
 }
 
 html .trailerModal.show,
