@@ -211,8 +211,9 @@ body {
 .footer {
   text-align: center;
   color: #a2a3a9;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
+  -webkit-box-shadow: 0rem 0rem 3rem black;
+          box-shadow: 0rem 0rem 3rem black;
 }
 
 .footer i {
@@ -355,6 +356,8 @@ body .container .navbar.headerScrolled {
   background-color: #282c37 !important;
   -webkit-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
+  -webkit-box-shadow: 0rem 0rem 3rem black;
+          box-shadow: 0rem 0rem 3rem black;
 }
 
 html .container .navbar .alert,

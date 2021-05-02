@@ -183,7 +183,7 @@ const getVideoByMovieId = (movieId) => {
       }
     })
     .then((data) => {
-      console.log(data)
+      console.log("video data is ", data)
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
@@ -271,12 +271,9 @@ const showTrailer = (videoKeyArray, movidId) => {
 const showTrailerBackgroundImg = (movidId) => {
   //get backdropPath from localstorage
   let component = JSON.parse(localStorage.getItem("movieComponent"));
-  console.log("going to find backdropPath", component);
 
   //find the backdropPath by movieId
   let dataObj = component.find(obj => { return obj.movieId == movidId });
-  console.log(dataObj);
-  console.log("backdrop url is ", backdropBaseURL + dataObj.backdropPath)
   let url = backdropBaseURL + dataObj.backdropPath;
 
   // trailerModal ---add background

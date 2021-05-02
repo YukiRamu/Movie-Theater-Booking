@@ -153,8 +153,8 @@ body {
 .footer {
   text-align: center;
   color: $color4;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
+  box-shadow: 0rem 0rem 3rem $black;
   i {
     color: $color4;
     &:hover {
