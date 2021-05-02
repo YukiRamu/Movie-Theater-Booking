@@ -117,7 +117,10 @@ const getMovieDetailById = (movieId) => {
         posterPath: data["poster_path"]
       });
       displayMovielist(resultArray); //#3 show the result
-      return;
+
+      export {resultArray};
+
+      return resultArray;
     })
     .catch((error) => {
       console.error(`Error = ${error}. Unable to fetch data by ID`);
@@ -143,6 +146,7 @@ const displayMovielist = (movieComponent) => {
     return movieComponent;
   }
 };
+
 
 //#4 store html list with detail movie info into LocalStorage
 let detailMovieInfo = [];
@@ -222,7 +226,8 @@ const getVideoByMovieId = (movieId) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id);
-
+        export {videoKeyArray};
+        return videoKeyArray;
       }
 
     })
