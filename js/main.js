@@ -118,7 +118,7 @@ const getMovieDetailById = (movieId) => {
       });
       displayMovielist(resultArray); //#3 show the result
 
-      export {resultArray};
+      //export {resultArray};
 
       return resultArray;
     })
@@ -226,7 +226,7 @@ const getVideoByMovieId = (movieId) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id);
-        export {videoKeyArray};
+        //export {videoKeyArray};
         return videoKeyArray;
       }
 
