@@ -1,33 +1,3 @@
-/* Variables */
-//opening animation
-const droptexts = document.querySelectorAll(".drops span");
-const bigger = document.querySelector(".bigger");
-
-//search box
-const search = document.querySelector(".search");
-const searchBtn = document.querySelector(".searchBtn");
-const alertMsg = document.querySelector(".alert");
-
-//API
-const baseURL = "https://api.themoviedb.org";
-const imgBaseURL = "https://image.tmdb.org/t/p/w185";
-const videoBaseURL = "https://api.themoviedb.org/3/movie/"
-const backdropBaseURL = "https://image.tmdb.org/t/p/original";
-const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
-const numOfResult = document.querySelector(".numOfResult");
-const searchResultSection = document.querySelector(".searchResult");
-
-//animation
-const popOverContent = document.querySelector(".popOverContent");
-const card = document.querySelectorAll(".card-img-overlay");
-const movieListRow = document.querySelector(".movieListRow");
-
-//modal
-const htmlBody = document.getElementsByTagName("body")[0];
-const trailerModal = document.querySelector(".trailerModal");
-const trailerBackground = document.querySelector(".trailerBackground");
-const trailerContents = document.querySelector(".trailerContents");
-
 /* *******************************************
 /* Fetch API Note - how to access data
 /* 1. Search by keyword : getMovieByKeyword()
@@ -114,7 +84,8 @@ const getMovieDetailById = (movieId) => {
         runtime: data["runtime"],
         overview: data["overview"],
         backdropPath: data["backdrop_path"], //background photo
-        posterPath: data["poster_path"]
+        posterPath: data["poster_path"],
+        tagline: data["tagline"]
       });
       displayMovielist(resultArray); //#3 show the result
 
@@ -171,14 +142,19 @@ const storeMovieComponentHTML = (movieComponent) => {
     </div>
   `;
 
-  console.log(movieComponent);
-
   //create an object to store in the local storage
   let dataObj = {
     movieId: movieComponent[0].movieId,
     appendHTML: htmlAll, //discription popUp
-    backdropPath: movieComponent[0].backdropPath //trailer background img
+    backdropPath: movieComponent[0].backdropPath, //trailer background img
+    category: movieComponent[0].category, //below for movie.js
+    movieTitle: movieComponent[0].movieTitle,
+    overview: movieComponent[0].overview,
+    posterPath: movieComponent[0].posterPath,
+    runtime: movieComponent[0].runtime,
+    tagline: movieComponent[0].tagline
   }
+
   detailMovieInfo.push(dataObj);
 
   //when all item is shown, the local storage will be ready (all item stored)

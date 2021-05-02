@@ -1,46 +1,9 @@
-/* =========== Variables =========== */
-//button
-const movieChoice = document.getElementById("movieChoice"); //dropdown
-
-//Title
-const titleHeader = document.querySelector(".titleHeader");
-
-//Seat Panel
-const seat = document.querySelectorAll(".seat"); //all seats div 
-const regularSeats = document.querySelectorAll(".regSeat"); // all regular seats 
-const vipSeats = document.querySelectorAll(".vipSeat"); // all vip seats 
-
-//Seat Panel display control
-const seatLabel = document.querySelector(".seatLabel");
-const screenLine = document.querySelector(".screenLine");
-const seatContainer = document.querySelector(".seat-container");
-const note = document.querySelector(".note");
-const yourSeat = document.querySelector(".yourSeat");
-const footer = document.querySelector(".footer");
-
-//Price Calc
-const regularTicketNum = document.querySelector(".regNum");
-const vipTicketNum = document.querySelector(".vipNum");
-const totalTicketNum = document.querySelector(".totalNum");
-const regularSubtotal = document.querySelector(".regSub");
-const vipSubtotal = document.querySelector(".vipSub");
-const totalPrice = document.querySelector(".sum");
-const alertMsg = document.querySelector(".alert");
 
 //object
 const seatPrice = {
   regular: 10,
   vip: 20
 }
-
-/* =========== Class =========== */
-// class SeatMap {
-//   constructor(seatType, selected, locationIndex) {
-//     this._seatType = seatType;
-//     this._selected = selected;
-//     this._locationIndex = locationIndex;
-//   }
-// }
 
 class UI {
   constructor(seatType, isSelected) {
@@ -157,7 +120,7 @@ let listOfIndexWithSelected = [];
 let listOfIndexWithoutSelected = [];
 
 const displaySeatMap = (title) => {
-  alertMsg.classList.remove("show"); //remove alert if it is shown
+  alertMessage.classList.remove("show"); //remove alert if it is shown
   // #1: get all from localStorage
   let seatMap = JSON.parse(localStorage.getItem("seatMap"));
 
@@ -197,7 +160,7 @@ const displaySeatMap = (title) => {
 //regular
 for (let i = 0; i < regularSeats.length; i++) {
   regularSeats[i].addEventListener("click", (event) => {
-    alertMsg.classList.remove("show"); //remove alert if it is shown
+    alertMessage.classList.remove("show"); //remove alert if it is shown
     if (event.target.classList.contains("selected")) {
       let regular = new UI("regular", true);
       regular.toggleSelected(event.target);
@@ -211,7 +174,7 @@ for (let i = 0; i < regularSeats.length; i++) {
 };
 //vip
 for (let i = 0; i < vipSeats.length; i++) {
-  alertMsg.classList.remove("show"); //remove alert if it is shown
+  alertMessage.classList.remove("show"); //remove alert if it is shown
   vipSeats[i].addEventListener("click", (event) => {
     if (event.target.classList.contains("selected")) {
       let vip = new UI("vip", true);
@@ -235,7 +198,7 @@ let selectedClass;
 const checkOut = (title) => {
   //validation check
   if (totalPrice.innerHTML === "$ 0") {
-    alertMsg.classList.add("show");
+    alertMessage.classList.add("show");
     return false;
   } else {
     //store data into localStorage
@@ -300,7 +263,7 @@ const checkOut = (title) => {
 //The JSON.stringify() method converts JavaScript objects into strings.
 //array -> convert to object
 console.log(localStorage.getItem("seatMap"))
-if ((localStorage.length === 0)||(localStorage.getItem("seatMap")=== null)) {
+if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
   localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
 }
 
