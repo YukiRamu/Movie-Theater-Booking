@@ -193,7 +193,6 @@ const getVideoByMovieId = (movieId) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id);
-        //export {videoKeyArray};
         return videoKeyArray;
       };
 
@@ -267,12 +266,22 @@ const showTrailerBackgroundImg = (movidId) => {
   let dataObj = component.find(obj => { return obj.movieId == movidId });
   let url = backdropBaseURL + dataObj.backdropPath;
 
-  // trailerModal ---add background
-  trailerBackground.style.backgroundImage = `url('${url}')`;
-  trailerBackground.style.backgroundPosition = "center";
-  trailerBackground.style.backgroundSize = "cover";
-  trailerBackground.style.backgroundRepeat = "no-repeat";
-  //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
+  console.log(dataObj.backdropPath);
+  if (dataObj.backdropPath === null) {
+    console.log("null null")
+    trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
+    trailerBackground.style.backgroundPosition = "center";
+    trailerBackground.style.backgroundSize = "cover";
+    trailerBackground.style.backgroundRepeat = "no-repeat";
+  } else {
+    // trailerModal ---add background
+    trailerBackground.style.backgroundImage = `url('${url}')`;
+    trailerBackground.style.backgroundPosition = "center";
+    trailerBackground.style.backgroundSize = "cover";
+    trailerBackground.style.backgroundRepeat = "no-repeat";
+    //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
+  }
+
 };
 
 // smooth scroll to the section (param: sectionId)

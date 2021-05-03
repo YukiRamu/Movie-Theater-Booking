@@ -131,6 +131,42 @@
   }
 }
 
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 @-webkit-keyframes scaleUp {
   from {
     -webkit-transform: scale(1);
@@ -264,7 +300,14 @@ body .container .taglineSection .tagline {
 
 body .container .backdropRow {
   min-height: 100vh;
+  display: none;
   /* title panel */
+}
+
+body .container .backdropRow.show {
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
+  display: block;
 }
 
 body .container .backdropRow .backdrop img {
@@ -274,11 +317,19 @@ body .container .backdropRow .backdrop img {
 
 body .container .backdropRow .titlePanel {
   position: absolute;
+  top: 0;
   background: -webkit-gradient(linear, left top, right top, color-stop(10%, black), to(transparent));
   background: linear-gradient(to right, black 10%, transparent);
   min-height: 100vh;
   padding: 3rem 0 0 5rem;
   margin-left: -1rem;
+  display: none;
+}
+
+body .container .backdropRow .titlePanel.show {
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
+  display: block;
 }
 
 body .container .backdropRow .titlePanel .categoryRow {

@@ -83,6 +83,22 @@ $accent2: rgb(26, 236, 29);
     opacity: 1;
   }
 }
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes slideIn {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
 @keyframes scaleUp {
   from {
     transform: scale(1);

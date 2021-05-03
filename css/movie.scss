@@ -36,8 +36,13 @@ body {
     /* trailer row (top) */
     .backdropRow {
       min-height: 100vh;
+      display: none;
       // width: 90%;
       // margin-left: auto;
+      &.show {
+        animation: fadeIn 1s linear;
+        display: block;
+      }
       .backdrop img {
         //full width, height
         width: 100%;
@@ -46,10 +51,16 @@ body {
       /* title panel */
       .titlePanel {
         position: absolute;
+        top: 0;
         background: linear-gradient(to right, $black 10%, transparent);
         min-height: 100vh;
         padding: 3rem 0 0 5rem;
         margin-left: -1rem;
+        display: none;
+        &.show {
+          animation: fadeIn 1s linear;
+          display: block;
+        }
         .categoryRow {
           margin-left: 0.1rem;
           .col {
