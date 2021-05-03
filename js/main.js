@@ -25,7 +25,7 @@ const getMovieByKeyword = (keyword) => {
         throw error(response.statusText);
       } else {
         return response.json();
-      }
+      };
     })
     .then((data) => {
       console.log("fetch API data is ", data);
@@ -40,7 +40,7 @@ const getMovieByKeyword = (keyword) => {
         return false;
       } else {
         smoothScroll("searchResult");//#0 scroll to the result section
-      }
+      };
 
       //get ids
       let idArray = [];
@@ -70,7 +70,7 @@ const getMovieDetailById = (movieId) => {
         throw error(response.statusText);
       } else {
         return response.json();
-      }
+      };
     }).then((data) => {
       console.log("movie detail is ", data);
       //prepare category component
@@ -115,7 +115,7 @@ const displayMovielist = (movieComponent) => {
     storeMovieComponentHTML(movieComponent); //-> #4 store html into local storage
 
     return movieComponent;
-  }
+  };
 };
 
 
@@ -134,7 +134,7 @@ const storeMovieComponentHTML = (movieComponent) => {
   <h5>${movieComponent[0].movieTitle}</h5>
   <p">${movieComponent[0].overview}</p>
   <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${movieComponent[0].movieId}</span></button>
-  <a class="btn btn-outline-light" href="./movie.html" target="_blank" role="button"><i
+  <a class="btn btn-outline-light viewDetailBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i
       class="fas fa-film"></i></i> View Detail</a >
     <div class="info">
       ${htmlCategory}
@@ -153,25 +153,16 @@ const storeMovieComponentHTML = (movieComponent) => {
     posterPath: movieComponent[0].posterPath,
     runtime: movieComponent[0].runtime,
     tagline: movieComponent[0].tagline
-  }
+  };
 
   detailMovieInfo.push(dataObj);
 
   //when all item is shown, the local storage will be ready (all item stored)
   localStorage.setItem("movieComponent", JSON.stringify(detailMovieInfo));
-}
+};
 
 /******************** Below are the functions to fetch trailer data ******************* */
-//#4 fetch video key by movid Id
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("trailerBtn")) {
-    //get movieId from the button tag > span
-    let movieId = event.target.children[0].innerHTML; //string
-    getVideoByMovieId(movieId);
-  }
-});
-
-//#5 get video key array by movid id
+//#4 get video key array by movid id
 const getVideoByMovieId = (movieId) => {
   //fetch video key and store it to the local Storage
   fetch(`${videoBaseURL}${movieId}/videos?api_key=${APIKey}`)
@@ -180,7 +171,7 @@ const getVideoByMovieId = (movieId) => {
         throw error(response.statusText);
       } else {
         return response.json();
-      }
+      };
     })
     .then((data) => {
       console.log("video data is ", data)
@@ -204,7 +195,7 @@ const getVideoByMovieId = (movieId) => {
         showTrailer(videoKeyArray, data.id);
         //export {videoKeyArray};
         return videoKeyArray;
-      }
+      };
 
     })
     .catch((error) => {
@@ -232,7 +223,7 @@ const showTrailer = (videoKeyArray, movidId) => {
           title="YouTube video player" frameborder="0"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
-        </div>`
+        </div>`;
 
   //******** if there are more than 2 trailers
   let itemHTML = "";
@@ -244,7 +235,7 @@ const showTrailer = (videoKeyArray, movidId) => {
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
         </div>`
-  }
+  };
 
   let iframeHTML = `
         <div class="carousel-indicators">
@@ -282,7 +273,7 @@ const showTrailerBackgroundImg = (movidId) => {
   trailerBackground.style.backgroundSize = "cover";
   trailerBackground.style.backgroundRepeat = "no-repeat";
   //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
-}
+};
 
 // smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
@@ -291,7 +282,7 @@ const smoothScroll = (id) => {
   scrollTo.scrollIntoView(({
     behavior: "smooth"
   }), true); // to top
-}
+};
 
 /* =========================== Function Call =========================== */
 //#1 when the search box is focused
@@ -302,7 +293,7 @@ search.addEventListener("focus", () => {
   popOverContent.classList.remove("show");
   //clear input
   search.value = "";
-})
+});
 
 //#2 When the search button is clicked, get a list of movies based on a keyword
 searchBtn.addEventListener("click", (e) => {
@@ -320,7 +311,7 @@ searchBtn.addEventListener("click", (e) => {
   //#3 clear the previous search result
   movieListRow.innerHTML = "";
   getMovieByKeyword(search.value);
-})
+});
 
 //#4 Pop up screen for movie detail
 movieListRow.addEventListener("click", (event) => {
@@ -344,7 +335,7 @@ movieListRow.addEventListener("click", (event) => {
 //#5 Pop over close - onclick attribute in html
 const closePopup = () => {
   popOverContent.classList.remove("show");
-}
+};
 
 //#6 close modal
 trailerBackground.addEventListener("click", (event) => {
@@ -357,47 +348,74 @@ trailerBackground.addEventListener("click", (event) => {
     trailerModal.classList.remove("show");
     htmlBody.classList.remove("trailerModal-active");
   }
-})
-
-/* =========================== Animation function  =========================== */
-//#1 dropping text animation
-let dropTextsArray = [];
-Array.from(droptexts).forEach(elem => {
-  dropTextsArray.push(elem.innerHTML);
 });
 
-let index = 0;
-const windowOpen = () => {
-  droptexts[index].classList.add("show"); //add class to all span tags one by one
-  index++;
-  if (index === droptexts.length) {
-    complete(timer);
-  }
-}
-//#2 ScaleUp animation
-let index2 = 0;
-const scaleUp = () => {
-  droptexts[index2].classList.add("scaleUp"); //add class to all span tags one by one
-  index2++;
-  if (index2 === droptexts.length) {
-    complete(timer2);
-  }
-}
-//#3 ZoomIn animation
-let index3 = 0;
-const showText = () => {
-  bigger.classList.add("show"); //add class to all span tags one by one
-  index3++;
-  complete(timer3);
+//#7 Watch Trailer and View Detail clicked
+document.addEventListener("click", (event) => {
+  //#4 fetch video key by movid Id
+  if (event.target.classList.contains("trailerBtn")) {
+    //get movieId from the button tag > span
+    let movieId = event.target.children[0].innerHTML; //string
+    getVideoByMovieId(movieId);
+  };
+  //open movie.html with the URL parameter. movieId
+  if (event.target.classList.contains("viewDetailBtn")) {
+    //get movieId from the button tag > span
+    let movieId = event.target.children[0].innerHTML; //string
+    addParamtoURL(movieId, movieHTML);
+  };
+
+});
+
+//add parameter to URL
+const addParamtoURL = (movieId, baseURL) => {
+  let fullURL = baseURL + `?movieId=${movieId}`;
+  console.log(fullURL);
+  window.open(fullURL); //open window with combined URL
 }
 
-const complete = (timerName) => {
-  clearInterval(timerName);
-  timerName = null;
-}
-let timer = setInterval(windowOpen, 100);
-let timer2 = setInterval(scaleUp, 200);
-let timer3 = setInterval(showText, 800);
+/* =========================== Animation function  =========================== */
+
+window.addEventListener("DOMContentLoaded", () => {
+  //#1 dropping text animation
+  let dropTextsArray = [];
+  Array.from(droptexts).forEach(elem => {
+    dropTextsArray.push(elem.innerHTML);
+  });
+
+  let index = 0;
+  const windowOpen = () => {
+    droptexts[index].classList.add("show"); //add class to all span tags one by one
+    index++;
+    if (index === droptexts.length) {
+      complete(timer);
+    }
+  }
+  //#2 ScaleUp animation
+  let index2 = 0;
+  const scaleUp = () => {
+    droptexts[index2].classList.add("scaleUp"); //add class to all span tags one by one
+    index2++;
+    if (index2 === droptexts.length) {
+      complete(timer2);
+    }
+  }
+  //#3 ZoomIn animation
+  let index3 = 0;
+  const showText = () => {
+    bigger.classList.add("show"); //add class to all span tags one by one
+    index3++;
+    complete(timer3);
+  }
+
+  const complete = (timerName) => {
+    clearInterval(timerName);
+    timerName = null;
+  }
+  let timer = setInterval(windowOpen, 100);
+  let timer2 = setInterval(scaleUp, 200);
+  let timer3 = setInterval(showText, 800);
+});
 
 //#4 Nav bar color change on scroll
 $(() => {

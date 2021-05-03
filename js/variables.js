@@ -1,4 +1,8 @@
 /* Global Variables */
+/* base url */
+const movieHTML = "./movie.html";
+const searSelectionHTML = "./seatSelection.html";
+
 /* ***************** main.js ***************** */
 //opening animation
 const droptexts = document.querySelectorAll(".drops span");

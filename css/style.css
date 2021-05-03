@@ -635,8 +635,9 @@ body .container .searchResult .popOverContent h5 {
   border-bottom: 0.2rem solid #ec1a47;
 }
 
-html .container .searchResult .popOverContent .trailerBtn span,
-body .container .searchResult .popOverContent .trailerBtn span {
+html .container .searchResult .popOverContent .trailerBtn span, html .container .searchResult .popOverContent .viewDetailBtn span,
+body .container .searchResult .popOverContent .trailerBtn span,
+body .container .searchResult .popOverContent .viewDetailBtn span {
   display: none;
 }
 

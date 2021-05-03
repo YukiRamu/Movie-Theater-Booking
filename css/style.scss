@@ -281,9 +281,9 @@ body {
           font-family: "Noto Serif", serif;
           border-bottom: 0.2rem solid $accent1;
         }
-        .trailerBtn {
+        .trailerBtn , .viewDetailBtn{
           span {
-            display: none; //to have movid id in the button tag
+            display: none; //to have movid id in the button tag and a tag
           }
         }
         .info {
