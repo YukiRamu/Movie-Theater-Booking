@@ -193,6 +193,7 @@ const getVideoByMovieId = (movieId) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id);
+
         return videoKeyArray;
       };
 

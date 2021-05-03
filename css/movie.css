@@ -347,18 +347,22 @@ body .container .backdropRow .titlePanel .categoryRow .col {
 
 body .container .backdropRow .titlePanel .titleRow h1 {
   font-family: "Noto Serif", serif;
-  font-size: 6rem;
+  font-size: 5rem;
 }
 
-body .container .backdropRow .titlePanel .overviewRow {
-  max-width: 40%;
+body .container .backdropRow .titlePanel .subInfo {
+  width: 50%;
 }
 
-body .container .backdropRow .titlePanel .directorRow span {
+body .container .backdropRow .titlePanel .subInfo.show {
+  width: unset;
+}
+
+body .container .backdropRow .titlePanel .subInfo .left .directorRow span {
   margin-right: 0.5rem;
 }
 
-body .container .backdropRow .titlePanel .bookRow {
+body .container .backdropRow .titlePanel .subInfo .left .bookRow {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -366,14 +370,14 @@ body .container .backdropRow .titlePanel .bookRow {
   grid-gap: 1.5rem;
 }
 
-body .container .backdropRow .titlePanel .bookRow .rate {
+body .container .backdropRow .titlePanel .subInfo .left .bookRow .rate {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 2rem;
 }
 
-body .container .backdropRow .titlePanel .bookRow .rate span {
+body .container .backdropRow .titlePanel .subInfo .left .bookRow .rate span {
   font-size: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -381,7 +385,31 @@ body .container .backdropRow .titlePanel .bookRow .rate span {
   margin-left: 0.5rem;
 }
 
-body .container .backdropRow .titlePanel .rating .rate {
+body .container .backdropRow .titlePanel .subInfo .trailer {
+  position: relative;
+  -webkit-box-shadow: 0 1rem 2rem black;
+          box-shadow: 0 1rem 2rem black;
+  display: none;
+}
+
+body .container .backdropRow .titlePanel .subInfo .trailer.show {
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
+  display: block;
+  text-align: center;
+}
+
+body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {
+  -webkit-box-shadow: 0 0 2rem white;
+          box-shadow: 0 0 2rem white;
+}
+
+body .container .backdropRow .titlePanel .subInfo .trailer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   font-size: 2rem;
 }
 
