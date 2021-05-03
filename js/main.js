@@ -266,9 +266,8 @@ const showTrailerBackgroundImg = (movidId) => {
   let dataObj = component.find(obj => { return obj.movieId == movidId });
   let url = backdropBaseURL + dataObj.backdropPath;
 
-  console.log(dataObj.backdropPath);
   if (dataObj.backdropPath === null) {
-    console.log("null null")
+    // when the data is null
     trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
     trailerBackground.style.backgroundPosition = "center";
     trailerBackground.style.backgroundSize = "cover";
@@ -281,7 +280,6 @@ const showTrailerBackgroundImg = (movidId) => {
     trailerBackground.style.backgroundRepeat = "no-repeat";
     //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
   }
-
 };
 
 // smooth scroll to the section (param: sectionId)
@@ -376,11 +374,11 @@ document.addEventListener("click", (event) => {
 
 });
 
-//add parameter to URL
+//add parameter to URL ---> to get movieId on movie.html
 const addParamtoURL = (movieId, baseURL) => {
   let fullURL = baseURL + `?movieId=${movieId}`;
   console.log(fullURL);
-  window.open(fullURL); //open window with combined URL
+  window.open(fullURL); //open window with the combined URL
 }
 
 /* =========================== Animation function  =========================== */

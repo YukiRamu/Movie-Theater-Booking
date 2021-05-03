@@ -37,7 +37,7 @@
     <div class="taglineSection">
       <h2 class="tagline"></h2>
     </div>
-    <!-- first row -->
+    <!-- first row  insert html in backdropRow-->
     <div class="row backdropRow">
       <!-- backdrop -->
       <div class="col backdrop">
@@ -45,33 +45,53 @@
         <img src="./img/sample1.jpg" alt="backgroundImg">
       </div>
       <!--Title panel-->
-      <div class=" col titlePanel">
+      <div class="col titlePanel">
         <div class="row categoryRow">
+          <!--append category htmls-->
           <p class="col">category1</p>
-          <p class="col">category2</p>
-          <p class="col">category3</p>
+          <p class="col">category1</p>
+          <p class="col">category1</p>
+          <p class="col">category1</p>
         </div>
         <div class="row titleRow">
           <h1 class="col">Twilight Saga Breaking Dawn Part 2</h1>
         </div>
-        <div class="row overviewRow">
-          <p class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate corrupti cumque rerum qui
-            accusantium
-            molestias quibusdam a. Ipsum, reprehenderit ratione incidunt eius laudantium totam consectetur deleniti eos
-            quo, nemo repellendus!</p>
-        </div>
-        <div class="row directorRow">
-          <p class="col"><span><i class="far fa-clock"></i> 120 min</span><span><i class="far fa-closed-captioning"></i>
-              Subtitles</span><span><i class="fas fa-bullhorn"></i> Christomer Nolan</span></p>
+
+        <div class="row subInfo">
+          <!--sub left-->
+          <div class="col left">
+            <div class="row overviewRow">
+              <p class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate corrupti cumque rerum
+                qui
+                accusantium
+                molestias quibusdam a. Ipsum, reprehenderit ratione incidunt eius laudantium totam consectetur deleniti
+                eos
+                quo, nemo repellendus!</p>
+            </div>
+            <div class="row directorRow">
+              <p class="col"><span><i class="far fa-clock"></i> 120 min</span><span><i
+                    class="far fa-closed-captioning"></i>
+                  Subtitles</span><span><i class="fas fa-bullhorn"></i> Christomer Nolan</span></p>
+            </div>
+
+            <div class="row bookRow">
+              <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
+              <a class="col-md-8 btn btn-outline-light bookNowBtn" href="./seatSelection.html" target="_blank"
+                role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
+              <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
+            </div>
+          </div>
+          <!--sub right-->
+          <div class="col right">
+            <div>Trailer here</div>
+          </div>
         </div>
 
-        <div class="row bookRow">
-          <button type="button" class="btn btn-outline-light ">▶ Watch trailer</button>
-          <a class="col-md-8 btn btn-outline-light bookNowBtn" href="./seatSelection.html" target="_blank"
-            role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
-          <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
-        </div>
+
       </div>
+
+
+
 
     </div>
 

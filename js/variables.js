@@ -61,3 +61,8 @@ const regularSubtotal = document.querySelector(".regSub");
 const vipSubtotal = document.querySelector(".vipSub");
 const totalPrice = document.querySelector(".sum");
 const alertMessage = document.querySelector(".alert");
+
+/* ***************** movie.js ***************** */
+const tagline = document.querySelector(".tagline");
+const taglineSection = document.querySelector(".taglineSection");
+const backdropRow = document.querySelector(".backdropRow");

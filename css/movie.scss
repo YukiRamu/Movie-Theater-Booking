@@ -56,7 +56,7 @@ body {
         min-height: 100vh;
         padding: 3rem 0 0 5rem;
         margin-left: -1rem;
-        display: none;
+        //display: none;
         &.show {
           animation: fadeIn 1s linear;
           display: block;

@@ -323,7 +323,6 @@ body .container .backdropRow .titlePanel {
   min-height: 100vh;
   padding: 3rem 0 0 5rem;
   margin-left: -1rem;
-  display: none;
 }
 
 body .container .backdropRow .titlePanel.show {
