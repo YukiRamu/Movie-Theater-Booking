@@ -72,12 +72,12 @@ body {
           }
         }
         .titleRow {
+          margin-bottom: 2rem;
           h1 {
             font-family: "Noto Serif", serif;
             font-size: 5rem;
           }
         }
-
         .subInfo {
           width: 50%;
           &.show {
@@ -111,7 +111,7 @@ body {
           }
           .trailer {
             position: relative;
-            box-shadow: 0 1rem 2rem $black; //shadow effect
+            // box-shadow: 0 1rem 2rem $black; //shadow effect
             display: none;
             &.show {
               animation: fadeIn 1s linear;
@@ -134,20 +134,74 @@ body {
     }
     /* detail row (bottom) */
     .detailRow {
+      display: none;
       min-height: 50vh;
       padding-right: var(--bs-gutter-x, 0.75rem);
       padding-left: var(--bs-gutter-x, 0.75rem);
       margin-right: auto;
       margin-left: auto;
+      &.show {
+        animation: fadeIn 1s linear;
+        display: flex;
+      }
       .left {
         .castRow {
           height: fit-content;
           .casts {
-            .castImgRow {
-              .card {
-                .card-img-top {
-                  border-radius: 5%;
-                  box-shadow: 0 1rem 2rem $black; //shadow effect
+            // .castImgRow {
+            //   .card {
+            //     .card-img-top {
+            //       border-radius: 5%;
+            //       box-shadow: 0 1rem 2rem $black; //shadow effect
+            //     }
+            //   }
+            // }
+            .castCarousel {
+              position: relative;
+              span {
+                top: 0;
+                position: absolute;
+                cursor: pointer;
+                z-index: 1;
+                i {
+                  color: $accent1;
+                  &:hover {
+                    color: $color2;
+                  }
+                }
+              }
+              .leftBtn {
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+              }
+              .rightBtn {
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+              }
+              // span:nth-of-type(2) {
+              //   Left:98%;
+              //   text-align: right;
+              // }
+              .castImgRow {
+                display: flex;
+                width: 50vw;
+                height: 100%;
+                padding: 0.5rem;
+                overflow-x: auto;
+                &::-webkit-scrollbar {
+                  visibility: hidden;
+                }
+                .castImg {
+                  position: relative;
+                  min-width: 10vw;
+                  left: 0;
+                  margin: 1rem;
+                  transition: 0.5s;
+                  .card-img-top {
+                    border-radius: 1vw;
+                  }
                 }
               }
             }
@@ -157,6 +211,13 @@ body {
         }
       }
       .right {
+      }
+    }
+    .footer {
+      display: none;
+      &.show {
+        animation: fadeIn 1s linear;
+        display: block;
       }
     }
   }

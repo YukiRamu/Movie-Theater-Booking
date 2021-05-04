@@ -15,7 +15,7 @@ const alertMsg = document.querySelector(".alert");
 
 //API
 const baseURL = "https://api.themoviedb.org";
-const imgBaseURL = "https://image.tmdb.org/t/p/w185";
+const imgBaseURL = "https://image.tmdb.org/t/p/";
 const videoBaseURL = "https://api.themoviedb.org/3/movie/"
 const backdropBaseURL = "https://image.tmdb.org/t/p/original";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
@@ -63,6 +63,17 @@ const totalPrice = document.querySelector(".sum");
 const alertMessage = document.querySelector(".alert");
 
 /* ***************** movie.js ***************** */
+//top section
 const tagline = document.querySelector(".tagline");
 const taglineSection = document.querySelector(".taglineSection");
 const backdropRow = document.querySelector(".backdropRow");
+
+//bottom section
+const detailRow = document.querySelector(".detailRow");
+const castRow = document.querySelector(".castRow");
+
+//cast carousel
+const leftBtn = document.querySelector(".leftBtn");
+const rightBtn = document.querySelector(".rightBtn");
+const castImg = document.querySelectorAll(".castImg");
+const castCard = document.querySelectorAll(".card-img-top");

@@ -6,7 +6,7 @@ const displayMovieInfo = (component) => {
     return `<p class="col">${elem}</p>`;
   }).join("");
 
-  console.log(htmlCategory)
+  console.log(htmlCategory);
 
   let html = `
     <!-- backdrop -->
@@ -89,8 +89,84 @@ const displayTrailer = (movieId) => {
     });
 };
 
+//fetch cast data
+//https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
+const getCredit = (movieId) => {
+  fetch(`${videoBaseURL}${movieId}/credits?api_key=${APIKey}&language=en-US`)
+    .then((response) => {
+      if (!response.ok) {
+        throw error(response.statusText);
+      } else {
+        return response.json();
+      };
+    })
+    .then((data) => {
+      console.log(data.cast);
+      console.log(data.crew);
+
+      //get director name 
+      const result = data.crew.find(elem => elem.job === "Director"); //returns object
+      console.log(result);
+      let director = result["name"];
+      let directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
+      console.log(director, directorProfilePath);
+
+      //get cast array
+      let castArray = data.cast;
+      console.log(castArray);
+      displayMovieDetail(castArray); // after 5 seconds interval
+    })
+};
+
+
+const displayMovieDetail = (castArray) => {
+  let counter = 0;
+  let numLeft = 0;
+  let numRight = 0;
+  let maxLeft = (castArray.length - 2) * -150;
+  console.log("inside movieDetail function ", castArray);
+  //cast carousel - left button
+  leftBtn.addEventListener("click", () => {
+    numLeft += - 150;
+    counter++;
+    for (let i of castImg) {
+      if (counter === 0) {
+        i.style.transform = `translateX(0%)`;
+      }
+      if (counter > castArray.length - 2) {
+        //do nothing
+        leftBtn.style.pointerEvents = "none";
+        rightBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${maxLeft}%)`;
+      } else {
+        leftBtn.style.pointerEvents = "auto";
+        rightBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${numLeft + numRight}%)`;
+      }
+    }
+  });
+
+  //cast carousel - right button
+  rightBtn.addEventListener("click", () => {
+    numRight += 150;
+    counter--;
+    for (let i of castImg) {
+      if (counter < 0) {
+        //back to translateX(0%)
+        rightBtn.style.pointerEvents = "none";
+        leftBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(0%)`;
+      } else {
+        rightBtn.style.pointerEvents = "auto";
+        leftBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${numLeft + numRight}%)`;
+      }
+    }
+  });
+}
+
 /* ============ When the window opens ============ */
-/* Movie component preparation */
+/* Movie component preparation = global variables */
 //get movie component from localstorage
 let movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
 console.log("movie component is ", movieComponent);
@@ -112,19 +188,22 @@ window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     taglineSection.classList.add("hide");
     backdropRow.classList.add("show"); //fadeIn
+    detailRow.classList.add("show");
+    footer.classList.add("show");
   }, 5000);
 
   /*#2  show movie component */
   console.log(movieIdfromURL);
   console.log(component);
 
-  displayMovieInfo(component);
+  getCredit(movieIdfromURL); //get director and cast --> 5 seconds interval
+  displayMovieInfo(component); //display the top part (overview)
+
   return movieComponent, movieIdfromURL;
 });
 
 //when "Watch Trailer" button is clicked
 document.addEventListener("click", (event) => {
-  console.log(movieIdfromURL);
   if (event.target.classList.contains("trailerBtn")) {
     //show trailer section
     const trailer = document.querySelector(".trailer");
@@ -134,15 +213,4 @@ document.addEventListener("click", (event) => {
     displayTrailer(movieIdfromURL);
   };
   return
-})
-
-
-
-
-// alert(urlPrm.sample1);
-//backdrop
-//category
-//title
-//description
-
-//another fetch for cast, related movies etc....
+});
