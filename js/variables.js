@@ -75,5 +75,4 @@ const castRow = document.querySelector(".castRow");
 //cast carousel
 const leftBtn = document.querySelector(".leftBtn");
 const rightBtn = document.querySelector(".rightBtn");
-const castImg = document.querySelectorAll(".castImg");
-const castCard = document.querySelectorAll(".card-img-top");
+const castImgRow = document.querySelector(".castImgRow");

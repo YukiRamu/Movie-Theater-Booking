@@ -1,6 +1,36 @@
 /* function declaration */
+//fetch cast data
+const getCredit = (movieId) => {
+  fetch(`${videoBaseURL}${movieId}/credits?api_key=${APIKey}&language=en-US`)
+    .then((response) => {
+      if (!response.ok) {
+        throw error(response.statusText);
+      } else {
+        return response.json();
+      };
+    })
+    .then((data) => {
+      console.log(data.cast);
+      console.log(data.crew);
+
+      //get director name 
+      const result = data.crew.find(elem => elem.job === "Director"); //returns object
+      console.log(result);
+      let director = result["name"];
+      let directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
+      console.log(director, directorProfilePath);
+
+      //get cast array
+      let castArray = data.cast;
+      console.log(castArray);
+
+      displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
+      displayMovieDetail(castArray); //after 5 seconds interval
+    })
+};
+
 //display Title panel
-const displayMovieInfo = (component) => {
+const displayMovieInfo = (component, director) => {
   //for category component
   let htmlCategory = component[0].category[0].map((elem) => {
     return `<p class="col">${elem}</p>`;
@@ -31,7 +61,7 @@ const displayMovieInfo = (component) => {
         <div class="row directorRow">
           <p class="col"><span><i class="far fa-clock"></i> ${component[0].runtime} mins</span><span><i
                 class="far fa-closed-captioning"></i>
-                xxxxx</span><span><i class="fas fa-bullhorn"></i> Director Name needs to fetch</span></p>
+                xxxxx</span><span><i class="fas fa-bullhorn"></i> ${director}</span></p>
         </div>
         <div class="row bookRow">
           <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer</button>
@@ -49,6 +79,73 @@ const displayMovieInfo = (component) => {
 
   backdropRow.innerHTML = html;
 };
+
+//display movie detail
+const displayMovieDetail = (castArray) => {
+  //display cast photos
+  //#1 filter out the profile with no image
+  let filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
+
+  let html = filteredCastArray.map((elem) => {
+    return `
+      <div class="castImg"><img src="${imgBaseURL}/w185${elem.profile_path}" class="card-img-top" alt="sample4"></div>
+    `;
+  }).join("");
+
+  console.log(html)
+  castImgRow.innerHTML = html;
+
+  /* Below is for the cast carousel */
+  let counter = 0;
+  let numLeft = 0;
+  let numRight = 0;
+  let maxLeft = (castArray.length) * -150;
+  console.log("inside movieDetail function ", castArray);
+  //cast carousel - left button
+  leftBtn.addEventListener("click", () => {
+
+    console.log("left button clicked");
+    const castImg = document.querySelectorAll(".castImg");
+    numLeft += - 150;
+    counter++;
+    console.log(counter)
+    for (let i of castImg) {
+      if (counter === 0) {
+        i.style.transform = `translateX(0%)`;
+      }
+      if (counter > castArray.length) {
+        //do nothing
+        leftBtn.style.pointerEvents = "none";
+        rightBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${maxLeft}%)`;
+      } else {
+        leftBtn.style.pointerEvents = "auto";
+        rightBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${numLeft + numRight}%)`;
+      }
+    }
+  });
+
+  //cast carousel - right button
+  rightBtn.addEventListener("click", () => {
+    console.log("right button clicked");
+    const castImg = document.querySelectorAll(".castImg");
+    numRight += 150;
+    counter--;
+    for (let i of castImg) {
+      if (counter < 0) {
+        //back to translateX(0%)
+        rightBtn.style.pointerEvents = "none";
+        leftBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(0%)`;
+      } else {
+        rightBtn.style.pointerEvents = "auto";
+        leftBtn.style.pointerEvents = "auto";
+        i.style.transform = `translateX(${numLeft + numRight}%)`;
+      }
+    }
+  });
+}
 
 //display trailer
 const displayTrailer = (movieId) => {
@@ -89,82 +186,6 @@ const displayTrailer = (movieId) => {
     });
 };
 
-//fetch cast data
-//https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
-const getCredit = (movieId) => {
-  fetch(`${videoBaseURL}${movieId}/credits?api_key=${APIKey}&language=en-US`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    })
-    .then((data) => {
-      console.log(data.cast);
-      console.log(data.crew);
-
-      //get director name 
-      const result = data.crew.find(elem => elem.job === "Director"); //returns object
-      console.log(result);
-      let director = result["name"];
-      let directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
-      console.log(director, directorProfilePath);
-
-      //get cast array
-      let castArray = data.cast;
-      console.log(castArray);
-      displayMovieDetail(castArray); // after 5 seconds interval
-    })
-};
-
-
-const displayMovieDetail = (castArray) => {
-  let counter = 0;
-  let numLeft = 0;
-  let numRight = 0;
-  let maxLeft = (castArray.length - 2) * -150;
-  console.log("inside movieDetail function ", castArray);
-  //cast carousel - left button
-  leftBtn.addEventListener("click", () => {
-    numLeft += - 150;
-    counter++;
-    for (let i of castImg) {
-      if (counter === 0) {
-        i.style.transform = `translateX(0%)`;
-      }
-      if (counter > castArray.length - 2) {
-        //do nothing
-        leftBtn.style.pointerEvents = "none";
-        rightBtn.style.pointerEvents = "auto";
-        i.style.transform = `translateX(${maxLeft}%)`;
-      } else {
-        leftBtn.style.pointerEvents = "auto";
-        rightBtn.style.pointerEvents = "auto";
-        i.style.transform = `translateX(${numLeft + numRight}%)`;
-      }
-    }
-  });
-
-  //cast carousel - right button
-  rightBtn.addEventListener("click", () => {
-    numRight += 150;
-    counter--;
-    for (let i of castImg) {
-      if (counter < 0) {
-        //back to translateX(0%)
-        rightBtn.style.pointerEvents = "none";
-        leftBtn.style.pointerEvents = "auto";
-        i.style.transform = `translateX(0%)`;
-      } else {
-        rightBtn.style.pointerEvents = "auto";
-        leftBtn.style.pointerEvents = "auto";
-        i.style.transform = `translateX(${numLeft + numRight}%)`;
-      }
-    }
-  });
-}
-
 /* ============ When the window opens ============ */
 /* Movie component preparation = global variables */
 //get movie component from localstorage
@@ -197,7 +218,6 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log(component);
 
   getCredit(movieIdfromURL); //get director and cast --> 5 seconds interval
-  displayMovieInfo(component); //display the top part (overview)
 
   return movieComponent, movieIdfromURL;
 });
