@@ -433,6 +433,7 @@ body .container .detailRow {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  grid-gap: 1rem;
 }
 
 body .container .detailRow.show {
@@ -461,7 +462,7 @@ body .container .detailRow .left .castRow .casts h2 {
 body .container .detailRow .left .castRow .casts .castCarousel {
   position: relative;
   border-radius: 2vw;
-  background: linear-gradient(-135deg, #f5f5f68c 0%, transparent);
+  background: linear-gradient(-135deg, #f5f5f689 0%, transparent);
 }
 
 body .container .detailRow .left .castRow .casts .castCarousel span {
@@ -577,7 +578,7 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .reviewCard .a
 }
 
 body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd {
-  background: linear-gradient(135deg, #f5f5f68c 0%, transparent);
+  background: linear-gradient(135deg, #f5f5f689 0%, transparent);
   margin-right: 10rem;
 }
 
@@ -590,7 +591,7 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd .author s
 }
 
 body .container .detailRow .left .reviewRow .reviews .reviewPanel .even {
-  background: linear-gradient(-135deg, #f5f5f68c 0%, transparent);
+  background: linear-gradient(-135deg, #f5f5f689 0%, transparent);
   margin-left: 10rem;
 }
 
@@ -600,11 +601,40 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .even .author 
 
 body .container .detailRow .right .row h2 {
   margin-top: 2rem;
+  margin-bottom: 2rem;
   border-bottom: 0.1rem #ec1a47 solid;
   text-shadow: 0 1rem 1rem #ec1a47;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+body .container .detailRow .right .recomPanel {
+  border-radius: 2vw;
+  background: linear-gradient(45deg, #f5f5f689 0%, transparent);
+  padding: 1rem;
+}
+
+body .container .detailRow .right .recomPanel .col .recomCard {
+  border-radius: 2vw;
+  background-color: transparent;
+  margin: auto;
+  border: none;
+}
+
+body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
+  border-radius: 2vw;
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+body .container .detailRow .right .recomPanel .col .recomCard .card-body h5 {
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #282c37;
+  width: 80%;
+  margin: auto;
 }
 
 body .container .footer {

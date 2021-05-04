@@ -264,6 +264,14 @@ a {
   color: #5392d4;
 }
 
+html,
+body {
+  background: url(../img/smoke.jpg), linear-gradient(45deg, black 0%, transparent 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 html.trailerModal-active,
 body.trailerModal-active {
   overflow: hidden;

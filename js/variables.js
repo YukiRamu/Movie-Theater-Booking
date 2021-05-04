@@ -76,3 +76,4 @@ const leftBtn = document.querySelector(".leftBtn");
 const rightBtn = document.querySelector(".rightBtn");
 const castImgRow = document.querySelector(".castImgRow");
 const reviewPanel = document.querySelector(".reviewPanel");
+const recomPanel = document.querySelector(".recomPanel");

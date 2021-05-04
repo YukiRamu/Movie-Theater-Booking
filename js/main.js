@@ -107,7 +107,7 @@ const displayMovielist = (movieComponent) => {
     let appendHTML =
       `
     <div class="col card bg-dark text-white">
-      <img src="${imgBaseURL + "w185" + movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
+      <img src="${imgBaseURL + "original" + movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
     </div>
     `;
 

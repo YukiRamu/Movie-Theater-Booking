@@ -51,38 +51,38 @@ const getMovieSubComponent = async (movieId) => {
 
 //==============================================================
 //fetch cast data
-const getCredit = (movieId) => {
-  fetch(`${baseURL}/3/movie/${movieId}/credits?api_key=${APIKey}&language=en-US`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    })
-    .then((data) => {
-      console.log(data.cast);
-      console.log(data.crew);
+// const getCredit = (movieId) => {
+//   fetch(`${baseURL}/3/movie/${movieId}/credits?api_key=${APIKey}&language=en-US`)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw error(response.statusText);
+//       } else {
+//         return response.json();
+//       };
+//     })
+//     .then((data) => {
+//       console.log(data.cast);
+//       console.log(data.crew);
 
-      //get director name 
-      const result = data.crew.find(elem => elem.job === "Director"); //returns object
-      console.log(result);
-      const director = result["name"];
-      const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
-      console.log(director, directorProfilePath);
+//       //get director name 
+//       const result = data.crew.find(elem => elem.job === "Director"); //returns object
+//       console.log(result);
+//       const director = result["name"];
+//       const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
+//       console.log(director, directorProfilePath);
 
-      //get cast array
-      const castArray = data.cast;
-      console.log(castArray);
+//       //get cast array
+//       const castArray = data.cast;
+//       console.log(castArray);
 
-      displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
-      displayMovieDetail(castArray); //after 5 seconds interval
-    })
-    .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch credit data by movieId`);
-      return error;
-    });
-};
+//       displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
+//       displayMovieDetail(castArray); //after 5 seconds interval
+//     })
+//     .catch((error) => {
+//       console.error(`Error = ${error}. Unable to fetch credit data by movieId`);
+//       return error;
+//     });
+// };
 
 //display Title panel
 const displayMovieInfo = (component, director) => {
@@ -91,10 +91,19 @@ const displayMovieInfo = (component, director) => {
     return `<p class="col">${elem}</p>`;
   }).join("");
 
+  //for backdropPath
+  let srcPath;
+  if (component[0].backdropPath === null) {
+    srcPath = "";
+  } else {
+    srcPath = backdropBaseURL + component[0].backdropPath;
+  }
+
+
   let html = `
     <!-- backdrop -->
     <div class="col backdrop">
-      <img src="${backdropBaseURL + component[0].backdropPath}" alt="backgroundImg">
+      <img src="${srcPath}" alt="backgroundImg">
     </div>
     <!--Title panel-->
     <div class=" col titlePanel">
@@ -132,23 +141,32 @@ const displayMovieInfo = (component, director) => {
 };
 
 //display movie detail
-const displayMovieDetail = (castArray, reviewArray) => {
+const displayMovieDetail = (castArray, reviewArray, recomArray) => {
+  console.log(castArray, reviewArray, recomArray)
   /* display cast photos*/
-  //#1 filter out the profile with no image
-  const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
+  let html;
+  if (castArray.length === 0) {
+    html = `
+    <div class="castImg">
+     <p>No cast information available :(</p>
+    </div>
+  `;
+  } else {
+    //#1 filter out the profile with no image
+    const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
 
-  let html = filteredCastArray.map((elem) => {
-    return `
+    html = filteredCastArray.map((elem) => {
+      return `
       <div class="castImg">
-       <img src="${imgBaseURL}/w185${elem.profile_path}" class="card-img-top" alt="sample4">
+       <img src="${imgBaseURL}/original${elem.profile_path}" class="card-img-top" alt="sample4">
        <div>
         <p class="castName">${elem.name}</p>
         <p class="character">${elem.character}</p>
       </div>
       </div>
     `;
-  }).join("");
-
+    }).join("");
+  }
   castImgRow.innerHTML = html;
 
   /* Below is for the cast carousel */
@@ -207,9 +225,9 @@ const displayMovieDetail = (castArray, reviewArray) => {
   let reviewHTML;
   let htmlArray = [];
   if (reviewArray.length === 0) {
+    console.log("no review")
     //no review
-    reviewHTML = "<p>No review available :(</p>";
-    htmlArray.push(reviewHTML);
+    reviewPanel.innerHTML = "<p>No review available :(</p>";
   } else {
     //show review panel
     for (let i = 0; i < reviewArray.length; i++) {
@@ -218,29 +236,47 @@ const displayMovieDetail = (castArray, reviewArray) => {
         reviewHTML = `
           <div class="reviewCard even">
             <p>${reviewArray[i].content.substr(0, 100)}.......</p>
-            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}"> <i class="fas fa-star-and-crescent" target="_blank"></i> full review</a></p>                
+            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}" target="_blank"> <i class="fas fa-star-and-crescent"></i> full review</a></p>                
           </div>
           `;
-          htmlArray.push(reviewHTML);
+        htmlArray.push(reviewHTML);
       } else {
         //even num, for style change
         reviewHTML = `
           <div class="reviewCard odd">
             <p>${reviewArray[i].content.substr(0, 100)}.......</p>
-            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}"> <i class="fas fa-star-and-crescent" target="_blank"></i> full review</a></p>                
+            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}" target="_blank"> <i class="fas fa-star-and-crescent"></i> full review</a></p>                
           </div>
           `;
         htmlArray.push(reviewHTML);
       };
     };
-    //display html
+    //Append html
     reviewPanel.innerHTML = ""; //clear previous results
     htmlArray.map((elem) => {
       return reviewPanel.insertAdjacentHTML("beforeend", elem);
     }).join("");
-    
-  }
+  };
 
+  /* display recommendations - first 6 moview*/
+  let recomHTML = "";
+  let count = 0;
+  do {
+    recomHTML += `
+      <div class="col">
+        <div class="card recomCard">
+          <img src="${imgBaseURL + "original" + recomArray[count].poster_path}" class="card-img-top recomImg" alt="movieID">
+          <div class="card-body">
+            <h5 class="card-text">${recomArray[count].title}</h5>
+          </div>
+        </div>
+      </div>
+    ` ;
+    count++;
+  } while ((count >= 0) && (count < 6));
+
+  console.log(recomHTML);
+  recomPanel.innerHTML = recomHTML;
 }
 
 //display trailer
@@ -328,11 +364,13 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("similar", similar.results);
 
     //get director name 
-    const result = credit.crew.find(elem => elem.job === "Director"); //returns object
-    console.log(result);
-    const director = result["name"];
-    const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
-    console.log(director, directorProfilePath);
+    let director;
+    if (credit.crew.length === 0) {
+      director = "no info";
+    } else {
+      const result = credit.crew.find(elem => elem.job === "Director"); //returns object
+      director = result["name"];
+    }
 
     //get cast array
     const castArray = credit.cast;
@@ -341,8 +379,11 @@ window.addEventListener("DOMContentLoaded", () => {
     //get review
     const reviewArray = review.results;
 
+    //get recommendations
+    const recomArray = recommendation.results;
+
     displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
-    displayMovieDetail(castArray, reviewArray); //after 5 seconds interval
+    displayMovieDetail(castArray, reviewArray, recomArray); //after 5 seconds interval
 
   }).catch((error) => {
     console.error(`Error = ${error}. Unable to fetch sub component data by movieId`);
