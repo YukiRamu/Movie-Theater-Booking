@@ -1,7 +1,7 @@
 @import "./component";
 
 body {
-   background: url(../img/smoke.jpg),linear-gradient(45deg, $black 0%, transparent 100%);;
+  background: url(../img/smoke.jpg), linear-gradient(45deg, $black 0%, transparent 100%);
   @include backgroundFullScreen;
   .container {
     min-height: 50vh;
@@ -150,11 +150,14 @@ body {
           .casts {
             h2 {
               margin-top: 2rem;
+              border-bottom: 0.1rem $accent1 solid;
+              text-shadow: 0 1rem 1rem $accent1;
+              width: fit-content;
             }
             .castCarousel {
               position: relative;
               border-radius: 2vw;
-              background: linear-gradient(-135deg, $color2Tr 0%, transparent);
+              background: linear-gradient(-135deg, #f5f5f68c 0%, transparent);
               span {
                 top: 0;
                 position: absolute;
@@ -185,6 +188,7 @@ body {
                 display: flex;
                 width: 50vw;
                 //height: 100%;
+                margin-top: 2rem;
                 padding-left: 1rem;
                 overflow-x: auto;
                 &::-webkit-scrollbar {
@@ -208,6 +212,9 @@ body {
                       margin-top: 1rem;
                       font-size: 1.2rem;
                     }
+                    .character {
+                      color: $color3;
+                    }
                   }
                 }
               }
@@ -215,12 +222,64 @@ body {
           }
         }
         .reviewRow {
+          .reviews {
+            h2 {
+              margin-top: 2rem;
+              border-bottom: 0.1rem $accent1 solid;
+              text-shadow: 0 1rem 1rem $accent1;
+              width: fit-content;
+            }
+            .reviewPanel {
+              margin-top: 2rem;
+              .reviewCard {
+                border-radius: 1vw;
+                padding: 1rem;
+                margin-bottom: 1rem;
+                p {
+                  color: $color3;
+                }
+                .author {
+                  color: $color3;
+                  span {
+                    color: $color3;
+                    padding-right: 1rem;
+                  }
+                  a {
+                    color: $accent1;
+                    &:hover {
+                      color: $accent2;
+                    }
+                  }
+                }
+              }
+              .odd {
+                background: linear-gradient(135deg, #f5f5f68c 0%, transparent);
+                margin-right: 10rem;
+                .author {
+                  text-align: left;
+                  span {
+                    margin-left: 1rem;
+                  }
+                }
+              }
+              .even {
+                background: linear-gradient(-135deg, #f5f5f68c 0%, transparent);
+                margin-left: 10rem;
+                .author {
+                  text-align: right;
+                }
+              }
+            }
+          }
         }
       }
       .right {
         .row {
           h2 {
             margin-top: 2rem;
+            border-bottom: 0.1rem $accent1 solid;
+            text-shadow: 0 1rem 1rem $accent1;
+            width: fit-content;
           }
         }
       }

@@ -132,8 +132,8 @@ const displayMovieInfo = (component, director) => {
 };
 
 //display movie detail
-const displayMovieDetail = (castArray) => {
-  //display cast photos
+const displayMovieDetail = (castArray, reviewArray) => {
+  /* display cast photos*/
   //#1 filter out the profile with no image
   const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
 
@@ -201,6 +201,46 @@ const displayMovieDetail = (castArray) => {
       }
     }
   });
+
+  /* display reviews*/
+  //create html
+  let reviewHTML;
+  let htmlArray = [];
+  if (reviewArray.length === 0) {
+    //no review
+    reviewHTML = "<p>No review available :(</p>";
+    htmlArray.push(reviewHTML);
+  } else {
+    //show review panel
+    for (let i = 0; i < reviewArray.length; i++) {
+      if ((i % 2) !== 0) {
+        //odd num, for style change
+        reviewHTML = `
+          <div class="reviewCard even">
+            <p>${reviewArray[i].content.substr(0, 100)}.......</p>
+            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}"> <i class="fas fa-star-and-crescent" target="_blank"></i> full review</a></p>                
+          </div>
+          `;
+          htmlArray.push(reviewHTML);
+      } else {
+        //even num, for style change
+        reviewHTML = `
+          <div class="reviewCard odd">
+            <p>${reviewArray[i].content.substr(0, 100)}.......</p>
+            <p class="author"><span>- ${reviewArray[i].author} </span><a href="${reviewArray[i].url}"> <i class="fas fa-star-and-crescent" target="_blank"></i> full review</a></p>                
+          </div>
+          `;
+        htmlArray.push(reviewHTML);
+      };
+    };
+    //display html
+    reviewPanel.innerHTML = ""; //clear previous results
+    htmlArray.map((elem) => {
+      return reviewPanel.insertAdjacentHTML("beforeend", elem);
+    }).join("");
+    
+  }
+
 }
 
 //display trailer
@@ -299,11 +339,10 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log(castArray);
 
     //get review
-
-
+    const reviewArray = review.results;
 
     displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
-    displayMovieDetail(castArray); //after 5 seconds interval
+    displayMovieDetail(castArray, reviewArray); //after 5 seconds interval
 
   }).catch((error) => {
     console.error(`Error = ${error}. Unable to fetch sub component data by movieId`);
