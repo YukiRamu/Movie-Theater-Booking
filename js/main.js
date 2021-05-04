@@ -88,9 +88,6 @@ const getMovieDetailById = (movieId) => {
         tagline: data["tagline"]
       });
       displayMovielist(resultArray); //#3 show the result
-
-      //export {resultArray};
-
       return resultArray;
     })
     .catch((error) => {
@@ -383,7 +380,7 @@ const addParamtoURL = (movieId, baseURL) => {
 }
 
 /* =========================== Animation function  =========================== */
-
+// When the page is loaded
 window.addEventListener("DOMContentLoaded", () => {
   //#1 dropping text animation
   let dropTextsArray = [];
@@ -423,6 +420,10 @@ window.addEventListener("DOMContentLoaded", () => {
   let timer = setInterval(windowOpen, 100);
   let timer2 = setInterval(scaleUp, 200);
   let timer3 = setInterval(showText, 800);
+
+  //#4 Show Now Playing
+  getNowPlaying ();
+  
 });
 
 //#4 Nav bar color change on scroll

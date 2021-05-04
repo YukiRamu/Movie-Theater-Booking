@@ -627,6 +627,7 @@ body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
   padding: 1rem;
   margin: auto;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 body .container .detailRow .right .recomPanel .col .recomCard .recomImg:hover {

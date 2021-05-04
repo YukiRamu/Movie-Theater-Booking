@@ -49,41 +49,6 @@ const getMovieSubComponent = async (movieId) => {
   return [credit, review, recommendation, similar];
 };
 
-//==============================================================
-//fetch cast data
-// const getCredit = (movieId) => {
-//   fetch(`${baseURL}/3/movie/${movieId}/credits?api_key=${APIKey}&language=en-US`)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw error(response.statusText);
-//       } else {
-//         return response.json();
-//       };
-//     })
-//     .then((data) => {
-//       console.log(data.cast);
-//       console.log(data.crew);
-
-//       //get director name 
-//       const result = data.crew.find(elem => elem.job === "Director"); //returns object
-//       console.log(result);
-//       const director = result["name"];
-//       const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
-//       console.log(director, directorProfilePath);
-
-//       //get cast array
-//       const castArray = data.cast;
-//       console.log(castArray);
-
-//       displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
-//       displayMovieDetail(castArray); //after 5 seconds interval
-//     })
-//     .catch((error) => {
-//       console.error(`Error = ${error}. Unable to fetch credit data by movieId`);
-//       return error;
-//     });
-// };
-
 //display Title panel
 const displayMovieInfo = (component, director) => {
   //for category component
@@ -265,7 +230,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     recomHTML += `
       <div class="col">
         <div class="card recomCard">
-          <img src="${imgBaseURL + "original" + recomArray[count].poster_path}" class="card-img-top recomImg" alt="movieID">
+          <img src="${imgBaseURL + "original" + recomArray[count].poster_path}" class="card-img-top recomImg" alt="${recomArray[count].id}">
           <div class="card-body">
             <h5 class="card-text">${recomArray[count].title}</h5>
           </div>
