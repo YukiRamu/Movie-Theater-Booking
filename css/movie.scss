@@ -118,7 +118,7 @@ body {
               display: block;
               text-align: center;
               iframe {
-                box-shadow: 0 0 2rem white;
+                box-shadow: 0 0 2rem $white;
               }
             }
             p {
@@ -297,15 +297,17 @@ body {
               .recomImg {
                 border-radius: 2vw;
                 padding: 1rem;
-                width: 80%;
                 margin: auto;
+                margin-top: 0.5rem;
+                &:hover {
+                  padding: 0;
+                  box-shadow: 0 0.5rem 1rem $color2; //shadow effect
+                }
               }
               .card-body {
+                padding: 0;
                 h5 {
-                  font-size: 1.5rem;
                   text-align: center;
-                  background-color: $color1;
-                  width: 80%;
                   margin: auto;
                 }
               }
