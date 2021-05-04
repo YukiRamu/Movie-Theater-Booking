@@ -1,7 +1,58 @@
 /* function declaration */
+//Pararel fetch - Promise.all()
+const getMovieSubComponent = async (movieId) => {
+  const [getCredit, getReview, getRecommendation, getSimmilarMovie] = await Promise.all([
+    //#1: fetch cast data
+    fetch(`${baseURL}/3/movie/${movieId}/credits?api_key=${APIKey}&language=en-US`)
+      .then((creditResponse) => {
+        if (!creditResponse.ok) {
+          throw error(creditResponse.statusText);
+        } else {
+          return creditResponse.json();
+        };
+      }),
+    //#2: fetch review data
+    fetch(`${baseURL}/3/movie/${movieId}/reviews?api_key=${APIKey}&language=en-US`)
+      .then((reviewResponse) => {
+        if (!reviewResponse.ok) {
+          throw error(reviewResponse.statusText);
+        } else {
+          return reviewResponse.json();
+        };
+      }),
+    //#3: fetch recommendation data
+    fetch(`${baseURL}/3/movie/${movieId}/recommendations?api_key=${APIKey}&language=en-US`)
+      .then((recommendationResponse) => {
+        if (!recommendationResponse.ok) {
+          throw error(recommendationResponse.statusText);
+        } else {
+          return recommendationResponse.json();
+        };
+      }),
+    //#4: fetch similar data
+    fetch(`${baseURL}/3/movie/${movieId}/similar?api_key=${APIKey}&language=en-US`)
+      .then((similarResponse) => {
+        if (!similarResponse.ok) {
+          throw error(similarResponse.statusText);
+        } else {
+          return similarResponse.json();
+        };
+      })
+  ]);
+
+  //fetch data in pararel
+  const credit = await getCredit;
+  const review = await getReview;
+  const recommendation = await getRecommendation;
+  const similar = await getSimmilarMovie;
+
+  return [credit, review, recommendation, similar];
+};
+
+//==============================================================
 //fetch cast data
 const getCredit = (movieId) => {
-  fetch(`${videoBaseURL}${movieId}/credits?api_key=${APIKey}&language=en-US`)
+  fetch(`${baseURL}/3/movie/${movieId}/credits?api_key=${APIKey}&language=en-US`)
     .then((response) => {
       if (!response.ok) {
         throw error(response.statusText);
@@ -16,17 +67,21 @@ const getCredit = (movieId) => {
       //get director name 
       const result = data.crew.find(elem => elem.job === "Director"); //returns object
       console.log(result);
-      let director = result["name"];
-      let directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
+      const director = result["name"];
+      const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
       console.log(director, directorProfilePath);
 
       //get cast array
-      let castArray = data.cast;
+      const castArray = data.cast;
       console.log(castArray);
 
       displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
       displayMovieDetail(castArray); //after 5 seconds interval
     })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch credit data by movieId`);
+      return error;
+    });
 };
 
 //display Title panel
@@ -35,8 +90,6 @@ const displayMovieInfo = (component, director) => {
   let htmlCategory = component[0].category[0].map((elem) => {
     return `<p class="col">${elem}</p>`;
   }).join("");
-
-  console.log(htmlCategory);
 
   let html = `
     <!-- backdrop -->
@@ -59,9 +112,7 @@ const displayMovieInfo = (component, director) => {
           <p class="col">${component[0].overview}</p>
         </div>
         <div class="row directorRow">
-          <p class="col"><span><i class="far fa-clock"></i> ${component[0].runtime} mins</span><span><i
-                class="far fa-closed-captioning"></i>
-                xxxxx</span><span><i class="fas fa-bullhorn"></i> ${director}</span></p>
+          <p class="col"><span><i class="far fa-clock"></i> ${component[0].runtime} mins</span><span><i class="fas fa-bullhorn"></i> ${director}</span></p>
         </div>
         <div class="row bookRow">
           <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer</button>
@@ -84,7 +135,7 @@ const displayMovieInfo = (component, director) => {
 const displayMovieDetail = (castArray) => {
   //display cast photos
   //#1 filter out the profile with no image
-  let filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
+  const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
 
   let html = filteredCastArray.map((elem) => {
     return `
@@ -98,7 +149,6 @@ const displayMovieDetail = (castArray) => {
     `;
   }).join("");
 
-  console.log(html)
   castImgRow.innerHTML = html;
 
   /* Below is for the cast carousel */
@@ -156,7 +206,7 @@ const displayMovieDetail = (castArray) => {
 //display trailer
 const displayTrailer = (movieId) => {
   //fetch video key and store it to the local Storage
-  fetch(`${videoBaseURL}${movieId}/videos?api_key=${APIKey}`)
+  fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
     .then((response) => {
       if (!response.ok) {
         throw error(response.statusText);
@@ -192,18 +242,19 @@ const displayTrailer = (movieId) => {
     });
 };
 
-/* ============ When the window opens ============ */
+/* ============ Function calls ============ */
 /* Movie component preparation = global variables */
 //get movie component from localstorage
-let movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
+const movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
 console.log("movie component is ", movieComponent);
 
 //get URL parameter (movieId) and component
-let movieIdfromURL = location.search.slice(9); //get parameter from url and delete "?movieId=" (string)
-let component = movieComponent.filter((elem) => {
+const movieIdfromURL = location.search.slice(9); //get parameter from url and delete "?movieId=" (string)
+const component = movieComponent.filter((elem) => {
   return elem.movieId == movieIdfromURL;
 });
 
+// when the page is loaded
 window.addEventListener("DOMContentLoaded", () => {
   /* #1 show tagline --> fadeout */
   if (component[0].tagline === "") {
@@ -223,12 +274,46 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log(movieIdfromURL);
   console.log(component);
 
-  getCredit(movieIdfromURL); //get director and cast --> 5 seconds interval
+  /*#3 fetch sub movie components */
+  getMovieSubComponent(movieIdfromURL).then(([credit, review, recommendation, similar]) => {
+    credit; //fetch credit data. return object
+    review; //fetch review data. return object
+    recommendation; //fetch recommendation data. return object. 
+    similar; //fetch similar data. return object
+
+    console.log("I am here!!!!!");
+    console.log("credit", credit);
+    console.log("review", review.results);
+    console.log("recommendation", recommendation.results);
+    console.log("similar", similar.results);
+
+    //get director name 
+    const result = credit.crew.find(elem => elem.job === "Director"); //returns object
+    console.log(result);
+    const director = result["name"];
+    const directorProfilePath = `${imgBaseURL}w185${result["profile_path"]}`;
+    console.log(director, directorProfilePath);
+
+    //get cast array
+    const castArray = credit.cast;
+    console.log(castArray);
+
+    //get review
+
+
+
+    displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
+    displayMovieDetail(castArray); //after 5 seconds interval
+
+  }).catch((error) => {
+    console.error(`Error = ${error}. Unable to fetch sub component data by movieId`);
+    return error;
+  });
 
   return movieComponent, movieIdfromURL;
 });
 
-//when "Watch Trailer" button is clicked
+// when "Watch Trailer" button is clicked
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBtn")) {
     //show trailer section

@@ -1,8 +1,8 @@
 @import "./component";
 
 body {
-  // background: url(../img/sample1.jpg);
-  // @include backgroundFullScreen;
+   background: url(../img/smoke.jpg),linear-gradient(45deg, $black 0%, transparent 100%);;
+  @include backgroundFullScreen;
   .container {
     min-height: 50vh;
     margin: auto;
@@ -148,16 +148,13 @@ body {
         .castRow {
           height: fit-content;
           .casts {
-            // .castImgRow {
-            //   .card {
-            //     .card-img-top {
-            //       border-radius: 5%;
-            //       box-shadow: 0 1rem 2rem $black; //shadow effect
-            //     }
-            //   }
-            // }
+            h2 {
+              margin-top: 2rem;
+            }
             .castCarousel {
               position: relative;
+              border-radius: 2vw;
+              background: linear-gradient(-135deg, $color2Tr 0%, transparent);
               span {
                 top: 0;
                 position: absolute;
@@ -187,7 +184,7 @@ body {
               .castImgRow {
                 display: flex;
                 width: 50vw;
-                height: 100%;
+                //height: 100%;
                 padding-left: 1rem;
                 overflow-x: auto;
                 &::-webkit-scrollbar {
@@ -221,6 +218,11 @@ body {
         }
       }
       .right {
+        .row {
+          h2 {
+            margin-top: 2rem;
+          }
+        }
       }
     }
     .footer {

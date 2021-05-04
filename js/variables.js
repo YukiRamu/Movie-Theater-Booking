@@ -16,7 +16,6 @@ const alertMsg = document.querySelector(".alert");
 //API
 const baseURL = "https://api.themoviedb.org";
 const imgBaseURL = "https://image.tmdb.org/t/p/";
-const videoBaseURL = "https://api.themoviedb.org/3/movie/"
 const backdropBaseURL = "https://image.tmdb.org/t/p/original";
 const APIKey = "a9bfb23ff39a5cefa92aae8e6858a3b2";
 const numOfResult = document.querySelector(".numOfResult");

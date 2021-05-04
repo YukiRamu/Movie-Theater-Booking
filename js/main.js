@@ -165,7 +165,7 @@ const storeMovieComponentHTML = (movieComponent) => {
 //#4 get video key array by movid id
 const getVideoByMovieId = (movieId) => {
   //fetch video key and store it to the local Storage
-  fetch(`${videoBaseURL}${movieId}/videos?api_key=${APIKey}`)
+  fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
     .then((response) => {
       if (!response.ok) {
         throw error(response.statusText);
