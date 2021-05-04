@@ -88,7 +88,13 @@ const displayMovieDetail = (castArray) => {
 
   let html = filteredCastArray.map((elem) => {
     return `
-      <div class="castImg"><img src="${imgBaseURL}/w185${elem.profile_path}" class="card-img-top" alt="sample4"></div>
+      <div class="castImg">
+       <img src="${imgBaseURL}/w185${elem.profile_path}" class="card-img-top" alt="sample4">
+       <div>
+        <p class="castName">${elem.name}</p>
+        <p class="character">${elem.character}</p>
+      </div>
+      </div>
     `;
   }).join("");
 
