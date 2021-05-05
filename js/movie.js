@@ -46,6 +46,7 @@ const getMovieSubComponent = async (movieId) => {
   const recommendation = await getRecommendation;
   const similar = await getSimmilarMovie;
 
+    //return when both promises are resolved
   return [credit, review, recommendation, similar];
 };
 
@@ -217,7 +218,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     }).join("");
   };
 
-  /* display recommendations - first 6 movies */
+  /* display recommendations - first 9 movies */
   let recomHTML = "";
   let count = 0;
   do {
@@ -232,7 +233,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
       </div>
     ` ;
     count++;
-  } while ((count >= 0) && (count < 6));
+  } while ((count >= 0) && (count < 9));
 
   recomPanel.innerHTML = recomHTML;
 }
