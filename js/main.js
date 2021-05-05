@@ -158,7 +158,7 @@ const storeMovieComponent = (movieComponent) => {
 
 /******************** Below are the functions to fetch trailer data ******************* */
 //#4 get video key array by movid id
-const getVideoByMovieId = (movieId, onTheaterFlg) => {
+const getVideoByMovieId = async (movieId, onTheaterFlg) => {
   console.log("getVideoByMovieId", onTheaterFlg)
   //fetch video key and store it to the local Storage
   fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
@@ -351,7 +351,7 @@ const getNowPlaying = async () => {
 
 //#9 get backdrop path (for now on theater movies)
 const createNowOnTheaterComponent = async (movieId) => {
-  console.log("hi hi getting backDrop path", movieId);
+  console.log("createNowOnTheaterComponent ", movieId);
   let categoryArray = [];
   fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
     .then((response) => {
@@ -378,6 +378,7 @@ const createNowOnTheaterComponent = async (movieId) => {
 
       //store the component into localStorage
       localStorage.setItem("nowOnTheaterComponent", JSON.stringify(dataObj));
+      console.log("createNowOnTheaterComponent stored");
       return dataObj;
 
     }).catch((error) => {
@@ -490,8 +491,10 @@ document.addEventListener("click", (event) => {
     /******* async/await ******* */
     const promiseFunc = async () => {
       await createNowOnTheaterComponent(movieId); //first --> add to local storage
+      console.log(localStorage);
       onTheaterFlg = 1; //movies on theater (default = 0)
-      getVideoByMovieId(movieId, onTheaterFlg); //second
+      await getVideoByMovieId(movieId, onTheaterFlg); //second
+      return;
     }
     promiseFunc();
 
