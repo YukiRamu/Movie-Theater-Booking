@@ -280,6 +280,37 @@ const showTrailerBackgroundImg = (movidId) => {
   }
 };
 
+//#8 get now playing data
+const getNowPlaying = async () => {
+  //get category list
+  const [getCategoryList, getNowPlaying] = await Promise.all([
+    //fetch category list
+    fetch(`${baseURL}/3/genre/movie/list?api_key=${APIKey}`)
+      .then((categoryResponse) => {
+        if (!categoryResponse.ok) {
+          throw error(categoryResponse.statusText);
+        } else {
+          return categoryResponse.json();
+        };
+      }),
+    //fetch now playing
+    fetch(`${baseURL}/3/movie/now_playing?api_key=${APIKey}`)
+      .then((nowPlayResponse) => {
+        if (!nowPlayResponse.ok) {
+          throw error(nowPlayResponse.statusText);
+        } else {
+          return nowPlayResponse.json();
+        };
+      })
+  ]);
+
+  //fetch data in pararel
+  const categoryList = await getCategoryList;
+  const nowPlayingList = await getNowPlaying;
+
+  return [categoryList, nowPlayingList];
+};
+
 // smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
   searchResultSection.style.display = "block";
@@ -422,8 +453,116 @@ window.addEventListener("DOMContentLoaded", () => {
   let timer3 = setInterval(showText, 800);
 
   //#4 Show Now Playing
-  getNowPlaying ();
-  
+  getNowPlaying().then(([categoryList, nowPlayingList]) => {
+    categoryList;
+    nowPlayingList;
+
+    console.log("I am here!!!!!");
+    console.log(categoryList.genres)
+    console.log("nowPlayingList.results is ", nowPlayingList.results);
+
+    //Prepare carousel-item data
+    //src pass
+    let srcPath;
+    if (nowPlayingList.results.backdrop_path === null) {
+      srcPath = "./img/smoke.jpg";
+    } else {
+      srcPath = nowPlayingList.results.backdrop_path;
+    }
+
+    //category
+    //create a list of category name
+    let categoryArray = [];
+    categoryArray = nowPlayingList.results.map((elem) => {
+      return elem.genre_ids;
+    });
+
+    let categoryName = [];
+    categoryArray.map((idElem) => {
+      return categoryName.push(idElem.map((id) => { return categoryList.genres.find((elem) => elem.id === id) }));
+    });
+
+    //create html for category
+    //---index 0
+    let categoryOneHTML = categoryName[0].map((elem) => {
+      return `<p>${elem.name}</p>`
+    }).join("");
+
+    //---index 1 ~
+    let categoryHTMLArray = [];
+    for (let i = 1; i < categoryName.length; i++) {
+      categoryHTMLArray.push(categoryName[i].map((elem) => {
+        return `<p>${elem.name}</p>`
+      }).join(""))
+    }
+    console.log(categoryHTMLArray);
+
+    //first item - with active class
+    let carouselOneHTML = `
+      <div class="carousel-item active">
+        <img src="${backdropBaseURL}${nowPlayingList.results[0].backdrop_path}" class="d-block w-100" alt="sample1">
+        <div class="movieInfo">
+          <div class="row">
+            <h1 class="col movieTitle">${nowPlayingList.results[0].title}</h1>
+          </div>
+          <div class="row">
+            <div class="col category">
+              ${categoryOneHTML}
+            </div>
+          </div>
+          <div class="row">
+            <p class="col description">${nowPlayingList.results[0].overview}</p>
+          </div>
+          <div class="row">
+            <div class="col btns">
+              <button type="button" class="btn btn-outline-light">▶ Watch trailer<span class="movieId">${nowPlayingList.results[0].id}</span></button>
+              <a class="btn btn-outline-light" href="./seatSelection.html" target="_blank" role="button">span class="movieId">${nowPlayingList.results[0].id}</span><i class="fas
+                fa-ticket-alt"></i> Buy
+                ticket</a>
+            </div>
+          </div>
+          </div>
+       </div>
+      `;
+
+    //second or more items - without active class 
+    let carouselHTML = "";
+    for (let i = 1; i < nowPlayingList.results.length; i++) {
+      carouselHTML += `
+        <div class="carousel-item">
+          <img src="${backdropBaseURL}${nowPlayingList.results[i].backdrop_path}" class="d-block w-100" alt="sample1">
+          <div class="movieInfo">
+            <div class="row">
+              <h1 class="col movieTitle">${nowPlayingList.results[i].title}</h1>
+            </div>
+            <div class="row">
+              <div class="col category">
+                ${categoryHTMLArray[i - 1]}
+              </div>
+            </div>
+            <div class="row">
+              <p class="col description">${nowPlayingList.results[i].overview}</p>
+            </div>
+            <div class="row">
+              <div class="col btns">
+                <button type="button" class="btn btn-outline-light">▶ Watch trailer<span class="movieId">${nowPlayingList.results[i].id}</span></button>
+                <a class="btn btn-outline-light" href="./seatSelection.html" target="_blank" role="button">span class="movieId">${nowPlayingList.results[i].id}</span><i class="fas
+                  fa-ticket-alt"></i> Buy
+                  ticket</a>
+              </div>
+            </div>
+            </div>
+        </div>
+        `;
+    };
+
+    nowOnTheater.innerHTML = carouselOneHTML + carouselHTML;
+
+  })
+    .catch((error) => {
+      console.error(`Error = ${error}. Unable to fetch now playing data`);
+      return error;
+    });
 });
 
 //#4 Nav bar color change on scroll

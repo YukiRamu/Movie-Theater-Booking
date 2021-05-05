@@ -13,6 +13,9 @@ const search = document.querySelector(".search");
 const searchBtn = document.querySelector(".searchBtn");
 const alertMsg = document.querySelector(".alert");
 
+//now on theater
+const nowOnTheater = document.querySelector(".nowOnTheater");
+
 //API
 const baseURL = "https://api.themoviedb.org";
 const imgBaseURL = "https://image.tmdb.org/t/p/";
