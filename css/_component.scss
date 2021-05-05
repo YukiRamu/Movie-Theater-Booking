@@ -108,6 +108,14 @@ $accent2: rgb(26, 236, 29);
     transform: scale(1.5);
   }
 }
+@keyframes huerotator {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
 
 /* mixin */
 @mixin fadeInforInnerHTML {

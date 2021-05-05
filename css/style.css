@@ -189,6 +189,28 @@
   }
 }
 
+@-webkit-keyframes huerotator {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes huerotator {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
 /* mixin */
 /* Global settings*/
 body {
@@ -393,6 +415,13 @@ body .container .opening .msg {
           animation: blinkingText 1.5s infinite;
 }
 
+html .container .opening .msg span,
+body .container .opening .msg span {
+  color: #ec1a47;
+  font-weight: bold;
+  font-size: 4rem;
+}
+
 html .container .navbar,
 body .container .navbar {
   font-size: 1.5rem;
@@ -511,25 +540,25 @@ body .container .carousel {
   background-color: #363942;
 }
 
-html .container .carousel .carousel-inner,
-body .container .carousel .carousel-inner {
+html .container .carousel .nowOnTheater,
+body .container .carousel .nowOnTheater {
   height: 100vh;
   margin: auto;
 }
 
-html .container .carousel .carousel-inner .carousel-item,
-body .container .carousel .carousel-inner .carousel-item {
+html .container .carousel .nowOnTheater .carousel-item,
+body .container .carousel .nowOnTheater .carousel-item {
   height: 100%;
   width: 100%;
 }
 
-html .container .carousel .carousel-inner .carousel-item img,
-body .container .carousel .carousel-inner .carousel-item img {
+html .container .carousel .nowOnTheater .carousel-item img,
+body .container .carousel .nowOnTheater .carousel-item img {
   height: 100vh;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo,
-body .container .carousel .carousel-inner .carousel-item .movieInfo {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo {
   background-color: #282c37cf;
   -webkit-box-shadow: 0 1rem 2rem black;
           box-shadow: 0 1rem 2rem black;
@@ -547,13 +576,13 @@ body .container .carousel .carousel-inner .carousel-item .movieInfo {
   padding: 1rem;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo .row,
-body .container .carousel .carousel-inner .carousel-item .movieInfo .row {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .row,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .row {
   margin: 1rem;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo .category,
-body .container .carousel .carousel-inner .carousel-item .movieInfo .category {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .category,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .category {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -562,13 +591,13 @@ body .container .carousel .carousel-inner .carousel-item .movieInfo .category {
           justify-content: space-evenly;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo .description,
-body .container .carousel .carousel-inner .carousel-item .movieInfo .description {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .description,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .description {
   text-align: justify;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo .showInfo,
-body .container .carousel .carousel-inner .carousel-item .movieInfo .showInfo {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .showInfo,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .showInfo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -577,9 +606,33 @@ body .container .carousel .carousel-inner .carousel-item .movieInfo .showInfo {
           justify-content: space-evenly;
 }
 
-html .container .carousel .carousel-inner .carousel-item .movieInfo .btns .btn,
-body .container .carousel .carousel-inner .carousel-item .movieInfo .btns .btn {
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .btns .btn,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .btns .btn {
   margin: 0.5rem;
+}
+
+html .container .carousel .nowOnTheater .carousel-item .movieInfo .btns .btn span,
+body .container .carousel .nowOnTheater .carousel-item .movieInfo .btns .btn span {
+  display: none;
+}
+
+html .container .carousel .carousel-control-prev,
+html .container .carousel .carousel-control-next,
+body .container .carousel .carousel-control-prev,
+body .container .carousel .carousel-control-next {
+  width: 10%;
+}
+
+html .container .carousel .carousel-control-prev .carousel-control-prev-icon,
+html .container .carousel .carousel-control-prev .carousel-control-next-icon,
+html .container .carousel .carousel-control-next .carousel-control-prev-icon,
+html .container .carousel .carousel-control-next .carousel-control-next-icon,
+body .container .carousel .carousel-control-prev .carousel-control-prev-icon,
+body .container .carousel .carousel-control-prev .carousel-control-next-icon,
+body .container .carousel .carousel-control-next .carousel-control-prev-icon,
+body .container .carousel .carousel-control-next .carousel-control-next-icon {
+  width: 6rem;
+  height: 6rem;
 }
 
 html .container .searchResult,
@@ -683,7 +736,8 @@ body .container .searchResult .popOverContent h5 {
   border-bottom: 0.2rem solid #ec1a47;
 }
 
-html .container .searchResult .popOverContent .trailerBtn span, html .container .searchResult .popOverContent .viewDetailBtn span,
+html .container .searchResult .popOverContent .trailerBtn span,
+html .container .searchResult .popOverContent .viewDetailBtn span,
 body .container .searchResult .popOverContent .trailerBtn span,
 body .container .searchResult .popOverContent .viewDetailBtn span {
   display: none;
@@ -788,28 +842,6 @@ body .trailerModal.show {
   opacity: 1;
   -webkit-animation: fadeIn 1s linear;
           animation: fadeIn 1s linear;
-}
-
-@-webkit-keyframes huerotator {
-  0% {
-    -webkit-filter: hue-rotate(0deg);
-            filter: hue-rotate(0deg);
-  }
-  100% {
-    -webkit-filter: hue-rotate(360deg);
-            filter: hue-rotate(360deg);
-  }
-}
-
-@keyframes huerotator {
-  0% {
-    -webkit-filter: hue-rotate(0deg);
-            filter: hue-rotate(0deg);
-  }
-  100% {
-    -webkit-filter: hue-rotate(360deg);
-            filter: hue-rotate(360deg);
-  }
 }
 
 @-webkit-keyframes blowUpContent {

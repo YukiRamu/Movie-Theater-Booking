@@ -257,24 +257,32 @@ const showTrailerBackgroundImg = (movidId) => {
   //get backdropPath from localstorage
   let component = JSON.parse(localStorage.getItem("movieComponent"));
 
-  //find the backdropPath by movieId
-  let dataObj = component.find(obj => { return obj.movieId == movidId });
-  let url = backdropBaseURL + dataObj.backdropPath;
-
-  if (dataObj.backdropPath === null) {
-    // when the data is null
+  //when component is null (first time loaded, nothing in localStorage)
+  if (component === null) {
     trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
     trailerBackground.style.backgroundPosition = "center";
     trailerBackground.style.backgroundSize = "cover";
     trailerBackground.style.backgroundRepeat = "no-repeat";
   } else {
-    // trailerModal ---add background
-    trailerBackground.style.backgroundImage = `url('${url}')`;
-    trailerBackground.style.backgroundPosition = "center";
-    trailerBackground.style.backgroundSize = "cover";
-    trailerBackground.style.backgroundRepeat = "no-repeat";
-    //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
-  }
+    //find the backdropPath by movieId
+    let dataObj = component.find(obj => { return obj.movieId == movidId });
+    let url = backdropBaseURL + dataObj.backdropPath;
+
+    if (dataObj.backdropPath === null) {
+      // when the data is null
+      trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
+      trailerBackground.style.backgroundPosition = "center";
+      trailerBackground.style.backgroundSize = "cover";
+      trailerBackground.style.backgroundRepeat = "no-repeat";
+    } else {
+      // trailerModal ---add background
+      trailerBackground.style.backgroundImage = `url('${url}')`;
+      trailerBackground.style.backgroundPosition = "center";
+      trailerBackground.style.backgroundSize = "cover";
+      trailerBackground.style.backgroundRepeat = "no-repeat";
+      //trailerBackground.style.background = "radial-gradient(#F2B9A1, #EA6264);";
+    }
+  };
 };
 
 //#8 get now playing data
@@ -383,7 +391,7 @@ trailerBackground.addEventListener("click", (event) => {
   }
 });
 
-//#7 Watch Trailer and View Detail clicked
+//#7 Watch Trailer and View Detail clicked on the popover screen
 document.addEventListener("click", (event) => {
   //#4 fetch video key by movid Id
   if (event.target.classList.contains("trailerBtn")) {
@@ -397,6 +405,17 @@ document.addEventListener("click", (event) => {
     let movieId = event.target.children[0].innerHTML; //string
     addParamtoURL(movieId, movieHTML);
   };
+});
+
+//#8 Watch Trailer and Buy Ticket clicked on the new on theater section
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("nowOntrailerBtn")) {
+    console.log("Now on theater :Watch Trailer was clicked!!!!")
+    //get movieId from the button tag > span
+    let movieId = event.target.children[0].innerHTML; //string
+    getBackDropPath(movieId); //first --> add to local storage
+    getVideoByMovieId(movieId); //second
+  }
 
 });
 
@@ -507,8 +526,8 @@ window.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="row">
             <div class="col btns">
-              <button type="button" class="btn btn-outline-light">▶ Watch trailer<span class="movieId">${nowPlayingList.results[0].id}</span></button>
-              <a class="btn btn-outline-light" href="./seatSelection.html" target="_blank" role="button">span class="movieId">${nowPlayingList.results[0].id}</span><i class="fas
+              <button type="button" class="btn btn-outline-light nowOntrailerBtn">▶ Watch trailer<span class="movieId">${nowPlayingList.results[0].id}</span></button>
+              <a class="btn btn-outline-light buyTicketBtn" href="./seatSelection.html" target="_blank" role="button"><span class="movieId">${nowPlayingList.results[0].id}</span><i class="fas
                 fa-ticket-alt"></i> Buy
                 ticket</a>
             </div>
@@ -537,8 +556,8 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="row">
               <div class="col btns">
-                <button type="button" class="btn btn-outline-light">▶ Watch trailer<span class="movieId">${nowPlayingList.results[i].id}</span></button>
-                <a class="btn btn-outline-light" href="./seatSelection.html" target="_blank" role="button">span class="movieId">${nowPlayingList.results[i].id}</span><i class="fas
+                <button type="button" class="btn btn-outline-light nowOntrailerBtn">▶ Watch trailer<span class="movieId">${nowPlayingList.results[i].id}</span></button>
+                <a class="btn btn-outline-light buyTicketBtn" href="./seatSelection.html" target="_blank" role="button"><span class="movieId">${nowPlayingList.results[i].id}</span><i class="fas
                   fa-ticket-alt"></i> Buy
                   ticket</a>
               </div>
