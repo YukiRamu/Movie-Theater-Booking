@@ -37,13 +37,14 @@ const trailerContents = document.querySelector(".trailerContents");
 
 /* ***************** seatSelection.js ***************** */
 //button
-const movieChoice = document.getElementById("movieChoice"); //dropdown
+const theaterChoice = document.getElementById("theaterChoice"); //dropdown
 
 //UI
 const titleHeader = document.querySelector(".titleHeader");
 const description = document.querySelector(".description");
 const body = document.querySelector(".body");
 const trailer = document.querySelector(".trailer");
+const cinemaLocation = document.querySelector(".cinemaLocation");
 
 //Seat Panel
 const seat = document.querySelectorAll(".seat"); //all seats div 

@@ -30,9 +30,18 @@ body {
         color: $color4;
       }
     }
-    .btn {
-      cursor: pointer;
-      margin-bottom: 1rem;
+    .location {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .btn {
+        cursor: pointer;
+        margin-bottom: 1rem;
+      }
+      .cinemaLocation {
+        font-size: 2rem;
+        margin-left: 1rem;
+      }
     }
     .movieInfo {
       background-color: $color7;

@@ -39,7 +39,9 @@
       <h1 class="titleHeader">
         <!--Title to be applied-->
       </h1>
-      <p class="description"><!--Overview to be applied-->.</p>
+      <p class="description">
+        <!--Overview to be applied-->.
+      </p>
 
       <!--planning
       //search box -> can select the theater
@@ -48,17 +50,20 @@
       -->
       <!--select movie-->
       <div class="mb-3 search">
-        <label for="movieChoice" class="form-label">Choose a movie:</label>
-        <select class="form-select" id="movieChoice" aria-label="Default select example">
-          <option value="Pirates of the Caribbean">Pirates of the Caribbean</option>
-          <option value="Harry Potter">Harry Potter</option>
-          <option value="Fast and Furious">Fast and Furious</option>
+        <label for="theaterChoice" class="form-label">Choose a theater:</label>
+        <select class="form-select" id="theaterChoice" aria-label="Default select example">
+          <option value="Vancouver Cinema">Vancouver Cinema</option>
+          <option value="Toronto Cinema">Toronto Cinema</option>
+          <option value="Kelowna Cinema">Kelowna Cinema</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-outline-light" id="viewSeats" onclick="displaySeatMap(movieChoice.value)"
-        onmouse="this.style.background='#ec1a47'">View
-        Seats</button>
+      <div class="location">
+        <button type="submit" class="btn btn-outline-light" id="viewSeats" onclick="displaySeatMap(theaterChoice.value)"
+          onmouse="this.style.background='#ec1a47'">View
+          Seats</button>
+        <p class="cinemaLocation">Vancouver Cinema</p>
+      </div>
 
       <!--Movie Information / Seat icon-->
       <div class="movieInfo mb-3 row">

@@ -151,8 +151,8 @@ class UI {
 
 /* ========== Call methods ==========*/
 /* When the movie is picked, display the title */
-movieChoice.onchange = () => {
-  titleHeader.innerHTML = movieChoice.value;
+theaterChoice.onchange = () => {
+  cinemaLocation.innerHTML = theaterChoice.value;
   UI.hideMap();
 };
 
@@ -168,7 +168,7 @@ const displaySeatMap = (title) => {
 
   // #2: find the index of NodeList, "seat" where classList "selected" to be added
   // #2-1: prepare the seatMap data only for the movie currently selected
-  let filteredSeatMap = seatMap.filter(elem => elem.movieTitle === title);
+  let filteredSeatMap = seatMap.filter(elem => elem.theater === title);
 
   // #2-2 :when no data stored for the selected movie, show all seats as available
   if (filteredSeatMap.length === 0) {
@@ -249,7 +249,7 @@ const checkOut = (title) => {
 
     // #2: find the index of NodeList, "seat", from where the data is updated
     // #2-1: prepare the seatMap data only for the movie currently selected
-    let filteredSeatMap = seatMapArray.filter(elem => elem.movieTitle === title);
+    let filteredSeatMap = seatMapArray.filter(elem => elem.theater === title);
 
     // #2-2: convert Nodelist to array - current data before update
     seatArrayfromNodeList = Array.from(seat);
@@ -259,7 +259,7 @@ const checkOut = (title) => {
       seatArrayfromNodeList.map(elem => {
         return seatMapArray.push(
           {
-            movieTitle: movieChoice.value,
+            theater: theaterChoice.value,
             seatMap: [{
               seatType: elem.firstChild.classList[1], //regSeat or vipSeat
               selected: elem.firstChild.classList[2], //selected or undefined
@@ -276,13 +276,13 @@ const checkOut = (title) => {
       })
 
       //#3: find the index from localStorage (seatMapArray) where data is to be updated
-      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => value.movieTitle === title));
+      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => value.theater === title));
 
       //#4: update seatMapArray
       //i.e. )54 = 0, 55 = 1, 56 = 2......108 = 53
       indexToBeUpdated.map((elem) => {
         seatMapArray.splice(startIndex + elem, 1, {
-          movieTitle: title,
+          theater: title,
           seatMap: [{
             seatType: seatMapArray[startIndex + 2][seatType], //regSeat or vipSeat
             selected: "selected", //update!
@@ -334,7 +334,7 @@ window.addEventListener("DOMContentLoaded", () => {
     case "0":
       let component = movieComponent.filter((elem) => { return elem.movieId == movieIdfromURL }); //movieIdfromURL => string
       console.log(component)
-      title = component[0].movieTitle;
+      title = component[0].theater;
       overview = component[0].overview;
       backdropPath = component[0].backdropPath;
       break;
