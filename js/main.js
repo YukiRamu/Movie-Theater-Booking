@@ -28,7 +28,6 @@ const getMovieByKeyword = (keyword) => {
       };
     })
     .then((data) => {
-      console.log("fetch API data is ", data);
       //display the total number of result on nav bar with fadeIn effect
       numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
       numOfResult.classList.add("fadeIn");
@@ -72,7 +71,6 @@ const getMovieDetailById = (movieId) => {
         return response.json();
       };
     }).then((data) => {
-      console.log("movie detail is ", data);
       //prepare category component
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
@@ -171,7 +169,6 @@ const getVideoByMovieId = (movieId) => {
       };
     })
     .then((data) => {
-      console.log("video data is ", data)
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
@@ -406,7 +403,6 @@ document.addEventListener("click", (event) => {
 //add parameter to URL ---> to get movieId on movie.html
 const addParamtoURL = (movieId, baseURL) => {
   let fullURL = baseURL + `?movieId=${movieId}`;
-  console.log(fullURL);
   window.open(fullURL); //open window with the combined URL
 }
 
@@ -457,10 +453,6 @@ window.addEventListener("DOMContentLoaded", () => {
     categoryList;
     nowPlayingList;
 
-    console.log("I am here!!!!!");
-    console.log(categoryList.genres)
-    console.log("nowPlayingList.results is ", nowPlayingList.results);
-
     //Prepare carousel-item data
     //src pass
     let srcPath;
@@ -471,12 +463,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     //category
-    //create a list of category name
+    //create a list of category name from category id
     let categoryArray = [];
     categoryArray = nowPlayingList.results.map((elem) => {
       return elem.genre_ids;
     });
 
+    //create an array of category names from category id : find the value of categoryId
     let categoryName = [];
     categoryArray.map((idElem) => {
       return categoryName.push(idElem.map((id) => { return categoryList.genres.find((elem) => elem.id === id) }));
@@ -495,7 +488,6 @@ window.addEventListener("DOMContentLoaded", () => {
         return `<p>${elem.name}</p>`
       }).join(""))
     }
-    console.log(categoryHTMLArray);
 
     //first item - with active class
     let carouselOneHTML = `

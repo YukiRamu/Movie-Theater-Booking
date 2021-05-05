@@ -107,7 +107,6 @@ const displayMovieInfo = (component, director) => {
 
 //display movie detail
 const displayMovieDetail = (castArray, reviewArray, recomArray) => {
-  console.log(castArray, reviewArray, recomArray)
   /* display cast photos*/
   let html;
   if (castArray.length === 0) {
@@ -139,15 +138,12 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   let numLeft = 0;
   let numRight = 0;
   let maxLeft = (castArray.length) * -150;
-  console.log("inside movieDetail function ", castArray);
+
   //cast carousel - left button
   leftBtn.addEventListener("click", () => {
-
-    console.log("left button clicked");
     const castImg = document.querySelectorAll(".castImg");
     numLeft += - 150;
     counter++;
-    console.log(counter)
     for (let i of castImg) {
       if (counter === 0) {
         i.style.transform = `translateX(0%)`;
@@ -167,7 +163,6 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
 
   //cast carousel - right button
   rightBtn.addEventListener("click", () => {
-    console.log("right button clicked");
     const castImg = document.querySelectorAll(".castImg");
     numRight += 150;
     counter--;
@@ -190,7 +185,6 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   let reviewHTML;
   let htmlArray = [];
   if (reviewArray.length === 0) {
-    console.log("no review")
     //no review
     reviewPanel.innerHTML = "<p>No review available :(</p>";
   } else {
@@ -223,7 +217,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     }).join("");
   };
 
-  /* display recommendations - first 6 moview*/
+  /* display recommendations - first 6 movies */
   let recomHTML = "";
   let count = 0;
   do {
@@ -240,7 +234,6 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     count++;
   } while ((count >= 0) && (count < 6));
 
-  console.log(recomHTML);
   recomPanel.innerHTML = recomHTML;
 }
 
@@ -256,7 +249,6 @@ const displayTrailer = (movieId) => {
       };
     })
     .then((data) => {
-      console.log("video data is ", data)
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
@@ -312,21 +304,12 @@ window.addEventListener("DOMContentLoaded", () => {
   }, 5000);
 
   /*#2  show movie component */
-  console.log(movieIdfromURL);
-  console.log(component);
-
-  /*#3 fetch sub movie components */
+  /* fetch sub movie components */
   getMovieSubComponent(movieIdfromURL).then(([credit, review, recommendation, similar]) => {
     credit; //fetch credit data. return object
     review; //fetch review data. return object
     recommendation; //fetch recommendation data. return object. 
     similar; //fetch similar data. return object
-
-    console.log("I am here!!!!!");
-    console.log("credit", credit);
-    console.log("review", review.results);
-    console.log("recommendation", recommendation.results);
-    console.log("similar", similar.results);
 
     //get director name 
     let director;
@@ -339,7 +322,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //get cast array
     const castArray = credit.cast;
-    console.log(castArray);
 
     //get review
     const reviewArray = review.results;
