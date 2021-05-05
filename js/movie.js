@@ -141,8 +141,11 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
 
 //display movie detail
 const displayMovieDetail = (castArray, reviewArray, recomArray) => {
+
+  console.log(castArray)
   /* display cast photos*/
   let html;
+  let profilePath;
   if (castArray.length === 0) {
     html = `
     <div class="castImg">
@@ -151,12 +154,17 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   `;
   } else {
     //#1 filter out the profile with no image
-    const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
+    // const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
 
-    html = filteredCastArray.map((elem) => {
+    html = castArray.map((elem) => {
+      if (elem.profile_path === null) {
+        profilePath = "./img/people.jpg";
+      } else {
+        profilePath = `${imgBaseURL}/original${elem.profile_path}`;
+      }
       return `
       <div class="castImg">
-       <img src="${imgBaseURL}/original${elem.profile_path}" class="card-img-top" alt="sample4">
+       <img src="${profilePath}" class="card-img-top" alt="sample4">
        <div>
         <p class="castName">${elem.name}</p>
         <p class="character">${elem.character}</p>
@@ -258,7 +266,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   //if recommended movies are less than 9, display all they have
   if (recomArray.length < 9) {
     countUpTo = recomArray.length;
-  }else {
+  } else {
     countUpTo = 9;
   }
 
