@@ -158,8 +158,8 @@ const storeMovieComponent = (movieComponent) => {
 
 /******************** Below are the functions to fetch trailer data ******************* */
 //#4 get video key array by movid id
-const getVideoByMovieId = async (movieId, onTheaterFlg) => {
-  console.log("5. before getting video. localstorage is ".localStorage);
+const getVideoByMovieId = (movieId, onTheaterFlg) => {
+  console.log("5. before getting video. localstorage is ", localStorage);
   console.log("6. getVideoByMovieId with a flag", onTheaterFlg)
   //fetch video key and store it to the local Storage
   fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
@@ -353,43 +353,36 @@ const getNowPlaying = async () => {
 const createNowOnTheaterComponent = async (movieId) => {
   console.log("2. create NowOnTheaterComponent with movie id", movieId);
   let categoryArray = [];
-  fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    }).then((data) => {
-      alert("data fetched"); ////delete later
-      //prepare category component
-      categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
-      //create a movie component
-      let dataObj = {
-        movieId: movieId,
-        movieTitle: data["original_title"],
-        category: categoryArray,
-        runtime: data["runtime"],
-        overview: data["overview"],
-        backdropPath: data["backdrop_path"], //background photo
-        posterPath: data["poster_path"],
-        tagline: data["tagline"]
-      };
+  try {
+    const movieDetail = await fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`);
+    const movie = await movieDetail.json();
 
-      //store the component into localStorage
-      localStorage.setItem("nowOnTheaterComponent", JSON.stringify(dataObj));
+    //prepare category component
+    categoryArray.push(movie["genres"].map((elem) => { return elem.name }));
 
-      alert("localstorage stored"); ////delete later
-      console.log("3. NowOnTheater Component stored", localStorage);
-      return dataObj;
+    //create a movie component
+    let dataObj = {
+      movieId: movieId,
+      movieTitle: movie["original_title"],
+      category: categoryArray,
+      runtime: movie["runtime"],
+      overview: movie["overview"],
+      backdropPath: movie["backdrop_path"], //background photo
+      posterPath: movie["poster_path"],
+      tagline: movie["tagline"]
+    };
 
-    }).catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch data by ID`);
-      return error;
-    });
+    //store the component into localStorage
+    localStorage.setItem("nowOnTheaterComponent", JSON.stringify(dataObj));
+
+    console.log("3. NowOnTheater Component stored", localStorage);
+    return dataObj;
+
+  } catch (error) {
+    console.error(`Error = ${error}. Unable to fetch data by ID`);
+  }
 };
-
 
 // smooth scroll to the section (param: sectionId)
 const smoothScroll = (id) => {
@@ -484,58 +477,52 @@ document.addEventListener("click", (event) => {
   };
 });
 
+//When watch trailer on the now-on-theater section clicked
+const promiseFuncTrailer = async (movieId) => {
+  await createNowOnTheaterComponent(movieId); //first --> add to local storage
+  onTheaterFlg = 1; //movies on theater (default = 1)
+
+  //open movie.html with the URL parameter. movieId
+  getVideoByMovieId(movieId, onTheaterFlg); //second
+  return;
+};
+
+//When view detail on the now-on-theater section clicked
+const promiseFuncMovie = async (movieId) => {
+  await createNowOnTheaterComponent(movieId); //first --> add to local storage
+  onTheaterFlg = 1; //movies on theater (default = 0)
+
+  //open movie.html with the URL parameter. movieId
+  addParamtoURL(movieId, onTheaterFlg, movieHTML);
+  return;
+};
+
 //#8 Watch Trailer and View Detail clicked on the new on theater section
 document.addEventListener("click", (event) => {
+  //watch trailer
   if (event.target.classList.contains("nowOntrailerBtn")) {
     console.log("1.======== Now on theater :Watch Trailer was clicked!!!! ========")
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
 
     /******* async/await ******* */
-    const promiseFuncTrailer = async () => {
-      await createNowOnTheaterComponent(movieId); //first --> add to local storage
+    promiseFuncTrailer(movieId);
+  };
 
-      //just to check the flow
-      async function log() {
-        console.log("4. turning the flag onTheaterflag on", localStorage);
-      }
-      await log()
-
-      onTheaterFlg = 1; //movies on theater (default = 1)
-      await getVideoByMovieId(movieId, onTheaterFlg); //second
-      return;
-    };
-    promiseFuncTrailer();
-  }
-  //open movie.html with the URL parameter. movieId
   if (event.target.classList.contains("nowOnviewDetailBtn")) {
     console.log("1.======== Now on theater :View Detail was clicked!!!! ========")
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
 
     /********** async/await ********** */
-    const promiseFuncMovie = async () => {
-      await createNowOnTheaterComponent(movieId); //first --> add to local storage
-      onTheaterFlg = 1; //movies on theater (default = 0)
-
-      //just to check the flow
-      const log = async () => {
-        console.log("4. before going to movie.html", localStorage);
-      }
-      await log()
-
-      await addParamtoURL(movieId, onTheaterFlg, movieHTML);
-      return;
-    };
-    promiseFuncMovie();
+    promiseFuncMovie(movieId);
   };
 });
 
-
 //add parameter to URL ---> to get movieId on movie.html
-const addParamtoURL = async (movieId, onTheaterFlg, baseURL) => {
+const addParamtoURL = (movieId, onTheaterFlg, baseURL) => {
+  console.log("adding parameter to URL")
   let fullURL = baseURL + `?movieId=${movieId}&onTheaterFlg=${onTheaterFlg}`;
-  alert("URL param added, about to open movie.html")
   window.open(fullURL); //open window with the combined URL
 }
 
