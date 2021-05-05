@@ -361,7 +361,7 @@ const createNowOnTheaterComponent = async (movieId) => {
         return response.json();
       };
     }).then((data) => {
-      alert("data fetched");
+      alert("data fetched"); ////delete later
       //prepare category component
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
@@ -379,7 +379,8 @@ const createNowOnTheaterComponent = async (movieId) => {
 
       //store the component into localStorage
       localStorage.setItem("nowOnTheaterComponent", JSON.stringify(dataObj));
-      alert("localstorage stored");
+
+      alert("localstorage stored"); ////delete later
       console.log("3. NowOnTheater Component stored", localStorage);
       return dataObj;
 
@@ -493,7 +494,13 @@ document.addEventListener("click", (event) => {
     /******* async/await ******* */
     const promiseFuncTrailer = async () => {
       await createNowOnTheaterComponent(movieId); //first --> add to local storage
-      console.log("4. onTheaterflag on");
+
+      //just to check the flow
+      async function log() {
+        console.log("4. turning the flag onTheaterflag on", localStorage);
+      }
+      await log()
+
       onTheaterFlg = 1; //movies on theater (default = 1)
       await getVideoByMovieId(movieId, onTheaterFlg); //second
       return;
@@ -511,7 +518,8 @@ document.addEventListener("click", (event) => {
       await createNowOnTheaterComponent(movieId); //first --> add to local storage
       onTheaterFlg = 1; //movies on theater (default = 0)
 
-      async function log() {
+      //just to check the flow
+      const log = async () => {
         console.log("4. before going to movie.html", localStorage);
       }
       await log()
