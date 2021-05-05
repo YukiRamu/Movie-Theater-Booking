@@ -69,7 +69,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       if (component.backdropPath === null) {
         srcPath = "";
       } else {
-        srcPath = backdropBaseURL + component.backdropPath;
+        srcPath = `${backdropBaseURL}${component.backdropPath}`;
       }
 
       //movietitle, overview, runtime
@@ -87,7 +87,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       if (component[0].backdropPath === null) {
         srcPath = "";
       } else {
-        srcPath = backdropBaseURL + component[0].backdropPath;
+        srcPath =`${backdropBaseURL}${component[0].backdropPath}`;
       }
 
       //movietitle, overview, runtime
@@ -124,7 +124,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
         </div>
         <div class="row bookRow">
           <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer</button>
-          <a class="col-md-8 btn btn-outline-light bookNowBtn" href="./seatSelection.html" target="_blank"
+          <a class="col-md-8 btn btn-outline-light bookNowBtn" target="_blank"
             role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
           <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
         </div>
@@ -141,8 +141,6 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
 
 //display movie detail
 const displayMovieDetail = (castArray, reviewArray, recomArray) => {
-
-  console.log(castArray)
   /* display cast photos*/
   let html;
   let profilePath;
@@ -153,10 +151,8 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     </div>
   `;
   } else {
-    //#1 filter out the profile with no image
-    // const filteredCastArray = castArray.filter(elem => elem.profile_path !== null);
-
     html = castArray.map((elem) => {
+      //when no image available
       if (elem.profile_path === null) {
         profilePath = "./img/people.jpg";
       } else {
@@ -274,7 +270,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     recomHTML += `
       <div class="col">
         <div class="card recomCard">
-          <img src="${imgBaseURL + "original" + recomArray[count].poster_path}" class="card-img-top recomImg" alt="${recomArray[count].id}">
+          <img src="${imgBaseURL}original${recomArray[count].poster_path}" class="card-img-top recomImg" alt="${recomArray[count].id}">
           <div class="card-body">
             <h5 class="card-text">${recomArray[count].title}</h5>
           </div>
@@ -327,7 +323,7 @@ const displayTrailer = (movieId) => {
 
 /* ============ Function calls ============ */
 /* Movie component preparation = global variables */
-//get URL parameter (movieId) 
+//get URL parameter (movieId, onTheaterflg) 
 const urlParams = new URLSearchParams(window.location.search);
 
 const movieIdfromURL = urlParams.get("movieId"); //get parameter from url (string)
@@ -391,7 +387,7 @@ window.addEventListener("DOMContentLoaded", () => {
     footer.classList.add("show");
   }, 5000);
 
-  /*#2  show movie component */
+  /* #2  show movie component */
   /* fetch sub movie components */
   getMovieSubComponent(movieIdfromURL).then(([credit, review, recommendation, similar]) => {
     credit; //fetch credit data. return object
@@ -428,6 +424,12 @@ window.addEventListener("DOMContentLoaded", () => {
   return movieComponent, movieIdfromURL;
 });
 
+//add parameter to URL ---> to get movieId on seatSelection.html
+const addParamtoURL = (movieId, onTheaterFlgfromURL) => {
+  let fullURL = `${searSelectionHTML}?movieId=${movieId}&onTheaterFlg=${onTheaterFlgfromURL}`;
+  window.open(fullURL); //open window with the combined URL
+}
+
 // when "Watch Trailer" button is clicked
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBtn")) {
@@ -438,5 +440,9 @@ document.addEventListener("click", (event) => {
     subInfo.classList.add("show");
     displayTrailer(movieIdfromURL);
   };
+  if (event.target.classList.contains("bookNowBtn")) {
+    //add movieId as a parameter to URL and open seatSelection.html
+    addParamtoURL(movieIdfromURL, onTheaterFlgfromURL);
+  }
   return
 });

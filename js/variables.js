@@ -39,8 +39,11 @@ const trailerContents = document.querySelector(".trailerContents");
 //button
 const movieChoice = document.getElementById("movieChoice"); //dropdown
 
-//Title
+//UI
 const titleHeader = document.querySelector(".titleHeader");
+const description = document.querySelector(".description");
+const body = document.querySelector(".body");
+const trailer = document.querySelector(".trailer");
 
 //Seat Panel
 const seat = document.querySelectorAll(".seat"); //all seats div 

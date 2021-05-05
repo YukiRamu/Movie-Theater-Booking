@@ -304,7 +304,7 @@ body .container {
   max-width: 90vw;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #282c37cf;
+  background: linear-gradient(-45deg, black, #282c37cf);
   -webkit-box-shadow: 0 1rem 2rem black;
           box-shadow: 0 1rem 2rem black;
   border-radius: 3vw;
@@ -318,7 +318,7 @@ body .container .titleHeader {
 }
 
 body .container .description {
-  width: 50%;
+  width: 70%;
   color: #a2a3a9;
 }
 
@@ -576,6 +576,8 @@ body .container .yourSeat .alert.show {
 
 body .container .footer {
   display: none;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
 }
 
 body .container .footer.show {

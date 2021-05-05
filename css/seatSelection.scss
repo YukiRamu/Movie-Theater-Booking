@@ -14,14 +14,15 @@ body {
     max-width: 90vw;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: $color1Tr;
+    background: linear-gradient(-45deg, $black, $color1Tr);
+    // background-color: $color1Tr;
     box-shadow: 0 1rem 2rem $black; //shadow effect
     border-radius: 3vw;
     .titleHeader {
       @include fadeInforInnerHTML;
     }
     .description {
-      width: 50%;
+      width: 70%;
       color: $color4;
     }
     .search {
@@ -214,6 +215,7 @@ body {
     }
     .footer {
       display: none;
+      box-shadow: unset;
       &.show {
         display: block;
         animation: fadeIn 1s linear;

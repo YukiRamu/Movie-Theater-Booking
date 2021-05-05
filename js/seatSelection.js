@@ -1,3 +1,10 @@
+/* Movie component preparation = global variables */
+//get URL parameter (movieId, onTheaterFlg)
+const urlParams = new URLSearchParams(window.location.search);
+const movieIdfromURL = urlParams.get("movieId");
+const onTheaterFlgfromURL = urlParams.get("onTheaterFlg");
+console.log(movieIdfromURL);
+console.log(onTheaterFlgfromURL);
 
 //object
 const seatPrice = {
@@ -104,6 +111,41 @@ class UI {
     note.classList.remove("show");
     yourSeat.classList.remove("show");
     footer.classList.remove("show");
+  }
+
+  static displayTrailer(movieId) {
+    //fetch video key
+    fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw error(response.statusText);
+        } else {
+          return response.json();
+        };
+      })
+      .then((data) => {
+        console.log(data)
+        //#1 prepare video key array and return
+        let videoKeyArray = [];
+        videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
+
+        if (videoKeyArray[0].length === 0) {
+          //when no trailer found
+          trailer.innerHTML = "<p>No trailer available :(</p>";
+        } else {
+          //#3 display trailer 
+          trailer.innerHTML = `
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+          `
+          return;
+        };
+      }).catch((error) => {
+        console.error(`Error = ${error}. Unable to fetch video data by movieId`);
+        return error;
+      });
   }
 }
 
@@ -257,15 +299,56 @@ const checkOut = (title) => {
   }
 };
 
-/* When the page is loaded */
+/* When the page is loaded 
 //For the very first time, localStorage is null
 //store emply array
 //The JSON.stringify() method converts JavaScript objects into strings.
-//array -> convert to object
-console.log(localStorage.getItem("seatMap"))
-if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
-  localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
-}
+//array -> convert to object */
+window.addEventListener("DOMContentLoaded", () => {
+  if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
+    localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
+  }
 
-//Movie title fadeIn animation
-titleHeader.style.opacity = 1;
+  /* Show movie title, description and trailer*/
+  //get movieComponent from localstorage
+  if (onTheaterFlgfromURL == "1") {
+    movieComponent = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
+  } else {
+    movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
+  }
+
+  console.log(movieComponent);
+
+  let title;
+  let overview;
+  let backdropPath;
+  let trailerPath;
+  switch (onTheaterFlgfromURL) {
+    case "1":
+      title = movieComponent.movieTitle;
+      overview = movieComponent.overview;
+      backdropPath = movieComponent.backdropPath;
+      console.log(title)
+
+      break;
+    case "0":
+      let component = movieComponent.filter((elem) => { return elem.movieId == movieIdfromURL }); //movieIdfromURL => string
+      console.log(component)
+      title = component[0].movieTitle;
+      overview = component[0].overview;
+      backdropPath = component[0].backdropPath;
+      break;
+    default:
+      break;
+  }
+  titleHeader.innerText = title;
+  titleHeader.style.opacity = 1;
+  description.innerText = overview;
+  body.style.backgroundImage = `url(${backdropBaseURL}${backdropPath})`;
+  body.style.backgroundPosition = "center";
+  body.style.backgroundSize = "cover";
+  body.style.backgroundRepeat = "no-repeat";
+
+  UI.displayTrailer(movieIdfromURL);
+
+});

@@ -102,7 +102,7 @@ const displayMovielist = (movieComponent) => {
     let appendHTML =
       `
     <div class="col card bg-dark text-white">
-      <img src="${imgBaseURL + "original" + movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
+      <img src="${imgBaseURL}original${movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
     </div>
     `;
 
@@ -491,7 +491,6 @@ const promiseFuncTrailer = async (movieId) => {
 const promiseFuncMovie = async (movieId) => {
   await createNowOnTheaterComponent(movieId); //first --> add to local storage
   onTheaterFlg = 1; //movies on theater (default = 0)
-
   //open movie.html with the URL parameter. movieId
   addParamtoURL(movieId, onTheaterFlg, movieHTML);
   return;
@@ -522,7 +521,7 @@ document.addEventListener("click", (event) => {
 //add parameter to URL ---> to get movieId on movie.html
 const addParamtoURL = (movieId, onTheaterFlg, baseURL) => {
   console.log("adding parameter to URL")
-  let fullURL = baseURL + `?movieId=${movieId}&onTheaterFlg=${onTheaterFlg}`;
+  let fullURL = `${baseURL}?movieId=${movieId}&onTheaterFlg=${onTheaterFlg}`;
   window.open(fullURL); //open window with the combined URL
 }
 
