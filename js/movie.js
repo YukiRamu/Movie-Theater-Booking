@@ -254,6 +254,14 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   /* display recommendations - first 9 movies */
   let recomHTML = "";
   let count = 0;
+  let countUpTo;
+  //if recommended movies are less than 9, display all they have
+  if (recomArray.length < 9) {
+    countUpTo = recomArray.length;
+  }else {
+    countUpTo = 9;
+  }
+
   do {
     recomHTML += `
       <div class="col">
@@ -266,7 +274,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
       </div>
     ` ;
     count++;
-  } while ((count >= 0) && (count < 9));
+  } while ((count >= 0) && (count < countUpTo));
 
   recomPanel.innerHTML = recomHTML;
 }
