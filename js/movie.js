@@ -46,25 +46,58 @@ const getMovieSubComponent = async (movieId) => {
   const recommendation = await getRecommendation;
   const similar = await getSimmilarMovie;
 
-    //return when both promises are resolved
+  //return when both promises are resolved
   return [credit, review, recommendation, similar];
 };
 
 //display Title panel
-const displayMovieInfo = (component, director) => {
-  //for category component
-  let htmlCategory = component[0].category[0].map((elem) => {
-    return `<p class="col">${elem}</p>`;
-  }).join("");
-
-  //for backdropPath
+const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
+  let htmlCategory;
   let srcPath;
-  if (component[0].backdropPath === null) {
-    srcPath = "";
-  } else {
-    srcPath = backdropBaseURL + component[0].backdropPath;
-  }
+  let movieTitle;
+  let overview;
+  let runtime;
 
+  switch (onTheaterFlgfromURL) {
+    case "1":
+      //for category component
+      htmlCategory = component.category[0].map((elem) => {
+        return `<p class="col">${elem}</p>`;
+      }).join("");
+
+      //for backdropPath
+      if (component.backdropPath === null) {
+        srcPath = "";
+      } else {
+        srcPath = backdropBaseURL + component.backdropPath;
+      }
+
+      //movietitle, overview, runtime
+      movieTitle = component.movieTitle;
+      overview = component.overview;
+      runtime = component.runtime;
+      break;
+    case "0":
+      //for category component
+      htmlCategory = component[0].category[0].map((elem) => {
+        return `<p class="col">${elem}</p>`;
+      }).join("");
+
+      //for backdropPath
+      if (component[0].backdropPath === null) {
+        srcPath = "";
+      } else {
+        srcPath = backdropBaseURL + component[0].backdropPath;
+      }
+
+      //movietitle, overview, runtime
+      movieTitle = component[0].movieTitle;
+      overview = component[0].overview;
+      runtime = component[0].runtime;
+      break;
+    default:
+      break;
+  }
 
   let html = `
     <!-- backdrop -->
@@ -77,17 +110,17 @@ const displayMovieInfo = (component, director) => {
         ${htmlCategory}
       </div>
       <div class="row titleRow">
-        <h1 class="col">${component[0].movieTitle}</h1>
+        <h1 class="col">${movieTitle}</h1>
       </div>
 
       <div class="row subInfo">
       <!--sub left-->
       <div class="col left">
         <div class="row overviewRow">
-          <p class="col">${component[0].overview}</p>
+          <p class="col">${overview}</p>
         </div>
         <div class="row directorRow">
-          <p class="col"><span><i class="far fa-clock"></i> ${component[0].runtime} mins</span><span><i class="fas fa-bullhorn"></i> ${director}</span></p>
+          <p class="col"><span><i class="far fa-clock"></i> ${runtime} mins</span><span><i class="fas fa-bullhorn"></i> ${director}</span></p>
         </div>
         <div class="row bookRow">
           <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer</button>
@@ -278,23 +311,61 @@ const displayTrailer = (movieId) => {
 
 /* ============ Function calls ============ */
 /* Movie component preparation = global variables */
-//get movie component from localstorage
-const movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
-console.log("movie component is ", movieComponent);
+//get URL parameter (movieId) 
+const urlParams = new URLSearchParams(window.location.search);
 
-//get URL parameter (movieId) and component
-const movieIdfromURL = location.search.slice(9); //get parameter from url and delete "?movieId=" (string)
-const component = movieComponent.filter((elem) => {
-  return elem.movieId == movieIdfromURL;
-});
+const movieIdfromURL = urlParams.get("movieId"); //get parameter from url (string)
+const onTheaterFlgfromURL = urlParams.get("onTheaterFlg"); //0 or 1 (string)
+console.log(movieIdfromURL);
+console.log(onTheaterFlgfromURL);
+
+let movieComponent;
+let component;
+//get movieComponent from localstorage
+if (onTheaterFlgfromURL == "1") {
+  movieComponent = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
+} else {
+  movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
+}
+
+switch (onTheaterFlgfromURL) {
+  case "1":
+    component = movieComponent; //one object
+    break;
+  case "0":
+    //find one component
+    component = movieComponent.filter((elem) => {
+      return elem.movieId == movieIdfromURL;
+    });
+    break;
+  default:
+    break;
+}
+
+console.log(" component is ", component);
 
 // when the page is loaded
 window.addEventListener("DOMContentLoaded", () => {
   /* #1 show tagline --> fadeout */
-  if (component[0].tagline === "") {
-    taglineSection.innerHTML = ` <h2 class="tagline">Loading ...</h2>`; //when no data exists
-  } else {
-    taglineSection.innerHTML = ` <h2 class="tagline">${component[0].tagline}</h2>`;
+  console.log(onTheaterFlgfromURL);
+
+  switch (onTheaterFlgfromURL) {
+    case "1":
+      if (component.tagline === "") {
+        taglineSection.innerHTML = ` <h2 class="tagline">Loading ...</h2>`; //when no data exists
+      } else {
+        taglineSection.innerHTML = ` <h2 class="tagline">${component.tagline}</h2>`;
+      }
+      break;
+    case "0":
+      if (component[0].tagline === "") {
+        taglineSection.innerHTML = ` <h2 class="tagline">Loading ...</h2>`; //when no data exists
+      } else {
+        taglineSection.innerHTML = ` <h2 class="tagline">${component[0].tagline}</h2>`;
+      }
+      break;
+    default:
+      break;
   }
 
   setTimeout(() => {
@@ -330,7 +401,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //get recommendations
     const recomArray = recommendation.results;
 
-    displayMovieInfo(component, director); //after 5 seconds interval,display the top part (overview)
+    displayMovieInfo(component, director, onTheaterFlgfromURL); //after 5 seconds interval,display the top part (overview)
     displayMovieDetail(castArray, reviewArray, recomArray); //after 5 seconds interval
 
   }).catch((error) => {

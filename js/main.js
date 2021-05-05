@@ -188,7 +188,6 @@ const getVideoByMovieId = async (movieId, onTheaterFlg) => {
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id, onTheaterFlg);
-
         return videoKeyArray;
       };
 
@@ -201,7 +200,7 @@ const getVideoByMovieId = async (movieId, onTheaterFlg) => {
 
 //#6 create iframe for trailer
 const showTrailer = (videoKeyArray, movidId, onTheaterFlg) => {
-  console.log("showTrailer",onTheaterFlg)
+  console.log("showTrailer", onTheaterFlg)
   //#3 create iframe
   //prepare carousel-indicators (= length of array) = buttons
   let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
@@ -256,10 +255,10 @@ const showTrailer = (videoKeyArray, movidId, onTheaterFlg) => {
 
 //#7 add background image to the trailer
 const showTrailerBackgroundImg = (movidId, onTheaterFlg) => {
-  console.log("showTrailerBackgroundImg",onTheaterFlg)
+  console.log("showTrailerBackgroundImg", onTheaterFlg)
   let component;
   let url;
-  //get backdropPath from localstorage
+  //get movieComponent from localstorage
   if (onTheaterFlg === 1) {
     component = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
   } else {
@@ -477,7 +476,8 @@ document.addEventListener("click", (event) => {
   if (event.target.classList.contains("viewDetailBtn")) {
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
-    addParamtoURL(movieId, movieHTML);
+    onTheaterFlg = 0;
+    addParamtoURL(movieId, onTheaterFlg, movieHTML);
   };
 });
 
@@ -489,23 +489,35 @@ document.addEventListener("click", (event) => {
     let movieId = event.target.children[0].innerHTML; //string
 
     /******* async/await ******* */
-    const promiseFunc = async () => {
+    const promiseFuncTrailer = async () => {
       await createNowOnTheaterComponent(movieId); //first --> add to local storage
       console.log(localStorage);
-      onTheaterFlg = 1; //movies on theater (default = 0)
+      onTheaterFlg = 1; //movies on theater (default = 1)
       await getVideoByMovieId(movieId, onTheaterFlg); //second
       return;
-    }
-    promiseFunc();
-
-
+    };
+    promiseFuncTrailer();
   }
+  //open movie.html with the URL parameter. movieId
+  if (event.target.classList.contains("nowOnviewDetailBtn")) {
+    //get movieId from the button tag > span
+    let movieId = event.target.children[0].innerHTML; //string
 
+    /********** async/await ********** */
+    const promiseFuncMovie = async () => {
+      await createNowOnTheaterComponent(movieId); //first --> add to local storage
+      onTheaterFlg = 1; //movies on theater (default = 0)
+      console.log("before going to movie.html",localStorage);
+      await addParamtoURL(movieId, onTheaterFlg, movieHTML);
+      return;
+    };
+    promiseFuncMovie();
+  };
 });
 
 //add parameter to URL ---> to get movieId on movie.html
-const addParamtoURL = (movieId, baseURL) => {
-  let fullURL = baseURL + `?movieId=${movieId}`;
+const addParamtoURL = async (movieId, onTheaterFlg, baseURL) => {
+  let fullURL = baseURL + `?movieId=${movieId}&onTheaterFlg=${onTheaterFlg}`;
   window.open(fullURL); //open window with the combined URL
 }
 
@@ -641,7 +653,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="row">
               <div class="col btns">
                 <button type="button" class="btn btn-outline-light nowOntrailerBtn">▶ Watch trailer<span class="movieId">${nowPlayingList.results[i].id}</span></button>
-                <a class="btn btn-outline-light nowOnviewDetailBtn" target="_blank" role="button"><span class="movieId">${nowPlayingList.results[0].id}</span><i class="fas
+                <a class="btn btn-outline-light nowOnviewDetailBtn" target="_blank" role="button"><span class="movieId">${nowPlayingList.results[i].id}</span><i class="fas
                 fa-film"></i> View Detail</a>
               </div>
             </div>
