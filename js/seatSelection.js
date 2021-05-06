@@ -304,7 +304,7 @@ const checkOut = (title) => {
 //store emply array
 //The JSON.stringify() method converts JavaScript objects into strings.
 //array -> convert to object */
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
   }
@@ -314,7 +314,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (onTheaterFlgfromURL == "1") {
     movieComponent = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
   } else {
-    movieComponent = JSON.parse(localStorage.getItem("movieComponent"));
+    movieComponent = await getMovieDetailById(movieIdfromURL);
   }
 
   console.log(movieComponent);
@@ -330,16 +330,14 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log(title)
       break;
     case "0":
-      let component = movieComponent.filter((elem) => { return elem.movieId == movieIdfromURL }); //movieIdfromURL => string
-      console.log(component);
-
-      title = component[0].movieTitle;
-      overview = component[0].overview;
-      backdropPath = component[0].backdropPath;
+      title = movieComponent[0].title;
+      overview = movieComponent[0].overview;
+      backdropPath = movieComponent[0].backdrop_path;
       break;
     default:
       break;
-  }
+  };
+
   titleHeader.innerText = title;
   titleHeader.style.opacity = 1;
   description.innerText = overview;

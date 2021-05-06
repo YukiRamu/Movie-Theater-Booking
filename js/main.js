@@ -1,67 +1,24 @@
-/* *******************************************
-/* Fetch API Note - how to access data
-/* 1. Search by keyword : getMovieByKeyword()
-/* https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=
-//
-/* 2. Search detail by id (must have "id") : getMovieDetailById() //for runtime
-/* https://api.themoviedb.org/3/movie/${id}?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&append_to_response=videos%2Bimages
-//
-/* 3. get image
-/* use poster_path as a parameter
-/* https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
-// backdrop_path for the backgroud photo
-//
-// 4. get video getVideoByMovieId ()
-/* https://api.themoviedb.org/3/movie/384018/videos?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&language=en-US
-/* 
-/* *******************************************
+/* Function Declaration */
 
-/* Fetch Data -- TMDB */
-//#1 fetch a list of movie IDs based on a keyword
-const getMovieByKeyword = (keyword, page) => {
-  fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}&page=${page}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    })
-    .then((data) => {
-      console.log("data by keyword is ", data);
-      console.log("current page is ", page)
-      console.log("length of pages", data.total_pages);//11 : data.pages === 1
+//show the result on the result section
+const displayMovielist = (movieComponent) => {
+  console.log("display movie list, moviecomponent is", movieComponent)
+  //show only the data that has a poster image
+  let appendHTML = movieComponent.map((elem) => {
+    if (elem.poster_path) {
+      return `
+      <div class="col card bg-dark text-white">
+        <img src="${imgBaseURL}original${elem.poster_path}" class="card-img clicked posterImg" alt="${elem.id}">
+      </div>
+      `;
+    }
+  }).join("");
 
-      //display pagination at the bottom
-      showPagination(data.total_pages, page);
+  movieListRow.innerHTML = appendHTML;
+  searchResultSection.style.display = "block"; //open result section  
+  smoothScroll("searchResult");//#0 scroll to the result section
 
-      //display the total number of result on nav bar with fadeIn effect
-      numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
-      numOfResult.classList.add("fadeIn");
-
-      // if there is no data, do nothing.
-      if (data.total_results === 0) {
-        //hide search result section if it is already open
-        searchResultSection.style.display = "none";
-        return false;
-      } else {
-        // smoothScroll("searchResult");//#0 scroll to the result section
-      };
-
-      //get ids
-      let idArray = [];
-      idArray.push(data.results.map((elem) => { return elem.id }));
-
-      //get movie detail and display it one by one
-      idArray[0].forEach(elem => {
-        getMovieDetailById(elem); //#2 get detail by id
-        return;
-      });
-    })
-    .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch data by keyword`);
-      return error;
-    });
+  return movieComponent;
 };
 
 //Append pagination (ul) buttons : page = string
@@ -75,7 +32,6 @@ const showPagination = (totalPageNum, page) => {
     }
 
   };
-  console.log(html);
   pagination.innerHTML = `
   <li class="page-item"><a class="page-link">Prev</a></li>
   ${html}
@@ -89,296 +45,30 @@ document.addEventListener("click", (e) => {
     console.log(e.target.innerText); //get page number
     pageChange(e.target.innerText);
   }
-
 });
-const pageChange = (pageNum) => {
-  console.log(search.value);
+const pageChange = async (pageNum) => {
   movieListRow.innerHTML = ""; //clear previous result
-  getMovieByKeyword(search.value, pageNum);
-}
+  let movieList = await getMovieByKeyword(search.value, pageNum);
+  //display pagination at the bottom
+  showPagination(movieList.total_pages, pageNum);
 
-//#2 fetch movie detail by movie id
-const getMovieDetailById = (movieId) => {
-  //fetch detail of movie and store it one by one
-  let resultArray = [];
-  let categoryArray = [];
+  //display the total number of result on nav bar with fadeIn effect
+  numOfResult.innerHTML = `<span>${movieList.total_results}</span> MOVIES Found`;
+  numOfResult.classList.add("fadeIn");
 
-  fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    }).then((data) => {
-      //prepare category component
-      categoryArray.push(data["genres"].map((elem) => { return elem.name }));
+  // if there is no data, do nothing.
+  if (movieList.total_results === 0) {
+    //hide search result section if it is already open
+    searchResultSection.style.display = "none";
+    return false;
+  };
 
-      //create a movie component
-      resultArray.push({
-        movieId: movieId,
-        movieTitle: data["title"],
-        category: categoryArray,
-        runtime: data["runtime"],
-        overview: data["overview"],
-        backdropPath: data["backdrop_path"], //background photo
-        posterPath: data["poster_path"],
-        tagline: data["tagline"],
-        popularity: data["popularity"]
-      });
-      displayMovielist(resultArray); //#3 show the result
-      return resultArray;
-    })
-    .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch data by ID`);
-      return error;
-    });
+  displayMovielist(movieList.results); //#3 show the result
   return;
 }
 
-//#3 show the result on the result section
-const displayMovielist = (movieComponent) => {
-  //show only the data that has a poster image
-  if (movieComponent[0].posterPath) {
-    let appendHTML =
-      `
-    <div class="col card bg-dark text-white">
-      <img src="${imgBaseURL}original${movieComponent[0].posterPath}" class="card-img clicked posterImg" alt="${movieComponent[0].movieId}">
-    </div>
-    `;
 
-    movieListRow.insertAdjacentHTML("beforeend", appendHTML);
-    searchResultSection.style.display = "block"; //open result section
-    smoothScroll("searchResult");//#0 scroll to the result section
-    storeMovieComponent(movieComponent); //-> #4 store movieComponent into local storage
-
-    return movieComponent;
-  };
-};
-
-//#4 store html list with detail movie info into LocalStorage
-let detailMovieInfo = [];
-const storeMovieComponent = (movieComponent) => {
-  //create html
-  //for category component
-  let htmlCategory = movieComponent[0].category[0].map((elem) => {
-    return `<p class="card-text">${elem}</p>`;
-  }).join("");
-
-  //for the entire html
-  let htmlAll = `
-  <button type="button" class="clsBtn" onclick="closePopup()">x</button>
-  <h5>${movieComponent[0].movieTitle}</h5>
-  <p">${movieComponent[0].overview}</p>
-  <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${movieComponent[0].movieId}</span></button>
-  <a class="btn btn-outline-light viewDetailBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i
-      class="fas fa-film"></i> View Detail</a >
-  <a class="btn btn-outline-light bookNowBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i class="fas fa-ticket-alt"></i> Book Now</a >
-    <div class="info">
-      ${htmlCategory}
-      <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime} mins</p>
-    </div>
-  `;
-
-  //create an object to store in the local storage
-  let dataObj = {
-    movieId: movieComponent[0].movieId,
-    appendHTML: htmlAll, //discription popUp
-    backdropPath: movieComponent[0].backdropPath, //trailer background img
-    category: movieComponent[0].category, //below for movie.js
-    movieTitle: movieComponent[0].movieTitle,
-    overview: movieComponent[0].overview,
-    posterPath: movieComponent[0].posterPath,
-    runtime: movieComponent[0].runtime,
-    tagline: movieComponent[0].tagline,
-    popularity: movieComponent[0].popularity
-  };
-
-  detailMovieInfo.push(dataObj);
-
-  //when all item is shown, the local storage will be ready (all item stored)
-  localStorage.setItem("movieComponent", JSON.stringify(detailMovieInfo));
-};
-
-/******************** Below are the functions to fetch trailer data ******************* */
-//#4 get video key array by movid id
-const getVideoByMovieId = (movieId, onTheaterFlg) => {
-  console.log("5. before getting video. localstorage is ", localStorage);
-  console.log("6. getVideoByMovieId with a flag", onTheaterFlg)
-  //fetch video key and store it to the local Storage
-  fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw error(response.statusText);
-      } else {
-        return response.json();
-      };
-    })
-    .then((data) => {
-      //#1 prepare video key array and return
-      let videoKeyArray = [];
-      videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
-
-      //#2 show modal
-      trailerModal.classList.add("show");
-      htmlBody.classList.add("trailerModal-active");
-
-      if (videoKeyArray[0].length === 0) {
-        //when no trailer found
-        trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
-        trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-        trailerBackground.style.backgroundSize = "cover";
-      } else {
-        //#3 show trailer in the modal if the video key is found
-        showTrailer(videoKeyArray, data.id, onTheaterFlg);
-        return videoKeyArray;
-      };
-
-    })
-    .catch((error) => {
-      console.error(`Error = ${error}. Unable to fetch video data by movieId`);
-      return error;
-    });
-}
-
-//#6 create iframe for trailer
-const showTrailer = (videoKeyArray, movidId, onTheaterFlg) => {
-  console.log("7. showTrailer", onTheaterFlg)
-  //#3 create iframe
-  //prepare carousel-indicators (= length of array) = buttons
-  let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
-
-  //******** if there are more than 2 trailers
-  let indicatorHTML = "";
-  for (let i = 1; i < videoKeyArray[0].length; i++) {
-    indicatorHTML += `<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="${i}"></button>;`
-  };
-
-  //prepare carousel-items
-  let itemHTMLBase = `
-        <div class="carousel-item active">
-          <iframe width="650" height="400" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        </div>`;
-
-  //******** if there are more than 2 trailers
-  let itemHTML = "";
-  for (let i = 1; i < videoKeyArray[0].length; i++) {
-    itemHTML += `
-        <div class="carousel-item">
-          <iframe width="650" height="400" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][i].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        </div>`
-  };
-
-  let iframeHTML = `
-        <div class="carousel-indicators">
-          ${indicatorHTMLBase}${indicatorHTML}
-        </div>
-        <div class="carousel-inner">
-          ${itemHTMLBase}${itemHTML}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#movieTrailer" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#movieTrailer" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-        `;
-
-  trailerContents.innerHTML = iframeHTML;  //display trailer(s)
-  showTrailerBackgroundImg(movidId, onTheaterFlg);
-};
-
-//#7 add background image to the trailer
-const showTrailerBackgroundImg = (movidId, onTheaterFlg) => {
-  console.log("8. showTrailerBackgroundImg", onTheaterFlg)
-  let component;
-  let url;
-  //get movieComponent from localstorage
-  if (onTheaterFlg === 1) {
-    component = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
-  } else {
-    component = JSON.parse(localStorage.getItem("movieComponent"));
-  }
-
-  //when component is null (first time loaded, nothing in localStorage)
-  if (component === null) {
-    trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-    trailerBackground.style.backgroundSize = "cover";
-  } else {
-    switch (onTheaterFlg) {
-      case 1:
-        url = backdropBaseURL + component.backdropPath;
-        if ((component.backdropPath === null)) {
-          // when the data is null -- alternative bg
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        } else {
-          // trailerModal ---add background
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        };
-        break;
-      case 0:
-        //find the backdropPath by movieId
-        let dataObj = component.find(obj => { return obj.movieId == movidId });
-        url = backdropBaseURL + dataObj.backdropPath;
-        if ((dataObj.backdropPath === null)) {
-          // when the data is null -- alternative bg
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        } else {
-          // trailerModal ---add background
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        };
-        break;
-      default:
-        break;
-    }
-  };
-};
-
-//#8 get now playing data
-const getNowPlaying = async () => {
-  //get category list
-  const [getCategoryList, getNowPlaying] = await Promise.all([
-    //fetch category list
-    fetch(`${baseURL}/3/genre/movie/list?api_key=${APIKey}`)
-      .then((categoryResponse) => {
-        if (!categoryResponse.ok) {
-          throw error(categoryResponse.statusText);
-        } else {
-          return categoryResponse.json();
-        };
-      }),
-    //fetch now playing
-    fetch(`${baseURL}/3/movie/now_playing?api_key=${APIKey}`)
-      .then((nowPlayResponse) => {
-        if (!nowPlayResponse.ok) {
-          throw error(nowPlayResponse.statusText);
-        } else {
-          return nowPlayResponse.json();
-        };
-      })
-  ]);
-
-  //fetch data in pararel
-  const categoryList = await getCategoryList;
-  const nowPlayingList = await getNowPlaying;
-
-  //return when both promises are resolved
-  return [categoryList, nowPlayingList];
-};
-
-//#9 get backdrop path (for now on theater movies)
+//################## get backdrop path (for now on theater movies) ##################
 const createNowOnTheaterComponent = async (movieId) => {
   console.log("2. create NowOnTheaterComponent with movie id", movieId);
   let categoryArray = [];
@@ -411,7 +101,8 @@ const createNowOnTheaterComponent = async (movieId) => {
 
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch data by ID`);
-  }
+    return error;
+  };
 };
 
 /* =========================== Function Call =========================== */
@@ -426,7 +117,7 @@ search.addEventListener("focus", () => {
 });
 
 //#2 When the search button is clicked, get a list of movies based on a keyword
-searchBtn.addEventListener("click", (e) => {
+searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   //validation check
   if (search.value === "") {
@@ -440,23 +131,60 @@ searchBtn.addEventListener("click", (e) => {
   }
   //#3 clear the previous search result
   movieListRow.innerHTML = "";
-  getMovieByKeyword(search.value, 1);
+  let movieList = await getMovieByKeyword(search.value, 1);
+
+  console.log(movieList)
+  //display pagination at the bottom
+  showPagination(movieList[0].total_pages, 1);
+
+  //display the total number of result on nav bar with fadeIn effect
+  numOfResult.innerHTML = `<span>${movieList[0].total_results}</span> MOVIES Found`;
+  numOfResult.classList.add("fadeIn");
+
+  // if there is no data, do nothing.
+  if (movieList[0].total_results === 0) {
+    //hide search result section if it is already open
+    searchResultSection.style.display = "none";
+    return false;
+  };
+
+  displayMovielist(movieList[0].results); //#3 show the result
 });
 
 //#4 Pop up screen for movie detail
-movieListRow.addEventListener("click", (event) => {
+movieListRow.addEventListener("click", async (event) => {
 
   //when the image is clicked
   if (event.target.classList.contains("posterImg")) {
-    //show pop up
+
+    //get movie detail
+    let id = event.target.getAttribute("alt");
+    let selectedMovie = await getMovieDetailById(id); //array of object
+    console.log(selectedMovie);
+
+    //create category html
+    let htmlCategory = selectedMovie[0].genres.map((elem) => {
+      return `<p class="card-text">${elem.name}</p>`;
+    }).join("");
+
+    //append html and show pop up
+    let appendHTML = `
+      <button type="button" class="clsBtn" onclick="closePopup()">x</button>
+      <h5>${selectedMovie[0].title}</h5>
+      <p">${selectedMovie[0].overview}</p>
+      <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${selectedMovie[0].id}</span></button>
+      <a class="btn btn-outline-light viewDetailBtn" target="_blank" role="button"><span class="movieId">${selectedMovie[0].id}</span><i
+          class="fas fa-film"></i> View Detail</a >
+      <a class="btn btn-outline-light bookNowBtn" target="_blank" role="button"><span class="movieId">${selectedMovie[0].id}</span><i class="fas fa-ticket-alt"></i> Book Now</a >
+        <div class="info">
+          ${htmlCategory}
+          <p class="card-text"><i class="far fa-clock"></i> ${selectedMovie[0].runtime} mins</p>
+        </div>
+      `;
+
+    popOverContent.innerHTML = appendHTML;
     popOverContent.classList.add("show");
 
-    //append detail movie information into the pop up
-    let component = JSON.parse(localStorage.getItem("movieComponent"));
-
-    //find the appendHTML by movieId ("==" because of data type difference)
-    let result = component.find(obj => { return obj.movieId == event.target.getAttribute("alt") });
-    popOverContent.innerHTML = result.appendHTML;
   } else {
     popOverContent.classList.remove("show");
   }
@@ -519,6 +247,7 @@ const promiseFuncTrailer = async (movieId) => {
 const promiseFuncMovie = async (movieId) => {
   await createNowOnTheaterComponent(movieId); //first --> add to local storage
   onTheaterFlg = 1; //movies on theater (default = 0)
+
   //open movie.html with the URL parameter. movieId
   addParamtoURL(movieId, onTheaterFlg, movieHTML);
   return;

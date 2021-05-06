@@ -124,7 +124,6 @@ document.addEventListener('mousemove', (e) => {
 
 //add class when hover html tags
 let tags = document.querySelectorAll('a, li, button');
-console.log(tags)
 for (let i = 0; i < tags.length; i++) {
   tags[i].addEventListener('mouseover', () => {
     cursor.classList.add('hovered');
