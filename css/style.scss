@@ -301,7 +301,9 @@ body {
           border-bottom: 0.2rem solid $accent1;
         }
         .trailerBtn,
-        .viewDetailBtn {
+        .viewDetailBtn,
+        .bookNowBtn {
+          margin-right: 1rem;
           span {
             display: none; //to have movid id in the button tag and a tag
           }
@@ -318,17 +320,23 @@ body {
         }
       }
       .pageNav {
+        padding: 0 26rem;
         .pagination {
           .page-item {
+            &.active {
+              background-color: $color5;
+            }
             .page-link {
               background-color: transparent;
               color: $accent1;
               cursor: pointer;
+              border: 0.1rem solid $color2;
             }
             .pageNum {
               color: $color2;
               cursor: pointer;
               z-index: 2;
+              border: 0.1rem solid $color2;
             }
           }
         }

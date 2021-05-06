@@ -189,10 +189,23 @@ a {
   color: $color4;
   padding: 1rem 0;
   box-shadow: 0rem 0rem 3rem $black;
-  i {
-    color: $color4;
+  .toTop {
+    display: none;
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    color: $accent1;
+    z-index: 5000;
     &:hover {
-      color: $blue;
+      color: $accent2;
+    }
+  }
+  div {
+    i {
+      color: $color4;
+      &:hover {
+        color: $blue;
+      }
     }
   }
 }

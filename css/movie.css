@@ -278,11 +278,24 @@ a {
           box-shadow: 0rem 0rem 3rem black;
 }
 
-.footer i {
+.footer .toTop {
+  display: none;
+  position: fixed;
+  right: 5%;
+  bottom: 10%;
+  color: #ec1a47;
+  z-index: 5000;
+}
+
+.footer .toTop:hover {
+  color: #1aec1d;
+}
+
+.footer div i {
   color: #a2a3a9;
 }
 
-.footer i:hover {
+.footer div i:hover {
   color: #5392d4;
 }
 

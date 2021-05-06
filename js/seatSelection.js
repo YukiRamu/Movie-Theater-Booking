@@ -328,7 +328,6 @@ window.addEventListener("DOMContentLoaded", () => {
       overview = movieComponent.overview;
       backdropPath = movieComponent.backdropPath;
       console.log(title)
-
       break;
     case "0":
       let component = movieComponent.filter((elem) => { return elem.movieId == movieIdfromURL }); //movieIdfromURL => string

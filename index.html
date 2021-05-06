@@ -74,7 +74,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <!-- display number of movie results  -->
             <li class="nav-item numOfResult">
-            <!-- display number of movie results  -->
+              <!-- display number of movie results  -->
             </li>
           </ul>
           <form class="d-flex">
@@ -109,32 +109,47 @@
 
       <!-- result cards 5 panels in one row / 10 moview at one page-->
       <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow">
-        <div class="col card bg-dark text-white">
-          <img src="./img/sample4.jpg" class="card-img clicked posterImg" alt="671">
-        </div>
+        <!-- append movie images here -->
       </div>
 
       <div class="popOverContent">
         <!--display small description of selected movie : appear on click at the bottom-->
       </div>
 
-      <nav aria-label="Page navigation example" class="pageNav">
-        <ul class="pagination justify-content-center">
+      <!-- Pagination -->
+
+      <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
           </li>
-          <li class="page-item"><a class="page-link pageNum" href="#">1</a></li>
-          <li class="page-item"><a class="page-link pageNum" href="#">2</a></li>
-          <li class="page-item"><a class="page-link pageNum" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
             <a class="page-link" href="#">Next</a>
           </li>
         </ul>
+      </nav> -->
+
+      <nav aria-label="Page navigation" class="pageNav">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#searchResult">Prev</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">1</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">2</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">3</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">4</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">5</a></li>
+          <li class="page-item"><a class="page-link pageNum" href="">Next</a></li>
+        </ul>
       </nav>
+
+
     </div>
 
     <!--footer-->
     <footer class="footer">
+      <a href="#"><i class="fas fa-chevron-circle-up fa-3x toTop"></i></a>
       <div>
         ©Yuki Matsubara 2021. All Rights Reserved.
         <a href="https://www.linkedin.com/in/yukimatsubara/" target="_blank"><i class="fab fa-linkedin"></i></a>

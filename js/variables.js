@@ -28,12 +28,16 @@ const searchResultSection = document.querySelector(".searchResult");
 const popOverContent = document.querySelector(".popOverContent");
 const card = document.querySelectorAll(".card-img-overlay");
 const movieListRow = document.querySelector(".movieListRow");
+const toTopBtn = document.querySelector(".toTop");
 
 //modal
 const htmlBody = document.getElementsByTagName("body")[0];
 const trailerModal = document.querySelector(".trailerModal");
 const trailerBackground = document.querySelector(".trailerBackground");
 const trailerContents = document.querySelector(".trailerContents");
+
+//pagenation
+const pagination = document.querySelector(".pagination");
 
 /* ***************** seatSelection.js ***************** */
 //button
@@ -84,3 +88,21 @@ const rightBtn = document.querySelector(".rightBtn");
 const castImgRow = document.querySelector(".castImgRow");
 const reviewPanel = document.querySelector(".reviewPanel");
 const recomPanel = document.querySelector(".recomPanel");
+
+//move to top button fadeIn
+$(window).scroll(() => {
+  let height = $(window).scrollTop();
+  if (height > 200) {
+    $('.toTop').fadeIn();
+  } else {
+    $('.toTop').fadeOut();
+  }
+});
+
+$(document).ready(() => {
+  $(".toTop").click(function () {
+    $("html,body").animate({ scrollTop: 0 }, "slow");
+    return false;
+  });
+});
+

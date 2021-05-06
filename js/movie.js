@@ -89,7 +89,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       if (component[0].backdropPath === null) {
         srcPath = "";
       } else {
-        srcPath =`${backdropBaseURL}${component[0].backdropPath}`;
+        srcPath = `${backdropBaseURL}${component[0].backdropPath}`;
       }
 
       //movietitle, overview, runtime
@@ -264,6 +264,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
   let recomHTML = "";
   let count = 0;
   let countUpTo;
+  let srcPath;
   //if recommended movies are less than 9, display all they have
   if (recomArray.length < 9) {
     countUpTo = recomArray.length;
@@ -271,11 +272,20 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     countUpTo = 9;
   }
 
+
+
   do {
+    //when no movie photo found
+    if (recomArray[count].poster_path === null) {
+      srcPath = "./img/movie.jpg";
+    } else {
+      srcPath = `${imgBaseURL}original${recomArray[count].poster_path}`;
+    };
+    
     recomHTML += `
       <div class="col">
         <div class="card recomCard">
-          <img src="${imgBaseURL}original${recomArray[count].poster_path}" class="card-img-top recomImg" alt="${recomArray[count].id}">
+          <img src="${srcPath}" class="card-img-top recomImg" alt="${recomArray[count].id}">
           <div class="card-body">
             <h5 class="card-text">${recomArray[count].title}</h5>
           </div>

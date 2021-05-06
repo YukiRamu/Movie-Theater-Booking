@@ -18,8 +18,8 @@
 
 /* Fetch Data -- TMDB */
 //#1 fetch a list of movie IDs based on a keyword
-const getMovieByKeyword = (keyword) => {
-  fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}`)
+const getMovieByKeyword = (keyword, page) => {
+  fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}&page=${page}`)
     .then((response) => {
       if (!response.ok) {
         throw error(response.statusText);
@@ -28,6 +28,13 @@ const getMovieByKeyword = (keyword) => {
       };
     })
     .then((data) => {
+      console.log("data by keyword is ", data);
+      console.log("current page is ", page)
+      console.log("length of pages", data.total_pages);//11 : data.pages === 1
+
+      //display pagination at the bottom
+      showPagination(data.total_pages, page);
+
       //display the total number of result on nav bar with fadeIn effect
       numOfResult.innerHTML = `<span>${data.total_results}</span> MOVIES Found`;
       numOfResult.classList.add("fadeIn");
@@ -56,6 +63,39 @@ const getMovieByKeyword = (keyword) => {
       return error;
     });
 };
+
+//Append pagination (ul) buttons : page = string
+const showPagination = (totalPageNum, page) => {
+  let html = "";
+  for (let i = 1; i <= totalPageNum; i++) {
+    if (i == page) {
+      html += `<li class="page-item active"><a class="page-link pageNum">${i}</a></li>`
+    } else {
+      html += `<li class="page-item"><a class="page-link pageNum">${i}</a></li>`
+    }
+
+  };
+  console.log(html);
+  pagination.innerHTML = `
+  <li class="page-item"><a class="page-link">Prev</a></li>
+  ${html}
+  <li class="page-item"><a class="page-link">Next</a></li>`
+};
+
+//change pages
+document.addEventListener("click", (e) => {
+  console.log(e.target)
+  if (e.target.classList.contains("pageNum")) {
+    console.log(e.target.innerText); //get page number
+    pageChange(e.target.innerText);
+  }
+
+});
+const pageChange = (pageNum) => {
+  console.log(search.value);
+  movieListRow.innerHTML = ""; //clear previous result
+  getMovieByKeyword(search.value, pageNum);
+}
 
 //#2 fetch movie detail by movie id
 const getMovieDetailById = (movieId) => {
@@ -114,7 +154,6 @@ const displayMovielist = (movieComponent) => {
   };
 };
 
-
 //#4 store html list with detail movie info into LocalStorage
 let detailMovieInfo = [];
 const storeMovieComponent = (movieComponent) => {
@@ -131,7 +170,8 @@ const storeMovieComponent = (movieComponent) => {
   <p">${movieComponent[0].overview}</p>
   <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${movieComponent[0].movieId}</span></button>
   <a class="btn btn-outline-light viewDetailBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i
-      class="fas fa-film"></i></i> View Detail</a >
+      class="fas fa-film"></i> View Detail</a >
+  <a class="btn btn-outline-light bookNowBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i class="fas fa-ticket-alt"></i> Book Now</a >
     <div class="info">
       ${htmlCategory}
       <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime}</p>
@@ -422,7 +462,7 @@ searchBtn.addEventListener("click", (e) => {
   }
   //#3 clear the previous search result
   movieListRow.innerHTML = "";
-  getMovieByKeyword(search.value);
+  getMovieByKeyword(search.value, 1);
 });
 
 //#4 Pop up screen for movie detail
@@ -471,12 +511,19 @@ document.addEventListener("click", (event) => {
     onTheaterFlg = 0;
     getVideoByMovieId(movieId, onTheaterFlg);
   };
-  //open movie.html with the URL parameter. movieId
+  //open movie.html with the URL parameter. movieId and flag
   if (event.target.classList.contains("viewDetailBtn")) {
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
     onTheaterFlg = 0;
     addParamtoURL(movieId, onTheaterFlg, movieHTML);
+  };
+  //open seatSelection.html with the URL parameter. movieId and flag
+  if (event.target.classList.contains("bookNowBtn")) {
+    //get movieId from the button tag > span
+    let movieId = event.target.children[0].innerHTML; //string
+    onTheaterFlg = 0;
+    addParamtoURL(movieId, onTheaterFlg, searSelectionHTML);
   };
 });
 
