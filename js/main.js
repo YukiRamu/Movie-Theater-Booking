@@ -71,8 +71,6 @@ const getMovieDetailById = (movieId) => {
         return response.json();
       };
     }).then((data) => {
-
-      console.log(data)
       //prepare category component
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
@@ -85,7 +83,8 @@ const getMovieDetailById = (movieId) => {
         overview: data["overview"],
         backdropPath: data["backdrop_path"], //background photo
         posterPath: data["poster_path"],
-        tagline: data["tagline"]
+        tagline: data["tagline"],
+        popularity: data["popularity"]
       });
       displayMovielist(resultArray); //#3 show the result
       return resultArray;
@@ -149,7 +148,8 @@ const storeMovieComponent = (movieComponent) => {
     overview: movieComponent[0].overview,
     posterPath: movieComponent[0].posterPath,
     runtime: movieComponent[0].runtime,
-    tagline: movieComponent[0].tagline
+    tagline: movieComponent[0].tagline,
+    popularity: movieComponent[0].popularity
   };
 
   detailMovieInfo.push(dataObj);
@@ -372,7 +372,8 @@ const createNowOnTheaterComponent = async (movieId) => {
       overview: movie["overview"],
       backdropPath: movie["backdrop_path"], //background photo
       posterPath: movie["poster_path"],
-      tagline: movie["tagline"]
+      tagline: movie["tagline"],
+      popularity: movie["popularity"]
     };
 
     //store the component into localStorage
@@ -502,7 +503,6 @@ const promiseFuncMovie = async (movieId) => {
 document.addEventListener("click", (event) => {
   //watch trailer
   if (event.target.classList.contains("nowOntrailerBtn")) {
-    console.log("1.======== Now on theater :Watch Trailer was clicked!!!! ========")
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
 
@@ -511,7 +511,6 @@ document.addEventListener("click", (event) => {
   };
 
   if (event.target.classList.contains("nowOnviewDetailBtn")) {
-    console.log("1.======== Now on theater :View Detail was clicked!!!! ========")
     //get movieId from the button tag > span
     let movieId = event.target.children[0].innerHTML; //string
 
@@ -522,7 +521,6 @@ document.addEventListener("click", (event) => {
 
 //add parameter to URL ---> to get movieId on movie.html
 const addParamtoURL = (movieId, onTheaterFlg, baseURL) => {
-  console.log("adding parameter to URL")
   let fullURL = `${baseURL}?movieId=${movieId}&onTheaterFlg=${onTheaterFlg}`;
   window.open(fullURL); //open window with the combined URL
 }
@@ -530,7 +528,6 @@ const addParamtoURL = (movieId, onTheaterFlg, baseURL) => {
 /* =========================== Animation function  =========================== */
 // When the page is loaded
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("window open. onTheaterFlg is ", onTheaterFlg)
   //#1 dropping text animation
   let dropTextsArray = [];
   Array.from(droptexts).forEach(elem => {

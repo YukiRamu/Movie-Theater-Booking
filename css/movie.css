@@ -407,14 +407,18 @@ body .container .backdropRow .titlePanel .subInfo .left .bookRow {
   grid-gap: 1.5rem;
 }
 
-body .container .backdropRow .titlePanel .subInfo .left .bookRow .rate {
+body .container .backdropRow .titlePanel .subInfo .left .rateRow {
+  margin-top: 2rem;
+}
+
+body .container .backdropRow .titlePanel .subInfo .left .rateRow .rate {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 2rem;
 }
 
-body .container .backdropRow .titlePanel .subInfo .left .bookRow .rate span {
+body .container .backdropRow .titlePanel .subInfo .left .rateRow .rate span {
   font-size: 1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;

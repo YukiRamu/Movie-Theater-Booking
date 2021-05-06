@@ -84,9 +84,6 @@ body {
             width: unset;
           }
           .left {
-            .overviewRow {
-              // max-width: 40%;
-            }
             .directorRow {
               span {
                 margin-right: 0.5rem;
@@ -96,8 +93,9 @@ body {
               width: fit-content;
               margin-left: 0.2rem;
               grid-gap: 1.5rem;
-              .bookNowBtn {
-              }
+            }
+            .rateRow {
+              margin-top: 2rem;
               .rate {
                 display: flex;
                 font-size: 2rem;

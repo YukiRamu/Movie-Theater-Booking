@@ -57,6 +57,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
   let movieTitle;
   let overview;
   let runtime;
+  let popularity;
 
   switch (onTheaterFlgfromURL) {
     case "1":
@@ -76,6 +77,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       movieTitle = component.movieTitle;
       overview = component.overview;
       runtime = component.runtime;
+      popularity = component.popularity;
       break;
     case "0":
       //for category component
@@ -94,6 +96,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       movieTitle = component[0].movieTitle;
       overview = component[0].overview;
       runtime = component[0].runtime;
+      popularity = component[0].popularity;
       break;
     default:
       break;
@@ -126,7 +129,9 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
           <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer</button>
           <a class="col-md-8 btn btn-outline-light bookNowBtn" target="_blank"
             role="button"><i class="fas fa-ticket-alt"></i> Book Now</a>
-          <h4 class="col-md-4 rate">7.5 <span class="badge bg-secondary">IMDB</span></h4>
+        </div>
+        <div class="row rateRow">
+          <h4 class="col-md-4 rate">${popularity} <span class="badge bg-secondary">Popularity</span></h4>
         </div>
       </div>
       <!--sub right-->
