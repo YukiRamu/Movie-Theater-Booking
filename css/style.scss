@@ -25,6 +25,10 @@ body {
         &.top {
           padding-top: 10%;
         }
+        &.msg {
+          width: fit-content;
+          margin: auto;
+        }
       }
       h1 {
         text-align: center;

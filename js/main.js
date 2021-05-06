@@ -444,7 +444,7 @@ search.addEventListener("focus", () => {
   //movie detail popUp hide
   popOverContent.classList.remove("show");
   //clear input
-  search.value = "";
+  //search.value = "";
 });
 
 //#2 When the search button is clicked, get a list of movies based on a keyword

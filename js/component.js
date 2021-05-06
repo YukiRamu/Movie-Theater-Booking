@@ -108,3 +108,44 @@ const scrollToTop = () => {
 };
 
 toTopBtn.addEventListener("click", scrollToTop);
+
+//Cursor design change
+const cursor = document.querySelector(".cursor");
+
+//make the cursor follow the mouse move
+document.addEventListener('mousemove', (e) => {
+  cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
+});
+
+//add class when hover <a> tag
+let link = document.querySelectorAll('a');
+for (let i = 0; i < link.length; i++) {
+  link[i].addEventListener('mouseover', () => {
+    cursor.classList.add('hovered');
+  });
+  link[i].addEventListener('mouseout', () => {
+    cursor.classList.remove('hovered');
+  });
+};
+
+//add class when hover <li> tag
+let list = document.querySelectorAll('li');
+for (let i = 0; i < list.length; i++) {
+  list[i].addEventListener('mouseover', () => {
+    cursor.classList.add('hovered');
+  });
+  list[i].addEventListener('mouseout', () => {
+    cursor.classList.remove('hovered');
+  });
+}
+
+//add class when hover <li> tag
+let span = document.querySelectorAll('span');
+for (let i = 0; i < span.length; i++) {
+  span[i].addEventListener('mouseover', () => {
+    cursor.classList.add('hovered');
+  });
+  span[i].addEventListener('mouseout', () => {
+    cursor.classList.remove('hovered');
+  });
+}
