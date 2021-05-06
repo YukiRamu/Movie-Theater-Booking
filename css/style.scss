@@ -327,6 +327,9 @@ body {
         padding: 0 26rem;
         .pagination {
           .page-item {
+            &:hover {
+              background-color: $accent1;
+            }
             &.active {
               background-color: $color5;
             }

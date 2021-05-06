@@ -139,13 +139,35 @@ for (let i = 0; i < list.length; i++) {
   });
 }
 
-//add class when hover <li> tag
-let span = document.querySelectorAll('span');
-for (let i = 0; i < span.length; i++) {
-  span[i].addEventListener('mouseover', () => {
+//add class when hover <span> tag
+// let span = document.querySelectorAll('span');
+// for (let i = 0; i < span.length; i++) {
+//   span[i].addEventListener('mouseover', () => {
+//     cursor.classList.add('hovered');
+//   });
+//   span[i].addEventListener('mouseout', () => {
+//     cursor.classList.remove('hovered');
+//   });
+// }
+
+//add class when hover <button> tag
+let button = document.querySelectorAll('button');
+for (let i = 0; i < button.length; i++) {
+  button[i].addEventListener('mouseover', () => {
     cursor.classList.add('hovered');
   });
-  span[i].addEventListener('mouseout', () => {
+  button[i].addEventListener('mouseout', () => {
+    cursor.classList.remove('hovered');
+  });
+}
+
+//add class when hover <img> tag
+let img = document.querySelectorAll('img');
+for (let i = 0; i < img.length; i++) {
+  img[i].addEventListener('mouseover', () => {
+    cursor.classList.add('hovered');
+  });
+  img[i].addEventListener('mouseout', () => {
     cursor.classList.remove('hovered');
   });
 }

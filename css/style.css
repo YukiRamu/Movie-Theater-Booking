@@ -834,6 +834,11 @@ body .container .searchResult .pageNav {
   padding: 0 26rem;
 }
 
+html .container .searchResult .pageNav .pagination .page-item:hover,
+body .container .searchResult .pageNav .pagination .page-item:hover {
+  background-color: #ec1a47;
+}
+
 html .container .searchResult .pageNav .pagination .page-item.active,
 body .container .searchResult .pageNav .pagination .page-item.active {
   background-color: #84838d;
