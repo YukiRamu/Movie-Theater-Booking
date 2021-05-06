@@ -3,7 +3,7 @@
 /* 1. Search by keyword : getMovieByKeyword()
 /* https://api.themoviedb.org/3/search/movie?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&query=
 //
-/* 2. Search detail by id (must have "id") : getMovieDetailById()
+/* 2. Search detail by id (must have "id") : getMovieDetailById() //for runtime
 /* https://api.themoviedb.org/3/movie/${id}?api_key=a9bfb23ff39a5cefa92aae8e6858a3b2&append_to_response=videos%2Bimages
 //
 /* 3. get image
@@ -45,7 +45,7 @@ const getMovieByKeyword = (keyword, page) => {
         searchResultSection.style.display = "none";
         return false;
       } else {
-        smoothScroll("searchResult");//#0 scroll to the result section
+        // smoothScroll("searchResult");//#0 scroll to the result section
       };
 
       //get ids
@@ -148,6 +148,8 @@ const displayMovielist = (movieComponent) => {
     `;
 
     movieListRow.insertAdjacentHTML("beforeend", appendHTML);
+    searchResultSection.style.display = "block"; //open result section
+    smoothScroll("searchResult");//#0 scroll to the result section
     storeMovieComponent(movieComponent); //-> #4 store movieComponent into local storage
 
     return movieComponent;
@@ -174,7 +176,7 @@ const storeMovieComponent = (movieComponent) => {
   <a class="btn btn-outline-light bookNowBtn" target="_blank" role="button"><span class="movieId">${movieComponent[0].movieId}</span><i class="fas fa-ticket-alt"></i> Book Now</a >
     <div class="info">
       ${htmlCategory}
-      <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime}</p>
+      <p class="card-text"><i class="far fa-clock"></i> ${movieComponent[0].runtime} mins</p>
     </div>
   `;
 
@@ -410,15 +412,6 @@ const createNowOnTheaterComponent = async (movieId) => {
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch data by ID`);
   }
-};
-
-// smooth scroll to the section (param: sectionId)
-const smoothScroll = (id) => {
-  searchResultSection.style.display = "block";
-  let scrollTo = document.getElementById(`${id}`);
-  scrollTo.scrollIntoView(({
-    behavior: "smooth"
-  }), true); // to top
 };
 
 /* =========================== Function Call =========================== */

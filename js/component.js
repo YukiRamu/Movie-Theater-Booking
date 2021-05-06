@@ -89,6 +89,16 @@ const castImgRow = document.querySelector(".castImgRow");
 const reviewPanel = document.querySelector(".reviewPanel");
 const recomPanel = document.querySelector(".recomPanel");
 
+
+/* Global Fumctions */
+// smooth scroll to the section
+const smoothScroll = (id) => {
+  let scrollTo = document.getElementById(`${id}`);
+  scrollTo.scrollIntoView(({
+    behavior: "smooth"
+  }), true); // to top
+};
+
 //move to top button fadeIn
 $(window).scroll(() => {
   let height = $(window).scrollTop();
@@ -100,14 +110,9 @@ $(window).scroll(() => {
 });
 
 //move to top button
-const scrollToTop = () => {
-  let scrollTo = document.querySelector(".container");
-  scrollTo.scrollIntoView(({
-    behavior: "smooth"
-  }), true); // to top
-};
-
-toTopBtn.addEventListener("click", scrollToTop);
+toTopBtn.addEventListener("click", () => {
+  smoothScroll(".container")
+});
 
 //Cursor design change
 const cursor = document.querySelector(".cursor");
@@ -117,57 +122,14 @@ document.addEventListener('mousemove', (e) => {
   cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
 });
 
-//add class when hover <a> tag
-let link = document.querySelectorAll('a');
-for (let i = 0; i < link.length; i++) {
-  link[i].addEventListener('mouseover', () => {
+//add class when hover html tags
+let tags = document.querySelectorAll('a, li, button');
+console.log(tags)
+for (let i = 0; i < tags.length; i++) {
+  tags[i].addEventListener('mouseover', () => {
     cursor.classList.add('hovered');
   });
-  link[i].addEventListener('mouseout', () => {
+  tags[i].addEventListener('mouseout', () => {
     cursor.classList.remove('hovered');
   });
 };
-
-//add class when hover <li> tag
-let list = document.querySelectorAll('li');
-for (let i = 0; i < list.length; i++) {
-  list[i].addEventListener('mouseover', () => {
-    cursor.classList.add('hovered');
-  });
-  list[i].addEventListener('mouseout', () => {
-    cursor.classList.remove('hovered');
-  });
-}
-
-//add class when hover <span> tag
-// let span = document.querySelectorAll('span');
-// for (let i = 0; i < span.length; i++) {
-//   span[i].addEventListener('mouseover', () => {
-//     cursor.classList.add('hovered');
-//   });
-//   span[i].addEventListener('mouseout', () => {
-//     cursor.classList.remove('hovered');
-//   });
-// }
-
-//add class when hover <button> tag
-let button = document.querySelectorAll('button');
-for (let i = 0; i < button.length; i++) {
-  button[i].addEventListener('mouseover', () => {
-    cursor.classList.add('hovered');
-  });
-  button[i].addEventListener('mouseout', () => {
-    cursor.classList.remove('hovered');
-  });
-}
-
-//add class when hover <img> tag
-let img = document.querySelectorAll('img');
-for (let i = 0; i < img.length; i++) {
-  img[i].addEventListener('mouseover', () => {
-    cursor.classList.add('hovered');
-  });
-  img[i].addEventListener('mouseout', () => {
-    cursor.classList.remove('hovered');
-  });
-}

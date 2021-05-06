@@ -279,8 +279,6 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     countUpTo = 9;
   }
 
-
-
   do {
     //when no movie photo found
     if (recomArray[count].poster_path === null) {
