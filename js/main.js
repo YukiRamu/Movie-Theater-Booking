@@ -71,13 +71,15 @@ const getMovieDetailById = (movieId) => {
         return response.json();
       };
     }).then((data) => {
+
+      console.log(data)
       //prepare category component
       categoryArray.push(data["genres"].map((elem) => { return elem.name }));
 
       //create a movie component
       resultArray.push({
         movieId: movieId,
-        movieTitle: data["original_title"],
+        movieTitle: data["title"],
         category: categoryArray,
         runtime: data["runtime"],
         overview: data["overview"],
@@ -364,7 +366,7 @@ const createNowOnTheaterComponent = async (movieId) => {
     //create a movie component
     let dataObj = {
       movieId: movieId,
-      movieTitle: movie["original_title"],
+      movieTitle: movie["title"],
       category: categoryArray,
       runtime: movie["runtime"],
       overview: movie["overview"],

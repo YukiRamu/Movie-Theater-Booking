@@ -322,7 +322,6 @@ window.addEventListener("DOMContentLoaded", () => {
   let title;
   let overview;
   let backdropPath;
-  let trailerPath;
   switch (onTheaterFlgfromURL) {
     case "1":
       title = movieComponent.movieTitle;
@@ -333,8 +332,9 @@ window.addEventListener("DOMContentLoaded", () => {
       break;
     case "0":
       let component = movieComponent.filter((elem) => { return elem.movieId == movieIdfromURL }); //movieIdfromURL => string
-      console.log(component)
-      title = component[0].theater;
+      console.log(component);
+
+      title = component[0].movieTitle;
       overview = component[0].overview;
       backdropPath = component[0].backdropPath;
       break;
