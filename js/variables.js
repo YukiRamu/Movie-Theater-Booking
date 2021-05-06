@@ -99,10 +99,12 @@ $(window).scroll(() => {
   }
 });
 
-$(document).ready(() => {
-  $(".toTop").click(function () {
-    $("html,body").animate({ scrollTop: 0 }, "slow");
-    return false;
-  });
-});
+//move to top button
+const scrollToTop = () => {
+  let scrollTo = document.querySelector(".container");
+  scrollTo.scrollIntoView(({
+    behavior: "smooth"
+  }), true); // to top
+};
 
+toTopBtn.addEventListener("click", scrollToTop);

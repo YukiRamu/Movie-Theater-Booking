@@ -281,7 +281,7 @@ const displayMovieDetail = (castArray, reviewArray, recomArray) => {
     } else {
       srcPath = `${imgBaseURL}original${recomArray[count].poster_path}`;
     };
-    
+
     recomHTML += `
       <div class="col">
         <div class="card recomCard">
@@ -322,7 +322,7 @@ const displayTrailer = (movieId) => {
       } else {
         //#3 display trailer 
         showTrailer.innerHTML = `
-        <iframe width="400" height="200" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
+        <iframe width="500" height="300" class="video" type="text/html" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
