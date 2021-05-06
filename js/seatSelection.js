@@ -1,10 +1,7 @@
 /* Movie component preparation = global variables */
-//get URL parameter (movieId, onTheaterFlg)
+//get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
 const movieIdfromURL = urlParams.get("movieId");
-const onTheaterFlgfromURL = urlParams.get("onTheaterFlg");
-console.log(movieIdfromURL);
-console.log(onTheaterFlgfromURL);
 
 //object
 const seatPrice = {
@@ -310,33 +307,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   /* Show movie title, description and trailer*/
-  //get movieComponent from localstorage
-  if (onTheaterFlgfromURL == "1") {
-    movieComponent = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
-  } else {
-    movieComponent = await getMovieDetailById(movieIdfromURL);
-  }
-
-  console.log(movieComponent);
+  movieComponent = await getMovieDetailById(movieIdfromURL);
 
   let title;
   let overview;
   let backdropPath;
-  switch (onTheaterFlgfromURL) {
-    case "1":
-      title = movieComponent.movieTitle;
-      overview = movieComponent.overview;
-      backdropPath = movieComponent.backdropPath;
-      console.log(title)
-      break;
-    case "0":
-      title = movieComponent[0].title;
-      overview = movieComponent[0].overview;
-      backdropPath = movieComponent[0].backdrop_path;
-      break;
-    default:
-      break;
-  };
+
+  title = movieComponent[0].title;
+  overview = movieComponent[0].overview;
+  backdropPath = movieComponent[0].backdrop_path;
 
   titleHeader.innerText = title;
   titleHeader.style.opacity = 1;

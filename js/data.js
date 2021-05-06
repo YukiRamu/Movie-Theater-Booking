@@ -21,14 +21,17 @@
 const getMovieByKeyword = async (keyword, page) => {
   try {
     const movieByKeyword = await fetch(`${baseURL}/3/search/movie?api_key=${APIKey}&query=${keyword}&page=${page}`);
-    const movieList = await movieByKeyword.json();
+    if (!movieByKeyword.ok) {
+      throw error(movieByKeyword.statusText);
+    } else {
+      const movieList = await movieByKeyword.json();
 
-    console.log("data by keyword is ", movieList.results);
-    console.log("current page is ", movieList)
-    console.log("length of pages", movieList.total_pages);//11 : data.pages === 1
+      console.log("data by keyword is ", movieList.results);
+      console.log("current page is ", movieList)
+      console.log("length of pages", movieList.total_pages);//11 : data.pages === 1
 
-    return [movieList];
-
+      return [movieList];
+    }
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch data by keyword`);
     return error;
@@ -40,8 +43,12 @@ const getMovieDetailById = async (movieId) => {
   //fetch detail of the selected movie
   try {
     const selectedMovie = await fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`);
-    const selected = await selectedMovie.json();
-    return [selected];
+    if (!selectedMovie.ok) {
+      throw error(selectedMovie.statusText);
+    } else {
+      const selected = await selectedMovie.json();
+      return [selected];
+    }
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch data by ID`);
     return error;
@@ -52,10 +59,14 @@ const getMovieDetailById = async (movieId) => {
 const categoryList = async () => {
   try {
     const category = await fetch(`${baseURL}/3/genre/movie/list?api_key=${APIKey}`);
-    const categoryList = await category.json();
+    if (!category.ok) {
+      throw error(category.statusText);
+    } else {
+      const categoryList = await category.json();
 
-    console.log(categoryList.genres)
-    return [categoryList];
+      console.log(categoryList.genres)
+      return [categoryList];
+    }
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch category list`);
     return error;
@@ -64,35 +75,36 @@ const categoryList = async () => {
 
 /******************** Below are the functions to fetch trailer data ******************* */
 //#4 get video key array by movid id
-const getVideoByMovieId = async (movieId, onTheaterFlg) => {
-  console.log("5. before getting video. localstorage is ", localStorage);
-  console.log("6. getVideoByMovieId with a flag", onTheaterFlg)
+const getVideoByMovieId = async (movieId) => {
   //fetch video key 
   try {
     const videoList = await fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`);
-    const video = await videoList.json();
-
-    console.log(video);
-    //#1 prepare video key array and return
-    let videoKeyArray = [];
-    videoKeyArray.push(video.results.filter((elem) => { return elem.type === "Trailer" }));
-
-    console.log(videoKeyArray)
-    //#2 show modal
-    trailerModal.classList.add("show");
-    htmlBody.classList.add("trailerModal-active");
-
-    if (videoKeyArray[0].length === 0) {
-      //when no trailer found
-      trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
-      trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-      trailerBackground.style.backgroundSize = "cover";
+    if (!videoList.ok) {
+      throw error(videoList.statusText);
     } else {
-      //#3 show trailer in the modal if the video key is found
-      showTrailer(videoKeyArray, video.id, onTheaterFlg);
-      return videoKeyArray;
-    };
+      const video = await videoList.json();
 
+      console.log(video);
+      //#1 prepare video key array and return
+      let videoKeyArray = [];
+      videoKeyArray.push(video.results.filter((elem) => { return elem.type === "Trailer" }));
+
+      console.log(videoKeyArray)
+      //#2 show modal
+      trailerModal.classList.add("show");
+      htmlBody.classList.add("trailerModal-active");
+
+      if (videoKeyArray[0].length === 0) {
+        //when no trailer found
+        trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
+        trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
+        trailerBackground.style.backgroundSize = "cover";
+      } else {
+        //#3 show trailer in the modal if the video key is found
+        showTrailer(videoKeyArray, video.id);
+        return videoKeyArray;
+      };
+    }
   } catch (error) {
     console.error(`Error = ${error}. Unable to fetch video data by movieId`);
     return error;
@@ -100,8 +112,7 @@ const getVideoByMovieId = async (movieId, onTheaterFlg) => {
 };
 
 //#6 create iframe for trailer
-const showTrailer = (videoKeyArray, movieId, onTheaterFlg) => {
-  console.log("7. showTrailer", onTheaterFlg)
+const showTrailer = (videoKeyArray, movieId) => {
   //#3 create iframe
   //prepare carousel-indicators (= length of array) = buttons
   let indicatorHTMLBase = '<button type="button" data-bs-target="#movieTrailer" data-bs-slide-to="0" class="active" aria-current="true"></button>';
@@ -151,58 +162,27 @@ const showTrailer = (videoKeyArray, movieId, onTheaterFlg) => {
         `;
 
   trailerContents.innerHTML = iframeHTML;  //display trailer(s)
-  showTrailerBackgroundImg(movieId, onTheaterFlg);
+  showTrailerBackgroundImg(movieId);
 };
 
 //#7 add background image to the trailer
-const showTrailerBackgroundImg = async (movieId, onTheaterFlg) => {
-  console.log("8. showTrailerBackgroundImg", onTheaterFlg)
-  let component;
+const showTrailerBackgroundImg = async (movieId) => {
   let url;
 
   //get backdrop photo
   const selectedMovie = await getMovieDetailById(movieId);
   let backdropPath = selectedMovie[0].backdrop_path;
 
-  //get movieComponent from localstorage
-  if (onTheaterFlg === 1) {
-    component = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
-  }
-
-  //when component is null (first time loaded, nothing in localStorage)
-  if (component === null) {
+  url = backdropBaseURL + backdropPath;
+  console.log("I am here", url)
+  if ((backdropPath === null)) {
+    // when the data is null -- alternative bg
     trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
     trailerBackground.style.backgroundSize = "cover";
   } else {
-    switch (onTheaterFlg) {
-      case 1:
-        url = backdropBaseURL + component.backdropPath;
-        if ((component.backdropPath === null)) {
-          // when the data is null -- alternative bg
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        } else {
-          // trailerModal ---add background
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        };
-        break;
-      case 0:
-        url = backdropBaseURL + backdropPath;
-        console.log("I am here", url)
-        if ((backdropPath === null)) {
-          // when the data is null -- alternative bg
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        } else {
-          // trailerModal ---add background
-          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
-          trailerBackground.style.backgroundSize = "cover";
-        };
-        break;
-      default:
-        break;
-    }
+    // trailerModal ---add background
+    trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
+    trailerBackground.style.backgroundSize = "cover";
   };
 };
 

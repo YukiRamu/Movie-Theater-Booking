@@ -51,7 +51,7 @@ const getMovieSubComponent = async (movieId) => {
 };
 
 //display Title panel
-const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
+const displayMovieInfo = (component, director) => {
   let htmlCategory;
   let srcPath;
   let movieTitle;
@@ -59,48 +59,23 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
   let runtime;
   let popularity;
 
-  switch (onTheaterFlgfromURL) {
-    case "1":
-      //for category component
-      htmlCategory = component.category[0].map((elem) => {
-        return `<p class="col">${elem}</p>`;
-      }).join("");
+  //for category component
+  htmlCategory = component.genres.map((elem) => {
+    return `<p class="col">${elem}</p>`;
+  }).join("");
 
-      //for backdropPath
-      if (component.backdropPath === null) {
-        srcPath = "";
-      } else {
-        srcPath = `${backdropBaseURL}${component.backdropPath}`;
-      }
-
-      //movietitle, overview, runtime
-      movieTitle = component.movieTitle;
-      overview = component.overview;
-      runtime = component.runtime;
-      popularity = component.popularity;
-      break;
-    case "0":
-      //for category component
-      htmlCategory = component.genres.map((elem) => {
-        return `<p class="col">${elem}</p>`;
-      }).join("");
-
-      //for backdropPath
-      if (component.backdrop_path === null) {
-        srcPath = "./img/bg2.jpg";
-      } else {
-        srcPath = `${backdropBaseURL}${component.backdrop_path}`;
-      }
-
-      //movietitle, overview, runtime
-      movieTitle = component.title;
-      overview = component.overview;
-      runtime = component.runtime;
-      popularity = component.popularity;
-      break;
-    default:
-      break;
+  //for backdropPath
+  if (component.backdrop_path === null) {
+    srcPath = "./img/bg2.jpg";
+  } else {
+    srcPath = `${backdropBaseURL}${component.backdrop_path}`;
   }
+
+  //movietitle, overview, runtime
+  movieTitle = component.title;
+  overview = component.overview;
+  runtime = component.runtime;
+  popularity = component.popularity;
 
   let html = `
     <!--Title panel-->
@@ -338,11 +313,10 @@ const displayTrailer = (movieId) => {
 
 /* ============ Function calls ============ */
 /* Movie component preparation = global variables */
-//get URL parameter (movieId, onTheaterflg) 
+//get URL parameter (movieId) 
 const urlParams = new URLSearchParams(window.location.search);
 
 const movieIdfromURL = urlParams.get("movieId"); //get parameter from url (string)
-const onTheaterFlgfromURL = urlParams.get("onTheaterFlg"); //0 or 1 (string)
 
 let movieComponent;
 const getMovieComponent = async () => {
@@ -358,31 +332,11 @@ const getMovieComponent = async () => {
   return selectedMovie[0];
 };
 
-//################# for now on theater movies) ##################
 
-//get movieComponent from localstorage
-if (onTheaterFlgfromURL == "1") {
-  movieComponent = JSON.parse(localStorage.getItem("nowOnTheaterComponent"));
-}
-
-
-
-// when the page is loaded
+// ================= when the page is loaded  =================
 window.addEventListener("DOMContentLoaded", async () => {
-  /* #1 show tagline --> fadeout */
-  console.log(onTheaterFlgfromURL);
-
-  if (onTheaterFlgfromURL == "1") {
-    if (movieComponent.tagline === "") {
-      taglineSection.innerHTML = ` <h2 class="tagline">Loading ...</h2>`; //when no data exists
-    } else {
-      taglineSection.innerHTML = ` <h2 class="tagline">${movieComponent.tagline}</h2>`;
-    }
-  } else {
-    movieComponent = await getMovieComponent();
-  }
-
-  console.log("component is ", movieComponent);
+  /* #1 create movieComponent and show tagline --> fadeout */
+  movieComponent = await getMovieComponent();
 
   setTimeout(() => {
     taglineSection.classList.add("hide");
@@ -411,15 +365,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   //get recommendations
   const recomArray = result[2].results;
 
-  displayMovieInfo(movieComponent, director, onTheaterFlgfromURL); //after 5 seconds interval,display the top part (overview)
+  displayMovieInfo(movieComponent, director); //after 5 seconds interval,display the top part (overview)
   displayMovieDetail(castArray, reviewArray, recomArray); //after 5 seconds interval
 
   return movieComponent, movieIdfromURL;
 });
 
 //add parameter to URL ---> to get movieId on seatSelection.html
-const addParamtoURL = (movieId, onTheaterFlgfromURL) => {
-  let fullURL = `${searSelectionHTML}?movieId=${movieId}&onTheaterFlg=${onTheaterFlgfromURL}`;
+const addParamtoURL = (movieId) => {
+  let fullURL = `${searSelectionHTML}?movieId=${movieId}`;
   window.open(fullURL); //open window with the combined URL
 }
 
@@ -435,7 +389,7 @@ document.addEventListener("click", (event) => {
   };
   if (event.target.classList.contains("bookNowBtn")) {
     //add movieId as a parameter to URL and open seatSelection.html
-    addParamtoURL(movieIdfromURL, onTheaterFlgfromURL);
+    addParamtoURL(movieIdfromURL);
   }
   return
 });

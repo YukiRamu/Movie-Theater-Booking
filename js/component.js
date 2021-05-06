@@ -2,7 +2,7 @@
 /* base url */
 const movieHTML = "./movie.html";
 const searSelectionHTML = "./seatSelection.html";
-let onTheaterFlg = 1;
+//let onTheaterFlg = 1;
 /* ***************** main.js ***************** */
 //opening animation
 const droptexts = document.querySelectorAll(".drops span");
