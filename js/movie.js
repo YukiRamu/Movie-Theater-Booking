@@ -102,12 +102,12 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       break;
   }
 
-    //< !--backdrop -->
-    // <div class="col backdrop">
-    //   <img src="${srcPath}" alt="backgroundImg">
-    // </div>
+  //< !--backdrop -->
+  // <div class="col backdrop">
+  //   <img src="${srcPath}" alt="backgroundImg">
+  // </div>
 
-    let html = `
+  let html = `
     <!--Title panel-->
     <div class=" col titlePanel">
       <div class="row categoryRow">
@@ -146,10 +146,8 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
   backdropRow.innerHTML = html;
   //append background image
   const titlePanel = document.querySelector(".titlePanel");
-  titlePanel.style.backgroundImage = `url(${srcPath})`;
-  titlePanel.style.backgroundPosition = "center";
+  titlePanel.style.background = `linear-gradient(to right, black 10%, transparent), url(${srcPath})  center fixed no-repeat`;
   titlePanel.style.backgroundSize = "cover";
-  titlePanel.style.backgroundRepeat = "no-repeat";
 
 };
 

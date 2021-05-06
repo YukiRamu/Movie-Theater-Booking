@@ -393,8 +393,6 @@ body .container .backdropRow.show {
 }
 
 body .container .backdropRow .titlePanel {
-  background: -webkit-gradient(linear, left top, right top, color-stop(10%, black), to(transparent));
-  background: linear-gradient(to right, black 10%, transparent);
   min-height: 100vh;
   padding: 3rem 0 0 5rem;
   margin-left: -1rem;
@@ -479,7 +477,6 @@ body .container .backdropRow .titlePanel .subInfo .trailer.show {
   -webkit-animation: fadeIn 1s linear;
           animation: fadeIn 1s linear;
   display: block;
-  text-align: center;
 }
 
 body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {

@@ -224,10 +224,8 @@ const getVideoByMovieId = (movieId, onTheaterFlg) => {
       if (videoKeyArray[0].length === 0) {
         //when no trailer found
         trailerContents.innerHTML = "<h1>No trailer available :(</h1>";
-        trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`;
-        trailerBackground.style.backgroundPosition = "center";
+        trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
         trailerBackground.style.backgroundSize = "cover";
-        trailerBackground.style.backgroundRepeat = "no-repeat";
       } else {
         //#3 show trailer in the modal if the video key is found
         showTrailer(videoKeyArray, data.id, onTheaterFlg);
@@ -308,31 +306,22 @@ const showTrailerBackgroundImg = (movidId, onTheaterFlg) => {
     component = JSON.parse(localStorage.getItem("movieComponent"));
   }
 
-  console.log("9. component fetched is ", component);
-
   //when component is null (first time loaded, nothing in localStorage)
   if (component === null) {
-    console.log("component null")
-    trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
-    trailerBackground.style.backgroundPosition = "center";
+    trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
     trailerBackground.style.backgroundSize = "cover";
-    trailerBackground.style.backgroundRepeat = "no-repeat";
   } else {
     switch (onTheaterFlg) {
       case 1:
         url = backdropBaseURL + component.backdropPath;
         if ((component.backdropPath === null)) {
-          // when the data is null
-          trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
-          trailerBackground.style.backgroundPosition = "center";
+          // when the data is null -- alternative bg
+          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
           trailerBackground.style.backgroundSize = "cover";
-          trailerBackground.style.backgroundRepeat = "no-repeat";
         } else {
           // trailerModal ---add background
-          trailerBackground.style.backgroundImage = `url('${url}')`;
-          trailerBackground.style.backgroundPosition = "center";
+          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
           trailerBackground.style.backgroundSize = "cover";
-          trailerBackground.style.backgroundRepeat = "no-repeat";
         };
         break;
       case 0:
@@ -340,17 +329,13 @@ const showTrailerBackgroundImg = (movidId, onTheaterFlg) => {
         let dataObj = component.find(obj => { return obj.movieId == movidId });
         url = backdropBaseURL + dataObj.backdropPath;
         if ((dataObj.backdropPath === null)) {
-          // when the data is null
-          trailerBackground.style.backgroundImage = `url(./img/bg2.jpg)`; //alternative bg image
-          trailerBackground.style.backgroundPosition = "center";
+          // when the data is null -- alternative bg
+          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;
           trailerBackground.style.backgroundSize = "cover";
-          trailerBackground.style.backgroundRepeat = "no-repeat";
         } else {
           // trailerModal ---add background
-          trailerBackground.style.backgroundImage = `url('${url}')`;
-          trailerBackground.style.backgroundPosition = "center";
+          trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url('${url}') center fixed no-repeat`;
           trailerBackground.style.backgroundSize = "cover";
-          trailerBackground.style.backgroundRepeat = "no-repeat";
         };
         break;
       default:

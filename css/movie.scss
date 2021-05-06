@@ -45,7 +45,7 @@ body {
       }
       /* title panel */
       .titlePanel {
-        background: linear-gradient(to right, $black 10%, transparent);
+        //background: linear-gradient(to right, $black 10%, transparent);
         min-height: 100vh;
         padding: 3rem 0 0 5rem;
         margin-left: -1rem;
@@ -108,7 +108,6 @@ body {
             &.show {
               animation: fadeIn 1s linear;
               display: block;
-              text-align: center;
               iframe {
                 box-shadow: 0 0 2rem $white;
               }
