@@ -111,7 +111,7 @@ $(window).scroll(() => {
 
 //move to top button
 toTopBtn.addEventListener("click", () => {
-  smoothScroll(".container")
+  smoothScroll("container")
 });
 
 //Cursor design change
