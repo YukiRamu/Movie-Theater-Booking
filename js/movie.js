@@ -87,7 +87,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
 
       //for backdropPath
       if (component[0].backdropPath === null) {
-        srcPath = "";
+        srcPath = "./img/bg2.jpg";
       } else {
         srcPath = `${backdropBaseURL}${component[0].backdropPath}`;
       }
@@ -102,11 +102,12 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
       break;
   }
 
-  let html = `
-    <!-- backdrop -->
-    <div class="col backdrop">
-      <img src="${srcPath}" alt="backgroundImg">
-    </div>
+    //< !--backdrop -->
+    // <div class="col backdrop">
+    //   <img src="${srcPath}" alt="backgroundImg">
+    // </div>
+
+    let html = `
     <!--Title panel-->
     <div class=" col titlePanel">
       <div class="row categoryRow">
@@ -143,6 +144,13 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
     `;
 
   backdropRow.innerHTML = html;
+  //append background image
+  const titlePanel = document.querySelector(".titlePanel");
+  titlePanel.style.backgroundImage = `url(${srcPath})`;
+  titlePanel.style.backgroundPosition = "center";
+  titlePanel.style.backgroundSize = "cover";
+  titlePanel.style.backgroundRepeat = "no-repeat";
+
 };
 
 //display movie detail
