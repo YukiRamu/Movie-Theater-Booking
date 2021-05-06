@@ -176,8 +176,30 @@ body {
       }
     }
     /* Your seat part (col-4) */
+    .websiteTitle {
+      color: $color2;
+      font-size: 2rem;
+      text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
+      display: block;
+      margin-bottom: 2rem;
+      text-align: right;
+      width: fit-content;
+      margin-left: auto;
+      span {
+        font-weight: bold;
+        color: $accent2Tr;
+        font-size: 3rem;
+        animation: flicker 2s linear infinite;
+      }
+      &:hover {
+        color: $color2;
+        font-weight: bold;
+        text-shadow: 0 1rem 1rem $accent1;
+      }
+    }
     h2 {
       color: $color4;
+      margin-bottom: 1rem;
     }
     .trailer {
       margin-bottom: 1rem;

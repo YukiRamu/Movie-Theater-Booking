@@ -128,6 +128,26 @@ body {
             }
           }
         }
+        .websiteTitle {
+          position: absolute;
+          top: 0;
+          right: 0;
+          color: $color2;
+          font-size: 2rem;
+          text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
+          margin: 2rem;
+          span {
+            font-weight: bold;
+            color: $accent2Tr;
+            font-size: 3rem;
+            animation: flicker 2s linear infinite;
+          }
+          &:hover {
+            color: $color2;
+            font-weight: bold;
+            text-shadow: 0 1rem 1rem $accent1;
+          }
+        }
       }
     }
     /* detail row (bottom) */

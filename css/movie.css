@@ -465,6 +465,30 @@ body .container .backdropRow .titlePanel .subInfo .trailer p {
   font-size: 2rem;
 }
 
+body .container .backdropRow .titlePanel .websiteTitle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #f5f5f6;
+  font-size: 2rem;
+  text-shadow: 0 13.36px 8.896px #282c37, 0 -2px 1px #f5f5f6;
+  margin: 2rem;
+}
+
+body .container .backdropRow .titlePanel .websiteTitle span {
+  font-weight: bold;
+  color: rgba(26, 236, 29, 0.586);
+  font-size: 3rem;
+  -webkit-animation: flicker 2s linear infinite;
+          animation: flicker 2s linear infinite;
+}
+
+body .container .backdropRow .titlePanel .websiteTitle:hover {
+  color: #f5f5f6;
+  font-weight: bold;
+  text-shadow: 0 1rem 1rem #ec1a47;
+}
+
 body .container .detailRow {
   display: none;
   min-height: 50vh;

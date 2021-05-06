@@ -18,6 +18,7 @@ $color7: #363942;
 $accent1: rgb(236, 26, 71);
 $accent1Tr: rgba(236, 26, 71, 0.579);
 $accent2: rgb(26, 236, 29);
+$accent2Tr: rgba(26, 236, 29, 0.586);
 
 /* animation */
 @keyframes flicker {
@@ -158,6 +159,7 @@ body {
     color: $accent1;
   }
 }
+
 //input
 .form-control {
   background-color: $color3;

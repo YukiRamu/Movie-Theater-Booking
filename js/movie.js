@@ -139,6 +139,7 @@ const displayMovieInfo = (component, director, onTheaterFlgfromURL) => {
         <p>No trailer available :(</p>
       </div>
     </div>
+    <a class="websiteTitle" href="./index.html"><span> Y</span>Cinema</a>
     `;
 
   backdropRow.innerHTML = html;
