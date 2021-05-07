@@ -154,19 +154,18 @@ theaterChoice.onchange = () => {
 
 /* When "view Seats" button is clicked */
 //get seatMap from local storage
-let listOfIndexWithBooked = [];
-let listOfIndexWithAvailable = [];
-
 const displaySeatMap = (theater) => {
+  let filteredSeatMap;
+  let listOfIndexWithBooked = [];
+  let listOfIndexWithAvailable = [];
+
   alertMessage.classList.remove("show"); //remove alert if it is shown
   // #1: get all from localStorage
   let seatMap = JSON.parse(localStorage.getItem("seatMap"));
 
   // #2: find the index of NodeList, "seat" where classList "booked" to be added
   // #2-1: prepare the seatMap data only for the theater currently selected
-  let filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
-
-  console.log(filteredSeatMap);
+  filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
 
   // #2-2 :when no data stored for the selected theater, show all seats as available
   if (filteredSeatMap.length === 0) {
@@ -178,17 +177,19 @@ const displaySeatMap = (theater) => {
     });
   } else {
     filteredSeatMap.map((elem) => {
+      console.log("elem", elem);
       if (elem.seatMap[0].status === "booked") {
-        //find the index where class "booked" to be added
+        //find the index where class "BOOKED" to be added
         listOfIndexWithBooked.push(filteredSeatMap.indexOf(elem));
         //add classList where already booked
-        listOfIndexWithAvailable.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
+        listOfIndexWithBooked.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
         listOfIndexWithBooked.map(elem => seat[elem].childNodes[0].classList.add("booked"));
       } else {
-        //find the index where class "selected" to be removed
+        //find the index where class "BOOKED" to be removed
         listOfIndexWithAvailable.push(filteredSeatMap.indexOf(elem));
         //remove classList where alreay selected
         listOfIndexWithAvailable.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
+        listOfIndexWithAvailable.map(elem => seat[elem].childNodes[0].classList.remove("booked"));
       }
     });
   }
@@ -240,7 +241,7 @@ let indexToBeUpdated = [];
 let seatType;
 let selectedClass;
 
-const checkOut = (theater) => {
+const checkOut = async (theater) => {
   //scroll to top
   window.scrollTo(0, 0);
 
@@ -316,9 +317,10 @@ const checkOut = (theater) => {
     completeMsg.style.transform = "translateY(0rem)";
     setTimeout(() => {
       completeMsg.style.transform = "translateY(-10rem)";
-    }, 2000)
-    UI.clearCalcPanel();
-    UI.hideMap();
+      UI.clearCalcPanel();
+      UI.hideMap();
+      window.location.reload();
+    }, 2000);
   };
 };
 
