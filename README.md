@@ -55,5 +55,16 @@
 * How to pass the movieId among three htmls
 * How to store the seat map into Local Storage
 
+![image](https://user-images.githubusercontent.com/76931326/117514844-a9bad800-af49-11eb-8ebc-d99749a97176.png)
+
+![image](https://user-images.githubusercontent.com/76931326/117514876-c35c1f80-af49-11eb-9245-91fb4e5eb26e.png)
+
+![image](https://user-images.githubusercontent.com/76931326/117514902-d111a500-af49-11eb-9322-84d777d906ec.png)
+
+![image](https://user-images.githubusercontent.com/76931326/117514922-de2e9400-af49-11eb-8c85-a57b8e7b7cb2.png)
+
+![image](https://user-images.githubusercontent.com/76931326/117514937-e555a200-af49-11eb-9ee5-caa6af447a17.png)
+
+
 ## License
 [MIT](https://github.com/YukiRamu/Movie-Theater-Booking/blob/master/LICENSE)
