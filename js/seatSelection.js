@@ -12,7 +12,7 @@ const seatPrice = {
 class UI {
   constructor(seatType, isSelected) {
     this._seatType = seatType; //regular or vip
-    this._isSelected = isSelected // is "selected" in classLise? true or false
+    this._isSelected = isSelected // is "selected" in classList? true or false
     this._totalTicketNum = 0;
     this._totalPrice;
   }
@@ -146,7 +146,7 @@ class UI {
 }
 
 /* ========== Call methods ==========*/
-/* When the movie is picked, display the title */
+/* When the thieater is picked, display the name of the theater */
 theaterChoice.onchange = () => {
   cinemaLocation.innerHTML = theaterChoice.value;
   UI.hideMap();
@@ -154,19 +154,21 @@ theaterChoice.onchange = () => {
 
 /* When "view Seats" button is clicked */
 //get seatMap from local storage
-let listOfIndexWithSelected = [];
-let listOfIndexWithoutSelected = [];
+let listOfIndexWithBooked = [];
+let listOfIndexWithAvailable = [];
 
-const displaySeatMap = (title) => {
+const displaySeatMap = (theater) => {
   alertMessage.classList.remove("show"); //remove alert if it is shown
   // #1: get all from localStorage
   let seatMap = JSON.parse(localStorage.getItem("seatMap"));
 
   // #2: find the index of NodeList, "seat" where classList "selected" to be added
-  // #2-1: prepare the seatMap data only for the movie currently selected
-  let filteredSeatMap = seatMap.filter(elem => elem.theater === title);
+  // #2-1: prepare the seatMap data only for the theater currently selected
+  let filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
 
-  // #2-2 :when no data stored for the selected movie, show all seats as available
+  console.log(filteredSeatMap);
+
+  // #2-2 :when no data stored for the selected theater, show all seats as available
   if (filteredSeatMap.length === 0) {
     Array.from(regularSeats).forEach(elem => {
       elem.classList.remove("selected");
@@ -176,16 +178,16 @@ const displaySeatMap = (title) => {
     });
   } else {
     filteredSeatMap.map((elem) => {
-      if (elem.seatMap[0].hasOwnProperty("selected")) {
-        //find the index where class "selected" to be added
-        listOfIndexWithSelected.push(filteredSeatMap.indexOf(elem));
-        //add classList where alreay selected
-        listOfIndexWithSelected.map(elem => seat[elem].childNodes[0].classList.add("selected"));
+      if (elem.seatMap[0].status === "booked") {
+        //find the index where class "booked" to be added
+        listOfIndexWithBooked.push(filteredSeatMap.indexOf(elem));
+        //add classList where already booked
+        listOfIndexWithBooked.map(elem => seat[elem].childNodes[0].classList.add("booked"));
       } else {
         //find the index where class "selected" to be removed
-        listOfIndexWithoutSelected.push(filteredSeatMap.indexOf(elem));
+        listOfIndexWithAvailable.push(filteredSeatMap.indexOf(elem));
         //remove classList where alreay selected
-        listOfIndexWithoutSelected.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
+        listOfIndexWithAvailable.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
       }
     });
   }
@@ -233,8 +235,11 @@ let indexToBeUpdated = [];
 let seatType;
 let selectedClass;
 
-const checkOut = (title) => {
-  //validation check
+const checkOut = (theater) => {
+  //scroll to top
+  window.scrollTo(0, 0);
+
+  //validation check alert if no seat is selected
   if (totalPrice.innerHTML === "$ 0") {
     alertMessage.classList.add("show");
     return false;
@@ -243,22 +248,32 @@ const checkOut = (title) => {
     // #1: get all from localStorage
     let seatMapArray = JSON.parse(localStorage.getItem("seatMap")); //get all from localStorage
 
-    // #2: find the index of NodeList, "seat", from where the data is updated
+    // #2: find the index of NodeList, "seat", from where the data should be updated
     // #2-1: prepare the seatMap data only for the movie currently selected
-    let filteredSeatMap = seatMapArray.filter(elem => elem.theater === title);
+    let filteredSeatMap = seatMapArray.filter(elem => elem.theater === theater);
+
+    console.log(filteredSeatMap);
 
     // #2-2: convert Nodelist to array - current data before update
     seatArrayfromNodeList = Array.from(seat);
 
+    console.log(seatArrayfromNodeList)
     // #2-3 when no data stored, simply push data
+    let seatStatus;
     if (filteredSeatMap.length === 0) {
       seatArrayfromNodeList.map(elem => {
+        //if selected class is toggled
+        if (elem.firstChild.classList.contains("selected")){
+          seatStatus = "booked";
+        }else {
+          seatStatus = "available";
+        }
         return seatMapArray.push(
           {
             theater: theaterChoice.value,
             seatMap: [{
               seatType: elem.firstChild.classList[1], //regSeat or vipSeat
-              selected: elem.firstChild.classList[2], //selected or undefined
+              status: seatStatus, //booked or available
               locationIndex: seatArrayfromNodeList.indexOf(elem)
             }]
           }
@@ -267,29 +282,34 @@ const checkOut = (title) => {
     } else {
       seatArrayfromNodeList.map((elem) => {
         if (elem.firstChild.classList.contains("selected")) {
-          indexToBeUpdated.push(seatArrayfromNodeList.indexOf(elem));
+          indexToBeUpdated.push(seatArrayfromNodeList.indexOf(elem)); //store the index to be updated
         }
       })
 
       //#3: find the index from localStorage (seatMapArray) where data is to be updated
-      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => value.theater === title));
+      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => value.theater === theater));
 
       //#4: update seatMapArray
       //i.e. )54 = 0, 55 = 1, 56 = 2......108 = 53
       indexToBeUpdated.map((elem) => {
         seatMapArray.splice(startIndex + elem, 1, {
-          theater: title,
+          theater: theater,
           seatMap: [{
             seatType: seatMapArray[startIndex + 2][seatType], //regSeat or vipSeat
-            selected: "selected", //update!
+            status: "booked", //update!
             locationIndex: elem
           }]
         });
       })
     }
 
-    //store new data
+    //store new data and show complete msg
     localStorage.setItem("seatMap", JSON.stringify(seatMapArray));
+
+    completeMsg.style.transform = "translateY(0rem)";
+    setTimeout(() => {
+      completeMsg.style.transform = "translateY(-10rem)";
+    }, 2000)
     UI.clearCalcPanel();
     UI.hideMap();
   }

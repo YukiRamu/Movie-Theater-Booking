@@ -49,6 +49,7 @@ const description = document.querySelector(".description");
 const body = document.querySelector(".body");
 const trailer = document.querySelector(".trailer");
 const cinemaLocation = document.querySelector(".cinemaLocation");
+const completeMsg = document.querySelector(".completeMsg");
 
 //Seat Panel
 const seat = document.querySelectorAll(".seat"); //all seats div 
