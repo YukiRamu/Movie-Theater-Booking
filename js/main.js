@@ -190,46 +190,6 @@ document.addEventListener("click", (event) => {
   };
 });
 
-// //When watch trailer on the now-on-theater section clicked
-// const promiseFuncTrailer = async (movieId) => {
-//   await createNowOnTheaterComponent(movieId); //first --> add to local storage
-//   onTheaterFlg = 1; //movies on theater (default = 1)
-
-//   //open movie.html with the URL parameter. movieId
-//   getVideoByMovieId(movieId, onTheaterFlg); //second
-//   return;
-// };
-
-// //When view detail on the now-on-theater section clicked
-// const promiseFuncMovie = async (movieId) => {
-//   await createNowOnTheaterComponent(movieId); //first --> add to local storage
-//   onTheaterFlg = 1; //movies on theater (default = 0)
-
-//   //open movie.html with the URL parameter. movieId
-//   addParamtoURL(movieId, onTheaterFlg, movieHTML);
-//   return;
-// };
-
-//#8 Watch Trailer and View Detail clicked on the new on theater section
-// document.addEventListener("click", (event) => {
-//   //watch trailer
-//   if (event.target.classList.contains("nowOntrailerBtn")) {
-//     //get movieId from the button tag > span
-//     let movieId = event.target.children[0].innerHTML; //string
-
-//     /******* async/await ******* */
-//     promiseFuncTrailer(movieId);
-//   };
-
-//   if (event.target.classList.contains("nowOnviewDetailBtn")) {
-//     //get movieId from the button tag > span
-//     let movieId = event.target.children[0].innerHTML; //string
-
-//     /********** async/await ********** */
-//     promiseFuncMovie(movieId);
-//   };
-// });
-
 //add parameter to URL ---> to get movieId on movie.html
 const addParamtoURL = (movieId, location) => {
   let fullURL = `${location}?movieId=${movieId}`;

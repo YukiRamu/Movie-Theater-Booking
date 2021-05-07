@@ -167,17 +167,20 @@ const displaySeatMap = (theater) => {
   // #2-1: prepare the seatMap data only for the theater currently selected
   filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
 
+  console.log("filteredSeatMap", filteredSeatMap);
+
   // #2-2 :when no data stored for the selected theater, show all seats as available
   if (filteredSeatMap.length === 0) {
     Array.from(regularSeats).forEach(elem => {
       elem.classList.remove("selected");
+      elem.classList.remove("booked");
     });
     Array.from(vipSeats).forEach(elem => {
       elem.classList.remove("selected");
+      elem.classList.remove("booked");
     });
   } else {
     filteredSeatMap.map((elem) => {
-      console.log("elem", elem);
       if (elem.seatMap[0].status === "booked") {
         //find the index where class "BOOKED" to be added
         listOfIndexWithBooked.push(filteredSeatMap.indexOf(elem));
@@ -204,12 +207,12 @@ for (let i = 0; i < regularSeats.length; i++) {
   regularSeats[i].addEventListener("click", (event) => {
     alertMessage.classList.remove("show"); //remove alert if it is shown
     if (event.target.classList.contains("booked")) {
-      //do nothing
-    } else if (event.target.classList.contains("selected")) {
+      //do nothing : disabled
+    } else if (event.target.classList.contains("selected")) { //cancel selected
       let regular = new UI("regular", true);
       regular.toggleSelected(event.target);
       regular.removeSeat();
-    } else {
+    } else { // seats selected
       let regular = new UI("regular", false);
       regular.toggleSelected(event.target);
       regular.addSeat();
@@ -327,7 +330,7 @@ const checkOut = async (theater) => {
 /* When the page is loaded 
 //For the very first time, localStorage is null
 //store emply array
-//The JSON.stringify() method converts JavaScript objects into strings.
+//The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
 window.addEventListener("DOMContentLoaded", async () => {
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
