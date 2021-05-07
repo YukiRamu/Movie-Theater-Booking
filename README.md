@@ -13,7 +13,7 @@
 ## Teck Stacks
 
 * HTML
-* CSS
+* SASS/CSS
 * JavaScript
 * Bootstrap 5.0
 * GitHub action / pages
