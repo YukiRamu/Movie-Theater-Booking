@@ -2,7 +2,6 @@
 
 //show the result on the result section
 const displayMovielist = (movieComponent) => {
-  console.log("display movie list, moviecomponent is", movieComponent)
   //show only the data that has a poster image
   let appendHTML = movieComponent.map((elem) => {
     if (elem.poster_path) {
@@ -40,9 +39,7 @@ const showPagination = (totalPageNum, page) => {
 
 //change pages
 document.addEventListener("click", (e) => {
-  console.log(e.target)
   if (e.target.classList.contains("pageNum")) {
-    console.log(e.target.innerText); //get page number
     pageChange(e.target.innerText);
   }
 });
@@ -66,44 +63,6 @@ const pageChange = async (pageNum) => {
   displayMovielist(movieList.results); //#3 show the result
   return;
 }
-
-
-//################## get backdrop path (for now on theater movies) ##################
-// const createNowOnTheaterComponent = async (movieId) => {
-//   console.log("2. create NowOnTheaterComponent with movie id", movieId);
-//   let categoryArray = [];
-
-//   try {
-//     const movieDetail = await fetch(`${baseURL}/3/movie/${movieId}?api_key=${APIKey}&append_to_response=videos%2Bimages}`);
-//     const movie = await movieDetail.json();
-
-//     //prepare category component
-//     categoryArray.push(movie["genres"].map((elem) => { return elem.name }));
-
-//     //create a movie component
-//     let dataObj = {
-//       movieId: movieId,
-//       movieTitle: movie["title"],
-//       category: categoryArray,
-//       runtime: movie["runtime"],
-//       overview: movie["overview"],
-//       backdropPath: movie["backdrop_path"], //background photo
-//       posterPath: movie["poster_path"],
-//       tagline: movie["tagline"],
-//       popularity: movie["popularity"]
-//     };
-
-//     //store the component into localStorage
-//     localStorage.setItem("nowOnTheaterComponent", JSON.stringify(dataObj));
-
-//     console.log("3. NowOnTheater Component stored", localStorage);
-//     return dataObj;
-
-//   } catch (error) {
-//     console.error(`Error = ${error}. Unable to fetch data by ID`);
-//     return error;
-//   };
-// };
 
 /* =========================== Function Call =========================== */
 //#1 when the search box is focused
@@ -133,7 +92,6 @@ searchBtn.addEventListener("click", async (e) => {
   movieListRow.innerHTML = "";
   let movieList = await getMovieByKeyword(search.value, 1);
 
-  console.log(movieList)
   //display pagination at the bottom
   showPagination(movieList[0].total_pages, 1);
 
@@ -160,7 +118,6 @@ movieListRow.addEventListener("click", async (event) => {
     //get movie detail
     let id = event.target.getAttribute("alt");
     let selectedMovie = await getMovieDetailById(id); //array of object
-    console.log(selectedMovie);
 
     //create category html
     let htmlCategory = selectedMovie[0].genres.map((elem) => {

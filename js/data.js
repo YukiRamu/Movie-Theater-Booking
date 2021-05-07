@@ -25,11 +25,6 @@ const getMovieByKeyword = async (keyword, page) => {
       throw error(movieByKeyword.statusText);
     } else {
       const movieList = await movieByKeyword.json();
-
-      console.log("data by keyword is ", movieList.results);
-      console.log("current page is ", movieList)
-      console.log("length of pages", movieList.total_pages);//11 : data.pages === 1
-
       return [movieList];
     }
   } catch (error) {
@@ -63,8 +58,6 @@ const categoryList = async () => {
       throw error(category.statusText);
     } else {
       const categoryList = await category.json();
-
-      console.log(categoryList.genres)
       return [categoryList];
     }
   } catch (error) {
@@ -84,12 +77,10 @@ const getVideoByMovieId = async (movieId) => {
     } else {
       const video = await videoList.json();
 
-      console.log(video);
       //#1 prepare video key array and return
       let videoKeyArray = [];
       videoKeyArray.push(video.results.filter((elem) => { return elem.type === "Trailer" }));
 
-      console.log(videoKeyArray)
       //#2 show modal
       trailerModal.classList.add("show");
       htmlBody.classList.add("trailerModal-active");
@@ -174,7 +165,7 @@ const showTrailerBackgroundImg = async (movieId) => {
   let backdropPath = selectedMovie[0].backdrop_path;
 
   url = backdropBaseURL + backdropPath;
-  console.log("I am here", url)
+
   if ((backdropPath === null)) {
     // when the data is null -- alternative bg
     trailerBackground.style.background = `linear-gradient(45deg, black 10%, transparent), url(./img/bg2.jpg)  center fixed no-repeat`;

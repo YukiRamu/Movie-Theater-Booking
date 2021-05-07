@@ -321,7 +321,6 @@ const movieIdfromURL = urlParams.get("movieId"); //get parameter from url (strin
 let movieComponent;
 const getMovieComponent = async () => {
   let selectedMovie = await getMovieDetailById(movieIdfromURL);
-  console.log(selectedMovie[0]);
 
   //show tagline
   if (selectedMovie[0].tagline === "") {
@@ -347,7 +346,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   /* #2  show movie component */
   const result = await getMovieSubComponent(movieIdfromURL);
-  console.log(result);
 
   //get director name 
   let director;

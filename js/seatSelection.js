@@ -121,7 +121,6 @@ class UI {
         };
       })
       .then((data) => {
-        console.log(data)
         //#1 prepare video key array and return
         let videoKeyArray = [];
         videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
