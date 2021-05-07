@@ -553,7 +553,7 @@ body .container .detailRow .left .castRow .casts h2 {
 body .container .detailRow .left .castRow .casts .castCarousel {
   position: relative;
   border-radius: 2vw;
-  background: linear-gradient(-135deg, #f5f5f689 0%, transparent);
+  background: linear-gradient(-135deg, #f5f5f6a5 0%, transparent);
 }
 
 body .container .detailRow .left .castRow .casts .castCarousel span {
@@ -669,7 +669,7 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .reviewCard .a
 }
 
 body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd {
-  background: linear-gradient(135deg, #f5f5f689 0%, transparent);
+  background: linear-gradient(135deg, #f5f5f6a5 0%, transparent);
   margin-right: 10rem;
 }
 
@@ -682,12 +682,19 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd .author s
 }
 
 body .container .detailRow .left .reviewRow .reviews .reviewPanel .even {
-  background: linear-gradient(-135deg, #f5f5f689 0%, transparent);
+  background: linear-gradient(-135deg, #f5f5f6a5 0%, transparent);
   margin-left: 10rem;
 }
 
 body .container .detailRow .left .reviewRow .reviews .reviewPanel .even .author {
   text-align: right;
+}
+
+body .container .detailRow .right {
+  background: url(https://i.gifer.com/WGkW.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 body .container .detailRow .right .row h2 {
@@ -702,7 +709,7 @@ body .container .detailRow .right .row h2 {
 
 body .container .detailRow .right .recomPanel {
   border-radius: 2vw;
-  background: linear-gradient(45deg, #f5f5f689 0%, transparent);
+  background: linear-gradient(45deg, #f5f5f6a5 0%, transparent);
   padding: 1rem;
 }
 

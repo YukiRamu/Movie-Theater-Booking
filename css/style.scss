@@ -14,9 +14,8 @@ body {
     min-width: 100%; //full screen
     /* opening*/
     .opening {
-      //gif
-      //background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
-      background: url(../img/bg6.jpg), linear-gradient(to bottom, $accent2 0%, $accent1 100%);
+       //background: url(../img/bg6.jpg), linear-gradient(to bottom, $accent2 0%, $accent1 100%);
+      background: url(https://i.gifer.com/WGkW.gif), linear-gradient(45deg, $black 0%, transparent 100%);
       @include backgroundFullScreen;
       animation: huerotator 3s infinite alternate;
       height: 100vh; //full screen

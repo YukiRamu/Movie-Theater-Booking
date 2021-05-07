@@ -361,8 +361,7 @@ body .container {
 
 html .container .opening,
 body .container .opening {
-  background: url(../img/bg6.jpg), -webkit-gradient(linear, left top, left bottom, from(#1aec1d), to(#ec1a47));
-  background: url(../img/bg6.jpg), linear-gradient(to bottom, #1aec1d 0%, #ec1a47 100%);
+  background: url(https://i.gifer.com/WGkW.gif), linear-gradient(45deg, black 0%, transparent 100%);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
