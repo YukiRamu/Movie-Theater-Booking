@@ -182,6 +182,7 @@ const displaySeatMap = (theater) => {
         //find the index where class "booked" to be added
         listOfIndexWithBooked.push(filteredSeatMap.indexOf(elem));
         //add classList where already booked
+        listOfIndexWithAvailable.map(elem => seat[elem].childNodes[0].classList.remove("selected"));
         listOfIndexWithBooked.map(elem => seat[elem].childNodes[0].classList.add("booked"));
       } else {
         //find the index where class "selected" to be removed
@@ -281,13 +282,14 @@ const checkOut = (theater) => {
               locationIndex: seatArrayfromNodeList.indexOf(elem)
             }]
           }
-        )
+        );
       });
     } else {
+      //data already stored -> update the element(s)
       seatArrayfromNodeList.map((elem) => {
         if (elem.firstChild.classList.contains("selected")) {
           indexToBeUpdated.push(seatArrayfromNodeList.indexOf(elem)); //store the index to be updated
-        }
+        };
       })
 
       //#3: find the index from localStorage (seatMapArray) where data is to be updated
@@ -296,16 +298,17 @@ const checkOut = (theater) => {
       //#4: update seatMapArray
       //i.e. )54 = 0, 55 = 1, 56 = 2......108 = 53
       indexToBeUpdated.map((elem) => {
+        //replace
         seatMapArray.splice(startIndex + elem, 1, {
           theater: theater,
           seatMap: [{
-            seatType: seatMapArray[startIndex + 2][seatType], //regSeat or vipSeat
+            seatType: seatMapArray[startIndex + elem].seatMap[0].seatType, //regSeat or vipSeat
             status: "booked", //update!
             locationIndex: elem
           }]
         });
       })
-    }
+    };
 
     //store new data and show complete msg
     localStorage.setItem("seatMap", JSON.stringify(seatMapArray));
@@ -316,7 +319,7 @@ const checkOut = (theater) => {
     }, 2000)
     UI.clearCalcPanel();
     UI.hideMap();
-  }
+  };
 };
 
 /* When the page is loaded 
@@ -327,7 +330,7 @@ const checkOut = (theater) => {
 window.addEventListener("DOMContentLoaded", async () => {
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
-  }
+  };
 
   /* Show movie title, description and trailer*/
   movieComponent = await getMovieDetailById(movieIdfromURL);

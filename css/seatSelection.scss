@@ -6,8 +6,7 @@
 }
 
 body {
-  background: url(../img/sample3.jpg);
-  @include backgroundFullScreen;
+   @include backgroundFullScreen;
   .completeMsg {
     position: absolute;
     top: -0%;
