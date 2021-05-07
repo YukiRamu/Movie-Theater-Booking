@@ -18,6 +18,38 @@
 * Bootstrap 5.0
 * GitHub action / pages
 
+## File Structure
+```bash
+/root
+├─ index.html
+├─ movie.html
+├─ seatSelection.html
+├─ imageConfig.json
+├─ LICENSE
+├─ /img
+├─ /flaticon
+├─ /css
+│   │── style.scss  # main style   
+│   │── style.css  
+│   │── style.css.map 
+│   │── movie.scss  # movie detail page style 
+│   │── movie.css  
+│   │── movie.css.map 
+│   │── seatSelection.scss   # booking page style  
+│   │── seatSelection.css  
+│   │── seatSelection.css.map 
+│   │── component.scss     # global variables, styles, @mixin, @keyframe
+│   │── bootstrap-reboot.css  
+│   └── bootstrap-reboot.css.map 
+└─ /js
+    │── component.js   # global variables and functions
+    │── data.js    # fetch API data
+    │── main.js    # for index.html
+    │── movie.js   # for movie.html
+    └── seatSelection.js    # for seatSelection.html
+```
+
+
 ## JavaScript
 
 ## License
