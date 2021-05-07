@@ -31,7 +31,7 @@ class UI {
   //#2 Add seats to Your Seats Panel
   addSeat() {
     //count the number of tickets
-    if (this._seatType === "regular") {
+    if ((this._seatType === "regular")) {
       UI.regularSeatCount++;
       regularTicketNum.innerHTML = UI.regularSeatCount; //display reg ticket num
       UI.calcTotalPrice(UI.regularSeatCount, this._seatType);
@@ -201,7 +201,9 @@ const displaySeatMap = (theater) => {
 for (let i = 0; i < regularSeats.length; i++) {
   regularSeats[i].addEventListener("click", (event) => {
     alertMessage.classList.remove("show"); //remove alert if it is shown
-    if (event.target.classList.contains("selected")) {
+    if (event.target.classList.contains("booked")) {
+      //do nothing
+    } else if (event.target.classList.contains("selected")) {
       let regular = new UI("regular", true);
       regular.toggleSelected(event.target);
       regular.removeSeat();
@@ -216,7 +218,9 @@ for (let i = 0; i < regularSeats.length; i++) {
 for (let i = 0; i < vipSeats.length; i++) {
   alertMessage.classList.remove("show"); //remove alert if it is shown
   vipSeats[i].addEventListener("click", (event) => {
-    if (event.target.classList.contains("selected")) {
+    if (event.target.classList.contains("booked")) {
+      //do nothing
+    } else if (event.target.classList.contains("selected")) {
       let vip = new UI("vip", true);
       vip.toggleSelected(event.target);
       vip.removeSeat();
@@ -263,9 +267,9 @@ const checkOut = (theater) => {
     if (filteredSeatMap.length === 0) {
       seatArrayfromNodeList.map(elem => {
         //if selected class is toggled
-        if (elem.firstChild.classList.contains("selected")){
+        if (elem.firstChild.classList.contains("selected")) {
           seatStatus = "booked";
-        }else {
+        } else {
           seatStatus = "available";
         }
         return seatMapArray.push(
