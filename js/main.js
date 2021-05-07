@@ -231,8 +231,8 @@ document.addEventListener("click", (event) => {
 // });
 
 //add parameter to URL ---> to get movieId on movie.html
-const addParamtoURL = (movieId,baseURL) => {
-  let fullURL = `${baseURL}?movieId=${movieId}`;
+const addParamtoURL = (movieId, location) => {
+  let fullURL = `${location}?movieId=${movieId}`;
   window.open(fullURL); //open window with the combined URL
 }
 

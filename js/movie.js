@@ -370,12 +370,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 //add parameter to URL ---> to get movieId on seatSelection.html
-const addParamtoURL = (movieId) => {
-  let fullURL = `${searSelectionHTML}?movieId=${movieId}`;
+const addParamtoURL = (movieId, location) => {
+  let fullURL = `${location}?movieId=${movieId}`;
   window.open(fullURL); //open window with the combined URL
 }
 
-// when "Watch Trailer" button is clicked
+// when "Watch Trailer" and "Book now" button is clicked
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("trailerBtn")) {
     //show trailer section
@@ -387,7 +387,17 @@ document.addEventListener("click", (event) => {
   };
   if (event.target.classList.contains("bookNowBtn")) {
     //add movieId as a parameter to URL and open seatSelection.html
-    addParamtoURL(movieIdfromURL);
+    addParamtoURL(movieIdfromURL, searSelectionHTML);
   }
   return
 });
+
+//when You may also like clicked
+recomPanel.addEventListener("click", (event) => {
+  if (event.target.classList.contains("recomImg")) {
+    let movieId = event.target.getAttribute("alt");
+    console.log(movieId);
+    //open movie.html
+    addParamtoURL(movieId, movieHTML);
+  }
+})
