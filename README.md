@@ -52,5 +52,8 @@
 
 ## JavaScript
 
+* How to pass the movieId between three htmls
+* How to store the seat map into Local Storage
+
 ## License
 [MIT](https://github.com/YukiRamu/Movie-Theater-Booking/blob/master/LICENSE)
