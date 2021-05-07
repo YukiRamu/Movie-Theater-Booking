@@ -244,7 +244,8 @@ let indexToBeUpdated = [];
 let seatType;
 let selectedClass;
 
-const checkOut = async (theater) => {
+//check out and update the local storage
+const checkOut = (theater) => {
   //scroll to top
   window.scrollTo(0, 0);
 
@@ -261,12 +262,9 @@ const checkOut = async (theater) => {
     // #2-1: prepare the seatMap data only for the movie currently selected
     let filteredSeatMap = seatMapArray.filter(elem => elem.theater === theater);
 
-    console.log(filteredSeatMap);
-
     // #2-2: convert Nodelist to array - current data before update
     seatArrayfromNodeList = Array.from(seat);
 
-    console.log(seatArrayfromNodeList)
     // #2-3 when no data stored, simply push data
     let seatStatus;
     if (filteredSeatMap.length === 0) {
