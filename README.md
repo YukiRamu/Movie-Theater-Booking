@@ -1,6 +1,6 @@
 # Movie Theater Booking Website
 
-[Go to website]
+[Go to website](https://yukiramu.github.io/Movie-Theater-Booking/)
 
 ## Features
 
