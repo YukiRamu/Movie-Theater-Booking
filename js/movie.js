@@ -59,10 +59,13 @@ const displayMovieInfo = (component, director) => {
   let runtime;
   let popularity;
 
+  console.log(component.genres);
   //for category component
   htmlCategory = component.genres.map((elem) => {
-    return `<p class="col">${elem}</p>`;
+    return `<p class="col">${elem.name}</p>`;
   }).join("");
+
+  console.log(htmlCategory)
 
   //for backdropPath
   if (component.backdrop_path === null) {
