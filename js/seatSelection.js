@@ -162,7 +162,7 @@ const displaySeatMap = (theater) => {
   // #1: get all from localStorage
   let seatMap = JSON.parse(localStorage.getItem("seatMap"));
 
-  // #2: find the index of NodeList, "seat" where classList "selected" to be added
+  // #2: find the index of NodeList, "seat" where classList "booked" to be added
   // #2-1: prepare the seatMap data only for the theater currently selected
   let filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
 
