@@ -224,15 +224,18 @@ a {
   color: $color4;
   padding: 1rem 0;
   box-shadow: 0rem 0rem 3rem $black;
-  .toTop {
-    display: none;
-    position: fixed;
-    right: 5%;
-    bottom: 10%;
-    color: $accent1;
+  a {
     z-index: 5000;
-    &:hover {
-      color: $accent2;
+    .toTop {
+      display: none;
+      position: fixed;
+      right: 5%;
+      bottom: 10%;
+      color: $accent1;
+      z-index: 5000;
+      &:hover {
+        color: $accent2;
+      }
     }
   }
   div {
