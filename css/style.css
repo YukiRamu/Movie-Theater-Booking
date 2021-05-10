@@ -735,6 +735,7 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
             transform: unset;
     width: unset;
     height: 100%;
+    overflow-y: scroll;
   }
 }
 
