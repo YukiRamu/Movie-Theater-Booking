@@ -631,10 +631,22 @@ body .container .seat-container .seatRow .numLeft {
   color: #a2a3a9;
 }
 
+@media (max-width: 575.98px) {
+  body .container .seat-container .seatRow .numLeft {
+    left: -5%;
+  }
+}
+
 body .container .seat-container .seatRow .numRight {
   position: absolute;
   right: 3%;
   color: #a2a3a9;
+}
+
+@media (max-width: 575.98px) {
+  body .container .seat-container .seatRow .numRight {
+    right: -5%;
+  }
 }
 
 body .container .seat-container .seatRow .seat {

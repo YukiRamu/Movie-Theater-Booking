@@ -326,6 +326,9 @@ body {
         &.show {
           opacity: 1;
           z-index: 1000;
+          @include XS {
+            z-index: 1500;
+          }
         }
         .clsBtn {
           color: $accent1;

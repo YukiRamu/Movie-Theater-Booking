@@ -36,13 +36,13 @@ body {
     background: linear-gradient(-45deg, $black, $color1Tr);
     box-shadow: 0 1rem 2rem $black; //shadow effect
     border-radius: 3vw;
-    .websiteTitleSMdevice{
+    .websiteTitleSMdevice {
       display: none;
       @include XS {
         display: block;
         color: $color2;
         font-size: 2rem;
-        text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D     
+        text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
         text-align: right;
         width: fit-content;
         margin-left: auto;
@@ -182,11 +182,17 @@ body {
           position: absolute;
           left: 3%;
           color: $color4;
+          @include XS {
+            left: -5%;
+          }
         }
         .numRight {
           position: absolute;
           right: 3%;
           color: $color4;
+          @include XS {
+            right: -5%;
+          }
         }
         .seat {
           padding: 0.5rem;

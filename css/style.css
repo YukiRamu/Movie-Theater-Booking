@@ -889,6 +889,13 @@ body .container .searchResult .popOverContent.show {
   z-index: 1000;
 }
 
+@media (max-width: 575.98px) {
+  html .container .searchResult .popOverContent.show,
+  body .container .searchResult .popOverContent.show {
+    z-index: 1500;
+  }
+}
+
 html .container .searchResult .popOverContent .clsBtn,
 body .container .searchResult .popOverContent .clsBtn {
   color: #ec1a47;

@@ -99,6 +99,11 @@ body {
               width: fit-content;
               margin-left: 0.2rem;
               grid-gap: 1.5rem;
+              button a {
+                @include XS {
+                  margin: 0.5rem;
+                }
+              }
             }
             .rateRow {
               margin-top: 2rem;
