@@ -234,6 +234,18 @@ span {
   cursor: none !important;
 }
 
+@media (max-width: 575.98px) {
+  html,
+  body,
+  a,
+  button,
+  i,
+  img,
+  span {
+    cursor: pointer !important;
+  }
+}
+
 .cursor {
   position: fixed;
   top: -20px;
@@ -250,6 +262,12 @@ span {
   pointer-events: none;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@media (max-width: 575.98px) {
+  .cursor {
+    display: none;
+  }
 }
 
 .cursor.hovered {
@@ -429,7 +447,15 @@ body .container .opening .openingRow h1 .drops span.show {
 @media (max-width: 575.98px) {
   html .container .opening .openingRow h1 .drops span.show,
   body .container .opening .openingRow h1 .drops span.show {
-    font-size: 3rem;
+    font-size: inherit;
+  }
+  html .container .opening .openingRow h1 .drops span.show h1,
+  body .container .opening .openingRow h1 .drops span.show h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .opening .openingRow h1 .drops span.show a,
+  body .container .opening .openingRow h1 .drops span.show a {
+    font-size: 1rem;
   }
 }
 
@@ -456,7 +482,15 @@ body .container .opening .openingRow h1 .bigger {
 @media (max-width: 575.98px) {
   html .container .opening .openingRow h1 .bigger,
   body .container .opening .openingRow h1 .bigger {
-    font-size: 4rem;
+    font-size: 3rem;
+  }
+  html .container .opening .openingRow h1 .bigger h1,
+  body .container .opening .openingRow h1 .bigger h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .opening .openingRow h1 .bigger a,
+  body .container .opening .openingRow h1 .bigger a {
+    font-size: 1rem;
   }
 }
 
@@ -470,7 +504,15 @@ body .container .opening .openingRow h1 .bigger.show {
 @media (max-width: 575.98px) {
   html .container .opening .openingRow h1 .bigger.show,
   body .container .opening .openingRow h1 .bigger.show {
-    font-size: 4rem;
+    font-size: 3rem;
+  }
+  html .container .opening .openingRow h1 .bigger.show h1,
+  body .container .opening .openingRow h1 .bigger.show h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .opening .openingRow h1 .bigger.show a,
+  body .container .opening .openingRow h1 .bigger.show a {
+    font-size: 1rem;
   }
 }
 
@@ -497,11 +539,41 @@ body .container .opening .openingRow .msg {
   margin: auto;
 }
 
+@media (max-width: 575.98px) {
+  html .container .opening .openingRow .msg,
+  body .container .opening .openingRow .msg {
+    font-size: 2rem;
+  }
+  html .container .opening .openingRow .msg h1,
+  body .container .opening .openingRow .msg h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .opening .openingRow .msg a,
+  body .container .opening .openingRow .msg a {
+    font-size: 1rem;
+  }
+}
+
 html .container .opening .openingRow .msg span,
 body .container .opening .openingRow .msg span {
   color: #ec1a47;
   font-weight: bold;
   font-size: 4rem;
+}
+
+@media (max-width: 575.98px) {
+  html .container .opening .openingRow .msg span,
+  body .container .opening .openingRow .msg span {
+    font-size: 2rem;
+  }
+  html .container .opening .openingRow .msg span h1,
+  body .container .opening .openingRow .msg span h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .opening .openingRow .msg span a,
+  body .container .opening .openingRow .msg span a {
+    font-size: 1rem;
+  }
 }
 
 html .container .navbar,
@@ -514,6 +586,14 @@ body .container .navbar {
   html .container .navbar,
   body .container .navbar {
     width: 100vw;
+  }
+  html .container .navbar h1,
+  body .container .navbar h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .navbar a,
+  body .container .navbar a {
+    font-size: 1rem;
   }
 }
 
@@ -545,6 +625,14 @@ body .container .navbar .alert {
   html .container .navbar .container-fluid,
   body .container .navbar .container-fluid {
     background-color: #282c37cf;
+  }
+  html .container .navbar .container-fluid h1,
+  body .container .navbar .container-fluid h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .navbar .container-fluid a,
+  body .container .navbar .container-fluid a {
+    font-size: 1rem;
   }
 }
 
@@ -635,6 +723,14 @@ body .container .navbar .container-fluid .navbar-collapse form .search {
   body .container .navbar .container-fluid .navbar-collapse form .search {
     width: 100%;
   }
+  html .container .navbar .container-fluid .navbar-collapse form .search h1,
+  body .container .navbar .container-fluid .navbar-collapse form .search h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .navbar .container-fluid .navbar-collapse form .search a,
+  body .container .navbar .container-fluid .navbar-collapse form .search a {
+    font-size: 1rem;
+  }
 }
 
 html .container .carousel,
@@ -664,6 +760,14 @@ body .container .carousel .nowOnTheater .carousel-item img {
   html .container .carousel .nowOnTheater .carousel-item img,
   body .container .carousel .nowOnTheater .carousel-item img {
     height: 50%;
+  }
+  html .container .carousel .nowOnTheater .carousel-item img h1,
+  body .container .carousel .nowOnTheater .carousel-item img h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .carousel .nowOnTheater .carousel-item img a,
+  body .container .carousel .nowOnTheater .carousel-item img a {
+    font-size: 1rem;
   }
 }
 
@@ -695,7 +799,15 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
     -webkit-transform: unset;
             transform: unset;
     width: unset;
-    height: 50vh;
+    min-height: 50vh;
+  }
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo h1,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo a,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo a {
+    font-size: 1rem;
   }
 }
 
@@ -708,6 +820,14 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo .row {
   html .container .carousel .nowOnTheater .carousel-item .movieInfo .row,
   body .container .carousel .nowOnTheater .carousel-item .movieInfo .row {
     margin: 0;
+  }
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo .row h1,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo .row h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo .row a,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo .row a {
+    font-size: 1rem;
   }
 }
 
@@ -842,6 +962,14 @@ body .container .searchResult .popOverContent {
   body .container .searchResult .popOverContent {
     width: 100%;
   }
+  html .container .searchResult .popOverContent h1,
+  body .container .searchResult .popOverContent h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .searchResult .popOverContent a,
+  body .container .searchResult .popOverContent a {
+    font-size: 1rem;
+  }
 }
 
 html .container .searchResult .popOverContent.show,
@@ -891,6 +1019,22 @@ body .container .searchResult .popOverContent .bookNowBtn {
   body .container .searchResult .popOverContent .bookNowBtn {
     margin: 1rem;
   }
+  html .container .searchResult .popOverContent .trailerBtn h1,
+  html .container .searchResult .popOverContent .viewDetailBtn h1,
+  html .container .searchResult .popOverContent .bookNowBtn h1,
+  body .container .searchResult .popOverContent .trailerBtn h1,
+  body .container .searchResult .popOverContent .viewDetailBtn h1,
+  body .container .searchResult .popOverContent .bookNowBtn h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .searchResult .popOverContent .trailerBtn a,
+  html .container .searchResult .popOverContent .viewDetailBtn a,
+  html .container .searchResult .popOverContent .bookNowBtn a,
+  body .container .searchResult .popOverContent .trailerBtn a,
+  body .container .searchResult .popOverContent .viewDetailBtn a,
+  body .container .searchResult .popOverContent .bookNowBtn a {
+    font-size: 1rem;
+  }
 }
 
 html .container .searchResult .popOverContent .trailerBtn span,
@@ -930,6 +1074,14 @@ body .container .searchResult .pageNav {
   html .container .searchResult .pageNav,
   body .container .searchResult .pageNav {
     padding: 0;
+  }
+  html .container .searchResult .pageNav h1,
+  body .container .searchResult .pageNav h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .container .searchResult .pageNav a,
+  body .container .searchResult .pageNav a {
+    font-size: 1rem;
   }
 }
 
@@ -1011,6 +1163,14 @@ body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner 
   body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe {
     width: 300px;
     height: 200px;
+  }
+  html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe h1,
+  body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe a,
+  body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe a {
+    font-size: 1rem;
   }
 }
 

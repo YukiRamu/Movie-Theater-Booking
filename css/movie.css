@@ -234,6 +234,18 @@ span {
   cursor: none !important;
 }
 
+@media (max-width: 575.98px) {
+  html,
+  body,
+  a,
+  button,
+  i,
+  img,
+  span {
+    cursor: pointer !important;
+  }
+}
+
 .cursor {
   position: fixed;
   top: -20px;
@@ -250,6 +262,12 @@ span {
   pointer-events: none;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@media (max-width: 575.98px) {
+  .cursor {
+    display: none;
+  }
 }
 
 .cursor.hovered {
@@ -411,6 +429,12 @@ body .container .backdropRow .titlePanel {
   body .container .backdropRow .titlePanel {
     padding: 4rem 0 0 3rem;
   }
+  body .container .backdropRow .titlePanel h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  body .container .backdropRow .titlePanel a {
+    font-size: 1rem;
+  }
 }
 
 body .container .backdropRow .titlePanel.show {
@@ -505,6 +529,12 @@ body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {
     height: 200px;
     margin-left: 1rem;
   }
+  body .container .backdropRow .titlePanel .subInfo .trailer.show iframe h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  body .container .backdropRow .titlePanel .subInfo .trailer.show iframe a {
+    font-size: 1rem;
+  }
 }
 
 body .container .backdropRow .titlePanel .subInfo .trailer p {
@@ -529,6 +559,12 @@ body .container .backdropRow .titlePanel .websiteTitle {
 @media (max-width: 575.98px) {
   body .container .backdropRow .titlePanel .websiteTitle {
     margin: 0;
+  }
+  body .container .backdropRow .titlePanel .websiteTitle h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+  body .container .backdropRow .titlePanel .websiteTitle a {
+    font-size: 1rem;
   }
 }
 
