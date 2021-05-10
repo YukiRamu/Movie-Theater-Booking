@@ -314,7 +314,11 @@ a {
           box-shadow: 0rem 0rem 3rem black;
 }
 
-.footer .toTop {
+.footer a {
+  z-index: 5000;
+}
+
+.footer a .toTop {
   display: none;
   position: fixed;
   right: 5%;
@@ -323,7 +327,7 @@ a {
   z-index: 5000;
 }
 
-.footer .toTop:hover {
+.footer a .toTop:hover {
   color: #1aec1d;
 }
 

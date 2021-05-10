@@ -50,6 +50,8 @@ const body = document.querySelector(".body");
 const trailer = document.querySelector(".trailer");
 const cinemaLocation = document.querySelector(".cinemaLocation");
 const completeMsg = document.querySelector(".completeMsg");
+const viewSeatsBtn = document.querySelector(".viewSeats");
+const checkOutBtn = document.querySelector(".checkOut");
 
 //Seat Panel
 const seat = document.querySelectorAll(".seat"); //all seats div 

@@ -153,8 +153,11 @@ theaterChoice.onchange = () => {
 };
 
 /* When "view Seats" button is clicked */
+viewSeatsBtn.addEventListener("click", () => {
+  displaySeatMap(theaterChoice.value, movieIdfromURL);
+});
 //get seatMap from local storage
-const displaySeatMap = (theater) => {
+const displaySeatMap = (theater, movieId) => {
   let filteredSeatMap;
   let listOfIndexWithBooked = [];
   let listOfIndexWithAvailable = [];
@@ -164,8 +167,8 @@ const displaySeatMap = (theater) => {
   let seatMap = JSON.parse(localStorage.getItem("seatMap"));
 
   // #2: find the index of NodeList, "seat" where classList "booked" to be added
-  // #2-1: prepare the seatMap data only for the theater currently selected
-  filteredSeatMap = seatMap.filter(elem => elem.theater === theater);
+  // #2-1: prepare the seatMap data only for the theater and movie currently selected
+  filteredSeatMap = seatMap.filter(elem => (elem.theater === theater) && (elem.movieId === movieId));
 
   console.log("filteredSeatMap", filteredSeatMap);
 
@@ -245,7 +248,10 @@ let seatType;
 let selectedClass;
 
 //check out and update the local storage
-const checkOut = (theater) => {
+checkOutBtn.addEventListener("click", () => {
+  checkOut(theaterChoice.value, movieIdfromURL);
+});
+const checkOut = (theater, movieId) => {
   //scroll to top
   window.scrollTo(0, 0);
 
@@ -260,7 +266,9 @@ const checkOut = (theater) => {
 
     // #2: find the index of NodeList, "seat", from where the data should be updated
     // #2-1: prepare the seatMap data only for the movie currently selected
-    let filteredSeatMap = seatMapArray.filter(elem => elem.theater === theater);
+    let filteredSeatMap = seatMapArray.filter(elem => (elem.theater === theater) && (elem.movieId === movieId));
+
+    console.log("inside checkout func", filteredSeatMap);
 
     // #2-2: convert Nodelist to array - current data before update
     seatArrayfromNodeList = Array.from(seat);
@@ -277,6 +285,7 @@ const checkOut = (theater) => {
         }
         return seatMapArray.push(
           {
+            movieId: movieIdfromURL,
             theater: theaterChoice.value,
             seatMap: [{
               seatType: elem.firstChild.classList[1], //regSeat or vipSeat
@@ -294,14 +303,19 @@ const checkOut = (theater) => {
         };
       })
 
+      console.log("indexToBeUpdated is ", indexToBeUpdated);
+
       //#3: find the index from localStorage (seatMapArray) where data is to be updated
-      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => value.theater === theater));
+      let startIndex = seatMapArray.indexOf(seatMapArray.find(value => (value.theater === theater && (value.movieId === movieId))));
+
+      console.log("startIndex is ", startIndex);
 
       //#4: update seatMapArray
       //i.e. )54 = 0, 55 = 1, 56 = 2......108 = 53
       indexToBeUpdated.map((elem) => {
         //replace
         seatMapArray.splice(startIndex + elem, 1, {
+          movieId: movieIdfromURL,
           theater: theater,
           seatMap: [{
             seatType: seatMapArray[startIndex + elem].seatMap[0].seatType, //regSeat or vipSeat
@@ -316,12 +330,12 @@ const checkOut = (theater) => {
     localStorage.setItem("seatMap", JSON.stringify(seatMapArray));
 
     completeMsg.style.transform = "translateY(0rem)";
-    setTimeout(() => {
-      completeMsg.style.transform = "translateY(-10rem)";
-      UI.clearCalcPanel();
-      UI.hideMap();
-      window.location.reload();
-    }, 2000);
+    // setTimeout(() => {
+    //   completeMsg.style.transform = "translateY(-10rem)";
+    //   UI.clearCalcPanel();
+    //   UI.hideMap();
+    //   window.location.reload();
+    // }, 2000);
   };
 };
 
