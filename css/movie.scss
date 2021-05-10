@@ -51,6 +51,9 @@ body {
         min-height: 100vh;
         padding: 3rem 0 0 5rem;
         margin-left: -1rem;
+        @include XS{
+          padding: 4rem 0 0 3rem;
+        }
         &.show {
           animation: fadeIn 1s linear;
           display: block;
@@ -112,6 +115,11 @@ body {
               display: block;
               iframe {
                 box-shadow: 0 0 2rem $white;
+                @include XS {
+                  width: 300px;
+                  height: 200px;
+                  margin-left: 1rem;
+                }
               }
             }
             p {
@@ -131,6 +139,9 @@ body {
           font-size: 2rem;
           text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
           margin: 2rem;
+          @include XS{
+            margin: 0;
+          }
           span {
             font-weight: bold;
             color: $accent2Tr;

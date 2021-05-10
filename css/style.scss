@@ -14,77 +14,84 @@ body {
     min-width: 100%; //full screen
     /* opening*/
     .opening {
-       //background: url(../img/bg6.jpg), linear-gradient(to bottom, $accent2 0%, $accent1 100%);
+      position: relative;
+      //background: url(../img/bg6.jpg), linear-gradient(to bottom, $accent2 0%, $accent1 100%);
       background: url(https://i.gifer.com/WGkW.gif), linear-gradient(45deg, $black 0%, transparent 100%);
       @include backgroundFullScreen;
       animation: huerotator 3s infinite alternate;
       height: 100vh; //full screen
-      .row {
-        margin-right: 0;
-        &.top {
-          padding-top: 10%;
-        }
-        &.msg {
-          width: fit-content;
-          margin: auto;
-        }
-      }
-      h1 {
-        text-align: center;
-        //animation: blinkingText 1.5s infinite;
-        .drops {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 2rem;
-          span {
+      .openingRow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        h1 {
+          text-align: center;
+          .drops {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            span {
+              opacity: 0;
+              transition: 0.3s linear;
+              display: block;
+              font-size: 3rem;
+              transform: translateY(-15rem);
+              overflow-y: hidden;
+              &.show {
+                opacity: 1;
+                font-size: 5rem;
+                transform: translateY(0rem);
+                padding: 1rem;
+                @include XS {
+                  font-size: 3rem;
+                }
+                &.scaleUp {
+                  transform: scale(1.5);
+                }
+              }
+            }
+          }
+          .bigger {
             opacity: 0;
-            transition: 0.3s linear;
-            display: block;
-            font-size: 5rem;
-            transform: translateY(-15rem);
-            overflow-y: hidden;
+            transition: 1s linear;
+            font-size: 7rem;
+            font-family: "Noto Serif", serif;
+            font-weight: bold;
+            width: fit-content;
+            margin: auto;
+            @include XS {
+              font-size: 4rem;
+            }
             &.show {
               opacity: 1;
-              font-size: 5rem;
-              transform: translateY(0rem);
-              padding: 1rem;
-              &.scaleUp {
-                transform: scale(1.5);
+              transform: scale(1.5);
+              @include XS {
+                font-size: 4rem;
               }
             }
           }
         }
-        .bigger {
-          opacity: 0;
-          transition: 1s linear;
-          font-size: 7rem;
-          font-family: "Noto Serif", serif;
-          font-weight: bold;
+        i {
+          font-size: 4rem;
+          color: $accent1;
+          text-align: center;
+          text-decoration: none;
+          margin: 1.5rem auto;
+          padding: 0;
+        }
+        .msg {
+          font-size: 3rem;
+          text-align: center;
+          text-decoration: none;
+          animation: blinkingText 1.5s infinite;
           width: fit-content;
           margin: auto;
-          &.show {
-            opacity: 1;
-            transform: scale(1.5);
+          span {
+            color: $accent1;
+            font-weight: bold;
+            font-size: 4rem;
           }
-        }
-      }
-      i {
-        font-size: 4rem;
-        color: $accent1;
-        text-align: center;
-        text-decoration: none;
-        margin: 1.5rem auto;
-        padding: 0;
-      }
-      .msg {
-        font-size: 3rem;
-        text-align: center;
-        text-decoration: none;
-        animation: blinkingText 1.5s infinite;
-        span {
-          color: $accent1;
-          font-weight: bold;
-          font-size: 4rem;
         }
       }
     }
@@ -92,6 +99,9 @@ body {
     .navbar {
       font-size: 1.5rem;
       padding: 0;
+      @include XS {
+        width: 100vw;
+      }
       &.headerScrolled {
         background-color: $color1 !important;
         transition: background-color 0.2s linear;
@@ -109,6 +119,9 @@ body {
         transition: 0.5s linear;
       }
       .container-fluid {
+        @include XS {
+          background-color: $color1Tr;
+        }
         .navbar-toggler {
           border-color: $color2;
           color: $accent1;
@@ -163,6 +176,9 @@ body {
           form {
             .search {
               width: 50vw;
+              @include XS {
+                width: 100%;
+              }
             }
           }
         }
@@ -182,6 +198,9 @@ body {
           img {
             //images for carousel
             height: 100vh; //full screen
+            @include XS {
+              height: 50%;
+            }
           }
           .movieInfo {
             background-color: $color1Tr;
@@ -195,8 +214,19 @@ body {
             height: fit-content;
             border-radius: 3vw;
             padding: 1rem;
+            @include XS {
+              position: unset;
+              top: unset;
+              left: unset;
+              transform: unset;
+              width: unset;
+              height: 50vh;
+            }
             .row {
               margin: 1rem;
+              @include XS {
+                margin: 0;
+              }
             }
             .category {
               display: flex;
@@ -278,10 +308,12 @@ body {
         background: linear-gradient(45deg, $color5 50%, transparent);
         padding: 1rem 2rem 1rem 2rem;
         width: 50%;
-        //z-index: 0;
         border-top-right-radius: 5vw;
         text-shadow: 0 0 1em $color7;
         font-weight: bold;
+        @include XS {
+          width: 100%;
+        }
         &.show {
           opacity: 1;
           z-index: 1000;
@@ -307,6 +339,9 @@ body {
         .viewDetailBtn,
         .bookNowBtn {
           margin-right: 1rem;
+          @include XS {
+            margin: 1rem;
+          }
           span {
             display: none; //to have movid id in the button tag and a tag
           }
@@ -324,6 +359,10 @@ body {
       }
       .pageNav {
         padding: 0 26rem;
+        overflow-x: scroll;
+        @include XS {
+          padding: 0;
+        }
         .pagination {
           .page-item {
             &:hover {
@@ -377,6 +416,12 @@ body {
           }
           .carousel-inner {
             box-shadow: 0rem 0rem 3rem $color2Tr; //shadow
+            iframe {
+              @include XS {
+                width: 300px;
+                height: 200px;
+              }
+            }
           }
           .carousel-control-prev,
           .carousel-control-next {

@@ -220,6 +220,10 @@ body {
   overflow-x: hidden;
 }
 
+body .container {
+  overflow-x: hidden;
+}
+
 html,
 body,
 a,

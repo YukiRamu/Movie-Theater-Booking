@@ -220,6 +220,10 @@ body {
   overflow-x: hidden;
 }
 
+body .container {
+  overflow-x: hidden;
+}
+
 html,
 body,
 a,
@@ -366,6 +370,7 @@ body .container {
 
 html .container .opening,
 body .container .opening {
+  position: relative;
   background: url(https://i.gifer.com/WGkW.gif), linear-gradient(45deg, black 0%, transparent 100%);
   background-size: cover;
   background-repeat: no-repeat;
@@ -375,31 +380,22 @@ body .container .opening {
   height: 100vh;
 }
 
-html .container .opening .row,
-body .container .opening .row {
-  margin-right: 0;
+html .container .opening .openingRow,
+body .container .opening .openingRow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
-html .container .opening .row.top,
-body .container .opening .row.top {
-  padding-top: 10%;
-}
-
-html .container .opening .row.msg,
-body .container .opening .row.msg {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: auto;
-}
-
-html .container .opening h1,
-body .container .opening h1 {
+html .container .opening .openingRow h1,
+body .container .opening .openingRow h1 {
   text-align: center;
 }
 
-html .container .opening h1 .drops,
-body .container .opening h1 .drops {
+html .container .opening .openingRow h1 .drops,
+body .container .opening .openingRow h1 .drops {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -409,20 +405,20 @@ body .container .opening h1 .drops {
   margin-bottom: 2rem;
 }
 
-html .container .opening h1 .drops span,
-body .container .opening h1 .drops span {
+html .container .opening .openingRow h1 .drops span,
+body .container .opening .openingRow h1 .drops span {
   opacity: 0;
   -webkit-transition: 0.3s linear;
   transition: 0.3s linear;
   display: block;
-  font-size: 5rem;
+  font-size: 3rem;
   -webkit-transform: translateY(-15rem);
           transform: translateY(-15rem);
   overflow-y: hidden;
 }
 
-html .container .opening h1 .drops span.show,
-body .container .opening h1 .drops span.show {
+html .container .opening .openingRow h1 .drops span.show,
+body .container .opening .openingRow h1 .drops span.show {
   opacity: 1;
   font-size: 5rem;
   -webkit-transform: translateY(0rem);
@@ -430,14 +426,21 @@ body .container .opening h1 .drops span.show {
   padding: 1rem;
 }
 
-html .container .opening h1 .drops span.show.scaleUp,
-body .container .opening h1 .drops span.show.scaleUp {
+@media (max-width: 575.98px) {
+  html .container .opening .openingRow h1 .drops span.show,
+  body .container .opening .openingRow h1 .drops span.show {
+    font-size: 3rem;
+  }
+}
+
+html .container .opening .openingRow h1 .drops span.show.scaleUp,
+body .container .opening .openingRow h1 .drops span.show.scaleUp {
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
 
-html .container .opening h1 .bigger,
-body .container .opening h1 .bigger {
+html .container .opening .openingRow h1 .bigger,
+body .container .opening .openingRow h1 .bigger {
   opacity: 0;
   -webkit-transition: 1s linear;
   transition: 1s linear;
@@ -450,15 +453,29 @@ body .container .opening h1 .bigger {
   margin: auto;
 }
 
-html .container .opening h1 .bigger.show,
-body .container .opening h1 .bigger.show {
+@media (max-width: 575.98px) {
+  html .container .opening .openingRow h1 .bigger,
+  body .container .opening .openingRow h1 .bigger {
+    font-size: 4rem;
+  }
+}
+
+html .container .opening .openingRow h1 .bigger.show,
+body .container .opening .openingRow h1 .bigger.show {
   opacity: 1;
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
 
-html .container .opening i,
-body .container .opening i {
+@media (max-width: 575.98px) {
+  html .container .opening .openingRow h1 .bigger.show,
+  body .container .opening .openingRow h1 .bigger.show {
+    font-size: 4rem;
+  }
+}
+
+html .container .opening .openingRow i,
+body .container .opening .openingRow i {
   font-size: 4rem;
   color: #ec1a47;
   text-align: center;
@@ -467,17 +484,21 @@ body .container .opening i {
   padding: 0;
 }
 
-html .container .opening .msg,
-body .container .opening .msg {
+html .container .opening .openingRow .msg,
+body .container .opening .openingRow .msg {
   font-size: 3rem;
   text-align: center;
   text-decoration: none;
   -webkit-animation: blinkingText 1.5s infinite;
           animation: blinkingText 1.5s infinite;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
 }
 
-html .container .opening .msg span,
-body .container .opening .msg span {
+html .container .opening .openingRow .msg span,
+body .container .opening .openingRow .msg span {
   color: #ec1a47;
   font-weight: bold;
   font-size: 4rem;
@@ -487,6 +508,13 @@ html .container .navbar,
 body .container .navbar {
   font-size: 1.5rem;
   padding: 0;
+}
+
+@media (max-width: 575.98px) {
+  html .container .navbar,
+  body .container .navbar {
+    width: 100vw;
+  }
 }
 
 html .container .navbar.headerScrolled,
@@ -511,6 +539,13 @@ body .container .navbar .alert {
           transform: translateY(-10rem);
   -webkit-transition: 0.5s linear;
   transition: 0.5s linear;
+}
+
+@media (max-width: 575.98px) {
+  html .container .navbar .container-fluid,
+  body .container .navbar .container-fluid {
+    background-color: #282c37cf;
+  }
 }
 
 html .container .navbar .container-fluid .navbar-toggler,
@@ -595,6 +630,13 @@ body .container .navbar .container-fluid .navbar-collapse form .search {
   width: 50vw;
 }
 
+@media (max-width: 575.98px) {
+  html .container .navbar .container-fluid .navbar-collapse form .search,
+  body .container .navbar .container-fluid .navbar-collapse form .search {
+    width: 100%;
+  }
+}
+
 html .container .carousel,
 body .container .carousel {
   height: 100vh;
@@ -618,6 +660,13 @@ body .container .carousel .nowOnTheater .carousel-item img {
   height: 100vh;
 }
 
+@media (max-width: 575.98px) {
+  html .container .carousel .nowOnTheater .carousel-item img,
+  body .container .carousel .nowOnTheater .carousel-item img {
+    height: 50%;
+  }
+}
+
 html .container .carousel .nowOnTheater .carousel-item .movieInfo,
 body .container .carousel .nowOnTheater .carousel-item .movieInfo {
   background-color: #282c37cf;
@@ -637,9 +686,29 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
   padding: 1rem;
 }
 
+@media (max-width: 575.98px) {
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo {
+    position: unset;
+    top: unset;
+    left: unset;
+    -webkit-transform: unset;
+            transform: unset;
+    width: unset;
+    height: 50vh;
+  }
+}
+
 html .container .carousel .nowOnTheater .carousel-item .movieInfo .row,
 body .container .carousel .nowOnTheater .carousel-item .movieInfo .row {
   margin: 1rem;
+}
+
+@media (max-width: 575.98px) {
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo .row,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo .row {
+    margin: 0;
+  }
 }
 
 html .container .carousel .nowOnTheater .carousel-item .movieInfo .category,
@@ -768,6 +837,13 @@ body .container .searchResult .popOverContent {
   font-weight: bold;
 }
 
+@media (max-width: 575.98px) {
+  html .container .searchResult .popOverContent,
+  body .container .searchResult .popOverContent {
+    width: 100%;
+  }
+}
+
 html .container .searchResult .popOverContent.show,
 body .container .searchResult .popOverContent.show {
   opacity: 1;
@@ -806,6 +882,17 @@ body .container .searchResult .popOverContent .bookNowBtn {
   margin-right: 1rem;
 }
 
+@media (max-width: 575.98px) {
+  html .container .searchResult .popOverContent .trailerBtn,
+  html .container .searchResult .popOverContent .viewDetailBtn,
+  html .container .searchResult .popOverContent .bookNowBtn,
+  body .container .searchResult .popOverContent .trailerBtn,
+  body .container .searchResult .popOverContent .viewDetailBtn,
+  body .container .searchResult .popOverContent .bookNowBtn {
+    margin: 1rem;
+  }
+}
+
 html .container .searchResult .popOverContent .trailerBtn span,
 html .container .searchResult .popOverContent .viewDetailBtn span,
 html .container .searchResult .popOverContent .bookNowBtn span,
@@ -836,6 +923,14 @@ body .container .searchResult .popOverContent .info p {
 html .container .searchResult .pageNav,
 body .container .searchResult .pageNav {
   padding: 0 26rem;
+  overflow-x: scroll;
+}
+
+@media (max-width: 575.98px) {
+  html .container .searchResult .pageNav,
+  body .container .searchResult .pageNav {
+    padding: 0;
+  }
 }
 
 html .container .searchResult .pageNav .pagination .page-item:hover,
@@ -909,6 +1004,14 @@ html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner,
 body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner {
   -webkit-box-shadow: 0rem 0rem 3rem #f5f5f6e4;
           box-shadow: 0rem 0rem 3rem #f5f5f6e4;
+}
+
+@media (max-width: 575.98px) {
+  html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe,
+  body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe {
+    width: 300px;
+    height: 200px;
+  }
 }
 
 html .trailerModal .trailerBackground .trailer .trailerContents .carousel-control-prev,

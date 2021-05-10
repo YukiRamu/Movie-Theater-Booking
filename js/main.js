@@ -128,7 +128,7 @@ movieListRow.addEventListener("click", async (event) => {
     let appendHTML = `
       <button type="button" class="clsBtn" onclick="closePopup()">x</button>
       <h5>${selectedMovie[0].title}</h5>
-      <p">${selectedMovie[0].overview}</p>
+      <p>${selectedMovie[0].overview}</p>
       <button type="button" class="btn btn-outline-light trailerBtn">▶ Watch trailer<span class="movieId">${selectedMovie[0].id}</span></button>
       <a class="btn btn-outline-light viewDetailBtn" target="_blank" role="button"><span class="movieId">${selectedMovie[0].id}</span><i
           class="fas fa-film"></i> View Detail</a >
