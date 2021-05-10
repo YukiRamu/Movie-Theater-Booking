@@ -322,6 +322,8 @@ body {
         font-weight: bold;
         @include XS {
           width: 100%;
+          height: 70%;
+          overflow-y: scroll;
         }
         &.show {
           opacity: 1;

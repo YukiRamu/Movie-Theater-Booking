@@ -880,6 +880,8 @@ body .container .searchResult .popOverContent {
   html .container .searchResult .popOverContent,
   body .container .searchResult .popOverContent {
     width: 100%;
+    height: 70%;
+    overflow-y: scroll;
   }
 }
 
