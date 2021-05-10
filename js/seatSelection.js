@@ -2,6 +2,7 @@
 //get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
 const movieIdfromURL = urlParams.get("movieId");
+console.log(movieIdfromURL);
 
 //object
 const seatPrice = {
@@ -369,5 +370,5 @@ window.addEventListener("DOMContentLoaded", async () => {
   body.style.backgroundRepeat = "no-repeat";
 
   UI.displayTrailer(movieIdfromURL);
-
+  return
 });
