@@ -3,10 +3,18 @@
 /* Global setting*/
 .flaticon-couch {
   font-size: 1.2rem;
+  @include XS {
+    font-size: 1rem;
+  }
+}
+.flaticon-armchair {
+  @include XS {
+    font-size: 0.8rem;
+  }
 }
 
 body {
-   @include backgroundFullScreen;
+  @include backgroundFullScreen;
   .completeMsg {
     position: absolute;
     top: -0%;
@@ -26,15 +34,40 @@ body {
     margin: 2rem auto;
     padding: 2rem;
     background: linear-gradient(-45deg, $black, $color1Tr);
-    // background-color: $color1Tr;
     box-shadow: 0 1rem 2rem $black; //shadow effect
     border-radius: 3vw;
+    .websiteTitleSMdevice{
+      display: none;
+      @include XS {
+        display: block;
+        color: $color2;
+        font-size: 2rem;
+        text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D     
+        text-align: right;
+        width: fit-content;
+        margin-left: auto;
+        span {
+          font-weight: bold;
+          color: $accent2Tr;
+          font-size: 3rem;
+          animation: flicker 2s linear infinite;
+        }
+        &:hover {
+          color: $color2;
+          font-weight: bold;
+          text-shadow: 0 1rem 1rem $accent1;
+        }
+      }
+    }
     .titleHeader {
       @include fadeInforInnerHTML;
     }
     .description {
       width: 70%;
       color: $color4;
+      @include XS {
+        width: 100%;
+      }
     }
     .search {
       .form-label {
@@ -53,6 +86,9 @@ body {
       .cinemaLocation {
         font-size: 2rem;
         margin-left: 1rem;
+        @include XS {
+          font-size: 1rem;
+        }
       }
     }
     .movieInfo {
@@ -98,6 +134,9 @@ body {
     .screenLine {
       display: none;
       margin-top: 3rem;
+      @include XS {
+        margin-top: 2rem;
+      }
       &.show {
         display: block;
         animation: fadeIn 1s linear;
@@ -123,6 +162,9 @@ body {
       background-color: $color7;
       border-radius: 50% 49% 10% 10% / 10% 10% 0% 0%;
       padding: 2rem 1rem;
+      @include XS {
+        padding: 2rem 0rem;
+      }
       &.show {
         display: block;
         animation: fadeIn 1s linear;
@@ -160,6 +202,9 @@ body {
           }
           .flaticon-couch {
             padding: 0.5rem;
+            @include XS {
+              padding: 0rem;
+            }
             color: $white;
           }
           .flaticon-couch.selected {
@@ -196,6 +241,9 @@ body {
       text-align: right;
       width: fit-content;
       margin-left: auto;
+      @include XS {
+        display: none;
+      }
       span {
         font-weight: bold;
         color: $accent2Tr;
@@ -211,6 +259,9 @@ body {
     h2 {
       color: $color4;
       margin-bottom: 1rem;
+      @include XS {
+        margin-top: 1rem;
+      }
     }
     .trailer {
       margin-bottom: 1rem;

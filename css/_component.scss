@@ -262,12 +262,6 @@ a {
 // X-Small devices (portrait phones, less than 576px)
 @mixin XS {
   @media (max-width: 575.98px) {
-    h1 {
-      font-size: calc(1.375rem + 1.5vw);
-    }
-    a {
-      font-size: 1rem
-    }
     @content;
   }
 }
@@ -302,3 +296,13 @@ a {
 
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
+
+// .element {
+//   // Three columns to start
+//   @include row-cols(3);
+
+//   // Five columns from medium breakpoint up
+//   @include media-breakpoint-up(md) {
+//     @include row-cols(5);
+//   }
+// }
