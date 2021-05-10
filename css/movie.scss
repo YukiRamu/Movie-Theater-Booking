@@ -99,7 +99,7 @@ body {
               width: fit-content;
               margin-left: 0.2rem;
               grid-gap: 1.5rem;
-              button a {
+              button, a {
                 @include XS {
                   margin: 0.5rem;
                 }
@@ -230,6 +230,9 @@ body {
                 margin-top: 2rem;
                 padding-left: 1rem;
                 overflow-x: auto;
+                @include XS {
+                  width: unset;
+                }
                 &::-webkit-scrollbar {
                   visibility: hidden;
                 }
@@ -294,6 +297,9 @@ body {
               .odd {
                 background: linear-gradient(135deg, $bgTr 0%, transparent);
                 margin-right: 10rem;
+                @include XS {
+                  margin: 0;
+                }
                 .author {
                   text-align: left;
                   span {
@@ -304,6 +310,9 @@ body {
               .even {
                 background: linear-gradient(-135deg, $bgTr 0%, transparent);
                 margin-left: 10rem;
+                @include XS {
+                  margin: 0;
+                }
                 .author {
                   text-align: right;
                 }
