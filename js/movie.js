@@ -324,9 +324,9 @@ const getMovieComponent = async () => {
 
   //show tagline
   if (selectedMovie[0].tagline === "") {
-    taglineSection.innerHTML = ` <h2 class="tagline">Loading ...</h2>`; //when no data exists
+    taglineSection.innerHTML = `<h2 class="tagline">Loading ...</h2>`; //when no data exists
   } else {
-    taglineSection.innerHTML = ` <h2 class="tagline">${selectedMovie[0].tagline}</h2>`;
+    taglineSection.innerHTML = `<h2 class="tagline">${selectedMovie[0].tagline}</h2>`;
   };
   return selectedMovie[0];
 };

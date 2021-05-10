@@ -361,9 +361,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   overview = movieComponent[0].overview;
   backdropPath = movieComponent[0].backdrop_path;
 
-  titleHeader.innerText = title;
+  titleHeader.innerText = "test";
   titleHeader.style.opacity = 1;
-  description.innerText = overview;
+  description.innerText = `${overview}`;
   body.style.backgroundImage = `url(${backdropBaseURL}${backdropPath})`;
   body.style.backgroundPosition = "center";
   body.style.backgroundSize = "cover";

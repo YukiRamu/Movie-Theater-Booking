@@ -405,6 +405,7 @@ body .container .opening .openingRow {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  width: 100%;
 }
 
 html .container .opening .openingRow h1,
@@ -438,7 +439,7 @@ body .container .opening .openingRow h1 .drops span {
 html .container .opening .openingRow h1 .drops span.show,
 body .container .opening .openingRow h1 .drops span.show {
   opacity: 1;
-  font-size: 5rem;
+  font-size: 4rem;
   -webkit-transform: translateY(0rem);
           transform: translateY(0rem);
   padding: 1rem;
@@ -462,7 +463,7 @@ body .container .opening .openingRow h1 .bigger {
   opacity: 0;
   -webkit-transition: 1s linear;
   transition: 1s linear;
-  font-size: 7rem;
+  font-size: 6rem;
   font-family: "Noto Serif", serif;
   font-weight: bold;
   width: -webkit-fit-content;

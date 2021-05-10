@@ -25,6 +25,7 @@ body {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        width: 100%;
         h1 {
           text-align: center;
           .drops {
@@ -40,7 +41,7 @@ body {
               overflow-y: hidden;
               &.show {
                 opacity: 1;
-                font-size: 5rem;
+                font-size: 4rem;
                 transform: translateY(0rem);
                 padding: 1rem;
                 @include XS {
@@ -55,7 +56,7 @@ body {
           .bigger {
             opacity: 0;
             transition: 1s linear;
-            font-size: 7rem;
+            font-size: 6rem;
             font-family: "Noto Serif", serif;
             font-weight: bold;
             width: fit-content;
