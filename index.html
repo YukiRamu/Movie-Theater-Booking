@@ -3,7 +3,7 @@
 
 <head>
   <title>Movie Theatre Booking</title>
-  <meta charset="UFT-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--Icon: fontawesome / Flaticon / Bootstrap-->
@@ -41,29 +41,29 @@
     <div class="opening">
 
       <div class="openingRow">
-            <!-- <div class="row top"> -->
-            <h1 class="row col">
-              <p class="drops">
-                <span class="dropText">N</span>
-                <span class="dropText">o</span>
-                <span class="dropText"> </span>
-                <span class="dropText">M</span>
-                <span class="dropText">o</span>
-                <span class="dropText">v</span>
-                <span class="dropText">i</span>
-                <span class="dropText">e</span>
-              </p>
-              <p class="bigger">
-                NO LIFE
-              </p>
-            </h1>
-            <!-- </div> -->
-            <div class="row">
-              <i class=" col fas fa-angle-double-down"></i>
-            </div>
-            <div class="row msg">
-              <a class="col msg" href="#carouselExampleIndicators">Check out Now On Theater<span> ! </span> </a>
-            </div>
+        <!-- <div class="row top"> -->
+        <h1 class="row col">
+          <p class="drops">
+            <span class="dropText">N</span>
+            <span class="dropText">o</span>
+            <span class="dropText"> </span>
+            <span class="dropText">M</span>
+            <span class="dropText">o</span>
+            <span class="dropText">v</span>
+            <span class="dropText">i</span>
+            <span class="dropText">e</span>
+          </p>
+          <p class="bigger">
+            NO LIFE
+          </p>
+        </h1>
+        <!-- </div> -->
+        <div class="row">
+          <i class=" col fas fa-angle-double-down"></i>
+        </div>
+        <div class="row msg">
+          <a class="col msg" href="#carouselExampleIndicators">Check out Now On Theater<span> ! </span> </a>
+        </div>
       </div>
 
     </div>
@@ -82,9 +82,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <!-- display number of movie results  -->
-            <li class="nav-item numOfResult">
-              <!-- display number of movie results  -->
-            </li>
+            <li class="nav-item numOfResult"></li>
           </ul>
           <form class="d-flex">
             <input class="form-control me-2 search" type="text" placeholder="Search movies, actors, editors, etc"
@@ -97,9 +95,8 @@
 
     <!-- Carousel -->
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner nowOnTheater">
-        <!-- Append carousel-item here-->
-      </div>
+      <!-- Append carousel-item inside div tag-->
+      <div class="carousel-inner nowOnTheater"></div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev">
@@ -117,13 +114,12 @@
     <div class="searchResult" id="searchResult">
 
       <!-- result cards 5 panels in one row / 10 moview at one page-->
-      <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow">
-        <!-- append movie images here -->
-      </div>
 
-      <div class="popOverContent">
-        <!--display small description of selected movie : appear on click at the bottom-->
-      </div>
+      <!-- append movie images here -->
+      <div class="row row-cols-1 row-cols-md-5 g-5 movieListRow"></div>
+
+      <!--display small description of selected movie : appear on click at the bottom-->
+      <div class="popOverContent"></div>
 
       <!-- Pagination -->
       <nav aria-label="Page navigation" class="pageNav">
