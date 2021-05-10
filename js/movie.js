@@ -334,6 +334,7 @@ const getMovieComponent = async () => {
 
 // ================= when the page is loaded  =================
 window.addEventListener("DOMContentLoaded", async () => {
+  alert("window open");
   /* #1 create movieComponent and show tagline --> fadeout */
   movieComponent = await getMovieComponent();
 

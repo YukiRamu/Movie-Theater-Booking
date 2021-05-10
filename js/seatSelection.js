@@ -346,12 +346,12 @@ const checkOut = (theater, movieId) => {
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
 window.addEventListener("DOMContentLoaded", async () => {
-  alert("window open")
+  alert("window open");
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
   };
 
-  alert("after local storage")
+  alert("after local storage");
   /* Show movie title, description and trailer*/
   movieComponent = await getMovieDetailById(movieIdfromURL);
 
@@ -363,7 +363,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   overview = movieComponent[0].overview;
   backdropPath = movieComponent[0].backdrop_path;
 
-  alert("after fetch mobie detail")
+  alert("after fetch mobie detail");
 
   titleHeader.innerText = `${title}`;
   titleHeader.style.opacity = 1;
@@ -373,8 +373,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   body.style.backgroundSize = "cover";
   body.style.backgroundRepeat = "no-repeat";
 
-  alert("after append element")
+  alert("after append element");
 
   UI.displayTrailer(movieIdfromURL);
-  return
+  return;
 });
