@@ -196,11 +196,15 @@ body {
       height: 100vh; //full screen
       //width: 100vw; //full screen
       background-color: $color7;
+      @include XS {
+        height: unset;
+      }
       .nowOnTheater {
         height: 100vh; //full screen
         margin: auto;
         @include XS {
-          min-height: 100vh;
+          height: unset;
+          min-height: unset;
         }
         .carousel-item {
           height: 100%;

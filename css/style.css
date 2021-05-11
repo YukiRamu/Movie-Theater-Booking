@@ -676,6 +676,13 @@ body .container .carousel {
   background-color: #363942;
 }
 
+@media (max-width: 575.98px) {
+  html .container .carousel,
+  body .container .carousel {
+    height: unset;
+  }
+}
+
 html .container .carousel .nowOnTheater,
 body .container .carousel .nowOnTheater {
   height: 100vh;
@@ -685,7 +692,8 @@ body .container .carousel .nowOnTheater {
 @media (max-width: 575.98px) {
   html .container .carousel .nowOnTheater,
   body .container .carousel .nowOnTheater {
-    min-height: 100vh;
+    height: unset;
+    min-height: unset;
   }
 }
 
