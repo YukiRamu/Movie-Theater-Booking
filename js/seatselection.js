@@ -339,7 +339,7 @@ const checkOut = (theater, movieId) => {
 //store emply array
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
-window.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
   alert("window open");
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
