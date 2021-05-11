@@ -39,7 +39,7 @@ const trailerContents = document.querySelector(".trailerContents");
 //pagenation
 const pagination = document.querySelector(".pagination");
 
-/* ***************** seatSelection.js ***************** */
+/* ***************** seatselection.js ***************** */
 //button
 const theaterChoice = document.getElementById("theaterChoice"); //dropdown
 
