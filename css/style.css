@@ -361,7 +361,7 @@ a {
   color: #5392d4;
 }
 
-/* Media Query */
+/* Media Query - PC first */
 html,
 body {
   background: url(../img/smoke.jpg), linear-gradient(45deg, black 0%, transparent 100%);
@@ -686,7 +686,6 @@ body .container .carousel .nowOnTheater {
   html .container .carousel .nowOnTheater,
   body .container .carousel .nowOnTheater {
     min-height: 100vh;
-    height: unset;
   }
 }
 

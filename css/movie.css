@@ -361,7 +361,7 @@ a {
   color: #5392d4;
 }
 
-/* Media Query */
+/* Media Query - PC first */
 body {
   background: url(../img/smoke.jpg), linear-gradient(45deg, black 0%, transparent 100%);
   background-size: cover;

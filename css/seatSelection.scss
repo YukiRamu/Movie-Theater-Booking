@@ -93,6 +93,9 @@ body {
     }
     .movieInfo {
       background-color: $color7;
+      @include XS {
+        padding-top: 0.5rem;
+      }
       .movieLabel {
         display: flex;
         justify-content: space-around;
@@ -229,6 +232,13 @@ body {
       &.show {
         display: block;
         animation: fadeIn 1s linear;
+        @include XS {
+          flex-direction: column;
+          display: flex;
+        }
+        span {
+          margin: 0;
+        }
       }
       span {
         margin: 1rem;
