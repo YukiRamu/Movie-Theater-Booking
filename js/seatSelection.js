@@ -2,13 +2,13 @@
 //get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
 const movieIdfromURL = urlParams.get("movieId");
-console.log(movieIdfromURL);
+alert("window loaded");
 
 //object
 const seatPrice = {
   regular: 10,
   vip: 20
-}
+};
 
 class UI {
   constructor(seatType, isSelected) {
@@ -16,7 +16,8 @@ class UI {
     this._isSelected = isSelected // is "selected" in classList? true or false
     this._totalTicketNum = 0;
     this._totalPrice;
-  }
+  };
+
   //static property
   static regularSeatCount = 0;
   static vipSeatCount = 0;
@@ -27,7 +28,7 @@ class UI {
   //#1 add "selected" class to the target or remove it 
   toggleSelected(target) {
     target.classList.toggle("selected");
-  }
+  };
 
   //#2 Add seats to Your Seats Panel
   addSeat() {
@@ -40,11 +41,11 @@ class UI {
       UI.vipSeatCount++;
       vipTicketNum.innerHTML = UI.vipSeatCount; //display vip ticket num
       UI.calcTotalPrice(UI.vipSeatCount, this._seatType);
-    }
+    };
     //total ticket count
     this._totalTicketNum = UI.regularSeatCount + UI.vipSeatCount;
     totalTicketNum.innerHTML = this._totalTicketNum;
-  }
+  };
 
   //#3 Calculate the price and show total
   static calcTotalPrice(seatNum, seatType) {
@@ -55,11 +56,11 @@ class UI {
     } else if (seatType === "vip") {
       UI.vipSubTtl = seatPrice["vip"] * seatNum;
       vipSubtotal.innerHTML = `$ ${UI.vipSubTtl}`;
-    }
+    };
     //total ticket price
     this._totalPrice = UI.regSubTtl + UI.vipSubTtl;
     totalPrice.innerHTML = `$ ${this._totalPrice}`;
-  }
+  };
 
   //#4 Remove seats from Your Seats panel
   removeSeat() {
@@ -72,11 +73,11 @@ class UI {
       UI.vipSeatCount--;
       vipTicketNum.innerHTML = UI.vipSeatCount; //display vip ticket num
       UI.calcTotalPrice(UI.vipSeatCount, this._seatType);
-    }
+    };
     //total ticket count
     this._totalTicketNum = UI.regularSeatCount + UI.vipSeatCount;
     totalTicketNum.innerHTML = this._totalTicketNum;
-  }
+  };
 
   static clearCalcPanel() {
     regularTicketNum.innerHTML = 0;
@@ -89,7 +90,7 @@ class UI {
     UI.vipSeatCount = 0;
     UI.regSubTtl = 0;
     UI.vipSubTtl = 0;
-  }
+  };
 
   static showMap() {
     //Show map
@@ -99,7 +100,7 @@ class UI {
     note.classList.add("show");
     yourSeat.classList.add("show");
     footer.classList.add("show");
-  }
+  };
 
   static hideMap() {
     //Hide map
@@ -109,7 +110,7 @@ class UI {
     note.classList.remove("show");
     yourSeat.classList.remove("show");
     footer.classList.remove("show");
-  }
+  };
 
   static displayTrailer(movieId) {
     //fetch video key
@@ -143,8 +144,8 @@ class UI {
         console.error(`Error = ${error}. Unable to fetch video data by movieId`);
         return error;
       });
-  }
-}
+  };
+};
 
 /* ========== Call methods ==========*/
 /* When the thieater is picked, display the name of the theater */
@@ -331,12 +332,6 @@ const checkOut = (theater, movieId) => {
     localStorage.setItem("seatMap", JSON.stringify(seatMapArray));
 
     completeMsg.style.transform = "translateY(0rem)";
-    // setTimeout(() => {
-    //   completeMsg.style.transform = "translateY(-10rem)";
-    //   UI.clearCalcPanel();
-    //   UI.hideMap();
-    //   window.location.reload();
-    // }, 2000);
   };
 };
 
