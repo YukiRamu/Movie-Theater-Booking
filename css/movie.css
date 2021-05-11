@@ -687,6 +687,12 @@ body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .cast
   transition: 0.5s;
 }
 
+@media (max-width: 575.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg {
+    min-width: 30vw;
+  }
+}
+
 body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg .card-img-top {
   border-radius: 1vw;
 }
@@ -703,8 +709,20 @@ body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .cast
   font-size: 1.2rem;
 }
 
+@media (max-width: 575.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg div .castName {
+    font-size: 1rem;
+  }
+}
+
 body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg div .character {
   color: #dedfe3;
+}
+
+@media (max-width: 575.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg div .character {
+    font-size: 1rem;
+  }
 }
 
 body .container .detailRow .left .reviewRow .reviews h2 {
