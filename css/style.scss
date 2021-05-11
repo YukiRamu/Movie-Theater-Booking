@@ -226,6 +226,7 @@ body {
             border-radius: 3vw;
             padding: 1rem;
             @include XS {
+              background-color: $color1;
               position: unset;
               top: unset;
               left: unset;

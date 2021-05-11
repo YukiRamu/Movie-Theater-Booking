@@ -730,6 +730,7 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
 @media (max-width: 575.98px) {
   html .container .carousel .nowOnTheater .carousel-item .movieInfo,
   body .container .carousel .nowOnTheater .carousel-item .movieInfo {
+    background-color: #282c37;
     position: unset;
     top: unset;
     left: unset;
