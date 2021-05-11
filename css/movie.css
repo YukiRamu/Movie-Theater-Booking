@@ -500,7 +500,8 @@ body .container .backdropRow .titlePanel .subInfo .left .bookRow {
 }
 
 @media (max-width: 575.98px) {
-  body .container .backdropRow .titlePanel .subInfo .left .bookRow button, body .container .backdropRow .titlePanel .subInfo .left .bookRow a {
+  body .container .backdropRow .titlePanel .subInfo .left .bookRow button,
+  body .container .backdropRow .titlePanel .subInfo .left .bookRow a {
     margin: 0.5rem;
   }
 }
@@ -753,7 +754,7 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd {
 
 @media (max-width: 575.98px) {
   body .container .detailRow .left .reviewRow .reviews .reviewPanel .odd {
-    margin: 0;
+    margin: 0.5rem;
   }
 }
 
@@ -772,7 +773,7 @@ body .container .detailRow .left .reviewRow .reviews .reviewPanel .even {
 
 @media (max-width: 575.98px) {
   body .container .detailRow .left .reviewRow .reviews .reviewPanel .even {
-    margin: 0;
+    margin: 0.5rem;
   }
 }
 

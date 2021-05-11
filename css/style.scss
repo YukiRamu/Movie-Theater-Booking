@@ -201,6 +201,7 @@ body {
         margin: auto;
         @include XS {
           min-height: 100vh;
+          height: unset;
         }
         .carousel-item {
           height: 100%;

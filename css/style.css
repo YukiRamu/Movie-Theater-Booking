@@ -686,6 +686,7 @@ body .container .carousel .nowOnTheater {
   html .container .carousel .nowOnTheater,
   body .container .carousel .nowOnTheater {
     min-height: 100vh;
+    height: unset;
   }
 }
 
