@@ -1,3 +1,7 @@
+/* testing if the mobile read this script */
+alert("Hi I am a seatselection javascript file");
+
+
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
@@ -338,7 +342,7 @@ const checkOut = (theater, movieId) => {
 //store emply array
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
-document.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
 
   //********************* Testing ***************************** */
   alert(`movie ID is ${movieIdfromURL}`);
