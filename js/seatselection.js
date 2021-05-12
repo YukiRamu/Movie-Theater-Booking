@@ -339,12 +339,23 @@ const checkOut = (theater, movieId) => {
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
 document.addEventListener("DOMContentLoaded", async () => {
+
+  //********************* Testing ***************************** */
+  alert(`movie ID is ${movieIdfromURL}`);
+  alert(localStorage.length);
+  alert(localStorage.getItem("seatMap"));
+
+
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
   };
 
+  alert(localStorage.getItem("seatMap"));
+
   /* Show movie title, description and trailer*/
   movieComponent = await getMovieDetailById(movieIdfromURL);
+
+  alert(movieComponent);
 
   let title;
   let overview;
