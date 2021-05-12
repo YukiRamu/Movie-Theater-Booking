@@ -541,6 +541,13 @@ body .container .backdropRow .titlePanel .subInfo .left .bookRow {
   grid-gap: 1.5rem;
 }
 
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .subInfo .left .bookRow button,
+  body .container .backdropRow .titlePanel .subInfo .left .bookRow a {
+    margin: 1rem;
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .backdropRow .titlePanel .subInfo .left .bookRow button,
   body .container .backdropRow .titlePanel .subInfo .left .bookRow a {
@@ -934,6 +941,18 @@ body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
   margin: auto;
   margin-top: 0.5rem;
   cursor: pointer;
+}
+
+@media (max-width: 767.98px) {
+  body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
+    padding: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
+    padding: 0;
+  }
 }
 
 body .container .detailRow .right .recomPanel .col .recomCard .recomImg:hover {

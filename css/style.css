@@ -636,6 +636,13 @@ body .container .navbar .alert {
   transition: 0.5s linear;
 }
 
+@media (max-width: 991.98px) {
+  html .container .navbar .container-fluid,
+  body .container .navbar .container-fluid {
+    background-color: #282c37cf;
+  }
+}
+
 @media (max-width: 767.98px) {
   html .container .navbar .container-fluid,
   body .container .navbar .container-fluid {
@@ -718,6 +725,14 @@ body .container .navbar .container-fluid .navbar-collapse.show {
   text-align: right;
 }
 
+@media (max-width: 991.98px) {
+  html .container .navbar .container-fluid .navbar-collapse.show,
+  body .container .navbar .container-fluid .navbar-collapse.show {
+    padding: 0;
+    padding-bottom: 1.5rem;
+  }
+}
+
 @media (max-width: 767.98px) {
   html .container .navbar .container-fluid .navbar-collapse.show,
   body .container .navbar .container-fluid .navbar-collapse.show {
@@ -788,6 +803,13 @@ body .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item.
 html .container .navbar .container-fluid .navbar-collapse form .search,
 body .container .navbar .container-fluid .navbar-collapse form .search {
   width: 50vw;
+}
+
+@media (max-width: 991.98px) {
+  html .container .navbar .container-fluid .navbar-collapse form .search,
+  body .container .navbar .container-fluid .navbar-collapse form .search {
+    width: 100%;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -866,6 +888,16 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
   height: fit-content;
   border-radius: 3vw;
   padding: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  html .container .carousel .nowOnTheater .carousel-item .movieInfo,
+  body .container .carousel .nowOnTheater .carousel-item .movieInfo {
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 80%;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -1031,6 +1063,13 @@ body .container .searchResult .popOverContent {
   border-top-right-radius: 5vw;
   text-shadow: 0 0 1em #363942;
   font-weight: bold;
+}
+
+@media (max-width: 991.98px) {
+  html .container .searchResult .popOverContent,
+  body .container .searchResult .popOverContent {
+    width: 80%;
+  }
 }
 
 @media (max-width: 767.98px) {

@@ -113,6 +113,9 @@ body {
               grid-gap: 1.5rem;
               button,
               a {
+                @include SM {
+                  margin: 1rem;
+                }
                 @include XS {
                   margin: 0.5rem;
                 }
@@ -398,6 +401,12 @@ body {
                 margin: auto;
                 margin-top: 0.5rem;
                 cursor: pointer;
+                @include SM {
+                  padding: 0;
+                }
+                @include XS {
+                  padding: 0;
+                }
                 &:hover {
                   padding: 0;
                   box-shadow: 0 0.5rem 1rem $color2; //shadow effect
