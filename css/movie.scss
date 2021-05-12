@@ -142,6 +142,14 @@ body {
               left: 50%;
               transform: translate(-50%, -50%);
               font-size: 2rem;
+              @include XS {
+                width: 300px;
+                margin-top: 1rem;
+                position: unset;
+                top: unset;
+                left: unset;
+                transform: unset;
+              }
             }
           }
         }

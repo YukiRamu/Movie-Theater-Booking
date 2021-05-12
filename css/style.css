@@ -734,6 +734,20 @@ body .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item 
   opacity: 0;
 }
 
+@media (max-width: 767.98px) {
+  html .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item,
+  body .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  html .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item,
+  body .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item {
+    font-size: 1rem;
+  }
+}
+
 html .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item:hover,
 body .container .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item:hover {
   font-weight: bold;
@@ -839,7 +853,9 @@ body .container .carousel .nowOnTheater .carousel-item .movieInfo {
 @media (max-width: 767.98px) {
   html .container .carousel .nowOnTheater .carousel-item .movieInfo,
   body .container .carousel .nowOnTheater .carousel-item .movieInfo {
-    width: 60vw;
+    width: 80vw;
+    height: 70vh;
+    overflow: scroll;
   }
 }
 
@@ -997,6 +1013,15 @@ body .container .searchResult .popOverContent {
   border-top-right-radius: 5vw;
   text-shadow: 0 0 1em #363942;
   font-weight: bold;
+}
+
+@media (max-width: 767.98px) {
+  html .container .searchResult .popOverContent,
+  body .container .searchResult .popOverContent {
+    width: 100%;
+    height: 70%;
+    overflow-y: scroll;
+  }
 }
 
 @media (max-width: 575.98px) {

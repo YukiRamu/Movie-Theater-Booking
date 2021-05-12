@@ -559,6 +559,18 @@ body .container .backdropRow .titlePanel .subInfo .trailer p {
   font-size: 2rem;
 }
 
+@media (max-width: 575.98px) {
+  body .container .backdropRow .titlePanel .subInfo .trailer p {
+    width: 300px;
+    margin-top: 1rem;
+    position: unset;
+    top: unset;
+    left: unset;
+    -webkit-transform: unset;
+            transform: unset;
+  }
+}
+
 body .container .backdropRow .titlePanel .websiteTitle {
   position: absolute;
   top: 0;
