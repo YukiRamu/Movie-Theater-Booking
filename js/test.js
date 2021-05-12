@@ -8,7 +8,7 @@ const movieIdfromURL = urlParams.get("movieId");
 
 alert(movieIdfromURL);
 
-object
+//object
 const seatPrice = {
   regular: 10,
   vip: 20
