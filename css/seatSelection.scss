@@ -36,8 +36,36 @@ body {
     background: linear-gradient(-45deg, $black, $color1Tr);
     box-shadow: 0 1rem 2rem $black; //shadow effect
     border-radius: 3vw;
+    @include MD {
+      flex-direction: column;
+    }
+    .col-md-8 {
+      @include MD {
+        width: 100%;
+      }
+    }
     .websiteTitleSMdevice {
       display: none;
+      @include MD {
+        display: block;
+        color: $color2;
+        font-size: 1rem;
+        text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
+        text-align: right;
+        width: fit-content;
+        margin-left: auto;
+        span {
+          font-weight: bold;
+          color: $accent2Tr;
+          font-size: 2rem;
+          animation: flicker 2s linear infinite;
+        }
+        &:hover {
+          color: $color2;
+          font-weight: bold;
+          text-shadow: 0 1rem 1rem $accent1;
+        }
+      }
       @include SM {
         display: block;
         color: $color2;
@@ -85,6 +113,9 @@ body {
     .description {
       width: 70%;
       color: $color4;
+      @include MD {
+        width: 100%;
+      }
       @include SM {
         width: 100%;
       }
@@ -255,6 +286,9 @@ body {
       &.show {
         display: block;
         animation: fadeIn 1s linear;
+        @include MD {
+          padding: 1rem;
+        }
         @include XS {
           flex-direction: column;
           display: flex;
@@ -271,6 +305,11 @@ body {
       }
     }
     /* Your seat part (col-4) */
+    .col-md-4 {
+      @include MD {
+        width: 100%;
+      }
+    }
     .websiteTitle {
       color: $color2;
       font-size: 2rem;
@@ -280,6 +319,9 @@ body {
       text-align: right;
       width: fit-content;
       margin-left: auto;
+      @include MD {
+        display: none;
+      }
       @include SM {
         display: none;
       }
@@ -311,6 +353,9 @@ body {
     .trailer {
       margin-bottom: 1rem;
       background-color: $color7;
+      @include MD {
+        height: 300px;
+      }
       @include SM {
         height: 300px;
       }
@@ -324,6 +369,9 @@ body {
       }
       h3 {
         color: $color4;
+        @include MD {
+          margin-bottom: 1rem;
+        }
       }
       .number {
         text-align: center;

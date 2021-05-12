@@ -513,6 +513,13 @@ body .container .backdropRow .titlePanel .subInfo {
   padding-bottom: 1rem;
 }
 
+@media (max-width: 991.98px) {
+  body .container .backdropRow .titlePanel .subInfo {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 767.98px) {
   body .container .backdropRow .titlePanel .subInfo {
     width: 100%;
@@ -584,6 +591,12 @@ body .container .backdropRow .titlePanel .subInfo .trailer.show {
   -webkit-animation: fadeIn 1s linear;
           animation: fadeIn 1s linear;
   display: block;
+}
+
+@media (max-width: 991.98px) {
+  body .container .backdropRow .titlePanel .subInfo .trailer.show {
+    padding-top: 2rem;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -760,6 +773,12 @@ body .container .detailRow .left .castRow .casts .castCarousel .castImgRow {
   margin-top: 2rem;
   padding-left: 1rem;
   overflow-x: auto;
+}
+
+@media (max-width: 991.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow {
+    width: 100%;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -943,6 +962,12 @@ body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
   cursor: pointer;
 }
 
+@media (max-width: 991.98px) {
+  body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
+    border-radius: 4vw;
+  }
+}
+
 @media (max-width: 767.98px) {
   body .container .detailRow .right .recomPanel .col .recomCard .recomImg {
     padding: 0;
@@ -968,6 +993,18 @@ body .container .detailRow .right .recomPanel .col .recomCard .card-body {
 body .container .detailRow .right .recomPanel .col .recomCard .card-body h5 {
   text-align: center;
   margin: auto;
+}
+
+@media (max-width: 767.98px) {
+  body .container .detailRow .right .recomPanel .col .recomCard .card-body h5 {
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body .container .detailRow .right .recomPanel .col .recomCard .card-body h5 {
+    padding-top: 1rem;
+  }
 }
 
 body .container .footer {

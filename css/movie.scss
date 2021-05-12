@@ -92,6 +92,10 @@ body {
         .subInfo {
           width: 50%;
           padding-bottom: 1rem;
+          @include MD {
+            width: 100%;
+            padding: 1rem;
+          }
           @include SM {
             width: 100%;
           }
@@ -142,6 +146,9 @@ body {
             &.show {
               animation: fadeIn 1s linear;
               display: block;
+              @include MD {
+                padding-top: 2rem;
+              }
               @include SM {
                 text-align: center;
               }
@@ -267,6 +274,9 @@ body {
                 margin-top: 2rem;
                 padding-left: 1rem;
                 overflow-x: auto;
+                @include MD {
+                  width: 100%;
+                }
                 @include SM {
                   width: 100%;
                 }
@@ -401,6 +411,9 @@ body {
                 margin: auto;
                 margin-top: 0.5rem;
                 cursor: pointer;
+                @include MD {
+                  border-radius: 4vw;
+                }
                 @include SM {
                   padding: 0;
                 }
@@ -417,6 +430,12 @@ body {
                 h5 {
                   text-align: center;
                   margin: auto;
+                  @include SM {
+                    padding-top: 1rem;
+                  }
+                  @include XS {
+                    padding-top: 1rem;
+                  }
                 }
               }
             }
