@@ -234,6 +234,18 @@ span {
   cursor: none !important;
 }
 
+@media (max-width: 767.98px) {
+  html,
+  body,
+  a,
+  button,
+  i,
+  img,
+  span {
+    cursor: pointer !important;
+  }
+}
+
 @media (max-width: 575.98px) {
   html,
   body,
@@ -262,6 +274,12 @@ span {
   pointer-events: none;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@media (max-width: 767.98px) {
+  .cursor {
+    display: none;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -1200,6 +1218,14 @@ html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner,
 body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner {
   -webkit-box-shadow: 0rem 0rem 3rem #f5f5f6e4;
           box-shadow: 0rem 0rem 3rem #f5f5f6e4;
+}
+
+@media (max-width: 767.98px) {
+  html .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe,
+  body .trailerModal .trailerBackground .trailer .trailerContents .carousel-inner iframe {
+    height: 300px;
+    width: 600px;
+  }
 }
 
 @media (max-width: 575.98px) {

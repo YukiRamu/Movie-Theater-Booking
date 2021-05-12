@@ -234,6 +234,18 @@ span {
   cursor: none !important;
 }
 
+@media (max-width: 767.98px) {
+  html,
+  body,
+  a,
+  button,
+  i,
+  img,
+  span {
+    cursor: pointer !important;
+  }
+}
+
 @media (max-width: 575.98px) {
   html,
   body,
@@ -262,6 +274,12 @@ span {
   pointer-events: none;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@media (max-width: 767.98px) {
+  .cursor {
+    display: none;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -407,6 +425,12 @@ body .container .taglineSection .tagline {
   width: 90%;
 }
 
+@media (max-width: 767.98px) {
+  body .container .taglineSection .tagline {
+    font-size: calc(1.325rem + 0.9vw);
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .taglineSection .tagline {
     font-size: calc(1.325rem + 0.9vw);
@@ -429,6 +453,12 @@ body .container .backdropRow .titlePanel {
   min-height: 100vh;
   padding: 3rem 0 0 5rem;
   margin-left: -1rem;
+}
+
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel {
+    padding: 2rem 0 0 3rem;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -466,6 +496,12 @@ body .container .backdropRow .titlePanel .titleRow h1 {
   font-size: 5rem;
 }
 
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .titleRow h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .backdropRow .titlePanel .titleRow h1 {
     font-size: calc(1.375rem + 1.5vw);
@@ -475,6 +511,12 @@ body .container .backdropRow .titlePanel .titleRow h1 {
 body .container .backdropRow .titlePanel .subInfo {
   width: 50%;
   padding-bottom: 1rem;
+}
+
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .subInfo {
+    width: 100%;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -537,6 +579,18 @@ body .container .backdropRow .titlePanel .subInfo .trailer.show {
   display: block;
 }
 
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .subInfo .trailer.show {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body .container .backdropRow .titlePanel .subInfo .trailer.show {
+    text-align: center;
+  }
+}
+
 body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {
   -webkit-box-shadow: 0 0 2rem #f5f5f6;
           box-shadow: 0 0 2rem #f5f5f6;
@@ -546,7 +600,6 @@ body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {
   body .container .backdropRow .titlePanel .subInfo .trailer.show iframe {
     width: 300px;
     height: 200px;
-    margin-left: 1rem;
   }
 }
 
@@ -581,10 +634,20 @@ body .container .backdropRow .titlePanel .websiteTitle {
   margin: 2rem;
 }
 
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .websiteTitle {
+    margin: 0;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .backdropRow .titlePanel .websiteTitle {
     margin: 0;
     margin-right: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -594,6 +657,18 @@ body .container .backdropRow .titlePanel .websiteTitle span {
   font-size: 3rem;
   -webkit-animation: flicker 2s linear infinite;
           animation: flicker 2s linear infinite;
+}
+
+@media (max-width: 767.98px) {
+  body .container .backdropRow .titlePanel .websiteTitle span {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body .container .backdropRow .titlePanel .websiteTitle span {
+    font-size: 2rem;
+  }
 }
 
 body .container .backdropRow .titlePanel .websiteTitle:hover {
@@ -680,6 +755,12 @@ body .container .detailRow .left .castRow .casts .castCarousel .castImgRow {
   overflow-x: auto;
 }
 
+@media (max-width: 767.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow {
+    width: 100%;
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .detailRow .left .castRow .casts .castCarousel .castImgRow {
     width: unset;
@@ -697,6 +778,12 @@ body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .cast
   margin: 1rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+@media (max-width: 767.98px) {
+  body .container .detailRow .left .castRow .casts .castCarousel .castImgRow .castImg {
+    min-width: 20vw;
+  }
 }
 
 @media (max-width: 575.98px) {

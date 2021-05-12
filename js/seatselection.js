@@ -253,14 +253,13 @@ checkOutBtn.addEventListener("click", () => {
   checkOut(theaterChoice.value, movieIdfromURL);
 });
 const checkOut = (theater, movieId) => {
-  //scroll to top
-  window.scrollTo(0, 0);
-
   //validation check alert if no seat is selected
   if (totalPrice.innerHTML === "$ 0") {
     alertMessage.classList.add("show");
     return false;
   } else {
+    //scroll to top
+    window.scrollTo(0, 0);
     //store data into localStorage
     // #1: get all from localStorage
     let seatMapArray = JSON.parse(localStorage.getItem("seatMap")); //get all from localStorage

@@ -38,10 +38,10 @@ body {
     border-radius: 3vw;
     .websiteTitleSMdevice {
       display: none;
-      @include XS {
+      @include SM {
         display: block;
         color: $color2;
-        font-size: 2rem;
+        font-size: 1rem;
         text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
         text-align: right;
         width: fit-content;
@@ -49,7 +49,27 @@ body {
         span {
           font-weight: bold;
           color: $accent2Tr;
-          font-size: 3rem;
+          font-size: 2rem;
+          animation: flicker 2s linear infinite;
+        }
+        &:hover {
+          color: $color2;
+          font-weight: bold;
+          text-shadow: 0 1rem 1rem $accent1;
+        }
+      }
+      @include XS {
+        display: block;
+        color: $color2;
+        font-size: 1rem;
+        text-shadow: 0 13.36px 8.896px $color1, 0 -2px 1px $color2; //3D
+        text-align: right;
+        width: fit-content;
+        margin-left: auto;
+        span {
+          font-weight: bold;
+          color: $accent2Tr;
+          font-size: 2rem;
           animation: flicker 2s linear infinite;
         }
         &:hover {
@@ -65,6 +85,9 @@ body {
     .description {
       width: 70%;
       color: $color4;
+      @include SM {
+        width: 100%;
+      }
       @include XS {
         width: 100%;
       }
@@ -257,6 +280,9 @@ body {
       text-align: right;
       width: fit-content;
       margin-left: auto;
+      @include SM {
+        display: none;
+      }
       @include XS {
         display: none;
       }
@@ -275,6 +301,9 @@ body {
     h2 {
       color: $color4;
       margin-bottom: 1rem;
+      @include SM {
+        margin-top: 1rem;
+      }
       @include XS {
         margin-top: 1rem;
       }
@@ -282,6 +311,9 @@ body {
     .trailer {
       margin-bottom: 1rem;
       background-color: $color7;
+      @include SM {
+        height: 300px;
+      }
     }
     .yourSeat {
       display: none;

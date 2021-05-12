@@ -234,6 +234,18 @@ span {
   cursor: none !important;
 }
 
+@media (max-width: 767.98px) {
+  html,
+  body,
+  a,
+  button,
+  i,
+  img,
+  span {
+    cursor: pointer !important;
+  }
+}
+
 @media (max-width: 575.98px) {
   html,
   body,
@@ -262,6 +274,12 @@ span {
   pointer-events: none;
   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@media (max-width: 767.98px) {
+  .cursor {
+    display: none;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -417,11 +435,11 @@ body .container .websiteTitleSMdevice {
   display: none;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 767.98px) {
   body .container .websiteTitleSMdevice {
     display: block;
     color: #f5f5f6;
-    font-size: 2rem;
+    font-size: 1rem;
     text-shadow: 0 13.36px 8.896px #282c37, 0 -2px 1px #f5f5f6;
     text-align: right;
     width: -webkit-fit-content;
@@ -432,7 +450,33 @@ body .container .websiteTitleSMdevice {
   body .container .websiteTitleSMdevice span {
     font-weight: bold;
     color: rgba(26, 236, 29, 0.586);
-    font-size: 3rem;
+    font-size: 2rem;
+    -webkit-animation: flicker 2s linear infinite;
+            animation: flicker 2s linear infinite;
+  }
+  body .container .websiteTitleSMdevice:hover {
+    color: #f5f5f6;
+    font-weight: bold;
+    text-shadow: 0 1rem 1rem #ec1a47;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body .container .websiteTitleSMdevice {
+    display: block;
+    color: #f5f5f6;
+    font-size: 1rem;
+    text-shadow: 0 13.36px 8.896px #282c37, 0 -2px 1px #f5f5f6;
+    text-align: right;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto;
+  }
+  body .container .websiteTitleSMdevice span {
+    font-weight: bold;
+    color: rgba(26, 236, 29, 0.586);
+    font-size: 2rem;
     -webkit-animation: flicker 2s linear infinite;
             animation: flicker 2s linear infinite;
   }
@@ -452,6 +496,12 @@ body .container .titleHeader {
 body .container .description {
   width: 70%;
   color: #a2a3a9;
+}
+
+@media (max-width: 767.98px) {
+  body .container .description {
+    width: 100%;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -740,6 +790,12 @@ body .container .websiteTitle {
   margin-left: auto;
 }
 
+@media (max-width: 767.98px) {
+  body .container .websiteTitle {
+    display: none;
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container .websiteTitle {
     display: none;
@@ -765,6 +821,12 @@ body .container h2 {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 767.98px) {
+  body .container h2 {
+    margin-top: 1rem;
+  }
+}
+
 @media (max-width: 575.98px) {
   body .container h2 {
     margin-top: 1rem;
@@ -774,6 +836,12 @@ body .container h2 {
 body .container .trailer {
   margin-bottom: 1rem;
   background-color: #363942;
+}
+
+@media (max-width: 767.98px) {
+  body .container .trailer {
+    height: 300px;
+  }
 }
 
 body .container .yourSeat {
