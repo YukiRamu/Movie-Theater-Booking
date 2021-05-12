@@ -1,12 +1,12 @@
 /* testing if the mobile read this script */
 alert("Hi I am a test javascript file");
 
-
-
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
 const movieIdfromURL = urlParams.get("movieId");
+
+alert(movieIdfromURL);
 
 //object
 const seatPrice = {
@@ -176,8 +176,6 @@ const displaySeatMap = (theater, movieId) => {
   // #2-1: prepare the seatMap data only for the theater and movie currently selected
   filteredSeatMap = seatMap.filter(elem => (elem.theater === theater) && (elem.movieId === movieId));
 
-  console.log("filteredSeatMap", filteredSeatMap);
-
   // #2-2 :when no data stored for the selected theater, show all seats as available
   if (filteredSeatMap.length === 0) {
     Array.from(regularSeats).forEach(elem => {
@@ -332,46 +330,46 @@ const checkOut = (theater, movieId) => {
   };
 };
 
-/* When the page is loaded 
+/* When the page is loaded
 //At the very first time, localStorage is null
 //store emply array
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
-window.addEventListener("DOMContentLoaded", async () => {
+// window.addEventListener("DOMContentLoaded", async () => {
 
-  //********************* Testing ***************************** */
-  alert(`test.js movie ID is ${movieIdfromURL}`);
-  alert(localStorage.length);
-  alert(localStorage.getItem("seatMap"));
+//   //********************* Testing ***************************** */
+//   alert(`test.js movie ID is ${movieIdfromURL}`);
+//   alert(localStorage.length);
+//   alert(localStorage.getItem("seatMap"));
 
 
-  if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
-    localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
-  };
+//   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
+//     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
+//   };
 
-  alert(localStorage.getItem("seatMap"));
+//   alert(localStorage.getItem("seatMap"));
 
-  /* Show movie title, description and trailer*/
-  movieComponent = await getMovieDetailById(movieIdfromURL);
+//   /* Show movie title, description and trailer*/
+//   movieComponent = await getMovieDetailById(movieIdfromURL);
 
-  alert(movieComponent);
+//   alert(movieComponent);
 
-  let title;
-  let overview;
-  let backdropPath;
+//   let title;
+//   let overview;
+//   let backdropPath;
 
-  title = movieComponent[0].title;
-  overview = movieComponent[0].overview;
-  backdropPath = movieComponent[0].backdrop_path;
+//   title = movieComponent[0].title;
+//   overview = movieComponent[0].overview;
+//   backdropPath = movieComponent[0].backdrop_path;
 
-  titleHeader.innerText = `${title}`;
-  titleHeader.style.opacity = 1;
-  description.innerText = `${overview}`;
-  body.style.backgroundImage = `url(${backdropBaseURL}${backdropPath})`;
-  body.style.backgroundPosition = "center";
-  body.style.backgroundSize = "cover";
-  body.style.backgroundRepeat = "no-repeat";
+//   titleHeader.innerText = `${title}`;
+//   titleHeader.style.opacity = 1;
+//   description.innerText = `${overview}`;
+//   body.style.backgroundImage = `url(${backdropBaseURL}${backdropPath})`;
+//   body.style.backgroundPosition = "center";
+//   body.style.backgroundSize = "cover";
+//   body.style.backgroundRepeat = "no-repeat";
 
-  UI.displayTrailer(movieIdfromURL);
-  return;
-});
+//   UI.displayTrailer(movieIdfromURL);
+//   return;
+// });
