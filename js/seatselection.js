@@ -272,8 +272,6 @@ const checkOut = (theater, movieId) => {
     // #2-1: prepare the seatMap data only for the movie currently selected
     let filteredSeatMap = seatMapArray.filter(elem => (elem.theater === theater) && (elem.movieId === movieId));
 
-    console.log("inside checkout func", filteredSeatMap);
-
     // #2-2: convert Nodelist to array - current data before update
     seatArrayfromNodeList = Array.from(seat);
 
@@ -307,12 +305,8 @@ const checkOut = (theater, movieId) => {
         };
       })
 
-      console.log("indexToBeUpdated is ", indexToBeUpdated);
-
       //#3: find the index from localStorage (seatMapArray) where data is to be updated
       let startIndex = seatMapArray.indexOf(seatMapArray.find(value => (value.theater === theater && (value.movieId === movieId))));
-
-      console.log("startIndex is ", startIndex);
 
       //#4: update seatMapArray
       //i.e. )54 = 0, 55 = 1, 56 = 2......108 = 53
