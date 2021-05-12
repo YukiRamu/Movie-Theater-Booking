@@ -143,7 +143,7 @@ body {
             position: relative;
             // box-shadow: 0 1rem 2rem $black; //shadow effect
             display: none;
-            text-align: left;
+            text-align: center;
             &.show {
               animation: fadeIn 1s linear;
               display: block;

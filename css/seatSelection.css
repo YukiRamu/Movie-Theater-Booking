@@ -903,6 +903,12 @@ body .container .trailer {
   background-color: #363942;
 }
 
+@media (max-width: 1399.98px) {
+  body .container .trailer {
+    height: 250px;
+  }
+}
+
 @media (max-width: 991.98px) {
   body .container .trailer {
     height: 300px;

@@ -353,6 +353,9 @@ body {
     .trailer {
       margin-bottom: 1rem;
       background-color: $color7;
+      @include XL {
+        height: 250px;
+      }
       @include MD {
         height: 300px;
       }

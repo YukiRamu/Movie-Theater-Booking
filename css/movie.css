@@ -585,7 +585,7 @@ body .container .backdropRow .titlePanel .subInfo .left .rateRow .rate span {
 body .container .backdropRow .titlePanel .subInfo .trailer {
   position: relative;
   display: none;
-  text-align: left;
+  text-align: center;
 }
 
 body .container .backdropRow .titlePanel .subInfo .trailer.show {
