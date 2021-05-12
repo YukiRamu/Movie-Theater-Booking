@@ -93,6 +93,7 @@ body {
           width: 50%;
           padding-bottom: 1rem;
           @include MD {
+            display: block;
             width: 100%;
             padding: 1rem;
           }

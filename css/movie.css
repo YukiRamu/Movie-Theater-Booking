@@ -515,6 +515,7 @@ body .container .backdropRow .titlePanel .subInfo {
 
 @media (max-width: 991.98px) {
   body .container .backdropRow .titlePanel .subInfo {
+    display: block;
     width: 100%;
     padding: 1rem;
   }
