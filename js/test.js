@@ -5,5 +5,6 @@ alert("Hi I am a test javascript file");
 
 const urlParams2 = new URLSearchParams(window.location.search);
 const movieIdfromURL2 = urlParams2.get("movieId");
-
-alert("movie ID is ", movieIdfromURL2);
+console.log(urlParams2);
+console.log(movieIdfromURL2)
+alert(`movie ID is ${movieIdfromURL2}`);
