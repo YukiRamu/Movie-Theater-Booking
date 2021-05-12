@@ -286,7 +286,7 @@ a {
   }
 }
 
-// Large devices (desktops, less than 1200px) //default 
+// Large devices (desktops, less than 1200px) //default
 @mixin LG {
   @media (max-width: 1199.98px) {
     @content;
@@ -299,16 +299,3 @@ a {
     @content;
   }
 }
-
-// XX-Large devices (larger desktops)
-// No media query since the xxl breakpoint has no upper bound on its width
-
-// .element {
-//   // Three columns to start
-//   @include row-cols(3);
-
-//   // Five columns from medium breakpoint up
-//   @include media-breakpoint-up(md) {
-//     @include row-cols(5);
-//   }
-// }
