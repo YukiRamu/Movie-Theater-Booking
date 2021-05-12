@@ -87,7 +87,7 @@ const displayMovieInfo = (component, director) => {
         <h1 class="col">${movieTitle}</h1>
       </div>
 
-      <div class="row row-cols-md-1 subInfo">
+      <div class="row subInfo">
       <!--sub left-->
       <div class="col left">
         <div class="row overviewRow">

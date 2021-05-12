@@ -286,7 +286,7 @@ a {
   }
 }
 
-// Large devices (desktops, less than 1200px)
+// Large devices (desktops, less than 1200px) //default 
 @mixin LG {
   @media (max-width: 1199.98px) {
     @content;
