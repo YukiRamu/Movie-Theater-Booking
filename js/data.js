@@ -1,5 +1,5 @@
 /* testing if the mobile read this script */
-alert("Hi I am a data javascript file : all activated except for static property");
+alert("Hi I am a data javascript file : final check");
 
 /* Fetch Data -- TMDB */
 /* *******************************************
