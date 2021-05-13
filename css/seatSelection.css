@@ -658,9 +658,21 @@ body .container .movieInfo .seatLabel i {
   padding-right: 1rem;
 }
 
+@media (max-width: 575.98px) {
+  body .container .movieInfo .seatLabel i {
+    padding-right: 0.5rem;
+  }
+}
+
 body .container .movieInfo .seatLabel .availableLabel {
   color: #f5f5f6;
   padding-right: 1rem;
+}
+
+@media (max-width: 575.98px) {
+  body .container .movieInfo .seatLabel .availableLabel {
+    padding-right: 0.5rem;
+  }
 }
 
 body .container .movieInfo .seatLabel .bookedLabel {

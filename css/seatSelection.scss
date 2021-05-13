@@ -181,10 +181,16 @@ body {
         }
         i {
           padding-right: 1rem;
+          @include XS {
+            padding-right: 0.5rem;
+          }
         }
         .availableLabel {
           color: $white;
           padding-right: 1rem;
+          @include XS {
+            padding-right: 0.5rem;
+          }
         }
         .bookedLabel {
           color: $gray;
