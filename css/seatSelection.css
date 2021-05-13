@@ -440,6 +440,12 @@ body .container {
   }
 }
 
+@media (max-width: 575.98px) {
+  body .container {
+    padding: 0;
+  }
+}
+
 @media (max-width: 991.98px) {
   body .container .col-md-8 {
     width: 100%;
@@ -598,6 +604,7 @@ body .container .movieInfo {
 @media (max-width: 575.98px) {
   body .container .movieInfo {
     padding-top: 0.5rem;
+    display: block;
   }
 }
 
@@ -631,6 +638,12 @@ body .container .movieInfo .seatLabel {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+}
+
+@media (max-width: 575.98px) {
+  body .container .movieInfo .seatLabel {
+    font-size: 0.8rem;
+  }
 }
 
 body .container .movieInfo .seatLabel.show {
@@ -736,7 +749,8 @@ body .container .seat-container .seatRow .numLeft {
 
 @media (max-width: 575.98px) {
   body .container .seat-container .seatRow .numLeft {
-    left: -5%;
+    left: 2%;
+    font-size: 0.8rem;
   }
 }
 
@@ -748,12 +762,20 @@ body .container .seat-container .seatRow .numRight {
 
 @media (max-width: 575.98px) {
   body .container .seat-container .seatRow .numRight {
-    right: -5%;
+    right: 2%;
+    font-size: 0.8rem;
   }
 }
 
 body .container .seat-container .seatRow .seat {
   padding: 0.5rem;
+}
+
+@media (max-width: 575.98px) {
+  body .container .seat-container .seatRow .seat {
+    font-size: 0.5rem;
+    padding: 0.3rem;
+  }
 }
 
 body .container .seat-container .seatRow .seat .flaticon-armchair {

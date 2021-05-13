@@ -39,6 +39,9 @@ body {
     @include MD {
       flex-direction: column;
     }
+    @include XS {
+      padding: 0;
+    }
     .col-md-8 {
       @include MD {
         width: 100%;
@@ -149,6 +152,7 @@ body {
       background-color: $color7;
       @include XS {
         padding-top: 0.5rem;
+        display: block;
       }
       .movieLabel {
         display: flex;
@@ -168,6 +172,9 @@ body {
         justify-content: space-around;
         flex-direction: row;
         align-items: flex-end;
+        @include XS {
+          font-size: 0.8rem;
+        }
         &.show {
           display: flex;
           animation: fadeIn 1s linear;
@@ -240,7 +247,8 @@ body {
           left: 3%;
           color: $color4;
           @include XS {
-            left: -5%;
+            left: 2%;
+            font-size: 0.8rem;
           }
         }
         .numRight {
@@ -248,11 +256,16 @@ body {
           right: 3%;
           color: $color4;
           @include XS {
-            right: -5%;
+            right: 2%;
+            font-size: 0.8rem;
           }
         }
         .seat {
           padding: 0.5rem;
+          @include XS {
+            font-size: 0.5rem;
+            padding: 0.3rem;
+          }
           .flaticon-armchair {
             color: $white;
           }
