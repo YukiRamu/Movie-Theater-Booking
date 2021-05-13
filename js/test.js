@@ -1,5 +1,5 @@
 /* testing if the mobile read this script */
-alert("Hi I am a test javascript file : class Seat constructor activated");
+alert("Hi I am a test javascript file : class Seat static property hidden");
 
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
