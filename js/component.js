@@ -1,6 +1,3 @@
-/* testing if the mobile read this script */
-alert("Hi I am a component javascript file");
-
 /* Global Variables */
 /* base url */
 const movieHTML = "./movie.html";

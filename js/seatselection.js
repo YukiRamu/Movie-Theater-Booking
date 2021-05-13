@@ -1,11 +1,14 @@
-/* testing if the mobile read this script */
-alert("Hi I am a seatselection javascript file");
-
-
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
 const urlParams = new URLSearchParams(window.location.search);
 const movieIdfromURL = urlParams.get("movieId");
+
+//variables
+//this was static properties before, but since they don't work on mobile device, chenged to global variables
+let regularSeatCount = 0;
+let vipSeatCount = 0;
+let regSubTtl = 0;
+let vipSubTtl = 0;
 
 //object
 const seatPrice = {
@@ -13,19 +16,13 @@ const seatPrice = {
   vip: 20
 };
 
-class UI {
+class Seat {
   constructor(seatType, isSelected) {
     this._seatType = seatType; //regular or vip
     this._isSelected = isSelected // is "selected" in classList? true or false
     this._totalTicketNum = 0;
     this._totalPrice;
   };
-
-  //static property
-  static regularSeatCount = 0;
-  static vipSeatCount = 0;
-  static regSubTtl = 0;
-  static vipSubTtl = 0;
 
   //method
   //#1 add "selected" class to the target or remove it 
@@ -37,16 +34,16 @@ class UI {
   addSeat() {
     //count the number of tickets
     if ((this._seatType === "regular")) {
-      UI.regularSeatCount++;
-      regularTicketNum.innerHTML = UI.regularSeatCount; //display reg ticket num
-      UI.calcTotalPrice(UI.regularSeatCount, this._seatType);
+      regularSeatCount++;
+      regularTicketNum.innerHTML = regularSeatCount; //display reg ticket num
+      Seat.calcTotalPrice(regularSeatCount, this._seatType);
     } else if (this._seatType === "vip") {
-      UI.vipSeatCount++;
-      vipTicketNum.innerHTML = UI.vipSeatCount; //display vip ticket num
-      UI.calcTotalPrice(UI.vipSeatCount, this._seatType);
+      vipSeatCount++;
+      vipTicketNum.innerHTML = vipSeatCount; //display vip ticket num
+      Seat.calcTotalPrice(vipSeatCount, this._seatType);
     };
     //total ticket count
-    this._totalTicketNum = UI.regularSeatCount + UI.vipSeatCount;
+    this._totalTicketNum = regularSeatCount + vipSeatCount;
     totalTicketNum.innerHTML = this._totalTicketNum;
   };
 
@@ -54,14 +51,14 @@ class UI {
   static calcTotalPrice(seatNum, seatType) {
     //sub total
     if (seatType === "regular") {
-      UI.regSubTtl = seatPrice["regular"] * seatNum;
-      regularSubtotal.innerHTML = `$ ${UI.regSubTtl}`;
+      regSubTtl = seatPrice["regular"] * seatNum;
+      regularSubtotal.innerHTML = `$ ${regSubTtl}`;
     } else if (seatType === "vip") {
-      UI.vipSubTtl = seatPrice["vip"] * seatNum;
-      vipSubtotal.innerHTML = `$ ${UI.vipSubTtl}`;
+      vipSubTtl = seatPrice["vip"] * seatNum;
+      vipSubtotal.innerHTML = `$ ${vipSubTtl}`;
     };
     //total ticket price
-    this._totalPrice = UI.regSubTtl + UI.vipSubTtl;
+    this._totalPrice = regSubTtl + vipSubTtl;
     totalPrice.innerHTML = `$ ${this._totalPrice}`;
   };
 
@@ -69,16 +66,16 @@ class UI {
   removeSeat() {
     //recount the number of tickets
     if (this._seatType === "regular") {
-      UI.regularSeatCount--;
-      regularTicketNum.innerHTML = UI.regularSeatCount; //display reg ticket num
-      UI.calcTotalPrice(UI.regularSeatCount, this._seatType);
+      regularSeatCount--;
+      regularTicketNum.innerHTML = regularSeatCount; //display reg ticket num
+      Seat.calcTotalPrice(regularSeatCount, this._seatType);
     } else if (this._seatType === "vip") {
-      UI.vipSeatCount--;
-      vipTicketNum.innerHTML = UI.vipSeatCount; //display vip ticket num
-      UI.calcTotalPrice(UI.vipSeatCount, this._seatType);
+      vipSeatCount--;
+      vipTicketNum.innerHTML = vipSeatCount; //display vip ticket num
+      Seat.calcTotalPrice(vipSeatCount, this._seatType);
     };
     //total ticket count
-    this._totalTicketNum = UI.regularSeatCount + UI.vipSeatCount;
+    this._totalTicketNum = regularSeatCount + vipSeatCount;
     totalTicketNum.innerHTML = this._totalTicketNum;
   };
 
@@ -89,10 +86,10 @@ class UI {
     regularSubtotal.innerHTML = "$ 0";
     vipSubtotal.innerHTML = "$ 0";
     totalPrice.innerHTML = "$ 0";
-    UI.regularSeatCount = 0;
-    UI.vipSeatCount = 0;
-    UI.regSubTtl = 0;
-    UI.vipSubTtl = 0;
+    regularSeatCount = 0;
+    vipSeatCount = 0;
+    regSubTtl = 0;
+    vipSubTtl = 0;
   };
 
   static showMap() {
@@ -154,7 +151,7 @@ class UI {
 /* When the thieater is picked, display the name of the theater */
 theaterChoice.onchange = () => {
   cinemaLocation.innerHTML = theaterChoice.value;
-  UI.hideMap();
+  Seat.hideMap();
 };
 
 /* When "view Seats" button is clicked */
@@ -174,8 +171,6 @@ const displaySeatMap = (theater, movieId) => {
   // #2: find the index of NodeList, "seat" where classList "booked" to be added
   // #2-1: prepare the seatMap data only for the theater and movie currently selected
   filteredSeatMap = seatMap.filter(elem => (elem.theater === theater) && (elem.movieId === movieId));
-
-  console.log("filteredSeatMap", filteredSeatMap);
 
   // #2-2 :when no data stored for the selected theater, show all seats as available
   if (filteredSeatMap.length === 0) {
@@ -206,7 +201,7 @@ const displaySeatMap = (theater, movieId) => {
   }
 
   //Show map
-  UI.showMap();
+  Seat.showMap();
 };
 
 /* When the seat is selected */
@@ -217,11 +212,11 @@ for (let i = 0; i < regularSeats.length; i++) {
     if (event.target.classList.contains("booked")) {
       //do nothing : disabled
     } else if (event.target.classList.contains("selected")) { //cancel selected
-      let regular = new UI("regular", true);
+      let regular = new Seat("regular", true);
       regular.toggleSelected(event.target);
       regular.removeSeat();
     } else { // seats selected
-      let regular = new UI("regular", false);
+      let regular = new Seat("regular", false);
       regular.toggleSelected(event.target);
       regular.addSeat();
     }
@@ -234,11 +229,11 @@ for (let i = 0; i < vipSeats.length; i++) {
     if (event.target.classList.contains("booked")) {
       //do nothing
     } else if (event.target.classList.contains("selected")) {
-      let vip = new UI("vip", true);
+      let vip = new Seat("vip", true);
       vip.toggleSelected(event.target);
       vip.removeSeat();
     } else {
-      let vip = new UI("vip", false);
+      let vip = new Seat("vip", false);
       vip.toggleSelected(event.target);
       vip.addSeat();
     }
@@ -326,34 +321,23 @@ const checkOut = (theater, movieId) => {
 
     //store new data and show complete msg
     localStorage.setItem("seatMap", JSON.stringify(seatMapArray));
-
     completeMsg.style.transform = "translateY(0rem)";
   };
 };
 
-/* When the page is loaded 
+/* When the page is loaded
 //At the very first time, localStorage is null
 //store emply array
 //The JSON.stringify() method converts a JavaScript object into an array.
 //array -> convert to object */
 window.addEventListener("DOMContentLoaded", async () => {
 
-  //********************* Testing ***************************** */
-  alert(`movie ID is ${movieIdfromURL}`);
-  alert(localStorage.length);
-  alert(localStorage.getItem("seatMap"));
-
-
   if ((localStorage.length === 0) || (localStorage.getItem("seatMap") === null)) {
     localStorage.setItem("seatMap", JSON.stringify(Object.entries([])));
   };
 
-  alert(localStorage.getItem("seatMap"));
-
   /* Show movie title, description and trailer*/
   movieComponent = await getMovieDetailById(movieIdfromURL);
-
-  alert(movieComponent);
 
   let title;
   let overview;
@@ -371,6 +355,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   body.style.backgroundSize = "cover";
   body.style.backgroundRepeat = "no-repeat";
 
-  UI.displayTrailer(movieIdfromURL);
+  Seat.displayTrailer(movieIdfromURL);
   return;
 });

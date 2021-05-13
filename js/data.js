@@ -1,6 +1,3 @@
-/* testing if the mobile read this script */
-alert("Hi I am a data javascript file : final check");
-
 /* Fetch Data -- TMDB */
 /* *******************************************
 /* Fetch API Note - how to access data
