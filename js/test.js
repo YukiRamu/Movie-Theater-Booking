@@ -1,5 +1,5 @@
 /* testing if the mobile read this script */
-alert("Hi I am a test javascript file : class Seat activated");
+alert("Hi I am a test javascript file : class Seat constructor and static property activated");
 
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
@@ -30,125 +30,125 @@ class Seat {
 
   //method
   //#1 add "selected" class to the target or remove it 
-  toggleSelected(target) {
-    target.classList.toggle("selected");
-  };
+  // toggleSelected(target) {
+  //   target.classList.toggle("selected");
+  // };
 
-  //#2 Add seats to Your Seats Panel
-  addSeat() {
-    //count the number of tickets
-    if ((this._seatType === "regular")) {
-      Seat.regularSeatCount++;
-      regularTicketNum.innerHTML = Seat.regularSeatCount; //display reg ticket num
-      Seat.calcTotalPrice(Seat.regularSeatCount, this._seatType);
-    } else if (this._seatType === "vip") {
-      Seat.vipSeatCount++;
-      vipTicketNum.innerHTML = Seat.vipSeatCount; //display vip ticket num
-      Seat.calcTotalPrice(Seat.vipSeatCount, this._seatType);
-    };
-    //total ticket count
-    this._totalTicketNum = Seat.regularSeatCount + Seat.vipSeatCount;
-    totalTicketNum.innerHTML = this._totalTicketNum;
-  };
+  // //#2 Add seats to Your Seats Panel
+  // addSeat() {
+  //   //count the number of tickets
+  //   if ((this._seatType === "regular")) {
+  //     Seat.regularSeatCount++;
+  //     regularTicketNum.innerHTML = Seat.regularSeatCount; //display reg ticket num
+  //     Seat.calcTotalPrice(Seat.regularSeatCount, this._seatType);
+  //   } else if (this._seatType === "vip") {
+  //     Seat.vipSeatCount++;
+  //     vipTicketNum.innerHTML = Seat.vipSeatCount; //display vip ticket num
+  //     Seat.calcTotalPrice(Seat.vipSeatCount, this._seatType);
+  //   };
+  //   //total ticket count
+  //   this._totalTicketNum = Seat.regularSeatCount + Seat.vipSeatCount;
+  //   totalTicketNum.innerHTML = this._totalTicketNum;
+  // };
 
-  //#3 Calculate the price and show total
-  static calcTotalPrice(seatNum, seatType) {
-    //sub total
-    if (seatType === "regular") {
-      Seat.regSubTtl = seatPrice["regular"] * seatNum;
-      regularSubtotal.innerHTML = `$ ${Seat.regSubTtl}`;
-    } else if (seatType === "vip") {
-      Seat.vipSubTtl = seatPrice["vip"] * seatNum;
-      vipSubtotal.innerHTML = `$ ${Seat.vipSubTtl}`;
-    };
-    //total ticket price
-    this._totalPrice = Seat.regSubTtl + Seat.vipSubTtl;
-    totalPrice.innerHTML = `$ ${this._totalPrice}`;
-  };
+  // //#3 Calculate the price and show total
+  // static calcTotalPrice(seatNum, seatType) {
+  //   //sub total
+  //   if (seatType === "regular") {
+  //     Seat.regSubTtl = seatPrice["regular"] * seatNum;
+  //     regularSubtotal.innerHTML = `$ ${Seat.regSubTtl}`;
+  //   } else if (seatType === "vip") {
+  //     Seat.vipSubTtl = seatPrice["vip"] * seatNum;
+  //     vipSubtotal.innerHTML = `$ ${Seat.vipSubTtl}`;
+  //   };
+  //   //total ticket price
+  //   this._totalPrice = Seat.regSubTtl + Seat.vipSubTtl;
+  //   totalPrice.innerHTML = `$ ${this._totalPrice}`;
+  // };
 
-  //#4 Remove seats from Your Seats panel
-  removeSeat() {
-    //recount the number of tickets
-    if (this._seatType === "regular") {
-      Seat.regularSeatCount--;
-      regularTicketNum.innerHTML = Seat.regularSeatCount; //display reg ticket num
-      Seat.calcTotalPrice(Seat.regularSeatCount, this._seatType);
-    } else if (this._seatType === "vip") {
-      Seat.vipSeatCount--;
-      vipTicketNum.innerHTML = Seat.vipSeatCount; //display vip ticket num
-      Seat.calcTotalPrice(Seat.vipSeatCount, this._seatType);
-    };
-    //total ticket count
-    this._totalTicketNum = Seat.regularSeatCount + Seat.vipSeatCount;
-    totalTicketNum.innerHTML = this._totalTicketNum;
-  };
+  // //#4 Remove seats from Your Seats panel
+  // removeSeat() {
+  //   //recount the number of tickets
+  //   if (this._seatType === "regular") {
+  //     Seat.regularSeatCount--;
+  //     regularTicketNum.innerHTML = Seat.regularSeatCount; //display reg ticket num
+  //     Seat.calcTotalPrice(Seat.regularSeatCount, this._seatType);
+  //   } else if (this._seatType === "vip") {
+  //     Seat.vipSeatCount--;
+  //     vipTicketNum.innerHTML = Seat.vipSeatCount; //display vip ticket num
+  //     Seat.calcTotalPrice(Seat.vipSeatCount, this._seatType);
+  //   };
+  //   //total ticket count
+  //   this._totalTicketNum = Seat.regularSeatCount + Seat.vipSeatCount;
+  //   totalTicketNum.innerHTML = this._totalTicketNum;
+  // };
 
-  static clearCalcPanel() {
-    regularTicketNum.innerHTML = 0;
-    vipTicketNum.innerHTML = 0;
-    totalTicketNum.innerHTML = 0;
-    regularSubtotal.innerHTML = "$ 0";
-    vipSubtotal.innerHTML = "$ 0";
-    totalPrice.innerHTML = "$ 0";
-    Seat.regularSeatCount = 0;
-    Seat.vipSeatCount = 0;
-    Seat.regSubTtl = 0;
-    Seat.vipSubTtl = 0;
-  };
+  // static clearCalcPanel() {
+  //   regularTicketNum.innerHTML = 0;
+  //   vipTicketNum.innerHTML = 0;
+  //   totalTicketNum.innerHTML = 0;
+  //   regularSubtotal.innerHTML = "$ 0";
+  //   vipSubtotal.innerHTML = "$ 0";
+  //   totalPrice.innerHTML = "$ 0";
+  //   Seat.regularSeatCount = 0;
+  //   Seat.vipSeatCount = 0;
+  //   Seat.regSubTtl = 0;
+  //   Seat.vipSubTtl = 0;
+  // };
 
-  static showMap() {
-    //Show map
-    seatLabel.classList.add("show");
-    screenLine.classList.add("show");
-    seatContainer.classList.add("show");
-    note.classList.add("show");
-    yourSeat.classList.add("show");
-    footer.classList.add("show");
-  };
+  // static showMap() {
+  //   //Show map
+  //   seatLabel.classList.add("show");
+  //   screenLine.classList.add("show");
+  //   seatContainer.classList.add("show");
+  //   note.classList.add("show");
+  //   yourSeat.classList.add("show");
+  //   footer.classList.add("show");
+  // };
 
-  static hideMap() {
-    //Hide map
-    seatLabel.classList.remove("show");
-    screenLine.classList.remove("show");
-    seatContainer.classList.remove("show");
-    note.classList.remove("show");
-    yourSeat.classList.remove("show");
-    footer.classList.remove("show");
-  };
+  // static hideMap() {
+  //   //Hide map
+  //   seatLabel.classList.remove("show");
+  //   screenLine.classList.remove("show");
+  //   seatContainer.classList.remove("show");
+  //   note.classList.remove("show");
+  //   yourSeat.classList.remove("show");
+  //   footer.classList.remove("show");
+  // };
 
-  static displayTrailer(movieId) {
-    //fetch video key
-    fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw error(response.statusText);
-        } else {
-          return response.json();
-        };
-      })
-      .then((data) => {
-        //#1 prepare video key array and return
-        let videoKeyArray = [];
-        videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
+  // static displayTrailer(movieId) {
+  //   //fetch video key
+  //   fetch(`${baseURL}/3/movie/${movieId}/videos?api_key=${APIKey}`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw error(response.statusText);
+  //       } else {
+  //         return response.json();
+  //       };
+  //     })
+  //     .then((data) => {
+  //       //#1 prepare video key array and return
+  //       let videoKeyArray = [];
+  //       videoKeyArray.push(data.results.filter((elem) => { return elem.type === "Trailer" }));
 
-        if (videoKeyArray[0].length === 0) {
-          //when no trailer found
-          trailer.innerHTML = "<p>No trailer available :(</p>";
-        } else {
-          //#3 display trailer 
-          trailer.innerHTML = `
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0" title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-          `
-          return;
-        };
-      }).catch((error) => {
-        console.error(`Error = ${error}. Unable to fetch video data by movieId`);
-        return error;
-      });
-  };
+  //       if (videoKeyArray[0].length === 0) {
+  //         //when no trailer found
+  //         trailer.innerHTML = "<p>No trailer available :(</p>";
+  //       } else {
+  //         //#3 display trailer 
+  //         trailer.innerHTML = `
+  //           <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoKeyArray[0][0].key}?enablejsapi=1&modestbranding=1&iv_load_policy=3?rel=0" title="YouTube video player"
+  //           frameborder="0"
+  //           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  //           allowfullscreen></iframe>
+  //         `
+  //         return;
+  //       };
+  //     }).catch((error) => {
+  //       console.error(`Error = ${error}. Unable to fetch video data by movieId`);
+  //       return error;
+  //     });
+  // };
 };
 
 /* ========== Call methods ==========*/
