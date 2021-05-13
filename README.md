@@ -9,6 +9,7 @@
 * View detail of the movie (cast, reviews, and recommendation)
 * Seat selection and booking (local storage)
 * View movies currently on show
+* Responsive design
 
 ## Teck Stacks
 
