@@ -1,5 +1,5 @@
 /* testing if the mobile read this script */
-alert("Hi I am a data javascript file : checkin constructor and static property");
+alert("Hi I am a data javascript file : checkin constructor");
 
 /* Fetch Data -- TMDB */
 /* *******************************************

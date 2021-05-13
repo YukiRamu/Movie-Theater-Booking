@@ -1,5 +1,5 @@
 /* testing if the mobile read this script */
-alert("Hi I am a test javascript file : class Seat constructor and static property activated");
+alert("Hi I am a test javascript file : class Seat constructor activated");
 
 /* Movie component preparation = global variables */
 //get URL parameter (movieId)
@@ -23,10 +23,10 @@ class Seat {
   };
 
   //static property
-  static regularSeatCount = 0;
-  static vipSeatCount = 0;
-  static regSubTtl = 0;
-  static vipSubTtl = 0;
+  // static regularSeatCount = 0;
+  // static vipSeatCount = 0;
+  // static regSubTtl = 0;
+  // static vipSubTtl = 0;
 
   //method
   //#1 add "selected" class to the target or remove it 
